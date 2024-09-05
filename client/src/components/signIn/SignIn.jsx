@@ -1,10 +1,12 @@
 import React, { useState } from "react";
-import './SignIn.css'
+import { useNavigate } from "react-router-dom";
+import './SignIn.css';
 
 const SignIn = () => {
   const [isSignUpMode, setIsSignUpMode] = useState(false);
+  const navigate = useNavigate();
 
-  // Event handlers to switch between sign-in and sign-up modes
+  
   const handleSignUpClick = () => {
     setIsSignUpMode(true);
   };
@@ -13,11 +15,19 @@ const SignIn = () => {
     setIsSignUpMode(false);
   };
 
+  const handleStudentSignUp = () => {
+    navigate("/student-signup");
+  };
+
+  const handleAdminSignUp = () => {
+    navigate("/admin-signup");
+  };
+
   return (
     <div className={`container ${isSignUpMode ? "sign-up-mode" : ""}`}>
       <div className="forms-container">
         <div className="signin-signup">
-          {/* Sign In Form */}
+      
           <form action="#" className="sign-in-form">
             <h2 className="title">Sign in</h2>
             <div className="input-field">
@@ -41,39 +51,40 @@ const SignIn = () => {
             <input type="submit" value="Login" className="btn solid" />
           </form>
 
-          {/* Sign Up Form */}
-          <form action="#" className="sign-up-form">
+          <div className="sign-up-form">
             <h2 className="title">Sign up</h2>
-            
-
-          </form>
+            <button className="btn solid" onClick={handleStudentSignUp}>
+              Student Sign Up
+            </button>
+            <button className="btn solid" onClick={handleAdminSignUp}>
+              Admin Sign Up
+            </button>
+          </div>
         </div>
       </div>
 
       <div className="panels-container">
         <div className="panel left-panel">
           <div className="content">
-            <h3>New here ?</h3>
-            <p>
-              Lorem ipsum, dolor sit amet consectetur adipisicing elit. Debitis,
-              ex ratione. Aliquid!
-            </p>
-            <button className="btn transparent" onClick={handleSignUpClick}>
-              Sign up
-            </button>
+            <h3>New here?</h3>
+            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit.</p>
+            {!isSignUpMode && (
+              <button className="btn transparent" onClick={handleSignUpClick}>
+                Sign up
+              </button>
+            )}
           </div>
           <img src="img/log.svg" className="image" alt="" />
         </div>
         <div className="panel right-panel">
           <div className="content">
-            <h3>One of us ?</h3>
-            <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum
-              laboriosam ad deleniti.
-            </p>
-            <button className="btn transparent" onClick={handleSignInClick}>
-              Sign in
-            </button>
+            <h3>One of us?</h3>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+            {isSignUpMode && (
+              <button className="btn transparent" onClick={handleSignInClick}>
+                Sign in
+              </button>
+            )}
           </div>
           <img src="img/register.svg" className="image" alt="" />
         </div>
@@ -82,6 +93,4 @@ const SignIn = () => {
   );
 };
 
-
-
-export default SignIn
+export default SignIn;
