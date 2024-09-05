@@ -42,7 +42,8 @@ const AdminSignUp = () => {
   };
 
   return (
-    <div className="">
+    <div className="container1">
+        <div className="card">
       <h2 className="text-center">Admin Sign Up</h2>
       <form onSubmit={handleSubmit} className="mt-4">
         <div className="form-group">
@@ -164,6 +165,7 @@ const AdminSignUp = () => {
 
         <button type="submit" className="btn btn-primary btn-block mt-4">Sign Up</button>
       </form>
+    </div>
     </div>
   );
 };

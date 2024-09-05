@@ -228,6 +228,7 @@ form.sign-in-form {
   height: 41px;
   font-weight: 600;
   font-size: 0.8rem;
+  background-color: var(--dark-green);
 }
 
 .right-panel .image,
@@ -337,6 +338,7 @@ form.sign-in-form {
     width: 110px;
     height: 35px;
     font-size: 0.7rem;
+    background-color: var(--light-green);
   }
 
   .container:before {

@@ -27,7 +27,7 @@ app.post('/signup', async (req, res) => {
       name,
       email,
       password: hashedPassword,
-      mobileNumber: role === 'student' ? mobileNumber : null,
+      mobileNumber,
       state,
       district,
       collegeName,
