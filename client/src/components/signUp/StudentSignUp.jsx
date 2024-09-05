@@ -108,31 +108,33 @@ const StudentSignUp = () => {
         </div>
 
         <div className="form-group">
-          <label htmlFor="state">State</label>
-          <input
-            type="text"
-            className="form-control"
-            id="state"
-            name="state"
-            value={formData.state}
-            onChange={handleChange}
-            required
-          />
+            <div className="row">
+                <div className="col-6">
+                <label htmlFor="state">State</label>
+                    <input
+                        type="text"
+                        className="form-control"
+                        id="state"
+                        name="state"
+                        value={formData.state}
+                        onChange={handleChange}
+                        required
+                    />
+                </div>
+                <div className="col-6">
+                <label htmlFor="district">District</label>
+                    <input
+                        type="text"
+                        className="form-control"
+                        id="district"
+                        name="district"
+                        value={formData.district}
+                        onChange={handleChange}
+                        required
+                    />
+                </div>
+            </div>
         </div>
-
-        <div className="form-group">
-          <label htmlFor="district">District</label>
-          <input
-            type="text"
-            className="form-control"
-            id="district"
-            name="district"
-            value={formData.district}
-            onChange={handleChange}
-            required
-          />
-        </div>
-
         <div className="form-group">
           <label htmlFor="collegeName">College Name</label>
           <input
