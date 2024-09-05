@@ -2,16 +2,15 @@ const express = require('express');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 require('dotenv').config();
-const sequelize = require('./db'); 
-const User = require('./models/User'); 
-
+const sequelize = require('./db');
+const User = require('./models/User');
 const app = express();
-app.use(express.json()); 
+app.use(express.json());
 
 const JWT_SECRET = process.env.JWT_SECRET || 'your_jwt_secret';
 
 app.post('/signup', async (req, res) => {
-  const { email, password } = req.body;
+  const { role, name, email, password, mobileNumber, state, district, collegeName, department, collegeRegisterNumber, yearOfGraduation, aadharNumber, principalName, pocNumber } = req.body;
 
   try {
     const existingUser = await User.findOne({ where: { email } });
@@ -20,7 +19,23 @@ app.post('/signup', async (req, res) => {
     }
 
     const hashedPassword = await bcrypt.hash(password, 10);
-    const newUser = await User.create({ email, password: hashedPassword });
+
+    const newUser = await User.create({
+      role,
+      name,
+      email,
+      password: hashedPassword,
+      mobileNumber: role === 'student' ? mobileNumber : null,
+      state,
+      district,
+      collegeName,
+      department: role === 'student' ? department : null,
+      collegeRegisterNumber: role === 'student' ? collegeRegisterNumber : null,
+      yearOfGraduation: role === 'student' ? yearOfGraduation : null,
+      aadharNumber: role === 'student' ? aadharNumber : null,
+      principalName: role === 'admin' ? principalName : null,
+      pocNumber: role === 'admin' ? pocNumber : null,
+    });
 
     res.status(201).json({ message: 'User created successfully', userId: newUser.id });
   } catch (error) {
@@ -42,7 +57,7 @@ app.post('/login', async (req, res) => {
       return res.status(400).json({ message: 'Invalid email or password' });
     }
 
-    const token = jwt.sign({ userId: user.id }, JWT_SECRET, { expiresIn: '1h' });
+    const token = jwt.sign({ userId: user.id, role: user.role }, JWT_SECRET, { expiresIn: '1h' });
 
     res.status(200).json({ message: 'Login successful', token });
   } catch (error) {
