@@ -1,4 +1,3 @@
-
 const express = require('express');
 const { Sequelize } = require('sequelize');
 require('dotenv').config();
