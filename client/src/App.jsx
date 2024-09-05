@@ -4,6 +4,7 @@ import StudentSignUp from './components/signUp/StudentSignUp';
 import AdminSignUp from './components/signUp/AdminSignUp';
 import './App.css';
 import StudentSidebar from './components/sidebar/StudentSideBar';
+import StudentHome from './student/StudentHome';
 
 function App() {
   return (
@@ -12,8 +13,8 @@ function App() {
         <Route path="/" element={<SignIn />} /> 
         <Route path="/signin" element={<SignIn />} /> 
         <Route path="/student-signup" element={<StudentSignUp />} /> 
-        <Route path="/admin-signup" element={<AdminSignUp />} /> 
-        <Route path="/sidebar" element={<StudentSidebar />} />
+        <Route path="/admin-signup" element={<AdminSignUp />} />
+        <Route path="/Student" element={<StudentHome />} /> 
       </Routes>
     </Router>
   );
