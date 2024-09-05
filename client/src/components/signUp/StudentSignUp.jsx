@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import bcrypt from 'bcryptjs';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import './SignUp.css'
 
 const StudentSignUp = () => {
   const [formData, setFormData] = useState({
@@ -60,8 +63,9 @@ const StudentSignUp = () => {
   };
 
   return (
-    <div className="">
-      <h2 className="text-center">Student Sign Up</h2>
+    <div className="container1">
+        <div className="card">
+      <h2 className="text-center">Student SignUp</h2>
       <form onSubmit={handleSubmit} className="mt-4">
        
         <div className="form-group">
@@ -243,6 +247,7 @@ const StudentSignUp = () => {
 
         <button type="submit" className="btn btn-primary btn-block mt-4">Sign Up</button>
       </form>
+      </div>
     </div>
   );
 };

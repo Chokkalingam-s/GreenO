@@ -445,12 +445,12 @@ form .role-checkboxes {
   font-size: 16px;
   cursor: pointer;
   border: none;
-  background-color: #ff4b2b;
+  background-color: var(--dark-green);
   color: #fff;
   transition: background-color 0.3s ease;
 }
 
 .role-btn:hover {
-  background-color: #ff2a00;
+  background-color: var(--medium-green);
 }
 

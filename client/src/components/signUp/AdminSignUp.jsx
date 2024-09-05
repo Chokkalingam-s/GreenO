@@ -1,4 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
+import axios from 'axios';
+import bcrypt from 'bcryptjs';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import './SignUp.css'
 
 const AdminSignUp = () => {
   return (
