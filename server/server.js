@@ -27,7 +27,7 @@ app.post('/signup', async (req, res) => {
       name,
       email,
       password: hashedPassword,
-      mobileNumber: role === 'student' ? mobileNumber : null,
+      mobileNumber,
       state,
       district,
       collegeName,
@@ -46,26 +46,33 @@ app.post('/signup', async (req, res) => {
 });
 
 app.post('/login', async (req, res) => {
-  const { email, password } = req.body;
-
-  try {
-    const user = await User.findOne({ where: { email } });
-    if (!user) {
-      return res.status(400).json({ message: 'Invalid email or password' });
+    const { email, password, role } = req.body;
+  
+    try {
+      const user = await User.findOne({ where: { email } });
+      if (!user) {
+        return res.status(400).json({ message: 'Invalid email or password' });
+      }
+  
+     
+      if (user.role !== role) {
+        return res.status(400).json({ message: 'Role does not match' });
+      }
+  
+      const isPasswordValid = await bcrypt.compare(password, user.password);
+      if (!isPasswordValid) {
+        return res.status(400).json({ message: 'Invalid email or password' });
+      }
+  
+      const token = jwt.sign({ userId: user.id, role: user.role }, JWT_SECRET, { expiresIn: '1h' });
+      res.status(200).json({ message: 'Login successful', token });
+    } catch (error) {
+      res.status(500).json({ error: error.message });
     }
+  });
+  
+  
 
-    const isPasswordValid = await bcrypt.compare(password, user.password);
-    if (!isPasswordValid) {
-      return res.status(400).json({ message: 'Invalid email or password' });
-    }
-
-    const token = jwt.sign({ userId: user.id, role: user.role }, JWT_SECRET, { expiresIn: '1h' });
-
-    res.status(200).json({ message: 'Login successful', token });
-  } catch (error) {
-    res.status(500).json({ error: error.message });
-  }
-});
 
 const PORT = process.env.PORT || 3000;
 
