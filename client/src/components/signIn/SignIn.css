@@ -5,16 +5,12 @@
   padding: 0;
   box-sizing: border-box;
 }
-
 :root {
   --lightest-green: #DEF9C4;
   --light-green: #9CDBA6;
   --medium-green: #50B498;
   --dark-green: #468585;
 }
-
-
-
 body,
 input {
   font-family: "Poppins", sans-serif;
@@ -403,4 +399,35 @@ form.sign-in-form {
     bottom: 28%;
     left: 50%;
   }
+}
+/* Style for the role checkboxes container */
+.role-checkboxes {
+  display: flex;
+  justify-content: center;
+  gap: 20px;  /* Space between checkboxes */
+  margin-top: 20px;
+}
+
+/* Style for each label */
+.role-checkboxes label {
+  display: flex;
+  align-items: center;
+  font-size: 16px;
+  color: #333;  /* Darker text color */
+  font-weight: 500;  /* Slightly bold */
+  cursor: pointer;  /* Change cursor to pointer */
+}
+
+/* Style for the checkboxes themselves */
+.role-checkboxes input[type="checkbox"] {
+  margin-right: 10px;
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  accent-color: var(--dark-green); /* Change the color of the checked state */
+}
+
+/* Style for the checkbox container in the sign-in form */
+form .role-checkboxes {
+  margin: 20px 0;
 }

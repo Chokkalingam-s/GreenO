@@ -1,10 +1,8 @@
 import React, { useState } from "react";
-
 import './SignIn.css'
 
 const SignIn = () => {
   const [isSignUpMode, setIsSignUpMode] = useState(false);
-
 
   // Event handlers to switch between sign-in and sign-up modes
   const handleSignUpClick = () => {
@@ -24,11 +22,21 @@ const SignIn = () => {
             <h2 className="title">Sign in</h2>
             <div className="input-field">
               <i className="fas fa-user"></i>
-              <input type="text" placeholder="Username" />
+              <input type="email" placeholder="Email" />
             </div>
             <div className="input-field">
               <i className="fas fa-lock"></i>
               <input type="password" placeholder="Password" />
+            </div>
+            <div className="role-checkboxes">
+              <label>
+                <input type="checkbox" name="role" value="student" />
+                Student
+              </label>
+              <label>
+                <input type="checkbox" name="role" value="admin" />
+                Admin
+              </label>
             </div>
             <input type="submit" value="Login" className="btn solid" />
           </form>
@@ -36,19 +44,8 @@ const SignIn = () => {
           {/* Sign Up Form */}
           <form action="#" className="sign-up-form">
             <h2 className="title">Sign up</h2>
-            <div className="input-field">
-              <i className="fas fa-user"></i>
-              <input type="text" placeholder="Username" />
-            </div>
-            <div className="input-field">
-              <i className="fas fa-envelope"></i>
-              <input type="email" placeholder="Email" />
-            </div>
-            <div className="input-field">
-              <i className="fas fa-lock"></i>
-              <input type="password" placeholder="Password" />
-            </div>
-            <input type="submit" className="btn" value="Sign up" />
+            
+
           </form>
         </div>
       </div>
