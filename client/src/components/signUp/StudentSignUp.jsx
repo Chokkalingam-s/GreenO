@@ -16,9 +16,10 @@ const StudentSignUp = () => {
     collegeRegisterNumber: '',
     yearOfGraduation: '',
     aadharNumber: '',
+    principalName: '',
+    pocNumber: '',
   });
 
-  // Handle form field changes
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prevData) => ({
@@ -27,44 +28,42 @@ const StudentSignUp = () => {
     }));
   };
 
-  // Handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Hash the password
     const hashedPassword = bcrypt.hashSync(formData.password, 10);
 
-    // Prepare data for the backend
+  
     const postData = {
       role: formData.role,
       name: formData.name,
       email: formData.email,
       password: hashedPassword,
-      mobileNumber: formData.mobileNumber,
+      mobileNumber: formData.role === 'student' ? formData.mobileNumber : null,
       state: formData.state,
       district: formData.district,
       collegeName: formData.collegeName,
-      department: formData.department,
-      collegeRegisterNumber: formData.collegeRegisterNumber,
-      yearOfGraduation: formData.yearOfGraduation,
-      aadharNumber: formData.aadharNumber,
+      department: formData.role === 'student' ? formData.department : null,
+      collegeRegisterNumber: formData.role === 'student' ? formData.collegeRegisterNumber : null,
+      yearOfGraduation: formData.role === 'student' ? formData.yearOfGraduation : null,
+      aadharNumber: formData.role === 'student' ? formData.aadharNumber : null,
+      principalName: formData.role === 'admin' ? formData.principalName : null,
+      pocNumber: formData.role === 'admin' ? formData.pocNumber : null,
     };
 
     try {
-      // Send data to the backend API
-      const response = await axios.post('http://your-backend-api-url/signup', postData);
+      const response = await axios.post('http://localhost:3000/signup', postData);
       console.log('Sign up successful:', response.data);
-      // Redirect or show success message
-    } catch (error) {
+     } catch (error) {
       console.error('Error signing up:', error);
-      // Show error message
-    }
+      }
   };
 
   return (
-    <div className="container mt-5">
+    <div className="">
       <h2 className="text-center">Student Sign Up</h2>
       <form onSubmit={handleSubmit} className="mt-4">
+       
         <div className="form-group">
           <label htmlFor="name">Name</label>
           <input
@@ -99,19 +98,6 @@ const StudentSignUp = () => {
             id="password"
             name="password"
             value={formData.password}
-            onChange={handleChange}
-            required
-          />
-        </div>
-
-        <div className="form-group">
-          <label htmlFor="mobileNumber">Mobile Number</label>
-          <input
-            type="text"
-            className="form-control"
-            id="mobileNumber"
-            name="mobileNumber"
-            value={formData.mobileNumber}
             onChange={handleChange}
             required
           />
@@ -156,57 +142,104 @@ const StudentSignUp = () => {
           />
         </div>
 
-        <div className="form-group">
-          <label htmlFor="department">Department</label>
-          <input
-            type="text"
-            className="form-control"
-            id="department"
-            name="department"
-            value={formData.department}
-            onChange={handleChange}
-            required
-          />
-        </div>
+        {formData.role === 'student' && (
+          <>
+            <div className="form-group">
+              <label htmlFor="mobileNumber">Mobile Number</label>
+              <input
+                type="text"
+                className="form-control"
+                id="mobileNumber"
+                name="mobileNumber"
+                value={formData.mobileNumber}
+                onChange={handleChange}
+                required
+              />
+            </div>
 
-        <div className="form-group">
-          <label htmlFor="collegeRegisterNumber">College Register Number</label>
-          <input
-            type="text"
-            className="form-control"
-            id="collegeRegisterNumber"
-            name="collegeRegisterNumber"
-            value={formData.collegeRegisterNumber}
-            onChange={handleChange}
-            required
-          />
-        </div>
+            <div className="form-group">
+              <label htmlFor="department">Department</label>
+              <input
+                type="text"
+                className="form-control"
+                id="department"
+                name="department"
+                value={formData.department}
+                onChange={handleChange}
+                required
+              />
+            </div>
 
-        <div className="form-group">
-          <label htmlFor="yearOfGraduation">Year of Graduation</label>
-          <input
-            type="text"
-            className="form-control"
-            id="yearOfGraduation"
-            name="yearOfGraduation"
-            value={formData.yearOfGraduation}
-            onChange={handleChange}
-            required
-          />
-        </div>
+            <div className="form-group">
+              <label htmlFor="collegeRegisterNumber">College Register Number</label>
+              <input
+                type="text"
+                className="form-control"
+                id="collegeRegisterNumber"
+                name="collegeRegisterNumber"
+                value={formData.collegeRegisterNumber}
+                onChange={handleChange}
+                required
+              />
+            </div>
 
-        <div className="form-group">
-          <label htmlFor="aadharNumber">Aadhar Number</label>
-          <input
-            type="text"
-            className="form-control"
-            id="aadharNumber"
-            name="aadharNumber"
-            value={formData.aadharNumber}
-            onChange={handleChange}
-            required
-          />
-        </div>
+            <div className="form-group">
+              <label htmlFor="yearOfGraduation">Year of Graduation</label>
+              <input
+                type="text"
+                className="form-control"
+                id="yearOfGraduation"
+                name="yearOfGraduation"
+                value={formData.yearOfGraduation}
+                onChange={handleChange}
+                required
+              />
+            </div>
+
+            <div className="form-group">
+              <label htmlFor="aadharNumber">Aadhar Number</label>
+              <input
+                type="text"
+                className="form-control"
+                id="aadharNumber"
+                name="aadharNumber"
+                value={formData.aadharNumber}
+                onChange={handleChange}
+                required
+              />
+            </div>
+          </>
+        )}
+
+        {formData.role === 'admin' && (
+          <>
+            <div className="form-group">
+              <label htmlFor="principalName">Principal Name</label>
+              <input
+                type="text"
+                className="form-control"
+                id="principalName"
+                name="principalName"
+                value={formData.principalName}
+                onChange={handleChange}
+                required
+              />
+            </div>
+
+            <div className="form-group">
+              <label htmlFor="pocNumber">POC Number</label>
+              <input
+                type="text"
+                className="form-control"
+                id="pocNumber"
+                name="pocNumber"
+                value={formData.pocNumber}
+                onChange={handleChange}
+                required
+              />
+            </div>
+          </>
+        )}
 
         <button type="submit" className="btn btn-primary btn-block mt-4">Sign Up</button>
       </form>

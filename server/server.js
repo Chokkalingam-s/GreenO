@@ -1,12 +1,14 @@
 const express = require('express');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
+const cors = require('cors');
 require('dotenv').config();
 const sequelize = require('./db');
 const User = require('./models/User');
+
 const app = express();
 app.use(express.json());
-
+app.use(cors()); 
 const JWT_SECRET = process.env.JWT_SECRET || 'your_jwt_secret';
 
 app.post('/signup', async (req, res) => {
