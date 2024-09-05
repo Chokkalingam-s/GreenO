@@ -1,3 +1,7 @@
 GreenO Dev Notes
 
 05/09/2024 Created Repo 
+
+Choks 
+  ==> Vite React - client ( frontend)
+  ==> server - backend 
