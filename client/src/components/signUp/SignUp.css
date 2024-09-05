@@ -13,18 +13,27 @@
     overflow: hidden;
   }
 
-  .card{
+  .card {
     padding-top: 20px;
     width: 550px;
-    margin: 0 auto;
+    margin: 10px auto; /* Added top and bottom margin for spacing */
     background-color: var(--lightest-green);
+    border-radius: 10px; /* Optional: Adds rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Adds a subtle shadow */
+    transition: box-shadow 0.3s ease; /* Smooth transition for hover effect */
   }
-
+  
+  /* Hover effect for the card */
+  .card:hover {
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Enhanced shadow on hover */
+  }
+  
+  /* Responsive design */
   @media screen and (max-width: 768px) {
-    .card{
+    .card {
       width: 100%;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Maintain shadow on smaller screens */
     }
-    
   }
   
   /* Form heading */
