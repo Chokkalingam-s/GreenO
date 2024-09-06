@@ -39,7 +39,7 @@ const SignIn = () => {
       
       const { token } = response.data;
       localStorage.setItem('token', token); 
-      navigate('/dashboard'); 
+      navigate('/AdminHome'); 
     } catch (error) {
       
       setError(error.response?.data?.message || 'Login failed');

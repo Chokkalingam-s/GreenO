@@ -5,6 +5,7 @@ import AdminSignUp from './components/signUp/AdminSignUp';
 import './App.css';
 import StudentSidebar from './components/sidebar/StudentSideBar';
 import StudentHome from './student/StudentHome';
+import AdminHome from './admin/AdminHome';
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
         <Route path="/student-signup" element={<StudentSignUp />} /> 
         <Route path="/admin-signup" element={<AdminSignUp />} />
         <Route path="/Student" element={<StudentHome />} /> 
+        <Route path="/AdminHome" element={<AdminHome />} />
       </Routes>
     </Router>
   );
