@@ -1,0 +1,101 @@
+.upload-snaps-container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+  }
+  
+  .upload-snaps-content {
+    display: flex;
+    flex: 1;
+  }
+  
+  .upload-snaps-body {
+    flex: 1;
+    padding: 20px;
+    margin-left: 220px; 
+    box-sizing: border-box;
+  }
+  
+  .email-check {
+    margin-bottom: 20px;
+  }
+  
+  .email-check input {
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-right: 10px;
+    width: 300px;
+  }
+  
+  .email-check button {
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .email-check button:hover {
+    background-color: #0056b3;
+  }
+  
+  .upload-section {
+    margin-top: 20px;
+  }
+  
+  .upload-section input[type="file"] {
+    margin-bottom: 10px;
+  }
+  
+  .upload-section button {
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #28a745;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .upload-section button:hover {
+    background-color: #218838;
+  }
+  
+  .uploaded-image {
+    margin-top: 20px;
+  }
+  
+  .uploaded-image img {
+    max-width: 100%;
+    height: auto;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+  }
+  
+  .message {
+    font-size: 16px;
+    font-weight: bold;
+  }
+  
+  .message.success {
+    color: #28a745;
+  }
+  
+  .message.error {
+    color: #dc3545;
+  }
+  
+  @media (max-width: 768px) {
+    .upload-snaps-body {
+      margin-left: 0;
+    }
+  
+    .upload-snaps-content {
+      flex-direction: column;
+    }
+  }
+  

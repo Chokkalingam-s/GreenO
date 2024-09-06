@@ -1,58 +1,55 @@
-import React from 'react'
-import 
-{BsCart3, BsGrid1X2Fill, BsFillArchiveFill, BsFillGrid3X3GapFill, BsPeopleFill, 
-  BsListCheck, BsMenuButtonWideFill, BsFillGearFill}
- from 'react-icons/bs'
+import React from 'react';
 
-function StudentSideBar({openSidebarToggle, OpenSidebar}) {
+import {
+  BsHouseDoorFill, BsPersonFill, BsCameraFill, BsBookFill,
+  BsFillFileEarmarkTextFill, BsBoxArrowRight, BsList
+} from 'react-icons/bs';
+import { NavLink } from 'react-router-dom';
+
+function StudentSideBar({ openSidebarToggle, OpenSidebar }) {
   return (
-    <aside id="sidebar" className={openSidebarToggle ? "sidebar-responsive": ""}>
-        <div className='sidebar-title'>
-            <div className='sidebar-brand'>
-                <BsCart3  className='icon_header'/> SHOP
-            </div>
-            <span className='icon close_icon' onClick={OpenSidebar}>X</span>
+    <aside id="sidebar" className={openSidebarToggle ? "sidebar-responsive slide-in" : "slide-out"}>
+      <div className="sidebar-title">
+        <div className="sidebar-brand">
+          <BsList className="icon_header" /> Student Panel
         </div>
+        <span className="icon close_icon" onClick={OpenSidebar}>X</span>
+      </div>
 
-        <ul className='sidebar-list'>
-            <li className='sidebar-list-item'>
-                <a href="">
-                    <BsGrid1X2Fill className='icon'/> Dashboard
-                </a>
-            </li>
-            <li className='sidebar-list-item'>
-                <a href="">
-                    <BsFillArchiveFill className='icon'/> Products
-                </a>
-            </li>
-            <li className='sidebar-list-item'>
-                <a href="">
-                    <BsFillGrid3X3GapFill className='icon'/> Categories
-                </a>
-            </li>
-            <li className='sidebar-list-item'>
-                <a href="">
-                    <BsPeopleFill className='icon'/> Customers
-                </a>
-            </li>
-            <li className='sidebar-list-item'>
-                <a href="">
-                    <BsListCheck className='icon'/> Inventory
-                </a>
-            </li>
-            <li className='sidebar-list-item'>
-                <a href="">
-                    <BsMenuButtonWideFill className='icon'/> Reports
-                </a>
-            </li>
-            <li className='sidebar-list-item'>
-                <a href="">
-                    <BsFillGearFill className='icon'/> Setting
-                </a>
-            </li>
-        </ul>
+      <ul className="sidebar-list">
+        <li className="sidebar-list-item">
+          <NavLink to="/home" activeClassName="active">
+            <BsHouseDoorFill className="icon" /> Home
+          </NavLink>
+        </li>
+        <li className="sidebar-list-item">
+          <NavLink to="/profile" activeClassName="active">
+            <BsPersonFill className="icon" /> Profile
+          </NavLink>
+        </li>
+        <li className="sidebar-list-item">
+          <NavLink to="/student/my-activities" activeClassName="active">
+            <BsFillFileEarmarkTextFill className="icon" /> My Activities
+          </NavLink>
+        </li>
+        <li className="sidebar-list-item">
+          <NavLink to="/student/upload-snaps" activeClassName="active">
+            <BsCameraFill className="icon" /> Upload Snaps
+          </NavLink>
+        </li>
+        <li className="sidebar-list-item">
+          <NavLink to="/resources" activeClassName="active">
+            <BsBookFill className="icon" /> Resources
+          </NavLink>
+        </li>
+        <li className="sidebar-list-item">
+          <NavLink to="/logout" activeClassName="active">
+            <BsBoxArrowRight className="icon" /> Logout
+          </NavLink>
+        </li>
+      </ul>
     </aside>
-  )
+  );
 }
 
-export default StudentSideBar
+export default StudentSideBar;

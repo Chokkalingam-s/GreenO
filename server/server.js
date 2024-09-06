@@ -2,14 +2,37 @@ const express = require('express');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const cors = require('cors');
+const multer = require('multer');
+const fs = require('fs');
+const path = require('path');
 require('dotenv').config();
 const sequelize = require('./db');
 const User = require('./models/User');
-
+const UploadSnap = require('./models/UploadSnap'); 
 const app = express();
+
 app.use(express.json());
-app.use(cors()); 
+app.use(cors());
+
 const JWT_SECRET = process.env.JWT_SECRET || 'your_jwt_secret';
+const uploadDir = path.join(__dirname, 'uploads');
+
+if (!fs.existsSync(uploadDir)) {
+  fs.mkdirSync(uploadDir, { recursive: true }); 
+}
+
+
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, uploadDir);
+  },
+  filename: (req, file, cb) => {
+    const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
+    cb(null, `${req.body.email}-${uniqueSuffix}${path.extname(file.originalname)}`);
+  }
+});
+
+const upload = multer({ storage });
 
 app.post('/signup', async (req, res) => {
   const { role, name, email, password, mobileNumber, state, district, collegeName, department, collegeRegisterNumber, yearOfGraduation, aadharNumber, principalName, pocNumber } = req.body;
@@ -19,9 +42,7 @@ app.post('/signup', async (req, res) => {
     if (existingUser) {
       return res.status(400).json({ message: 'User already exists' });
     }
-
     const hashedPassword = await bcrypt.hash(password, 10);
-
     const newUser = await User.create({
       role,
       name,
@@ -41,6 +62,7 @@ app.post('/signup', async (req, res) => {
 
     res.status(201).json({ message: 'User created successfully', userId: newUser.id });
   } catch (error) {
+    console.error('Error creating user:', error);
     res.status(500).json({ error: error.message });
   }
 });
@@ -69,9 +91,44 @@ app.post('/login', async (req, res) => {
     } catch (error) {
       res.status(500).json({ error: error.message });
     }
-  });
+
+    
+});
+
+app.post('/api/check-email', async (req, res) => {
+  const { email } = req.body;
+  try {
+    const user = await User.findOne({ where: { email } });
+    if (user && user.role === 'student') {
+      res.status(200).json({ role: 'student' });
+    } else {
+      res.status(400).json({ message: 'This email is not associated with a student.' });
+    }
+  } catch (error) {
+    console.error('Error checking email:', error);
+    res.status(500).json({ error: error.message });
+  }
+});
+
+app.post('/api/upload-snap', upload.single('file'), async (req, res) => {
+  const { email } = req.body;
+  if (!req.file) {
+    return res.status(400).json({ message: 'No file uploaded.' });
+  }
+
+  try {
   
-  
+    const newUploadSnap = await UploadSnap.create({
+      email: email,
+      filename: req.file.filename,
+      filePath: req.file.path  
+    });
+    
+    res.status(200).json({ message: 'File uploaded successfully.' });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
 
 
 const PORT = process.env.PORT || 3000;
