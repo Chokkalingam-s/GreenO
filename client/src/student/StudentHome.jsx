@@ -2,7 +2,7 @@ import React from 'react'
 import { useState } from 'react'
 import StudentSideBar from '../components/sidebar/StudentSideBar'
 import StudentHeader from '../components/sidebar/StudentHeader'
-import Home from './Home'
+import SHome from './SHome'
 
 import './Student.css'
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -17,7 +17,7 @@ const StudentHome = () => {
     <div className='grid-container'>
       <StudentHeader OpenSidebar={OpenSidebar} />
       <StudentSideBar openSidebarToggle={openSidebarToggle} OpenSidebar={OpenSidebar} />
-      <Home />
+      <SHome />
     </div>
   )
 }

@@ -37,9 +37,15 @@ const SignIn = () => {
         role 
       });
       
-      const { token } = response.data;
+      const { token } = response.data; // Assuming 'role' is returned from the API
       localStorage.setItem('token', token); 
-      navigate('/AdminHome'); 
+      
+      // Role-based navigation
+      if (role === 'admin') {
+        navigate('/AdminHome'); 
+      } else if (role === 'student') {
+        navigate('/StudentHome'); 
+      }
     } catch (error) {
       
       setError(error.response?.data?.message || 'Login failed');

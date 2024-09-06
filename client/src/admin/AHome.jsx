@@ -6,7 +6,7 @@ import
  { BarChart, Bar, Cell, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, LineChart, Line } 
  from 'recharts';
 
-function Home() {
+function AHome() {
 
     const data = [
         {
@@ -127,4 +127,4 @@ function Home() {
   )
 }
 
-export default Home
+export default AHome

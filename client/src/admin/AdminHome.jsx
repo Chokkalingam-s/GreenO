@@ -1,9 +1,23 @@
 import React from 'react'
+import { useState } from 'react'
+import AdminHeader from '../components/sidebar/AdminHeader'
+import AdminSideBar from '../components/sidebar/AdminSideBar'
+import AHome from './AHome'
+
+import 'bootstrap/dist/css/bootstrap.min.css';
+import './Admin.css'
 
 const AdminHome = () => {
+  const [openSidebarToggle, setOpenSidebarToggle] = useState(false)
+
+  const OpenSidebar = () => {
+    setOpenSidebarToggle(!openSidebarToggle)
+  }
   return (
-    <div>
-      
+    <div className='grid-container'>
+      <AdminHeader OpenSidebar={OpenSidebar} />
+      <AdminSideBar openSidebarToggle={openSidebarToggle} OpenSidebar={OpenSidebar} />
+      <AHome />
     </div>
   )
 }
