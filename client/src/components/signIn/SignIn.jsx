@@ -38,7 +38,7 @@ const SignIn = () => {
       });
       
       const { token } = response.data; // Assuming 'role' is returned from the API
-      localStorage.setItem('token', token); 
+      localStorage.setItem('token',  response.data.token); 
       
       // Role-based navigation
       if (role === 'admin') {
@@ -82,26 +82,27 @@ const SignIn = () => {
               />
             </div>
             <div className="role-checkboxes">
-              <label>
-                <input
-                  type="radio"
-                  name="role"
-                  value="student"
-                  checked={role === 'student'}
-                  onChange={() => setRole('student')}
-                />
-                Student
-              </label>
-              <label>
-                <input
-                  type="radio"
-                  name="role"
-                  value="admin"
-                  checked={role === 'admin'}
-                  onChange={() => setRole('admin')}
-                />
-                Admin
-              </label>
+            <label>
+    <input
+        type="radio"
+        name="role"
+        value="student"
+        checked={role === 'student'}
+        onChange={() => setRole('student')}
+    />
+    Student
+</label>
+<label>
+    <input
+        type="radio"
+        name="role"
+        value="admin"
+        checked={role === 'admin'}
+        onChange={() => setRole('admin')}
+    />
+    Admin
+</label>
+
             </div>
             <input type="submit" value="Login" className="btn solid" />
             {error && <p className="error-message">{error}</p>}

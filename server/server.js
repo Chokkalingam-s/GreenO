@@ -68,35 +68,48 @@ app.post('/signup', async (req, res) => {
 });
 
 app.post('/login', async (req, res) => {
-    const { email, password, role } = req.body;
-  
-    try {
-      const user = await User.findOne({ where: { email } });
-      if (!user) {
-        return res.status(400).json({ message: 'Invalid email or password' });
-      }
-  
-     
-      if (user.role !== role) {
-        return res.status(400).json({ message: 'Role does not match' });
-      }
-  
-      const isPasswordValid = await bcrypt.compare(password, user.password);
-      if (!isPasswordValid) {
-        return res.status(400).json({ message: 'Invalid email or password' });
-      }
-  
-      const token = jwt.sign({ userId: user.id, role: user.role }, JWT_SECRET, { expiresIn: '1h' });
-      res.status(200).json({ message: 'Login successful', token});
-    } catch (error) {
-      res.status(500).json({ error: error.message });
+  const { email, password, role } = req.body;
+
+  try {
+    const user = await User.findOne({ where: { email } });
+    if (!user) {
+      return res.status(400).json({ message: 'Invalid email or password' });
     }
 
-    
-});
+    if (user.role !== role) {
+      return res.status(400).json({ message: 'Role does not match' });
+    }
 
-app.post('/api/check-email', async (req, res) => {
+    const isPasswordValid = await bcrypt.compare(password, user.password);
+    if (!isPasswordValid) {
+      return res.status(400).json({ message: 'Invalid email or password' });
+    }
+
+    const token = jwt.sign({ userId: user.id, email: user.email, role: user.role }, JWT_SECRET, { expiresIn: '1h' });
+    res.status(200).json({ message: 'Login successful', token });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+const authenticateToken = (req, res, next) => {
+  const token = req.headers['authorization'] && req.headers['authorization'].split(' ')[1];
+  if (token == null) return res.sendStatus(401);
+
+  jwt.verify(token, JWT_SECRET, (err, user) => {
+    if (err) return res.sendStatus(403);
+    req.user = user;
+    next();
+  });
+};
+
+app.post('/api/check-email', authenticateToken, async (req, res) => {
   const { email } = req.body;
+  const userEmailFromToken = req.user.email; 
+
+  if (email !== userEmailFromToken) {
+    return res.status(400).json({ message: 'Provided email does not match the logged-in user.' });
+  }
+
   try {
     const user = await User.findOne({ where: { email } });
     if (user && user.role === 'student') {
@@ -125,6 +138,32 @@ app.post('/api/upload-snap', upload.single('file'), async (req, res) => {
     });
     
     res.status(200).json({ message: 'File uploaded successfully.' });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+app.get('/api/uploaded-snaps', authenticateToken, async (req, res) => {
+  const { email } = req.user; 
+
+  try {
+    const uploads = await UploadSnaps.findAll({ where: { email } });
+    res.status(200).json(uploads);
+  } catch (error) {
+    console.error('Error fetching uploaded files:', error);
+    res.status(500).json({ error: error.message });
+  }
+});
+
+app.get('/api/get-uploaded-images', authenticateToken, async (req, res) => {
+  const { email } = req.user; 
+  
+  try {
+    const uploadedImages = await UploadSnap.findAll({
+      where: { email: email },
+      order: [['createdAt', 'ASC']],
+    });
+
+    res.status(200).json(uploadedImages);
   } catch (error) {
     res.status(500).json({ error: error.message });
   }

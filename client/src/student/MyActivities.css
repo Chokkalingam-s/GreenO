@@ -1,0 +1,44 @@
+.my-activities-container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+  }
+  
+  .my-activities-content {
+    display: flex;
+    flex: 1;
+  }
+  
+  .my-activities-body {
+    flex: 1;
+    padding: 20px;
+  }
+  
+  h2 {
+    margin-bottom: 20px;
+    font-size: 24px;
+  }
+  
+  .image-gallery {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+  
+  .image-item {
+    flex: 1 1 calc(25% - 20px);
+    box-sizing: border-box;
+  }
+  
+  .image-item img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  p {
+    color: #666;
+    font-size: 18px;
+  }
+  
