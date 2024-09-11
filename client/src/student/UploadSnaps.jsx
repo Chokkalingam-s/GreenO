@@ -13,6 +13,12 @@ function UploadSnaps() {
   const handleEmailChange = (e) => setEmail(e.target.value);
   const handleFileChange = (e) => setFile(e.target.files[0]);
 
+  const [openSidebarToggle, setOpenSidebarToggle] = useState(false)
+
+  const OpenSidebar = () => {
+    setOpenSidebarToggle(!openSidebarToggle)
+  }
+
   useEffect(() => {
     
     const fetchUploadedSnaps = async () => {
@@ -30,27 +36,27 @@ function UploadSnaps() {
     fetchUploadedSnaps(); 
   }, []); 
 
-  const handleCheckEmail = async () => {
-    const token = localStorage.getItem('token'); 
+  // const handleCheckEmail = async () => {
+  //   const token = localStorage.getItem('token'); 
 
-    try {
-      const response = await axios.post(
-        'http://localhost:3000/api/check-email',
-        { email },
-        {
-          headers: { Authorization: `Bearer ${token}` }
-        }
-      );
-      if (response.data.role === 'student') {
-        setMessage('Email verified. You can upload a photo.');
-      } else {
-        setMessage('This email is not associated with a student.');
-      }
-    } catch (error) {
-      console.error('Error checking email:', error);
-      setMessage('Error checking email. Please try again.');
-    }
-  };
+  //   try {
+  //     const response = await axios.post(
+  //       'http://localhost:3000/api/check-email',
+  //       { email },
+  //       {
+  //         headers: { Authorization: `Bearer ${token}` }
+  //       }
+  //     );
+  //     if (response.data.role === 'student') {
+  //       setMessage('Email verified. You can upload a photo.');
+  //     } else {
+  //       setMessage('This email is not associated with a student.');
+  //     }
+  //   } catch (error) {
+  //     console.error('Error checking email:', error);
+  //     setMessage('Error checking email. Please try again.');
+  //   }
+  // };
 
   const handleUpload = async () => {
     if (!file) {
@@ -80,13 +86,14 @@ function UploadSnaps() {
   };
 
   return (
+    <div className='grid-container'>
+    <StudentHeader OpenSidebar={OpenSidebar} />
+    <StudentSideBar openSidebarToggle={openSidebarToggle} OpenSidebar={OpenSidebar} />
     <div className='upload-snaps-container'>
-      <StudentHeader />
       <div className='upload-snaps-content'>
-        <StudentSideBar />
         <div className='upload-snaps-body'>
           <h2>Upload Snap</h2>
-          <div className='email-check'>
+          {/* <div className='email-check'>
             <input
               type='email'
               value={email}
@@ -96,12 +103,12 @@ function UploadSnaps() {
             <button onClick={handleCheckEmail}>Check Email</button>
           </div>
           {message && <p className={`message ${message.includes('Error') ? 'error' : 'success'}`}>{message}</p>}
-          {message === 'Email verified. You can upload a photo.' && (
+          {message === 'Email verified. You can upload a photo.' && ( */}
             <div className='upload-section'>
               <input type='file' onChange={handleFileChange} />
               <button onClick={handleUpload}>Upload Snap</button>
             </div>
-          )}
+          {/* )} */}
           
           
           <div className='uploaded-images'>
@@ -117,6 +124,7 @@ function UploadSnaps() {
           </div>
         </div>
       </div>
+    </div>
     </div>
   );
 }
