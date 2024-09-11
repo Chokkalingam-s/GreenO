@@ -5,3 +5,23 @@ GreenO Dev Notes
 Choks 
   ==> Vite React - client ( frontend)
   ==> server - backend 
+
+Works need to complete
+User Side:
+Student Login issue
+Upload snap - captcha, Image displaying in proper style. 
+ 	      Constraints: - Sem wise
+
+Resources
+Profile:
+   - role based
+ 	details
+	progress
+Home Page:
+	Green O details
+	Progress
+
+
+Admin Side:
+
+	
