@@ -13,6 +13,12 @@ function UploadSnaps() {
   const handleEmailChange = (e) => setEmail(e.target.value);
   const handleFileChange = (e) => setFile(e.target.files[0]);
 
+  const [openSidebarToggle, setOpenSidebarToggle] = useState(false)
+
+  const OpenSidebar = () => {
+    setOpenSidebarToggle(!openSidebarToggle)
+  }
+
   useEffect(() => {
     
     const fetchUploadedSnaps = async () => {
@@ -80,10 +86,11 @@ function UploadSnaps() {
   };
 
   return (
+    <div className='grid-container'>
+    <StudentHeader OpenSidebar={OpenSidebar} />
+    <StudentSideBar openSidebarToggle={openSidebarToggle} OpenSidebar={OpenSidebar} />
     <div className='upload-snaps-container'>
-      <StudentHeader />
       <div className='upload-snaps-content'>
-        <StudentSideBar />
         <div className='upload-snaps-body'>
           <h2>Upload Snap</h2>
           <div className='email-check'>
@@ -117,6 +124,7 @@ function UploadSnaps() {
           </div>
         </div>
       </div>
+    </div>
     </div>
   );
 }

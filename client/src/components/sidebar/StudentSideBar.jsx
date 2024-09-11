@@ -18,7 +18,7 @@ function StudentSideBar({ openSidebarToggle, OpenSidebar }) {
 
       <ul className="sidebar-list">
         <li className="sidebar-list-item">
-          <NavLink to="/home" activeClassName="active">
+          <NavLink to="/StudentHome" activeClassName="active">
             <BsHouseDoorFill className="icon" /> Home
           </NavLink>
         </li>
