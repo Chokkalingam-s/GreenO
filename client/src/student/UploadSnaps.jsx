@@ -10,6 +10,13 @@ function UploadSnaps() {
   const [message, setMessage] = useState('');
   const [uploadedImages, setUploadedImages] = useState([]); 
 
+  const [openSidebarToggle, setOpenSidebarToggle] = useState(false)
+
+  const OpenSidebar = () => {
+    setOpenSidebarToggle(!openSidebarToggle)
+  }
+
+  const handleEmailChange = (e) => setEmail(e.target.value);
   const handleFileChange = (e) => setFile(e.target.files[0]);
 
   useEffect(() => {
