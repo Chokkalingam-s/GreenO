@@ -1,12 +1,21 @@
 import React from 'react';
-
 import {
   BsHouseDoorFill, BsPersonFill, BsCameraFill, BsBookFill,
   BsFillFileEarmarkTextFill, BsBoxArrowRight, BsList
 } from 'react-icons/bs';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 
 function StudentSideBar({ openSidebarToggle, OpenSidebar }) {
+  const navigate = useNavigate(); 
+
+  const handleLogout = () => {
+    
+    localStorage.removeItem('token'); 
+    
+    
+    navigate('/signin'); 
+  };
+
   return (
     <aside id="sidebar" className={openSidebarToggle ? "sidebar-responsive slide-in" : "slide-out"}>
       <div className="sidebar-title">
@@ -43,9 +52,9 @@ function StudentSideBar({ openSidebarToggle, OpenSidebar }) {
           </NavLink>
         </li>
         <li className="sidebar-list-item">
-          <NavLink to="/logout" activeClassName="active">
+          <span onClick={handleLogout} className="sidebar-list-item-link">
             <BsBoxArrowRight className="icon" /> Logout
-          </NavLink>
+          </span>
         </li>
       </ul>
     </aside>
