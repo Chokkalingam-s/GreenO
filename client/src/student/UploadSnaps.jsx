@@ -10,7 +10,6 @@ function UploadSnaps() {
   const [message, setMessage] = useState('');
   const [uploadedImages, setUploadedImages] = useState([]); 
 
-
   const handleFileChange = (e) => setFile(e.target.files[0]);
 
   useEffect(() => {
@@ -58,10 +57,13 @@ function UploadSnaps() {
   };
 
   return (
+    <div className='grid-container'>
+    <StudentHeader OpenSidebar={OpenSidebar} />
+    <StudentSideBar openSidebarToggle={openSidebarToggle} OpenSidebar={OpenSidebar} />
     <div className='upload-snaps-container'>
-      <StudentHeader />
+
       <div className='upload-snaps-content'>
-        <StudentSideBar />
+
         <div className='upload-snaps-body'>
           <h2>Upload Snap</h2>
           
@@ -85,6 +87,7 @@ function UploadSnaps() {
           </div>
         </div>
       </div>
+    </div>
     </div>
   );
 }
