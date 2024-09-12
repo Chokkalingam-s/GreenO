@@ -14,6 +14,8 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+
 const JWT_SECRET = process.env.JWT_SECRET || 'your_jwt_secret';
 const uploadDir = path.join(__dirname, 'uploads');
 
@@ -134,19 +136,22 @@ app.post('/api/check-email', authenticateToken, async (req, res) => {
 
 app.post('/api/upload-snap', upload.single('file'), async (req, res) => {
   const { email } = req.body;
+  
   if (!req.file) {
     return res.status(400).json({ message: 'No file uploaded.' });
   }
 
   try {
-  
+    // Construct the relative file path to store in the database
+    const relativeFilePath = `uploads/${req.file.filename}`;  // Save only relative path
+
     const newUploadSnap = await UploadSnap.create({
       email: email,
       filename: req.file.filename,
-      filePath: req.file.path  
+      filePath: relativeFilePath  // Use the relative file path here
     });
-    
-    res.status(200).json({ message: 'File uploaded successfully.' });
+
+    res.status(200).json({ message: 'File uploaded successfully.', filePath: relativeFilePath });
   } catch (error) {
     res.status(500).json({ error: error.message });
   }

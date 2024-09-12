@@ -33,15 +33,15 @@ function MyActivities() {
         <div className='my-activities-body'>
           <h2>My Uploaded Photos</h2>
           <div className='image-gallery'>
-            {images.length === 0 ? (
-              <p>No images uploaded yet.</p>
-            ) : (
-              images.map((image, index) => (
-                <div key={index} className='image-item'>
-                  <img src={`http://localhost:3000/${image.filePath}`} alt={`Semester ${index + 1}`} />
-                </div>
-              ))
-            )}
+          {images.length === 0 ? (
+            <p>No images uploaded yet.</p>
+          ) : (
+            images.map((image, index) => (
+              <div key={index} className='image-item'>
+                <img src={`http://localhost:3000/${image.filePath}`} alt={`Semester ${index + 1}`} />
+              </div>
+            ))
+          )}
           </div>
         </div>
       </div>
