@@ -37,10 +37,10 @@ const SignIn = () => {
         role 
       });
       
-      const { token } = response.data; // Assuming 'role' is returned from the API
+      const { token } = response.data; 
       localStorage.setItem('token', token);
       
-      // Role-based navigation
+ 
       if (role === 'admin') {
         navigate('/AdminHome'); 
       } else if (role === 'student') {
@@ -58,7 +58,6 @@ const SignIn = () => {
     <div className={`container ${isSignUpMode ? "sign-up-mode" : ""}`}>
       <div className="forms-container">
         <div className="signin-signup">
-          {/* Sign In Form */}
           <form className="sign-in-form" onSubmit={handleLogin}>
             <h2 className="title">Sign in</h2>
             <div className="input-field">
@@ -108,7 +107,6 @@ const SignIn = () => {
             {error && <p className="error-message">{error}</p>}
           </form>
 
-          {/* Sign Up Form */}
           <form action="#" className="sign-up-form">
             <h2 className="title">Sign up</h2>
             <div className="role-buttons">

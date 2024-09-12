@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './SignUp.css';
+import { useNavigate } from 'react-router-dom';
 
 const departments = [
   'Artificial Intelligence and Data Science',
@@ -20,7 +21,7 @@ const departments = [
 ];
 
 const currentYear = new Date().getFullYear();
-const years = Array.from({ length: 4 }, (_, i) => currentYear+1 + i);
+const years = Array.from({ length: 4 }, (_, i) => currentYear + i);
 
 const StudentSignUp = () => {
   const [formData, setFormData] = useState({
@@ -39,6 +40,8 @@ const StudentSignUp = () => {
     principalName: '',
     pocNumber: '',
   });
+
+  const navigate = useNavigate(); 
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -61,19 +64,19 @@ const StudentSignUp = () => {
       return;
     }
 
-    const currentYear = new Date().getFullYear();
-    const graduationYear = parseInt(formData.yearOfGraduation, 10);
-    if (graduationYear < currentYear || graduationYear > currentYear + 4) {
-      alert('Year of Graduation must be between this year and the next 4 years.');
-      return;
-    }
-
-    
     try {
       const response = await axios.post('http://localhost:3000/signup', formData);
-      console.log('Sign up successful:', response.data);
+      const { token } = response.data;
+
+      if (token) {
+        localStorage.setItem('token', token);
+        navigate('/StudentHome');
+      } else {
+        alert('Sign up failed. Please try again.');
+      }
     } catch (error) {
       console.error('Error signing up:', error);
+      alert('An error occurred during sign-up.');
     }
   };
 
@@ -236,36 +239,6 @@ const StudentSignUp = () => {
                   value={formData.aadharNumber}
                   onChange={handleChange}
                   maxLength="12"
-                  required
-                />
-              </div>
-            </>
-          )}
-
-          {formData.role === 'admin' && (
-            <>
-              <div className="form-group">
-                <label htmlFor="principalName">Principal Name</label>
-                <input
-                  type="text"
-                  className="form-control"
-                  id="principalName"
-                  name="principalName"
-                  value={formData.principalName}
-                  onChange={handleChange}
-                  required
-                />
-              </div>
-
-              <div className="form-group">
-                <label htmlFor="pocNumber">POC Number</label>
-                <input
-                  type="text"
-                  className="form-control"
-                  id="pocNumber"
-                  name="pocNumber"
-                  value={formData.pocNumber}
-                  onChange={handleChange}
                   required
                 />
               </div>

@@ -42,6 +42,7 @@ app.post('/signup', async (req, res) => {
     if (existingUser) {
       return res.status(400).json({ message: 'User already exists' });
     }
+
     const hashedPassword = await bcrypt.hash(password, 10);
     const newUser = await User.create({
       role,
@@ -60,7 +61,10 @@ app.post('/signup', async (req, res) => {
       pocNumber: role === 'admin' ? pocNumber : null,
     });
 
-    res.status(201).json({ message: 'User created successfully', userId: newUser.id });
+    // Generate JWT token
+    const token = jwt.sign({ userId: newUser.id, email: newUser.email, role: newUser.role }, JWT_SECRET, { expiresIn: '1h' });
+
+    res.status(201).json({ message: 'User created successfully', token });
   } catch (error) {
     console.error('Error creating user:', error);
     res.status(500).json({ error: error.message });
