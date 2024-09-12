@@ -38,7 +38,7 @@ const SignIn = () => {
       });
       
       const { token } = response.data; // Assuming 'role' is returned from the API
-      localStorage.setItem('token',  response.data.token); 
+      localStorage.setItem('token', token);
       
       // Role-based navigation
       if (role === 'admin') {

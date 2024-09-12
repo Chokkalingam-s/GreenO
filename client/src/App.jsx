@@ -7,6 +7,7 @@ import AdminHome from './admin/AdminHome';
 import MyActivities from './student/MyActivities';
 import UploadSnaps from './student/UploadSnaps';
 import './App.css';
+import Resource from './student/Resource';
 
 function App() {
   return (
@@ -18,8 +19,9 @@ function App() {
         <Route path="/admin-signup" element={<AdminSignUp />} />
         <Route path="/StudentHome" element={<StudentHome />} />
         <Route path="/AdminHome" element={<AdminHome />} />
-        <Route path="/student/my-activities" element={<MyActivities />} />
-        <Route path="/student/upload-snaps" element={<UploadSnaps />} />
+        <Route path="/Student/my-activities" element={<MyActivities />} />
+        <Route path="/Student/upload-snaps" element={<UploadSnaps />} />\
+        <Route path="/Student/Resources" element={<Resource />} />
       </Routes>
     </Router>
   );
