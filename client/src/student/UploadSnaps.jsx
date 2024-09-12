@@ -59,7 +59,7 @@ function UploadSnaps() {
     }
   
     const formData = new FormData();
-    // formData.append('email', email);
+    formData.append('email', email);
     formData.append('file', file);
   
     const token = localStorage.getItem('token'); 
