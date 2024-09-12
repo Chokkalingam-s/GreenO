@@ -10,7 +10,7 @@ function UploadSnaps() {
   const [message, setMessage] = useState('');
   const [uploadedImages, setUploadedImages] = useState([]); 
 
-  const handleEmailChange = (e) => setEmail(e.target.value);
+
   const handleFileChange = (e) => setFile(e.target.files[0]);
 
   useEffect(() => {
@@ -30,28 +30,6 @@ function UploadSnaps() {
     fetchUploadedSnaps(); 
   }, []); 
 
-  // const handleCheckEmail = async () => {
-  //   const token = localStorage.getItem('token'); 
-
-  //   try {
-  //     const response = await axios.post(
-  //       'http://localhost:3000/api/check-email',
-  //       { email },
-  //       {
-  //         headers: { Authorization: `Bearer ${token}` }
-  //       }
-  //     );
-  //     if (response.data.role === 'student') {
-  //       setMessage('Email verified. You can upload a photo.');
-  //     } else {
-  //       setMessage('This email is not associated with a student.');
-  //     }
-  //   } catch (error) {
-  //     console.error('Error checking email:', error);
-  //     setMessage('Error checking email. Please try again.');
-  //   }
-  // };
-
   const handleUpload = async () => {
     if (!file) {
       setMessage('Please select a file to upload.');
@@ -59,7 +37,7 @@ function UploadSnaps() {
     }
   
     const formData = new FormData();
-    // formData.append('email', email);
+    formData.append('email', email);
     formData.append('file', file);
   
     const token = localStorage.getItem('token'); 
@@ -70,11 +48,8 @@ function UploadSnaps() {
           Authorization: `Bearer ${token}`
         }
       });
-  
-      // Assuming response includes the filePath in the response data
       setMessage('File uploaded successfully.');
-      
-      // Append the new uploaded image to the list of images
+
       setUploadedImages([...uploadedImages, response.data.filePath]); 
     } catch (error) {
       console.error('Upload error:', error);
@@ -89,22 +64,12 @@ function UploadSnaps() {
         <StudentSideBar />
         <div className='upload-snaps-body'>
           <h2>Upload Snap</h2>
-          {/* <div className='email-check'>
-            <input
-              type='email'
-              value={email}
-              onChange={handleEmailChange}
-              placeholder='Enter your email'
-            />
-            <button onClick={handleCheckEmail}>Check Email</button>
-          </div> */}
-          {/* {message && <p className={`message ${message.includes('Error') ? 'error' : 'success'}`}>{message}</p>}
-          {message === 'Email verified. You can upload a photo.' && ( */}
+          
             <div className='upload-section'>
               <input type='file' onChange={handleFileChange} />
               <button onClick={handleUpload}>Upload Snap</button>
             </div>
-          {/* )} */}
+        
           
           
           <div className='uploaded-images'>

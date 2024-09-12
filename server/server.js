@@ -29,8 +29,9 @@ const storage = multer.diskStorage({
     cb(null, uploadDir);
   },
   filename: (req, file, cb) => {
+    const email = req.user.email; 
     const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
-    cb(null, `${req.body.email}-${uniqueSuffix}${path.extname(file.originalname)}`);
+    cb(null, `${email}-${uniqueSuffix}${path.extname(file.originalname)}`);
   }
 });
 
@@ -63,7 +64,6 @@ app.post('/signup', async (req, res) => {
       pocNumber: role === 'admin' ? pocNumber : null,
     });
 
-    // Generate JWT token
     const token = jwt.sign({ userId: newUser.id, email: newUser.email, role: newUser.role }, JWT_SECRET, { expiresIn: '1h' });
 
     res.status(201).json({ message: 'User created successfully', token });
@@ -77,31 +77,29 @@ app.post('/login', async (req, res) => {
   const { email, password, role } = req.body;
 
   try {
-  const user = await User.findOne({ where: { email } });
-  if (!user) {
-    return res.status(400).json({ message: 'Invalid email or password' });
+    const user = await User.findOne({ where: { email } });
+    if (!user) {
+      return res.status(400).json({ message: 'Invalid email or password' });
+    }
+
+    if (user.role !== role) {
+      console.log(`User role in DB: ${user.role}, Role provided: ${role}`);
+      return res.status(400).json({ message: 'Role does not match' });
+    }
+
+    const isPasswordValid = await bcrypt.compare(password, user.password);
+    if (!isPasswordValid) {
+      return res.status(400).json({ message: 'Invalid email or password' });
+    }
+
+    const token = jwt.sign({ userId: user.id, email: user.email, role: user.role }, JWT_SECRET, { expiresIn: '1h' });
+    res.status(200).json({ message: 'Login successful', token });
+  } catch (error) {
+    console.error('Login Error:', error);
+    res.status(500).json({ error: error.message });
   }
-
-  if (user.role !== role) {
-    console.log(`User role in DB: ${user.role}, Role provided: ${role}`);
-    return res.status(400).json({ message: 'Role does not match' });
-  }
-
-
-  const isPasswordValid = await bcrypt.compare(password, user.password);
-  if (!isPasswordValid) {
-    return res.status(400).json({ message: 'Invalid email or password' });
-  }
-
-
-  const token = jwt.sign({ userId: user.id, email: user.email, role: user.role }, JWT_SECRET, { expiresIn: '1h' });
-  res.status(200).json({ message: 'Login successful', token });
-} catch (error) {
-  console.error('Login Error:', error);
-  res.status(500).json({ error: error.message });
-}
-
 });
+
 const authenticateToken = (req, res, next) => {
   const token = req.headers['authorization'] && req.headers['authorization'].split(' ')[1];
   if (token == null) return res.sendStatus(401);
@@ -113,57 +111,24 @@ const authenticateToken = (req, res, next) => {
   });
 };
 
-app.post('/api/check-email', authenticateToken, async (req, res) => {
-  const { email } = req.body;
-  const userEmailFromToken = req.user.email; 
-
-  if (email !== userEmailFromToken) {
-    return res.status(400).json({ message: 'Provided email does not match the logged-in user.' });
-  }
-
-  try {
-    const user = await User.findOne({ where: { email } });
-    if (user && user.role === 'student') {
-      res.status(200).json({ role: 'student' });
-    } else {
-      res.status(400).json({ message: 'This email is not associated with a student.' });
-    }
-  } catch (error) {
-    console.error('Error checking email:', error);
-    res.status(500).json({ error: error.message });
-  }
-});
-
-app.post('/api/upload-snap', upload.single('file'), async (req, res) => {
-  const { email } = req.body;
+app.post('/api/upload-snap', authenticateToken, upload.single('file'), async (req, res) => {
+  const { email } = req.user; 
   
   if (!req.file) {
     return res.status(400).json({ message: 'No file uploaded.' });
   }
 
   try {
-    // Construct the relative file path to store in the database
-    const relativeFilePath = `uploads/${req.file.filename}`;  // Save only relative path
+    const relativeFilePath = `uploads/${req.file.filename}`;  
 
     const newUploadSnap = await UploadSnap.create({
       email: email,
       filename: req.file.filename,
-      filePath: relativeFilePath  // Use the relative file path here
+      filePath: relativeFilePath  
     });
 
     res.status(200).json({ message: 'File uploaded successfully.', filePath: relativeFilePath });
   } catch (error) {
-    res.status(500).json({ error: error.message });
-  }
-});
-app.get('/api/uploaded-snaps', authenticateToken, async (req, res) => {
-  const { email } = req.user; 
-
-  try {
-    const uploads = await UploadSnaps.findAll({ where: { email } });
-    res.status(200).json(uploads);
-  } catch (error) {
-    console.error('Error fetching uploaded files:', error);
     res.status(500).json({ error: error.message });
   }
 });
@@ -179,6 +144,17 @@ app.get('/api/get-uploaded-images', authenticateToken, async (req, res) => {
 
     res.status(200).json(uploadedImages);
   } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+app.get('/api/uploaded-snaps', authenticateToken, async (req, res) => {
+  const { email } = req.user; 
+
+  try {
+    const uploads = await UploadSnap.findAll({ where: { email } });
+    res.status(200).json(uploads);
+  } catch (error) {
+    console.error('Error fetching uploaded snaps:', error);
     res.status(500).json({ error: error.message });
   }
 });
