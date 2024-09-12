@@ -10,45 +10,45 @@ function AHome() {
 
     const data = [
         {
-          name: 'Page A',
-          uv: 4000,
-          pv: 2400,
+          name: 'ADS',
+          Trees: 2400,
+          Students: 4000,
           amt: 2400,
         },
         {
-          name: 'Page B',
-          uv: 3000,
-          pv: 1398,
+          name: 'MECH',
+          Trees: 1398,
+          Students: 3000,
           amt: 2210,
         },
         {
-          name: 'Page C',
-          uv: 2000,
-          pv: 9800,
+          name: 'IT',
+          Trees: 3800,
+          Students: 4000,
           amt: 2290,
         },
         {
-          name: 'Page D',
-          uv: 2780,
-          pv: 3908,
+          name: 'CSE',
+          Trees: 2780,
+          Students: 3908,
           amt: 2000,
         },
         {
-          name: 'Page E',
-          uv: 1890,
-          pv: 4800,
+          name: 'ECE',
+          Trees: 1890,
+          Students: 4800,
           amt: 2181,
         },
         {
-          name: 'Page F',
-          uv: 2390,
-          pv: 3800,
+          name: 'EEE',
+          Trees: 2390,
+          Students: 3800,
           amt: 2500,
         },
         {
-          name: 'Page G',
-          uv: 3490,
-          pv: 4300,
+          name: 'CIVIL',
+          Trees: 3490,
+          Students: 4300,
           amt: 2100,
         },
       ];
@@ -63,17 +63,17 @@ function AHome() {
         <div className='main-cards'>
             <div className='card'>
                 <div className='card-inner'>
-                    <h3>PRODUCTS</h3>
-                    <BsFillArchiveFill className='card_icon'/>
+                    <h3>Student's OnBoarded</h3>
+                    <BsPeopleFill className='card_icon'/>
                 </div>
-                <h1>300</h1>
+                <h1>3080</h1>
             </div>
             <div className='card'>
                 <div className='card-inner'>
-                    <h3>CATEGORIES</h3>
+                    <h3>Tree's Planted</h3>
                     <BsFillGrid3X3GapFill className='card_icon'/>
                 </div>
-                <h1>12</h1>
+                <h1>2700</h1>
             </div>
         </div>
 
@@ -95,8 +95,8 @@ function AHome() {
                 <YAxis />
                 <Tooltip />
                 <Legend />
-                <Bar dataKey="pv" fill="#8884d8" />
-                <Bar dataKey="uv" fill="#82ca9d" />
+                <Bar dataKey="Students" fill="#8884d8" />
+                <Bar dataKey="Trees" fill="#82ca9d" />
                 </BarChart>
             </ResponsiveContainer>
 
@@ -117,8 +117,8 @@ function AHome() {
                 <YAxis />
                 <Tooltip />
                 <Legend />
-                <Line type="monotone" dataKey="pv" stroke="#8884d8" activeDot={{ r: 8 }} />
-                <Line type="monotone" dataKey="uv" stroke="#82ca9d" />
+                <Line type="monotone" dataKey="Students" stroke="#8884d8" activeDot={{ r: 8 }} />
+                <Line type="monotone" dataKey="Trees" stroke="#82ca9d" />
                 </LineChart>
             </ResponsiveContainer>
 
