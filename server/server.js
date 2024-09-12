@@ -71,25 +71,30 @@ app.post('/login', async (req, res) => {
   const { email, password, role } = req.body;
 
   try {
-    const user = await User.findOne({ where: { email } });
-    if (!user) {
-      return res.status(400).json({ message: 'Invalid email or password' });
-    }
-
-    if (user.role !== role) {
-      return res.status(400).json({ message: 'Role does not match' });
-    }
-
-    const isPasswordValid = await bcrypt.compare(password, user.password);
-    if (!isPasswordValid) {
-      return res.status(400).json({ message: 'Invalid email or password' });
-    }
-
-    const token = jwt.sign({ userId: user.id, email: user.email, role: user.role }, JWT_SECRET, { expiresIn: '1h' });
-    res.status(200).json({ message: 'Login successful', token });
-  } catch (error) {
-    res.status(500).json({ error: error.message });
+  const user = await User.findOne({ where: { email } });
+  if (!user) {
+    return res.status(400).json({ message: 'Invalid email or password' });
   }
+
+  if (user.role !== role) {
+    console.log(`User role in DB: ${user.role}, Role provided: ${role}`);
+    return res.status(400).json({ message: 'Role does not match' });
+  }
+
+
+  const isPasswordValid = await bcrypt.compare(password, user.password);
+  if (!isPasswordValid) {
+    return res.status(400).json({ message: 'Invalid email or password' });
+  }
+
+
+  const token = jwt.sign({ userId: user.id, email: user.email, role: user.role }, JWT_SECRET, { expiresIn: '1h' });
+  res.status(200).json({ message: 'Login successful', token });
+} catch (error) {
+  console.error('Login Error:', error);
+  res.status(500).json({ error: error.message });
+}
+
 });
 const authenticateToken = (req, res, next) => {
   const token = req.headers['authorization'] && req.headers['authorization'].split(' ')[1];

@@ -38,7 +38,7 @@ function StudentSideBar({ openSidebarToggle, OpenSidebar }) {
           </NavLink>
         </li>
         <li className="sidebar-list-item">
-          <NavLink to="/resources" activeClassName="active">
+          <NavLink to="/student/resource" activeClassName="active">
             <BsBookFill className="icon" /> Resources
           </NavLink>
         </li>

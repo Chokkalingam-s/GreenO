@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import bcrypt from 'bcryptjs';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './SignUp.css';
 
@@ -69,27 +68,9 @@ const StudentSignUp = () => {
       return;
     }
 
-    const hashedPassword = bcrypt.hashSync(formData.password, 10);
-
-    const postData = {
-      role: formData.role,
-      name: formData.name,
-      email: formData.email,
-      password: hashedPassword,
-      mobileNumber: formData.role === 'student' ? formData.mobileNumber : null,
-      state: formData.state,
-      district: formData.district,
-      collegeName: formData.collegeName,
-      department: formData.role === 'student' ? formData.department : null,
-      collegeRegisterNumber: formData.role === 'student' ? formData.collegeRegisterNumber : null,
-      yearOfGraduation: formData.role === 'student' ? formData.yearOfGraduation : null,
-      aadharNumber: formData.role === 'student' ? formData.aadharNumber : null,
-      principalName: formData.role === 'admin' ? formData.principalName : null,
-      pocNumber: formData.role === 'admin' ? formData.pocNumber : null,
-    };
-
+    
     try {
-      const response = await axios.post('http://localhost:3000/signup', postData);
+      const response = await axios.post('http://localhost:3000/signup', formData);
       console.log('Sign up successful:', response.data);
     } catch (error) {
       console.error('Error signing up:', error);

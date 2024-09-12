@@ -8,12 +8,6 @@ function MyActivities() {
   const [images, setImages] = useState([]);
   const [token, setToken] = useState(localStorage.getItem('token') || '');
 
-  const [openSidebarToggle, setOpenSidebarToggle] = useState(false)
-
-  const OpenSidebar = () => {
-    setOpenSidebarToggle(!openSidebarToggle)
-  }
-
   useEffect(() => {
     const fetchImages = async () => {
       try {
@@ -32,15 +26,10 @@ function MyActivities() {
   }, [token]);
 
   return (
-    <div className='grid-container'>
-      <StudentHeader OpenSidebar={OpenSidebar} />
-      <StudentSideBar openSidebarToggle={openSidebarToggle} OpenSidebar={OpenSidebar} />
-
-    
     <div className='my-activities-container'>
-      
+      <StudentHeader />
       <div className='my-activities-content'>
-        
+        <StudentSideBar />
         <div className='my-activities-body'>
           <h2>My Uploaded Photos</h2>
           <div className='image-gallery'>
@@ -56,7 +45,6 @@ function MyActivities() {
           </div>
         </div>
       </div>
-    </div>
     </div>
   );
 }

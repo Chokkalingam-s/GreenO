@@ -1,3 +1,4 @@
+// src/App.js
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import SignIn from './components/signIn/SignIn';
 import StudentSignUp from './components/signUp/StudentSignUp';
@@ -6,6 +7,7 @@ import StudentHome from './student/StudentHome';
 import AdminHome from './admin/AdminHome';
 import MyActivities from './student/MyActivities';
 import UploadSnaps from './student/UploadSnaps';
+
 import './App.css';
 
 function App() {
@@ -20,6 +22,7 @@ function App() {
         <Route path="/AdminHome" element={<AdminHome />} />
         <Route path="/student/my-activities" element={<MyActivities />} />
         <Route path="/student/upload-snaps" element={<UploadSnaps />} />
+        
       </Routes>
     </Router>
   );
