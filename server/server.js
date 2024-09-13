@@ -151,6 +151,7 @@ app.get('/api/uploaded-snaps', authenticateToken, async (req, res) => {
   const { email } = req.user; 
 
   try {
+     
     const uploads = await UploadSnap.findAll({ where: { email } });
     res.status(200).json(uploads);
   } catch (error) {
