@@ -35,10 +35,10 @@ function MyActivities() {
     <div className='grid-container'>
     <StudentHeader OpenSidebar={OpenSidebar} />
     <StudentSideBar openSidebarToggle={openSidebarToggle} OpenSidebar={OpenSidebar} />
+    <main className='main-container'>
+    <div className='main-cards'>
     <div className='my-activities-container'>
-      
       <div className='my-activities-content'>
-      
         <div className='my-activities-body'>
           <h2>My Uploaded Photos</h2>
           <div className='image-gallery'>
@@ -55,6 +55,8 @@ function MyActivities() {
         </div>
       </div>
     </div>
+    </div>
+    </main>
     </div>
   );
 }

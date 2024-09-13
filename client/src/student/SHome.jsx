@@ -7,7 +7,6 @@ import
  from 'recharts';
  import homeImg1 from '../../Images/home.jpg'
  import homeImg2 from '../../Images/homeImg2.png'
- import styled from 'styled-components';
 
 function SHome() {
     
