@@ -143,23 +143,41 @@ body {
     justify-content: space-around;
     padding: 8px 15px;
     border-radius: 5px;
+    width: 80vw;
+  }
+  .card_student
+  { 
+    display: flex;
+    flex-direction: row ;
+    align-items: center;
   }
   
-  .card:first-child {
-    background-color: #57ae6a;
-  }
-  
-  .card:nth-child(2) {
-    background-color: #57ae6a;
-  }
-  
-  .card:nth-child(3) {
-    background-color: #2e7d32;
-  }
-  
-  .card:nth-child(4) {
-    background-color: #d50000;
-  }
+.card_img{
+  border-radius: 20px;
+  width: 100%;
+  max-width: 400px;
+  height: 26vh; /* Maintain aspect ratio */
+  margin-right: 20px ;
+}
+
+.card-title
+{
+  font-family: cursive;
+  color: black;
+  font-size: 1.5em;
+  margin-left: 27vw;
+  margin-top: 1%;
+}
+
+.card_description {
+  font-size: 17px;
+  margin-top: 0; /* Remove margin since it's now side by side */
+  flex-grow: 1; /* Allow the description to take up the remaining space */
+  max-width: 60%; /* Limit the description width to fit nicely */
+  color: white;
+  text-align: justify;
+text-justify: inter-word;
+}
   
   .card-inner {
     display: flex;
@@ -213,10 +231,48 @@ body {
       gap: 10px;
       margin-bottom: 0;
     }
+
+    .card-title
+{
+  font-family: cursive;
+  color: black;
+  font-size: 1.4em;
+  margin-left: 10px;
+  margin-top: 2%;
+}
+
+    .card_img{
+      border-radius: 20px;
+      width: 85vw;
+      max-width: 400px;
+      height: 15vh; /* Maintain aspect ratio */
+      margin-right: 17px ;
+      margin-left: 17px;
+    }
   
     .charts {
       grid-template-columns: 1fr;
       margin-top: 30px;
+    }
+
+    .card{
+      width: 90vw;
+    }
+    .card_description {
+      font-size: 15px;
+      margin-top: 0; /* Remove margin since it's now side by side */
+      flex-grow: 1; /* Allow the description to take up the remaining space */
+      max-width: 100%; /* Limit the description width to fit nicely */
+      color: white;
+      text-align: justify;
+    text-justify: inter-word;
+    }
+
+    .card_student
+    { 
+      display: flex;
+      flex-direction: column;
+      align-items: center;
     }
   }
   

@@ -137,12 +137,13 @@ body {
     margin: 15px 0;
   }
   
-  .card {
+  .adminCard{
     display: flex;
     flex-direction: column;
     justify-content: space-around;
     padding: 8px 15px;
     border-radius: 5px;
+    width: 40vw;
   }
   
   .card:first-child {
@@ -217,6 +218,15 @@ body {
     .charts {
       grid-template-columns: 1fr;
       margin-top: 30px;
+    }
+
+    .adminCard{
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around;
+      padding: 8px 15px;
+      border-radius: 5px;
+      width: 80vw;
     }
   }
   

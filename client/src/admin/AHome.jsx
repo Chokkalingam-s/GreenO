@@ -61,14 +61,14 @@ function AHome() {
         </div>
 
         <div className='main-cards'>
-            <div className='card'>
+            <div className='card adminCard'>
                 <div className='card-inner'>
                     <h3>Student's OnBoarded</h3>
                     <BsPeopleFill className='card_icon'/>
                 </div>
                 <h1>3080</h1>
             </div>
-            <div className='card'>
+            <div className='card adminCard'>
                 <div className='card-inner'>
                     <h3>Tree's Planted</h3>
                     <BsFillGrid3X3GapFill className='card_icon'/>
