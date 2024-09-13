@@ -46,6 +46,7 @@ const Resource = () => {
             </ul>
           </section>
 
+          {/* Plant Growth Cards Section */}
           <section className="plant-growth-section">
             <h2 className="section-title">Plant Growth Process</h2>
             <Row className="plant-cards-row">
