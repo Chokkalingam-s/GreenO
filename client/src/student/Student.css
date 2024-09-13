@@ -102,15 +102,15 @@ body {
     color: var(--dark-green);
     color: white;
   }
+  i{
+    color: green;
+    font-size: 1.5em;
+    margin-right: 10px;
+  }
   
   .sidebar-responsive {
     display: inline !important;
     position: absolute;
-    /*
-      we want the z-index of the sidebar higher so that
-      the charts are not showing over the sidebar 
-      on small screens
-    */
     z-index: 12 !important;
   }
   
@@ -158,6 +158,11 @@ body {
   max-width: 400px;
   height: 26vh; /* Maintain aspect ratio */
   margin-right: 20px ;
+}
+.img2{
+  margin-left: 30px !important;
+  height: 35vh;
+  margin-right:10px !important ;
 }
 
 .card-title
@@ -238,7 +243,7 @@ text-justify: inter-word;
   color: black;
   font-size: 1.4em;
   margin-left: 10px;
-  margin-top: 2%;
+  margin-top: 1%;
 }
 
     .card_img{
@@ -248,6 +253,9 @@ text-justify: inter-word;
       height: 15vh; /* Maintain aspect ratio */
       margin-right: 17px ;
       margin-left: 17px;
+    }
+    .img2{
+      height: 20vh !important;
     }
   
     .charts {

@@ -5,7 +5,8 @@ import
  import 
  { BarChart, Bar, Cell, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, LineChart, Line } 
  from 'recharts';
- import home from '../../Images/home.jpg'
+ import homeImg1 from '../../Images/home.jpg'
+ import homeImg2 from '../../Images/homeImg2.png'
  import styled from 'styled-components';
 
 function SHome() {
@@ -25,7 +26,7 @@ function SHome() {
                             <h3 className='card-title'>About Us</h3>
                         </div>
                         <div className="card_student">
-                        <img src={home} alt="product" className='card_img'/>
+                        <img src={homeImg1} alt="product" className='card_img'/>
                         <p className='card_description'>A sustainable environmental initiative that promotes afforestation by encouraging
                                     students to plant and nurture a tree during their academic journey. The project aims
                                     to instill a sense of environmental responsibility among students, fostering a
@@ -42,12 +43,21 @@ function SHome() {
                 </div>
 
                 <div className="col-12">
-                    <div className='card'>
+                <div className='card '>
                         <div className='card-inner'>
-                            <h3>CATEGORIES</h3>
-                            <BsFillGrid3X3GapFill className='card_icon'/>
+                            <h3 className='card-title'>How to Use This App !?</h3>
                         </div>
-                        <h1>12</h1>
+                        <div className="card_student">
+                        <p className='card_description'><ul>
+            <li><i className="uil uil-arrow-circle-right" /> Allow the app to access your location for ensuring the accuracy and legitimacy.</li>
+            <li><i className="uil uil-arrow-circle-right" /> Upload images of trees you've planted during each semester.</li>
+            <li><i className="uil uil-arrow-circle-right" /> Any suspicious or unauthorized activities will be reported to the college for verification.</li>
+            <li><i className="uil uil-arrow-circle-right" /> Explore a dedicated section to view a comprehensive record of your tree planting activities.</li>
+            <li><i className="uil uil-arrow-circle-right" /> When done, always log out securely to protect your account. This ensures the privacy and security of your data.</li>
+          </ul>
+                        </p>
+                        <img src={homeImg2} alt="product" className='card_img img2'/>
+                        </div>
                     </div>
                 </div>
             </div>
