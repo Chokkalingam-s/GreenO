@@ -3,7 +3,6 @@ import { useState } from 'react'
 import StudentSideBar from '../components/sidebar/StudentSideBar'
 import StudentHeader from '../components/sidebar/StudentHeader'
 import SHome from './SHome'
-
 import './Student.css'
 import 'bootstrap/dist/css/bootstrap.min.css';
 

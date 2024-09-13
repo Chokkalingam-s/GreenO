@@ -1,0 +1,118 @@
+.resource-container {
+    padding: 20px;
+  }
+  
+ 
+  .section-title {
+    font-size: 2.4rem;
+    color: #00796b;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+ 
+  .pinned-section {
+    background: linear-gradient(135deg, #e0f7fa, #b2dfdb);
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+  }
+  
+  .pinned-points li {
+    font-size: 1.2rem;
+    color: #2e7d32;
+    line-height: 1.8;
+    margin-bottom: 10px;
+  }
+  
+ 
+  .enhanced-card {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    height: 100%;
+  }
+  
+  .enhanced-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.15);
+  }
+  
+  .card-title-enhanced {
+    color: #2e7d32;
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 15px;
+  }
+  
+  .card-text-enhanced {
+    font-size: 1rem;
+    color: #616161;
+    margin-bottom: 20px;
+  }
+  
+  .enhanced-button {
+    background-color: #00796b;
+    border: none;
+    padding: 10px 20px;
+    font-size: 1rem;
+    color: white;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+  }
+  
+  .enhanced-button:hover {
+    background-color: #004d40;
+    transform: translateY(-5px);
+  }
+  
+ 
+  .video-card-enhanced {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .video-card-enhanced:hover {
+    transform: scale(1.03);
+    box-shadow: 0px 8px 18px rgba(0, 0, 0, 0.15);
+  }
+  
+  .video-description {
+    text-align: center;
+    background-color: #00796b;
+    color: white;
+    padding: 10px;
+    font-size: 1.2rem;
+    font-weight: bold;
+  }
+  
+ 
+  .plant-cards-row {
+    margin-top: 20px;
+  }
+  
+  .video-cards-row {
+    margin-top: 20px;
+  }
+  
+  @media (max-width: 768px) {
+    .section-title {
+      font-size: 2rem;
+    }
+    .card-title-enhanced {
+      font-size: 1.4rem;
+    }
+  }
+  
+  @media (max-width: 576px) {
+    .section-title {
+      font-size: 1.8rem;
+    }
+    .card-title-enhanced {
+      font-size: 1.2rem;
+    }
+  }
+  
