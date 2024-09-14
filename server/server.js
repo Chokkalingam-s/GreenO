@@ -23,7 +23,6 @@ if (!fs.existsSync(uploadDir)) {
   fs.mkdirSync(uploadDir, { recursive: true }); 
 }
 
-
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
     cb(null, uploadDir);
@@ -147,13 +146,22 @@ app.get('/api/get-uploaded-images', authenticateToken, async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 });
+
 app.get('/api/uploaded-snaps', authenticateToken, async (req, res) => {
   const { email } = req.user; 
 
   try {
-     
-    const uploads = await UploadSnap.findAll({ where: { email } });
-    res.status(200).json(uploads);
+    // Fetch only the most recent image uploaded by the user
+    const uploads = await UploadSnap.findOne({
+      where: { email },
+      order: [['createdAt', 'DESC']], // Sort by most recent
+    });
+
+    if (!uploads) {
+      return res.status(404).json({ message: 'No images found for the user' });
+    }
+
+    res.status(200).json(uploads); // Return only the most recent upload
   } catch (error) {
     console.error('Error fetching uploaded snaps:', error);
     res.status(500).json({ error: error.message });
