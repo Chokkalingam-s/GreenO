@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css'; 
+import { Link } from 'react-router-dom'; 
 import StudentSideBar from '../components/sidebar/StudentSideBar';
 import StudentHeader from '../components/sidebar/StudentHeader';
 import './UploadSnaps.css';
@@ -95,33 +96,42 @@ function UploadSnaps() {
   
     const token = localStorage.getItem('token');
     try {
-      await axios.post('http://localhost:3000/api/upload-snap', formData, {
+      const response = await axios.post('http://localhost:3000/api/upload-snap', formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
           Authorization: `Bearer ${token}`
         }
       });
       toast.success('File uploaded successfully!');
-      setFile(null); 
+      setUploadedImage(response.data.filePath);
       generateCaptcha(); 
-      window.location.reload();
+      setFile(null); 
+      setMessage('');
+
+      setTimeout(() => {
+        window.location.reload();
+      }, 1500);  
+  
     } catch (error) {
       console.error('Upload error:', error);
       toast.error('Error uploading file. Please try again.');
     }
   };
   
-  
+
   return (
     <div className='grid-container'>
       <ToastContainer />
       <StudentHeader OpenSidebar={OpenSidebar} />
       <StudentSideBar openSidebarToggle={openSidebarToggle} OpenSidebar={OpenSidebar} />
       <main className='main-container'>
+        <div className='breadcrumb-container'>
+          <Link to='/StudentHome' className='breadcrumb-link'>Home</Link> &gt; <span className='up-img'>Upload Image</span>
+        </div>
         <div className='upload-snaps-container'>
           <div className='upload-snaps-content'>
             <div className='upload-snaps-body'>
-              <h2>Upload Snap</h2>
+              <h2>Upload Image</h2>
 
               <div className='captcha-section'>
                 <div className='captcha-container'>
@@ -145,19 +155,25 @@ function UploadSnaps() {
               </div>
               
               <div className='upload-section'>
-                <input 
-                  type='file' 
-                  onChange={handleFileChange}
-                  className='file-input'
-                />
-                <button 
-                  onClick={handleUpload} 
-                  disabled={!isUploadEnabled}
-                  className={`upload-button ${isUploadEnabled ? 'enabled' : 'disabled'}`}
-                >
-                  Upload Snap
-                </button>
-              </div>
+  <label className='custom-file-upload'>
+    <input 
+      type='file' 
+      onChange={handleFileChange}
+      className='file-input'
+    />
+    <i className='fa fa-cloud-upload'></i> Choose File
+  </label>
+  {file && <p className='file-name'>{file.name}</p>}
+
+  <button 
+    onClick={handleUpload} 
+    disabled={!isUploadEnabled}
+    className={`upload-button ${isUploadEnabled ? 'enabled' : 'disabled'}`}
+  >
+    Upload Snap
+  </button>
+</div>
+
 
               {message && <p className='message'>{message}</p>}
 

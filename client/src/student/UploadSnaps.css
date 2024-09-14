@@ -4,23 +4,42 @@
   grid-template-columns: auto 1fr;
   height: 100vh;
   font-family: 'Roboto', sans-serif;
-
+  background-color: #f4f4f4;
 }
 
 .main-container {
   padding: 20px;
 }
 
+.breadcrumb-container {
+  text-align: right;
+  margin-bottom: 20px;
+}
+
+.breadcrumb-link {
+  color: #007bff;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.breadcrumb-link:hover {
+  text-decoration: underline;
+}
+
+.breadcrumb-container span {
+  font-weight: bold;
+}
+
 .upload-snaps-container {
-  max-width: 900px;
+  max-width: 800px;
   margin: auto;
 }
 
 .upload-snaps-content {
-  padding: 30px;
-  background: #fff;
-  border-radius: 12px;
-  box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+  padding: 20px;
+  background: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
 }
 
 .upload-snaps-body {
@@ -28,44 +47,105 @@
 }
 
 .captcha-section {
-  margin-bottom: 30px;
+  margin-bottom: 20px;
 }
 
 .captcha-container {
-  margin-bottom: 15px;
+  margin-bottom: 10px;
 }
 
 .captcha {
-  font-size: 28px;
+  font-size: 24px;
   font-weight: bold;
-  background-color: #ececec;
-  padding: 15px;
-  color: rgb(188, 125, 125);
-  border-radius: 8px;
+  background-color: #ddd;
+  padding: 10px;
+  color: #c28181;
+  border-radius: 5px;
 }
 
 .captcha-input-section {
   display: flex;
   justify-content: center;
-  gap: 15px;
+  gap: 10px;
   align-items: center;
 }
-
-.captcha-input {
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  width: 180px;
+.up-img{
+  color: #6c363b;
 }
-
-.verify-check {
-  padding: 10px 20px;
-  border: none;
-  border-radius: 8px;
+/* Custom File Upload Button */
+.custom-file-upload {
+  display: inline-block;
+  padding: 10px 25px;
   cursor: pointer;
   background-color: #007bff;
   color: white;
-  font-size: 18px;
+  border-radius: 5px;
+  font-size: 16px;
+  font-weight: bold;
+  text-align: center;
+  transition: background-color 0.3s ease;
+}
+
+.custom-file-upload:hover {
+  background-color: #0056b3;
+}
+
+.custom-file-upload i {
+  margin-right: 8px;
+}
+
+.file-input {
+  display: none; /* Hide the default input */
+}
+
+.file-name {
+  margin-top: 10px;
+  font-style: italic;
+  font-size: 14px;
+  color: #555;
+}
+
+/* Upload Button */
+.upload-button {
+  padding: 12px 30px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+  margin-top: 20px;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.upload-button.enabled {
+  background-color: #28a745;
+}
+
+.upload-button.enabled:hover {
+  background-color: #218838;
+  transform: scale(1.05);
+}
+
+.upload-button.disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.captcha-input {
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  width: 150px;
+}
+
+.verify-check {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  background-color: #007bff;
+  color: white;
+  font-size: 16px;
 }
 
 .verify-check.valid {
@@ -77,29 +157,21 @@
 }
 
 .upload-section {
-  margin-top: 30px;
+  margin-top: 20px;
 }
 
 .file-input {
   margin-bottom: 15px;
-  font-weight: bold;
-  border-radius: 4px !important;
-  background-color: var(--dark-green);
-  height: 5vh;
-}
-
-.prev{
-  color: #dc3545;
 }
 
 .upload-button {
-  padding: 12px 25px;
+  padding: 10px 20px;
   border: none;
-  border-radius: 8px;
+  border-radius: 5px;
   cursor: pointer;
   background-color: var(--dark-green);
   color: white;
-  font-size: 18px;
+  font-size: 16px;
 }
 
 .upload-button.enabled {
@@ -113,20 +185,20 @@
 
 .message {
   color: red;
-  font-size: 18px;
-  margin-top: 15px;
+  font-size: 16px;
+  margin-top: 10px;
 }
 
 .uploaded-images {
-  margin-top: 30px;
+  margin-top: 20px;
 }
 
 .uploaded-image {
-  margin-top: 15px;
+  margin-top: 10px;
 }
 
 .uploaded-image-img {
   max-width: 100%;
-  border-radius: 12px;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  height: auto;
+  border-radius: 8px;
 }
