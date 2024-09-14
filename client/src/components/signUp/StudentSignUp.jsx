@@ -82,7 +82,7 @@ const StudentSignUp = () => {
 
   return (
     <div className="container1">
-      <div className="card">
+      <div className="card signUpCard">
         <h2 className="text-center">Student SignUp</h2>
         <form onSubmit={handleSubmit} className="mt-4">
           <div className="form-group">
