@@ -1,46 +1,140 @@
 .my-activities-container {
-    display: flex;
-    flex-direction: column;
-    height: 100vh;
+  padding: 20px;
+  background-color: #f4f4f9;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.my-activities-container h2 {
+  font-size: 2.2rem;
+  margin-bottom: 30px;
+  text-align: center;
+  color: #333;
+  font-weight: bold;
+}
+
+.filters {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.filters button {
+  background-color: #eee;
+  border: none;
+  margin: 0 10px;
+  padding: 10px 20px;
+  font-size: 1rem;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+
+.filters button.active,
+.filters button:hover {
+  background-color: #004d40;
+  color: white;
+}
+
+.my-activities-container .gallery-container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* Display 2 cards per row */
+  gap: 25px;
+  padding: 20px;
+  box-sizing: border-box;
+  max-width: 1200px;
+  width: 100%;
+}
+
+.my-activities-container .image-card {
+  background-color: #fff;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  position: relative;
+}
+
+.my-activities-container .image-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 16px 32px rgba(0, 0, 0, 0.2);
+}
+
+.my-activities-container .image-card img {
+  width: 100%;
+  height: 250px;
+  object-fit: cover;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.my-activities-container .image-card:hover img {
+  opacity: 0.9;
+  transform: scale(1.05);
+}
+
+.my-activities-container .image-card-content {
+  padding: 15px;
+  text-align: center;
+}
+
+.my-activities-container .image-card h3 {
+  font-size: 1.4rem;
+  margin: 0;
+  color: #004d40;
+  font-weight: bold;
+}
+
+.my-activities-container .image-card p {
+  font-size: 1rem;
+  color: #666;
+  margin-top: 10px;
+}
+
+.my-activities-container .cta-button {
+  background-color: #004d40;
+  color: white;
+  padding: 10px 20px;
+  margin-top: 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.my-activities-container .cta-button:hover {
+  background-color: #00695c;
+}
+
+.my-activities-container .no-images-placeholder {
+  color: #888;
+  font-size: 1.6rem;
+  text-align: center;
+  margin-top: 20px;
+}
+
+@media (max-width: 1024px) {
+  .my-activities-container .gallery-container {
+    grid-template-columns: repeat(2, 1fr);
   }
-  
-  .my-activities-content {
-    display: flex;
-    flex: 1;
+}
+
+@media (max-width: 768px) {
+  .my-activities-container .gallery-container {
+    grid-template-columns: repeat(1, 1fr);
   }
-  
-  .my-activities-body {
-    flex: 1;
-    padding: 20px;
+}
+
+@media (max-width: 576px) {
+  .my-activities-container h2 {
+    font-size: 1.8rem;
   }
 
-
-  
-  h2 {
-    margin-bottom: 20px;
-    font-size: 24px;
-  }
-  
-  .image-gallery {
-    display: flex;
-    flex-wrap: wrap;
+  .my-activities-container .gallery-container {
     gap: 20px;
   }
-  
-  .image-item {
-    flex: 1 1 calc(25% - 20px);
-    box-sizing: border-box;
+
+  .my-activities-container .image-card img {
+    height: 200px;
   }
-  
-  .image-item img {
-    width: 100%;
-    height: auto;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  }
-  
-  p {
-    color: #666;
-    font-size: 18px;
-  }
-  
+}

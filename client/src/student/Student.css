@@ -37,7 +37,6 @@ body {
     height: 100vh;
   }
   
-  /* Header  */
   .header {
     grid-area: header;
     height: 60px;
@@ -52,9 +51,7 @@ body {
   .menu-icon {
     display: none;
   }
-  /* End Header  */
-  
-  /* Sidebar  */
+
   #sidebar {
     grid-area: sidebar;
     height: 100%;
@@ -113,11 +110,7 @@ body {
     position: absolute;
     z-index: 12 !important;
   }
-  
-  /* End Sidebar  */
-  
-  
-  /* Main  */  
+
   .main-container {
     grid-area: main;
     overflow-y: auto;
