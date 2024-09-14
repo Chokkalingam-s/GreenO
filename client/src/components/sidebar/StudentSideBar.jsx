@@ -32,7 +32,7 @@ function StudentSideBar({ openSidebarToggle, OpenSidebar }) {
           </NavLink>
         </li>
         <li className="sidebar-list-item">
-          <NavLink to="/profile" activeClassName="active">
+          <NavLink to="/Student/Profile" activeClassName="active">
             <BsPersonFill className="icon" /> Profile
           </NavLink>
         </li>

@@ -1,0 +1,20 @@
+.profileCard1{
+    width:40vw ;
+    height: 85vh;
+}
+.profileCard2{
+    width:40vw;
+    height: 42vh ;
+}
+
+@media (max-width: 576px) {
+    .profileCard1{
+        width:90vw ;
+        height: 85vh;
+
+    }
+    .profileCard2{
+        width:90vw ;
+        height: 85vh;
+    }
+  }

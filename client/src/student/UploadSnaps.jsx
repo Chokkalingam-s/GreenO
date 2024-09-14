@@ -164,6 +164,7 @@ function UploadSnaps() {
               <div className='uploaded-images'>
                 {uploadedImage ? (
                   <div className='uploaded-image'>
+                    <p className='prev'>Previously uploaded Image</p>
                     <img 
                       src={`http://localhost:3000/uploads/${uploadedImage.filename}`} 
                       alt='Uploaded snap' 

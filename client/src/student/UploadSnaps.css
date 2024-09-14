@@ -4,7 +4,7 @@
   grid-template-columns: auto 1fr;
   height: 100vh;
   font-family: 'Roboto', sans-serif;
-  background-color: #f4f4f4;
+
 }
 
 .main-container {
@@ -82,6 +82,14 @@
 
 .file-input {
   margin-bottom: 15px;
+  font-weight: bold;
+  border-radius: 4px !important;
+  background-color: var(--dark-green);
+  height: 5vh;
+}
+
+.prev{
+  color: #dc3545;
 }
 
 .upload-button {
@@ -89,13 +97,13 @@
   border: none;
   border-radius: 8px;
   cursor: pointer;
-  background-color: #007bff;
+  background-color: var(--dark-green);
   color: white;
   font-size: 18px;
 }
 
 .upload-button.enabled {
-  background-color: #007bff;
+  background-color:  var(--medium-green);
 }
 
 .upload-button.disabled {
