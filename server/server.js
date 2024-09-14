@@ -111,19 +111,42 @@ const authenticateToken = (req, res, next) => {
 };
 
 app.post('/api/upload-snap', authenticateToken, upload.single('file'), async (req, res) => {
-  const { email } = req.user; 
-  
+  const { email } = req.user;
+
   if (!req.file) {
     return res.status(400).json({ message: 'No file uploaded.' });
   }
 
   try {
-    const relativeFilePath = `uploads/${req.file.filename}`;  
+    const lastUpload = await UploadSnap.findOne({
+      where: { email },
+      order: [['createdAt', 'DESC']],
+    });
+
+    const currentTime = new Date();
+    if (lastUpload) {
+      const lastUploadTime = new Date(lastUpload.createdAt);
+      const timeDifference = currentTime - lastUploadTime;
+      const fourMonthsInMillis = 4 * 30 * 24 * 60 * 60 * 1000; 
+
+      if (timeDifference < fourMonthsInMillis) {
+        return res.status(403).json({ message: 'You can upload a new image only after 4 months from your last upload.' });
+      }
+    }
+
+    let uploadCount = 1;
+    if (lastUpload) {
+      uploadCount = lastUpload.count + 1;
+    }
+
+    const relativeFilePath = `uploads/${req.file.filename}`;
 
     const newUploadSnap = await UploadSnap.create({
       email: email,
       filename: req.file.filename,
-      filePath: relativeFilePath  
+      filePath: relativeFilePath,
+      count: uploadCount,
+      lastUpload: currentTime,
     });
 
     res.status(200).json({ message: 'File uploaded successfully.', filePath: relativeFilePath });
@@ -131,6 +154,7 @@ app.post('/api/upload-snap', authenticateToken, upload.single('file'), async (re
     res.status(500).json({ error: error.message });
   }
 });
+
 
 app.get('/api/get-uploaded-images', authenticateToken, async (req, res) => {
   const { email } = req.user; 
@@ -165,17 +189,17 @@ app.get('/api/uploaded-snaps', authenticateToken, async (req, res) => {
   const { email } = req.user; 
 
   try {
-    // Fetch only the most recent image uploaded by the user
+    
     const uploads = await UploadSnap.findOne({
       where: { email },
-      order: [['createdAt', 'DESC']], // Sort by most recent
+      order: [['createdAt', 'DESC']], 
     });
 
     if (!uploads) {
       return res.status(404).json({ message: 'No images found for the user' });
     }
 
-    res.status(200).json(uploads); // Return only the most recent upload
+    res.status(200).json(uploads); 
   } catch (error) {
     console.error('Error fetching uploaded snaps:', error);
     res.status(500).json({ error: error.message });

@@ -104,17 +104,20 @@ function UploadSnaps() {
       });
       toast.success('File uploaded successfully!');
       setUploadedImage(response.data.filePath);
-      generateCaptcha(); 
-      setFile(null); 
+      generateCaptcha();
+      setFile(null);
       setMessage('');
-
+  
       setTimeout(() => {
         window.location.reload();
-      }, 1500);  
-  
+      }, 1500);
     } catch (error) {
-      console.error('Upload error:', error);
-      toast.error('Error uploading file. Please try again.');
+      if (error.response.status === 403) {
+        toast.error('You can upload a new image only after 4 months from your last upload.');
+      } else {
+        console.error('Upload error:', error);
+        toast.error('Error uploading file. Please try again.');
+      }
     }
   };
   

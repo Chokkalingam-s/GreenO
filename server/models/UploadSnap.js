@@ -14,6 +14,14 @@ const UploadSnap = sequelize.define('UploadSnap', {
     type: DataTypes.STRING,
     allowNull: false,
   },
+  count: {
+    type: DataTypes.INTEGER,
+    defaultValue: 0,
+  },
+  lastUpload: {
+    type: DataTypes.DATE,
+    allowNull: true,
+  }
 }, {
   timestamps: true,
 });
