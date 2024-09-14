@@ -147,6 +147,20 @@ app.get('/api/get-uploaded-images', authenticateToken, async (req, res) => {
   }
 });
 
+app.get('/api/get-user-detailss', authenticateToken, async (req, res) => {
+  const { email } = req.user; 
+  
+  try {
+    const studentDetails = await User.findAll({
+      where: { email: email }
+    });
+
+    res.status(200).json(studentDetails);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
 app.get('/api/uploaded-snaps', authenticateToken, async (req, res) => {
   const { email } = req.user; 
 
