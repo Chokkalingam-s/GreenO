@@ -1,6 +1,6 @@
 .my-activities-container {
   padding: 20px;
-  background-color: #f4f4f9;
+  background-color: var(--lightest-green);
   display: flex;
   flex-direction: column;
   align-items: center;

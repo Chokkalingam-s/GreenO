@@ -39,7 +39,7 @@ function MyActivities() {
         <div className="">
           <div className="my-activities-content">
             <div className="my-activities-body">
-              <h2>My Uploaded Photos</h2>
+              <h2>My Progress</h2>
               <div className="gallery-container">
                 {images.length === 0 ? (
                   <p className="no-images-placeholder">No images uploaded yet.</p>
