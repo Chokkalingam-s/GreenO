@@ -14,10 +14,6 @@ const UploadSnap = sequelize.define('UploadSnap', {
     type: DataTypes.STRING,
     allowNull: false,
   },
-  semester: { 
-    type: DataTypes.STRING,
-    allowNull: false,
-  }
 }, {
   timestamps: true,
 });

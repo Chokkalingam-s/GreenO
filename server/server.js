@@ -113,8 +113,7 @@ const authenticateToken = (req, res, next) => {
 
 app.post('/api/upload-snap', authenticateToken, upload.single('file'), async (req, res) => {
   const { email } = req.user; 
-  const { semester } = req.body;
-
+  
   if (!req.file) {
     return res.status(400).json({ message: 'No file uploaded.' });
   }
@@ -125,8 +124,7 @@ app.post('/api/upload-snap', authenticateToken, upload.single('file'), async (re
     const newUploadSnap = await UploadSnap.create({
       email: email,
       filename: req.file.filename,
-      filePath: relativeFilePath,
-      semester: semester 
+      filePath: relativeFilePath  
     });
 
     res.status(200).json({ message: 'File uploaded successfully.', filePath: relativeFilePath });
@@ -134,7 +132,6 @@ app.post('/api/upload-snap', authenticateToken, upload.single('file'), async (re
     res.status(500).json({ error: error.message });
   }
 });
-
 
 app.get('/api/get-uploaded-images', authenticateToken, async (req, res) => {
   const { email } = req.user; 
