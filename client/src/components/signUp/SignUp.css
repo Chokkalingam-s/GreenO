@@ -13,9 +13,9 @@
     overflow: hidden;
   }
 
-  .card {
+  .signUpCard{
     padding-top: 20px;
-    width: 580px;
+    width: 550px !important;
     margin: 10px auto; /* Added top and bottom margin for spacing */
     background-color: var(--lightest-green);
     border-radius: 10px; /* Optional: Adds rounded corners */
@@ -52,7 +52,7 @@
   /* Input field styling */
 
   .form-group{
-    width: 90%;
+    width: 90% !important;
   }
   .form-control {
     margin-bottom: 15px;
