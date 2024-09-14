@@ -30,9 +30,9 @@ const Resource = () => {
     <div className="grid-container">
       <StudentHeader OpenSidebar={OpenSidebar} />
       <StudentSideBar openSidebarToggle={openSidebarToggle} OpenSidebar={OpenSidebar} />
-
+      <main className='main-container'>
       <div className="main-content">
-        <div className="main-container">
+        
 
     
         <Container fluid className="resource-container">
@@ -104,8 +104,9 @@ const Resource = () => {
             </Row>
           </section>
         </Container>
-        </div>
+        
       </div>
+      </main>
     </div>
   );
 };

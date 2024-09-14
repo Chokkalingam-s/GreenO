@@ -2,6 +2,7 @@
     display: flex;
     flex-direction: column;
     height: 100vh;
+    max-width: 80vw;
   }
   
   .upload-snaps-content {
@@ -12,24 +13,17 @@
   .upload-snaps-body {
     flex: 1;
     padding: 20px;
-    margin-left: 220px; 
+    margin-left: 15%; 
     box-sizing: border-box;
   }
   
-  .email-check {
+  .verify-check {
     margin-bottom: 20px;
   }
   
-  .email-check input {
-    padding: 10px;
-    font-size: 16px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    margin-right: 10px;
-    width: 300px;
-  }
+
   
-  .email-check button {
+  .verify-check{
     padding: 10px 20px;
     font-size: 16px;
     background-color: #007bff;
@@ -39,7 +33,7 @@
     cursor: pointer;
   }
   
-  .email-check button:hover {
+  .verify-check:hover {
     background-color: #0056b3;
   }
   

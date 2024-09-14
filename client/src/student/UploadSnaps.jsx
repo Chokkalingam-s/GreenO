@@ -121,6 +121,7 @@ function UploadSnaps() {
       <ToastContainer /> {/* Toast Container to display alerts */}
       <StudentHeader OpenSidebar={OpenSidebar} />
       <StudentSideBar openSidebarToggle={openSidebarToggle} OpenSidebar={OpenSidebar} />
+      <main className='main-container'>
       <div className='upload-snaps-container'>
         <div className='upload-snaps-content'>
           <div className='upload-snaps-body'>
@@ -134,7 +135,7 @@ function UploadSnaps() {
                 value={captchaInput}
                 onChange={handleCaptchaInput}
               />
-              <button onClick={handleVerifyCaptcha}>Verify Captcha</button> {/* Verify Button */}
+              <button className='verify-check' onClick={handleVerifyCaptcha}>Verify Captcha</button> {/* Verify Button */}
             </div>
             
             <div className='upload-section'>
@@ -160,6 +161,7 @@ function UploadSnaps() {
           </div>
         </div>
       </div>
+      </main>
     </div>
   );
 }
