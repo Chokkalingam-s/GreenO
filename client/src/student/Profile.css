@@ -7,10 +7,57 @@
     height: 42vh ;
 }
 
+
+  
+  /* Each individual card for personal and educational details */
+  .details-card {
+    background-color: #defbde; /* Light green background */
+    padding: 20px;
+    margin-bottom: 20px; /* Space between cards */
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow for cards */
+  }
+  
+  /* Section title for Personal and Educational Details */
+  .details-card h4 {
+    margin-bottom: 15px;
+    font-size: 18px;
+    font-weight: bold;
+    color: #333; /* Darker text for the section headings */
+  }
+  
+  /* Student details list */
+  .details-card ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  /* Individual items in the list */
+  .details-card li {
+    margin-bottom: 10px; /* Space between details */
+    font-size: 16px;
+    color: #555; /* Medium-dark text for details */
+  }
+  
+  /* Bold labels for the details */
+  .details-card li strong {
+    font-weight: bold;
+    color: #333;
+  }
+  
+  /* Add some spacing between the profile header and details */
+  .student-details h3 {
+    margin-bottom: 20px;
+    font-size: 24px;
+    color: #444;
+  }
+  
+
 @media (max-width: 576px) {
     .profileCard1{
         width:90vw ;
-        height: 85vh;
+        height: 69vh;
 
     }
     .profileCard2{
@@ -18,3 +65,4 @@
         height: 85vh;
     }
   }
+

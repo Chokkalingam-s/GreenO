@@ -42,40 +42,54 @@ const Profile = () => {
       <main className='main-container'>
         <div className="row">
           <div className="col-md-6">
-            <div className='card profileCard1'>
-              {loading ? (
-                <p>Loading...</p>
-              ) : error ? (
-                <p>Error: {error}</p>
-              ) : (
-                <div className='student-details'>
-                  <h3>Student Profile</h3>
-                  <ul>
-                    <li><strong>Name:</strong> {studentDetails.name}</li>
-                    <li><strong>Email:</strong> {studentDetails.email}</li>
-                    <li><strong>Mobile Number:</strong> {studentDetails.mobileNumber}</li>
-                    <li><strong>College Name:</strong> {studentDetails.collegeName}</li>
-                    <li><strong>Department:</strong> {studentDetails.department}</li>
-                    <li><strong>College Register Number:</strong> {studentDetails.collegeRegisterNumber}</li>
-                    <li><strong>Year of Graduation:</strong> {studentDetails.yearOfGraduation}</li>
-                    <li><strong>Aadhar Number:</strong> {studentDetails.aadharNumber}</li>
-                  </ul>
-                </div>
-              )}
-            </div>
+          <div className='card profileCard1'> 
+  {loading ? (
+    <p>Loading...</p>
+  ) : error ? (
+    <p>Error: {error}</p>
+  ) : (
+    <div className='student-details'>
+      <h3>Student Profile</h3>
+      
+      {/* Personal Details Card */}
+      <div className="details-card">
+        <h4>Personal Details</h4>
+        <ul>
+          <li><strong>Name:</strong> {studentDetails.name}</li>
+          <li><strong>Email:</strong> {studentDetails.email}</li>
+          <li><strong>Mobile Number:</strong> {studentDetails.mobileNumber}</li>
+          <li><strong>Aadhar Number:</strong> {studentDetails.aadharNumber}</li>
+        </ul>
+      </div>
+
+      {/* Educational Details Card */}
+      <div className="details-card">
+        <h4>Educational Details</h4>
+        <ul>
+          <li><strong>College Name:</strong> {studentDetails.collegeName}</li>
+          <li><strong>Department:</strong> {studentDetails.department}</li>
+          <li><strong>College Register Number:</strong> {studentDetails.collegeRegisterNumber}</li>
+          <li><strong>Year of Graduation:</strong> {studentDetails.yearOfGraduation}</li>
+        </ul>
+      </div>
+
+    </div>
+  )}
+</div>
+
           </div>
           <div className="col-md-6">
             <div className="row">
               <div className="col">
                 <div className='card profileCard2'>
-                  {/* Additional content or components can go here */}
+
                 </div>
               </div>
             </div>
             <div className="row">
               <div className="col">
                 <div className='card profileCard2'>
-                  {/* Additional content or components can go here */}
+
                 </div>
               </div>
             </div>
