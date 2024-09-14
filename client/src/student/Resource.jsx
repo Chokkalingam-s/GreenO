@@ -29,10 +29,12 @@ const Resource = () => {
   return (
     <div className="grid-container">
       <StudentHeader OpenSidebar={OpenSidebar} />
-
       <StudentSideBar openSidebarToggle={openSidebarToggle} OpenSidebar={OpenSidebar} />
-
+      <main className='main-container'>
       <div className="main-content">
+        
+
+    
         <Container fluid className="resource-container">
           
           <section className="green-care-section mb-4 pinned-section">
@@ -102,7 +104,9 @@ const Resource = () => {
             </Row>
           </section>
         </Container>
+        
       </div>
+      </main>
     </div>
   );
 };
