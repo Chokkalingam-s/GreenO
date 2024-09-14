@@ -1,31 +1,30 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios'; // Import axios for HTTP requests
+import axios from 'axios'; 
 import StudentSideBar from '../components/sidebar/StudentSideBar';
 import StudentHeader from '../components/sidebar/StudentHeader';
 import './Profile.css';
 
 const Profile = () => {
   const [openSidebarToggle, setOpenSidebarToggle] = useState(false);
-  const [studentDetails, setStudentDetails] = useState(null); // State to store student details
-  const [loading, setLoading] = useState(true); // Loading state
-  const [error, setError] = useState(null); // Error state
+  const [studentDetails, setStudentDetails] = useState(null); 
+  const [loading, setLoading] = useState(true); 
+  const [error, setError] = useState(null); 
 
   const OpenSidebar = () => {
     setOpenSidebarToggle(!openSidebarToggle);
   };
 
-  // Fetch student details on component mount
   useEffect(() => {
     const fetchStudentDetails = async () => {
       try {
-        const token = localStorage.getItem('token'); // Get the token from local storage
+        const token = localStorage.getItem('token'); 
         const response = await axios.get('http://localhost:3000/api/get-user-detailss', {
           headers: {
-            Authorization: `Bearer ${token}`, // Include token in headers
+            Authorization: `Bearer ${token}`, 
           },
         });
-        setStudentDetails(response.data[0]); // Set student details
-        setLoading(false); // Stop loading
+        setStudentDetails(response.data[0]); 
+        setLoading(false); 
       } catch (err) {
         setError(err.message);
         setLoading(false);
@@ -50,8 +49,7 @@ const Profile = () => {
   ) : (
     <div className='student-details'>
       <h3>Student Profile</h3>
-      
-      {/* Personal Details Card */}
+
       <div className="details-card">
         <h4>Personal Details</h4>
         <ul>
@@ -62,7 +60,6 @@ const Profile = () => {
         </ul>
       </div>
 
-      {/* Educational Details Card */}
       <div className="details-card">
         <h4>Educational Details</h4>
         <ul>

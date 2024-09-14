@@ -7,46 +7,39 @@
     height: 42vh ;
 }
 
-
-  
-  /* Each individual card for personal and educational details */
   .details-card {
-    background-color: #defbde; /* Light green background */
+    background-color: #defbde; 
     padding: 20px;
-    margin-bottom: 20px; /* Space between cards */
+    margin-bottom: 20px; 
     border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow for cards */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
   }
   
-  /* Section title for Personal and Educational Details */
   .details-card h4 {
     margin-bottom: 15px;
     font-size: 18px;
     font-weight: bold;
-    color: #333; /* Darker text for the section headings */
+    color: #333; 
   }
-  
-  /* Student details list */
+
   .details-card ul {
     list-style: none;
     padding: 0;
     margin: 0;
   }
   
-  /* Individual items in the list */
+  
   .details-card li {
-    margin-bottom: 10px; /* Space between details */
+    margin-bottom: 10px; 
     font-size: 16px;
-    color: #555; /* Medium-dark text for details */
+    color: #555; 
   }
   
-  /* Bold labels for the details */
   .details-card li strong {
     font-weight: bold;
     color: #333;
   }
-  
-  /* Add some spacing between the profile header and details */
+
   .student-details h3 {
     margin-bottom: 20px;
     font-size: 24px;
