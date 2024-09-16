@@ -139,9 +139,6 @@ app.post('/api/upload-snap', authenticateToken, upload.single('file'), async (re
         return res.status(403).json({ message: 'You can upload a new image only after 4 months from your last upload.' });
       }
     }
-
-    
-
     await User.update({
       uploadCount: user.uploadCount + 1,
       lastUpload: currentTime
