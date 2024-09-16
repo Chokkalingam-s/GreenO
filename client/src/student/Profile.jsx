@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios'; 
 import StudentSideBar from '../components/sidebar/StudentSideBar';
 import StudentHeader from '../components/sidebar/StudentHeader';
+import { Gauge, gaugeClasses } from '@mui/x-charts/Gauge';
 import './Profile.css';
 
 const Profile = () => {
@@ -9,15 +10,36 @@ const Profile = () => {
   const [studentDetails, setStudentDetails] = useState(null); 
   const [loading, setLoading] = useState(true); 
   const [error, setError] = useState(null); 
-
+  const [uploadedCount, setUploadedCount] = useState(null); // Initially null to handle loading state
+  const totalImages = 8;
   const OpenSidebar = () => {
     setOpenSidebarToggle(!openSidebarToggle);
   };
 
   useEffect(() => {
+    const token = localStorage.getItem('token'); 
+    const fetchUploadedImagesCount = async () => {
+      try {
+        const response = await axios.get('http://localhost:3000/api/get-uploaded-images-count', {
+          headers: {
+            Authorization: `Bearer ${token}`, // Send the token in Authorization header
+          },
+        });
+  
+        console.log(response.data); // Debug the response
+        const count = Number(response.data.uploadedImagesCount);
+        setUploadedCount(!isNaN(count) ? count : 0);
+      } catch (error) {
+        console.error('Error fetching uploaded images count:', error);
+        setUploadedCount(0); // Set to 0 in case of error
+      }
+    };
+  
+    fetchUploadedImagesCount();
+
     const fetchStudentDetails = async () => {
       try {
-        const token = localStorage.getItem('token'); 
+  
         const response = await axios.get('http://localhost:3000/api/get-user-detailss', {
           headers: {
             Authorization: `Bearer ${token}`, 
@@ -33,6 +55,8 @@ const Profile = () => {
 
     fetchStudentDetails();
   }, []);
+
+  const progressPercentage = (uploadedCount / totalImages) * 100;
 
   return (
     <div className='grid-container'>
@@ -79,7 +103,22 @@ const Profile = () => {
             <div className="row">
               <div className="col">
                 <div className='card profileCard2'>
-
+                <Gauge
+                    value={progressPercentage}
+                    min={0}
+                    max={100}
+                    startAngle={-120}
+                    endAngle={120}
+                    thickness={10}
+                    sx={{
+                      [`& .MuiGauge-valueLabel`]: {
+                        fontSize: 50,
+                        fontWeight: 'bold',
+                        transform: 'translate(0px, 0px)',
+                      },
+                    }}
+                    text={({ value }) => `${uploadedCount} / ${totalImages}`}
+                  />
                 </div>
               </div>
             </div>
