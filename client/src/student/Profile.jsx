@@ -103,22 +103,33 @@ const Profile = () => {
             <div className="row">
               <div className="col">
                 <div className='card profileCard2'>
-                  <Gauge
-                      value={progressPercentage}
-                      min={0}
-                      max={100}
-                      startAngle={-120}
-                      endAngle={120}
-                      thickness={10}
-                      sx={{
-                        [`& .MuiGauge-valueLabel`]: {
-                          fontSize: 50,
-                          fontWeight: 'bold',
-                          transform: 'translate(0px, 0px)',
-                        },
-                      }}
-                      text={({ value }) => `${uploadedCount} / ${totalImages}`}
-                    />
+                  <div className='gauge-container'> 
+                      <Gauge
+                        value={progressPercentage}
+                        min={0}
+                        max={100}
+                        startAngle={-120}
+                        endAngle={120}
+                        thickness={15}  
+                        sx={{
+                          [`& .${gaugeClasses.valueText}`]: {
+                            fontSize: '30px',  // Increase text size
+                            fontWeight: 'bold',
+                            color: '#e0e0e0',  // Text color
+                          },
+                          [`& .MuiGauge-bar`]: {
+                            fill: '#4caf50',  // Gauge color
+                          },
+                          [`& .${gaugeClasses.valueArc}`]: {
+                            fill: '#52b202',
+                          },
+                          [`& .MuiGauge-background`]: {
+                            fill: '#e0e0e0',  // Background color
+                          }
+                        }}
+                        text={({ value }) => `${uploadedCount} / ${totalImages}`}
+                      />
+                  </div>
                 </div>
               </div>
             </div>

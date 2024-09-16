@@ -45,6 +45,13 @@
     font-size: 24px;
     color: #444;
   }
+
+  .gauge-container {
+    width: 200px; /* Adjust size */
+    height: 200px; /* Adjust size */
+    margin-left: 50%;
+  }
+
   
 
 @media (max-width: 576px) {
