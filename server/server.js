@@ -206,6 +206,17 @@ app.get('/api/uploaded-snaps', authenticateToken, async (req, res) => {
   }
 });
 
+app.get('/api/student-count', async (req, res) => {
+  try {
+    const studentCount = await User.count({ where: { role: 'student' } });
+    console.log('Student count fetched:', studentCount); 
+    res.status(200).json({ count: studentCount });
+  } catch (error) {
+    console.error('Error fetching student count:', error); 
+    res.status(500).json({ error: error.message });
+  }
+});
+
 
 const PORT = process.env.PORT || 3000;
 
