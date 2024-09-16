@@ -9,7 +9,7 @@ function AHome() {
   useEffect(() => {
     const fetchStudentCount = async () => {
       try {
-        const response = await axios.get('/api/student-count');
+        const response = await axios.get('http://localhost:3000/api/student-count');
         console.log('Student count response:', response.data); 
         setStudentCount(response.data.count);
       } catch (error) {

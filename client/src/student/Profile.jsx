@@ -10,7 +10,7 @@ const Profile = () => {
   const [studentDetails, setStudentDetails] = useState(null); 
   const [loading, setLoading] = useState(true); 
   const [error, setError] = useState(null); 
-  const [uploadedCount, setUploadedCount] = useState(null); // Initially null to handle loading state
+  const [uploadedCount, setUploadedCount] = useState(null); 
   const totalImages = 8;
   const OpenSidebar = () => {
     setOpenSidebarToggle(!openSidebarToggle);
@@ -31,7 +31,7 @@ const Profile = () => {
         setUploadedCount(!isNaN(count) ? count : 0);
       } catch (error) {
         console.error('Error fetching uploaded images count:', error);
-        setUploadedCount(0); // Set to 0 in case of error
+        setUploadedCount(0); 
       }
     };
   
@@ -103,22 +103,22 @@ const Profile = () => {
             <div className="row">
               <div className="col">
                 <div className='card profileCard2'>
-                <Gauge
-                    value={progressPercentage}
-                    min={0}
-                    max={100}
-                    startAngle={-120}
-                    endAngle={120}
-                    thickness={10}
-                    sx={{
-                      [`& .MuiGauge-valueLabel`]: {
-                        fontSize: 50,
-                        fontWeight: 'bold',
-                        transform: 'translate(0px, 0px)',
-                      },
-                    }}
-                    text={({ value }) => `${uploadedCount} / ${totalImages}`}
-                  />
+                  <Gauge
+                      value={progressPercentage}
+                      min={0}
+                      max={100}
+                      startAngle={-120}
+                      endAngle={120}
+                      thickness={10}
+                      sx={{
+                        [`& .MuiGauge-valueLabel`]: {
+                          fontSize: 50,
+                          fontWeight: 'bold',
+                          transform: 'translate(0px, 0px)',
+                        },
+                      }}
+                      text={({ value }) => `${uploadedCount} / ${totalImages}`}
+                    />
                 </div>
               </div>
             </div>
