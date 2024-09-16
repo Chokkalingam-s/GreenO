@@ -171,6 +171,26 @@ app.get('/api/get-uploaded-images', authenticateToken, async (req, res) => {
   }
 });
 
+app.get('/api/get-uploaded-images-count', authenticateToken, async (req, res) => {
+  const { email } = req.user; 
+  
+  try {
+    // Fetch the latest uploaded image count for the given email
+    const latestUpload = await UploadSnap.findOne({
+      where: { email: email },
+      order: [['count', 'DESC']],  // Order by count in descending order to get the latest
+      attributes: ['count'],       // Only fetch the count column
+    });
+
+    // If no records found, set count to 0
+    const uploadedImagesCount = latestUpload ? latestUpload.count : 0;
+
+    res.status(200).json({ uploadedImagesCount });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
 app.get('/api/get-user-detailss', authenticateToken, async (req, res) => {
   const { email } = req.user; 
   
