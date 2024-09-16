@@ -118,35 +118,33 @@ app.post('/api/upload-snap', authenticateToken, upload.single('file'), async (re
   }
 
   try {
-    const lastUpload = await UploadSnap.findOne({
-      where: { email },
-      order: [['createdAt', 'DESC']],
-    });
+    const user = await User.findOne({ where: { email } });
 
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+
+    const lastUploadTime = user.lastUpload ? new Date(user.lastUpload) : new Date(0);
     const currentTime = new Date();
-    if (lastUpload) {
-      const lastUploadTime = new Date(lastUpload.createdAt);
-      const timeDifference = currentTime - lastUploadTime;
-      const fourMonthsInMillis = 4 * 30 * 24 * 60 * 60 * 1000; 
+    const fourMonthsInMillis = 4 * 30 * 24 * 60 * 60 * 1000;
 
-      if (timeDifference < fourMonthsInMillis) {
-        return res.status(403).json({ message: 'You can upload a new image only after 4 months from your last upload.' });
-      }
+    if (currentTime - lastUploadTime < fourMonthsInMillis) {
+      return res.status(403).json({ message: 'You can upload a new image only after 4 months from your last upload.' });
     }
 
-    let uploadCount = 1;
-    if (lastUpload) {
-      uploadCount = lastUpload.count + 1;
-    }
+    await User.update({
+      uploadCount: user.uploadCount + 1,
+      lastUpload: currentTime
+    }, { where: { email } });
 
+   
     const relativeFilePath = `uploads/${req.file.filename}`;
-
-    const newUploadSnap = await UploadSnap.create({
+    await UploadSnap.create({
       email: email,
       filename: req.file.filename,
       filePath: relativeFilePath,
-      count: uploadCount,
-      lastUpload: currentTime,
+      count: user.uploadCount + 1,
+      lastUpload: currentTime
     });
 
     res.status(200).json({ message: 'File uploaded successfully.', filePath: relativeFilePath });
@@ -154,7 +152,6 @@ app.post('/api/upload-snap', authenticateToken, upload.single('file'), async (re
     res.status(500).json({ error: error.message });
   }
 });
-
 
 app.get('/api/get-uploaded-images', authenticateToken, async (req, res) => {
   const { email } = req.user; 

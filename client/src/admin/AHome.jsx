@@ -16,7 +16,7 @@ function AHome() {
         console.error('Error fetching student count:', error.response?.data || error.message);
       }
     };
-  
+    
     fetchStudentCount();
   }, []);
   

@@ -22,11 +22,11 @@ const Profile = () => {
       try {
         const response = await axios.get('http://localhost:3000/api/get-uploaded-images-count', {
           headers: {
-            Authorization: `Bearer ${token}`, // Send the token in Authorization header
+            Authorization: `Bearer ${token}`, 
           },
         });
   
-        console.log(response.data); // Debug the response
+        console.log(response.data); 
         const count = Number(response.data.uploadedImagesCount);
         setUploadedCount(!isNaN(count) ? count : 0);
       } catch (error) {

@@ -58,6 +58,10 @@ const User = sequelize.define('User', {
   pocNumber: {
     type: DataTypes.STRING,
     allowNull: true
+  },
+  uploadCount: { 
+    type: DataTypes.INTEGER,
+    defaultValue: 0
   }
 });
 
