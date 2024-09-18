@@ -103,6 +103,7 @@ const Profile = () => {
             <div className="row">
               <div className="col">
                 <div className='card profileCard2'>
+                <p className='PorgressTitle'>My Progress</p>
                   <div className='gauge-container'> 
                       <Gauge
                         value={progressPercentage}
