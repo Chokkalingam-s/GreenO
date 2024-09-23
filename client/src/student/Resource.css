@@ -42,7 +42,7 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    max-width: 75vw;
+    max-width: 50vw;
   }
   
   .enhanced-card:hover {
@@ -56,14 +56,20 @@
     font-weight: bold;
     margin-bottom: 15px;
     overflow-wrap: break-word;
+    margin-left: 0%;
     
   }
   
   .card-text-enhanced {
     font-size: 1rem;
-    color: #616161;
+    color: rgb(253, 245, 229);
     margin-bottom: 20px;
     overflow-wrap: break-word;
+  }
+
+  .detailedContent{
+    color: #004d40;
+    text-align: justify;
   }
   
   .enhanced-button {
@@ -86,6 +92,7 @@
     box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     overflow: hidden;
+    max-width: 50vh;
     max-width: 75vw;
   }
   
