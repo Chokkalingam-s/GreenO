@@ -9,7 +9,7 @@ const departments = [
   'Civil Engineering',
   'Computer Science and Business Systems',
   'Computer Science and Design',
-  'Computer Science and Engineering',
+  'Computer Science and Engineering', 
   'Electrical and Electronics Engineering',
   'Electronics and Communication Engineering',
   'Electronics and Communication (Advanced Communication Technology)',
