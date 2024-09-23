@@ -8,6 +8,7 @@ const path = require('path');
 require('dotenv').config();
 const sequelize = require('./db');
 const User = require('./models/User');
+const Admin = require('./models/Admin');
 const UploadSnap = require('./models/UploadSnap'); 
 const app = express();
 
@@ -38,7 +39,6 @@ const upload = multer({ storage });
 
 app.post('/signup', async (req, res) => {
   const { role, name, email, password, mobileNumber, state, district, collegeName, department, collegeRegisterNumber, yearOfGraduation, aadharNumber, principalName, pocNumber } = req.body;
-
   try {
     const existingUser = await User.findOne({ where: { email } });
     if (existingUser) {
@@ -62,6 +62,16 @@ app.post('/signup', async (req, res) => {
       principalName: role === 'admin' ? principalName : null,
       pocNumber: role === 'admin' ? pocNumber : null,
     });
+
+    const adminEntry = await Admin.findOne({
+      where: { collegeName, department },
+    });
+
+    if (adminEntry) {
+      await Admin.update({ studentCount: adminEntry.studentCount + 1 }, { where: { id: adminEntry.id } });
+    } else {
+      await Admin.create({ collegeName, department, studentCount: 1 });
+    }
 
     const token = jwt.sign({ userId: newUser.id, email: newUser.email, role: newUser.role }, JWT_SECRET, { expiresIn: '1h' });
 
