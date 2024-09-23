@@ -99,7 +99,26 @@
     .container1 {
       padding: 20px;
     }
-  
+    
+    .signUpCard{
+      padding-top: 20px;
+      width: 95% !important;
+      margin: 10px; /* Added top and bottom margin for spacing */
+      background-color: var(--lightest-green);
+      border-radius: 10px; /* Optional: Adds rounded corners */
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Adds a subtle shadow */
+      transition: box-shadow 0.3s ease; /* Smooth transition for hover effect */
+    }
+
+    .form-control {
+      margin-bottom: 15px;
+      font-size: 16px;
+      border: 1px solid #ced4da;
+      border-radius: 5px;
+      transition: all 0.3s ease;
+      margin-left:-10% ;
+      width: 120% !important;
+    }
     h2 {
       font-size: 24px;
     }
