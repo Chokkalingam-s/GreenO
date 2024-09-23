@@ -41,7 +41,23 @@ const storage = multer.diskStorage({
 const upload = multer({ storage });
 
 app.post('/signup', async (req, res) => {
-  const { role, name, email, password, mobileNumber, state, district, collegeName, department, collegeRegisterNumber, yearOfGraduation, aadharNumber, principalName, pocNumber } = req.body;
+  const {
+    role,
+    name,
+    email,
+    password,
+    mobileNumber,
+    state,
+    district,
+    collegeName,
+    department,
+    collegeRegisterNumber,
+    yearOfGraduation,
+    aadharNumber,
+    principalName,
+    pocNumber,
+  } = req.body;
+
   try {
     const existingUser = await User.findOne({ where: { email } });
     if (existingUser) {
@@ -66,17 +82,31 @@ app.post('/signup', async (req, res) => {
       pocNumber: role === 'admin' ? pocNumber : null,
     });
 
-    const adminEntry = await Admin.findOne({
-      where: { collegeName, department },
-    });
+    let adminEntry;
 
-    if (adminEntry) {
-      await Admin.update({ studentCount: adminEntry.studentCount + 1 }, { where: { id: adminEntry.id } });
-    } else {
-      await Admin.create({ collegeName, department, studentCount: 1 });
+    if (role === 'admin') {
+      adminEntry = await Admin.findOne({ where: { collegeName } });
+
+      if (adminEntry) {
+        await Admin.update({ studentCount: adminEntry.studentCount + 1 }, { where: { id: adminEntry.id } });
+      } else {
+        await Admin.create({ collegeName, department: null, studentCount: 0 }); 
+      }
+    } else if (role === 'student') {
+      adminEntry = await Admin.findOne({ where: { collegeName, department } });
+
+      if (adminEntry) {
+        await Admin.update({ studentCount: adminEntry.studentCount + 1 }, { where: { id: adminEntry.id } });
+      } else {
+        await Admin.create({ collegeName, department, studentCount: 1 });
+      }
     }
 
-    const token = jwt.sign({ userId: newUser.id, email: newUser.email, role: newUser.role }, JWT_SECRET, { expiresIn: '1h' });
+    const token = jwt.sign(
+      { userId: newUser.id, email: newUser.email, role: newUser.role },
+      JWT_SECRET,
+      { expiresIn: '1h' }
+    );
 
     res.status(201).json({ message: 'User created successfully', token });
   } catch (error) {
@@ -84,6 +114,7 @@ app.post('/signup', async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 });
+
 
 app.post('/login', async (req, res) => {
   const { email, password, role } = req.body;
