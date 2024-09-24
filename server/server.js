@@ -282,6 +282,37 @@ app.get('/api/student-count', async (req, res) => {
   }
 });
 
+app.get('/api/admin-data', authenticateToken, async (req, res) => {
+  const { email } = req.user; // Extract email from the authenticated user
+
+  try {
+    // Fetch user's collegeName based on their email from the User table
+    const user = await User.findOne({
+      where: { email: email },
+      attributes: ['collegeName'], // Only select the collegeName field
+    });
+
+    if (!user) {
+      return res.status(404).json({ error: 'User not found' });
+    }
+
+    const collegeName = user.collegeName;
+
+    // Fetch rows from Admin table where collegeName matches the logged-in user's collegeName
+    const adminData = await Admin.findAll({
+      where: { collegeName: collegeName },
+      attributes: ['department', 'uploadCount', 'studentCount'],
+    });
+
+    // Send the fetched data as a JSON response
+    res.status(200).json(adminData);
+  } catch (error) {
+    console.error('Error fetching admin data:', error);
+    res.status(500).json({ error: error.message });
+  }
+});
+
+
 const PORT = process.env.PORT || 3000;
 
 sequelize.sync().then(() => {

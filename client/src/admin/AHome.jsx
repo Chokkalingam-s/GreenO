@@ -6,6 +6,8 @@ import axios from 'axios';
 function AHome() {
   const [studentCount, setStudentCount] = useState(0);
   const [saplingCount, setSaplingCount] = useState(0);
+  
+  const [data, setData] = useState([]);
 
   useEffect(() => {
     const fetchStudentCount = async () => {
@@ -20,18 +22,32 @@ function AHome() {
     };
     
     fetchStudentCount();
+    
+
+    const fetchAdminData = async () => {
+      try {
+        const token = localStorage.getItem('token'); // Assuming you're storing JWT tokens in local storage
+  const userEmail = localStorage.getItem('userEmail');
+        const response = await axios.get('http://localhost:3000/api/admin-data', {
+          headers: {
+            Authorization: `Bearer ${token}`, // Send token in header
+          },
+          params: { email: userEmail }, // Send email as query parameter or body if needed
+        });const fetchedData = response.data.map(item => ({
+          name: item.department,
+          Trees: item.uploadCount,    // Represents 'uploadCount' as 'Trees'
+          Students: item.studentCount, // Represents 'studentCount' as 'Students'
+        }));
+        setData(fetchedData);
+      } catch (error) {
+        console.error('Error fetching admin data:', error.response?.data || error.message);
+      }
+    };
+    
+
+    fetchAdminData();
   }, []);
   
-
-  const data = [
-    { name: 'ADS', Trees: 2400, Students: 4000 },
-    { name: 'MECH', Trees: 1398, Students: 3000 },
-    { name: 'IT', Trees: 3800, Students: 4000},
-    { name: 'CSE', Trees: 2780, Students: 3908 },
-    { name: 'ECE', Trees: 1890, Students: 4800 },
-    { name: 'EEE', Trees: 2390, Students: 3800 },
-    { name: 'CIVIL', Trees: 3490, Students: 4300 },
-  ];
 
   return (
     <main className="main-container">
@@ -55,6 +71,8 @@ function AHome() {
           <h1>{saplingCount}</h1>
         </div>
       </div>
+
+      
 
       <div className="charts">
         <ResponsiveContainer width="100%" height="100%">
@@ -100,7 +118,10 @@ function AHome() {
             <Line type="monotone" dataKey="Trees" stroke="#82ca9d" />
           </LineChart>
         </ResponsiveContainer>
+        
       </div>
+
+      
     </main>
   );
 }
