@@ -16,6 +16,10 @@ Admin.init({
     type: DataTypes.INTEGER,
     defaultValue: 0,
   },
+  uploadCount: {
+    type: DataTypes.INTEGER,
+    defaultValue: 0, 
+  },
 }, {
   sequelize,
   modelName: 'Admin',

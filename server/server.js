@@ -11,9 +11,7 @@ const User = require('./models/User');
 const Admin = require('./models/Admin');
 const UploadSnap = require('./models/UploadSnap'); 
 const app = express();
-
 const { Op } = require('sequelize');
-
 
 app.use(express.json());
 app.use(cors());
@@ -183,12 +181,12 @@ app.post('/api/upload-snap', authenticateToken, upload.single('file'), async (re
         return res.status(403).json({ message: 'You can upload a new image only after 4 months from your last upload.' });
       }
     }
+
     await User.update({
       uploadCount: user.uploadCount + 1,
       lastUpload: currentTime
     }, { where: { email } });
 
-   
     const relativeFilePath = `uploads/${req.file.filename}`;
     await UploadSnap.create({
       email: email,
@@ -197,6 +195,11 @@ app.post('/api/upload-snap', authenticateToken, upload.single('file'), async (re
       count: user.uploadCount + 1,
       lastUpload: currentTime
     });
+
+    const adminEntry = await Admin.findOne({ where: { collegeName: user.collegeName, department: user.department } });
+    if (adminEntry) {
+      await Admin.update({ uploadCount: adminEntry.uploadCount + 1 }, { where: { id: adminEntry.id } });
+    }
 
     res.status(200).json({ message: 'File uploaded successfully.', filePath: relativeFilePath });
   } catch (error) {
@@ -223,14 +226,12 @@ app.get('/api/get-uploaded-images-count', authenticateToken, async (req, res) =>
   const { email } = req.user; 
   
   try {
-    // Fetch the latest uploaded image count for the given email
     const latestUpload = await UploadSnap.findOne({
       where: { email: email },
-      order: [['count', 'DESC']],  // Order by count in descending order to get the latest
-      attributes: ['count'],       // Only fetch the count column
+      order: [['count', 'DESC']],  
+      attributes: ['count'],     
     });
 
-    // If no records found, set count to 0
     const uploadedImagesCount = latestUpload ? latestUpload.count : 0;
 
     res.status(200).json({ uploadedImagesCount });
