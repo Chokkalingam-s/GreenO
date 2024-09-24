@@ -82,15 +82,7 @@ app.post('/signup', async (req, res) => {
 
     let adminEntry;
 
-    if (role === 'admin') {
-      adminEntry = await Admin.findOne({ where: { collegeName } });
-
-      if (adminEntry) {
-        await Admin.update({ studentCount: adminEntry.studentCount + 1 }, { where: { id: adminEntry.id } });
-      } else {
-        await Admin.create({ collegeName, department: null, studentCount: 0 }); 
-      }
-    } else if (role === 'student') {
+     if (role === 'student') {
       adminEntry = await Admin.findOne({ where: { collegeName, department } });
 
       if (adminEntry) {
@@ -196,8 +188,10 @@ app.post('/api/upload-snap', authenticateToken, upload.single('file'), async (re
       lastUpload: currentTime
     });
 
+
+    const firstUpload = user.uploadCount === 0;
     const adminEntry = await Admin.findOne({ where: { collegeName: user.collegeName, department: user.department } });
-    if (adminEntry) {
+    if (adminEntry && firstUpload) {
       await Admin.update({ uploadCount: adminEntry.uploadCount + 1 }, { where: { id: adminEntry.id } });
     }
 

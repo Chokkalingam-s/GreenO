@@ -10,7 +10,7 @@ Admin.init({
   },
   department: {
     type: DataTypes.STRING,
-    allowNull: false,
+    allowNull: true,
   },
   studentCount: {
     type: DataTypes.INTEGER,
