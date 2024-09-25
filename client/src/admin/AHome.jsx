@@ -1,7 +1,20 @@
 import React, { useState, useEffect } from 'react';
-import { BsFillArchiveFill, BsFillGrid3X3GapFill, BsPeopleFill, BsFillBellFill } from 'react-icons/bs';
-import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, LineChart, Line } from 'recharts';
+import { BsFillGrid3X3GapFill, BsPeopleFill, } from 'react-icons/bs';
+import { BarChart } from '@mui/x-charts/BarChart';
+import { axisClasses } from '@mui/x-charts/ChartsAxis';
 import axios from 'axios';
+
+const chartSetting = {
+
+  width: 1000,
+  height: 300,
+  sx: {
+    [`.${axisClasses.left} .${axisClasses.label}`]: {
+      transform: 'translate(-20px, 0)',
+    },
+  },
+};
+
 
 function AHome() {
   const [studentCount, setStudentCount] = useState(0);
@@ -9,11 +22,13 @@ function AHome() {
   
   const [data, setData] = useState([]);
 
+  
+  
+
   useEffect(() => {
     const fetchStudentCount = async () => {
       try {
         const response = await axios.get('http://localhost:3000/api/student-count');
-        console.log('Student count response:', response.data); 
         setStudentCount(response.data.studentCount);
         setSaplingCount(response.data.saplingCount);
       } catch (error) {
@@ -33,8 +48,9 @@ function AHome() {
             Authorization: `Bearer ${token}`, // Send token in header
           },
           params: { email: userEmail }, // Send email as query parameter or body if needed
-        });const fetchedData = response.data.map(item => ({
-          name: item.department,
+        });
+         const fetchedData = response.data.map(item => ({
+          department: item.department,
           Trees: item.uploadCount,    // Represents 'uploadCount' as 'Trees'
           Students: item.studentCount, // Represents 'studentCount' as 'Students'
         }));
@@ -75,50 +91,18 @@ function AHome() {
       
 
       <div className="charts">
-        <ResponsiveContainer width="100%" height="100%">
-          <BarChart
-            width={500}
-            height={300}
-            data={data}
-            margin={{
-              top: 5,
-              right: 30,
-              left: 20,
-              bottom: 5,
-            }}
-          >
-            <CartesianGrid strokeDasharray="3 3" />
-            <XAxis dataKey="name" />
-            <YAxis />
-            <Tooltip />
-            <Legend />
-            <Bar dataKey="Students" fill="#8884d8" />
-            <Bar dataKey="Trees" fill="#82ca9d" />
-          </BarChart>
-        </ResponsiveContainer>
 
-        <ResponsiveContainer width="100%" height="100%">
-          <LineChart
-            width={500}
-            height={300}
-            data={data}
-            margin={{
-              top: 5,
-              right: 30,
-              left: 20,
-              bottom: 5,
-            }}
-          >
-            <CartesianGrid strokeDasharray="3 3" />
-            <XAxis dataKey="name" />
-            <YAxis />
-            <Tooltip />
-            <Legend />
-            <Line type="monotone" dataKey="Students" stroke="#8884d8" activeDot={{ r: 8 }} />
-            <Line type="monotone" dataKey="Trees" stroke="#82ca9d" />
-          </LineChart>
-        </ResponsiveContainer>
-        
+
+<BarChart
+      dataset={data}
+      xAxis={[{ scaleType: 'band', dataKey: 'department' }]}
+      series={[
+        { dataKey: 'Students', label: 'Students' },
+        { dataKey: 'Trees', label: 'Trees' },
+      ]}
+      {...chartSetting}
+    />
+
       </div>
 
       

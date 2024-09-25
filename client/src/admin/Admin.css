@@ -4,7 +4,7 @@ body {
     background-color: var(--lightest-green);
     color: white;
     font-family: 'Montserrat', sans-serif;
-  }
+  } 
   
   .icon {
     vertical-align: middle;
@@ -145,6 +145,7 @@ body {
     border-radius: 5px;
     width: 40vw;
   }
+
   
   .card:first-child {
     background-color: #60b572;
@@ -173,12 +174,21 @@ body {
   }
   
   .charts {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 20px;
+    display: flex; /* Changed from grid to flex for better control over single component */
+    flex-direction: column; /* Stacking in a column for better vertical spacing */
+    align-items: center; /* Centering the chart */
     margin-top: 60px;
-    height: 300px;
+    height: 50vh; /* Maintain height for chart */
+    width: 100vw; /* Ensure a minimum width for responsiveness */
+    overflow-x: auto; /* Allow horizontal scroll if necessary */
   }
+  
+  /* Optional: Add some specific styles for the BarChart to ensure it scales well */
+  .MuiBarChart-root {
+    width: 200%; /* Ensure the chart takes full width */
+    height: auto; /* Allow height to adjust automatically */
+  }
+  
   
   /* End Main  */
   

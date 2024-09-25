@@ -10,9 +10,11 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@mui/material": "^6.1.0",
+    "@emotion/react": "^11.13.3",
+    "@emotion/styled": "^11.13.0",
+    "@mui/material": "^6.1.1",
     "@mui/styles": "^6.1.0",
-    "@mui/x-charts": "^7.17.0",
+    "@mui/x-charts": "^7.18.0",
     "@react-spring/web": "^9.7.4",
     "axios": "^1.7.7",
     "bcryptjs": "^2.4.3",

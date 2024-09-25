@@ -25,8 +25,7 @@ const Profile = () => {
             Authorization: `Bearer ${token}`, 
           },
         });
-  
-        console.log(response.data); 
+
         const count = Number(response.data.uploadedImagesCount);
         setUploadedCount(!isNaN(count) ? count : 0);
       } catch (error) {
