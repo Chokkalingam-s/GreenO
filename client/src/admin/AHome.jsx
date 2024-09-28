@@ -5,12 +5,25 @@ import axios from 'axios';
 
 const chartSetting = {
   height: 400,
-  margin: { top: 20, right: 30, bottom: 50, left: 50 }, 
+  margin: { top: 20, right: 30, bottom: 50, left: 50 },
   grid: {
-    verticalLines: true,  
-    horizontalLines: true, 
+    verticalLines: true,
+    horizontalLines: true,
   },
-  tooltip: true,  
+  tooltip: true,
+};
+
+
+const abbreviateDepartmentName = (department) => {
+  return department
+    .split(' ')
+    .map(word => {
+      if (word.toLowerCase() === 'and') return ''; 
+      if (word.startsWith('(') && word.endsWith(')')) return word; 
+      return word.charAt(0).toUpperCase(); 
+    })
+    .filter(Boolean) 
+    .join('');
 };
 
 function AHome() {
@@ -39,9 +52,9 @@ function AHome() {
           },
           params: { email: userEmail },
         });
-        
+
         const fetchedData = response.data.map(item => ({
-          department: item.department,
+          department: abbreviateDepartmentName(item.department),
           Trees: item.uploadCount,
           Students: item.studentCount,
         }));
