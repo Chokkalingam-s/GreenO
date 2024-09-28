@@ -384,3 +384,4 @@ sequelize.sync().then(() => {
 }).catch((error) => {
   console.error('Unable to connect to the database:', error);
 });
+
