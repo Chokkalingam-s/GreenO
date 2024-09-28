@@ -14,13 +14,22 @@ const OverallProgress = () => {
     const fetchData = async () => {
       setLoading(true);
       setError(null);
-
+  
       try {
         console.log("Fetching overall progress data...");
-        const response = await axios.get('http://localhost:3000/api/overall-progress');
-        
+        const token = localStorage.getItem('token');
+        if (!token) {
+          throw new Error("Authentication token is missing.");
+        }
+  
+        const response = await axios.get('http://localhost:3000/api/overall-progress', {
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
+        });
+  
         console.log("Progress Data:", response.data);
-        
+  
         setProgressData(response.data);
       } catch (err) {
         console.error("Error fetching data:", err);
@@ -29,10 +38,10 @@ const OverallProgress = () => {
         setLoading(false);
       }
     };
-
+  
     fetchData();
   }, []);
-
+  
   const toggleSidebar = () => setOpenSidebarToggle(prev => !prev);
 
   return (

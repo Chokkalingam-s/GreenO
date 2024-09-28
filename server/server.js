@@ -311,32 +311,47 @@ app.get('/api/admin-data', authenticateToken, async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 });
-app.get('/api/overall-progress', async (req, res) => {
+app.get('/api/overall-progress', authenticateToken, async (req, res) => {
+  const { email } = req.user;
+
   try {
-    const admins = await Admin.findAll();
-    const users = await User.findAll();
+    const user = await User.findOne({
+      where: { email: email },
+      attributes: ['collegeName'], 
+    });
+
+    if (!user) {
+      return res.status(404).json({ error: 'User not found' });
+    }
+    const collegeName = user.collegeName;
+    const admins = await Admin.findAll({
+      where: { collegeName },
+    });
+
+    const users = await User.findAll({
+      where: { collegeName },
+    });
+
     const progressData = [];
 
     admins.forEach(admin => {
       const departmentData = {
         department: admin.department,
-        studentCount: 0 ,
+        studentCount: admin.studentCount,
         uploadCount: admin.uploadCount,
         yearCounts: {
           firstYear: 0,
           secondYear: 0,
           thirdYear: 0,
           fourthYear: 0,
-        }
+        },
       };
 
       users.forEach(user => {
         if (user.department === admin.department) {
-          departmentData.studentCount += 1;
-          
           const currentYear = new Date().getFullYear();
           const graduationYear = parseInt(user.yearOfGraduation, 10);
-          const year = graduationYear - currentYear + 1; 
+          const year = graduationYear - currentYear + 1;
 
           if (year === 1) {
             departmentData.yearCounts.firstYear += 1;
@@ -359,8 +374,6 @@ app.get('/api/overall-progress', async (req, res) => {
     res.status(500).json({ message: 'Internal server error' });
   }
 });
-
-
 
 const PORT = process.env.PORT || 3000;
 
