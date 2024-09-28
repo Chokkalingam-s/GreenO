@@ -174,19 +174,18 @@ body {
   }
   
   .charts {
-    display: flex; /* Changed from grid to flex for better control over single component */
-    flex-direction: column; /* Stacking in a column for better vertical spacing */
-    align-items: center; /* Centering the chart */
+    display: flex; 
+    flex-direction: column;
+    align-items: center; 
     margin-top: 60px;
-    height: 50vh; /* Maintain height for chart */
-    width: 100vw; /* Ensure a minimum width for responsiveness */
-    overflow-x: auto; /* Allow horizontal scroll if necessary */
+    height: 50vh; 
+    width: 100vw;
+    overflow-x: auto; 
   }
   
-  /* Optional: Add some specific styles for the BarChart to ensure it scales well */
   .MuiBarChart-root {
-    width: 200%; /* Ensure the chart takes full width */
-    height: auto; /* Allow height to adjust automatically */
+    width: 100%; 
+    height: auto; 
   }
   
   

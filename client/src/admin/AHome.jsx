@@ -33,7 +33,7 @@ function AHome() {
       try {
         const token = localStorage.getItem('token');
         const userEmail = localStorage.getItem('userEmail');
-        const response = await axios.get('http://localhost:3000/api/admin-data ', {
+        const response = await axios.get('http://localhost:3000/api/admin-data', {
           headers: {
             Authorization: `Bearer ${token}`,
           },
