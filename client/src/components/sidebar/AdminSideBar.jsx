@@ -1,5 +1,5 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, NavLink } from 'react-router-dom'; 
 import {
   BsCart3, BsGrid1X2Fill, BsFillArchiveFill, BsFillGrid3X3GapFill, BsPeopleFill, 
   BsListCheck, BsMenuButtonWideFill, BsFillGearFill
@@ -27,39 +27,39 @@ function AdminSideBar({ openSidebarToggle, OpenSidebar }) {
 
       <ul className='sidebar-list'>
         <li className='sidebar-list-item'>
-          <a href="#">
+          <NavLink to="/AdminHome" className={({ isActive }) => (isActive ? 'active' : '')}>
             <BsGrid1X2Fill className='icon' /> Dashboard
-          </a>
+          </NavLink>
         </li>
         <li className='sidebar-list-item'>
-          <a href="#">
+          <NavLink to="/admin-overallprogress" className={({ isActive }) => (isActive ? 'active' : '')}>
             <BsFillArchiveFill className='icon' /> Overall Progress
-          </a>
+          </NavLink>
         </li>
         <li className='sidebar-list-item'>
-          <a href="#">
+          <NavLink to="/Admin/DepartmentProgress" className={({ isActive }) => (isActive ? 'active' : '')}>
             <BsFillGrid3X3GapFill className='icon' /> Department Progress
-          </a>
+          </NavLink>
         </li>
         <li className='sidebar-list-item'>
-          <a href="#">
+          <NavLink to="/Admin/RankingIndia" className={({ isActive }) => (isActive ? 'active' : '')}>
             <BsPeopleFill className='icon' /> Ranking All Over India
-          </a>
+          </NavLink>
         </li>
         <li className='sidebar-list-item'>
-          <a href="#">
+          <NavLink to="/Admin/Activities" className={({ isActive }) => (isActive ? 'active' : '')}>
             <BsListCheck className='icon' /> Activities
-          </a>
+          </NavLink>
         </li>
         <li className='sidebar-list-item'>
-          <a href="#">
+          <NavLink to="/Admin/Reports" className={({ isActive }) => (isActive ? 'active' : '')}>
             <BsMenuButtonWideFill className='icon' /> Reports
-          </a>
+          </NavLink>
         </li>
         <li className='sidebar-list-item'>
-          <a href="#">
+          <NavLink to="/Admin/Settings" className={({ isActive }) => (isActive ? 'active' : '')}>
             <BsFillGearFill className='icon' /> Setting
-          </a>
+          </NavLink>
         </li>
         <li className='sidebar-list-item'>
           <span onClick={handleLogout} className='sidebar-list-item-link'>

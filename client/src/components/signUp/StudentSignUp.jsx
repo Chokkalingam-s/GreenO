@@ -3,13 +3,15 @@ import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './SignUp.css';
 import { useNavigate } from 'react-router-dom';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const departments = [
   'Artificial Intelligence and Data Science',
   'Civil Engineering',
   'Computer Science and Business Systems',
   'Computer Science and Design',
-  'Computer Science and Engineering', 
+  'Computer Science and Engineering',
   'Electrical and Electronics Engineering',
   'Electronics and Communication Engineering',
   'Electronics and Communication (Advanced Communication Technology)',
@@ -41,7 +43,8 @@ const StudentSignUp = () => {
     pocNumber: '',
   });
 
-  const navigate = useNavigate(); 
+  const [errors, setErrors] = useState({});
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -51,16 +54,25 @@ const StudentSignUp = () => {
     }));
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  const validateForm = () => {
+    const newErrors = {};
 
     if (formData.mobileNumber.length !== 10) {
-      alert('Mobile number must be 10 digits.');
-      return;
+      newErrors.mobileNumber = 'Mobile number must be 10 digits.';
     }
 
     if (formData.aadharNumber.length !== 12) {
-      alert('Aadhar number must be 12 digits.');
+      newErrors.aadharNumber = 'Aadhar number must be 12 digits.';
+    }
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    if (!validateForm()) {
       return;
     }
 
@@ -70,22 +82,24 @@ const StudentSignUp = () => {
 
       if (token) {
         localStorage.setItem('token', token);
+        toast.success('Sign up successful!');
         navigate('/StudentHome');
       } else {
-        alert('Sign up failed. Please try again.');
+        toast.error('Sign up failed. Please try again.');
       }
     } catch (error) {
       console.error('Error signing up:', error);
-      alert('An error occurred during sign-up.');
+      toast.error('An error occurred during sign-up.');
     }
   };
 
   return (
     <div className="container1">
+      <ToastContainer />
       <div className="card signUpCard">
         <h2 className="text-center">Student SignUp</h2>
         <form onSubmit={handleSubmit} className="mt-4">
-          <div className="form-group">
+          <div className="form-group mb-3">
             <label htmlFor="name">Name</label>
             <input
               type="text"
@@ -98,7 +112,7 @@ const StudentSignUp = () => {
             />
           </div>
 
-          <div className="form-group">
+          <div className="form-group mb-3">
             <label htmlFor="email">Email</label>
             <input
               type="email"
@@ -111,7 +125,7 @@ const StudentSignUp = () => {
             />
           </div>
 
-          <div className="form-group">
+          <div className="form-group mb-3">
             <label htmlFor="password">Password</label>
             <input
               type="password"
@@ -124,7 +138,7 @@ const StudentSignUp = () => {
             />
           </div>
 
-          <div className="form-group">
+          <div className="form-group mb-3">
             <div className="row">
               <div className="col-6">
                 <label htmlFor="state">State</label>
@@ -153,7 +167,7 @@ const StudentSignUp = () => {
             </div>
           </div>
 
-          <div className="form-group">
+          <div className="form-group mb-3">
             <label htmlFor="collegeName">College Name</label>
             <input
               type="text"
@@ -168,7 +182,7 @@ const StudentSignUp = () => {
 
           {formData.role === 'student' && (
             <>
-              <div className="form-group">
+              <div className="form-group mb-3">
                 <label htmlFor="mobileNumber">Mobile Number</label>
                 <input
                   type="text"
@@ -180,9 +194,12 @@ const StudentSignUp = () => {
                   maxLength="10"
                   required
                 />
+                {errors.mobileNumber && (
+                  <small className="text-danger">{errors.mobileNumber}</small>
+                )}
               </div>
 
-              <div className="form-group">
+              <div className="form-group mb-3">
                 <label htmlFor="department">Department</label>
                 <select
                   id="department"
@@ -194,12 +211,14 @@ const StudentSignUp = () => {
                 >
                   <option value="">Select Department</option>
                   {departments.map((dept) => (
-                    <option key={dept} value={dept}>{dept}</option>
+                    <option key={dept} value={dept}>
+                      {dept}
+                    </option>
                   ))}
                 </select>
               </div>
 
-              <div className="form-group">
+              <div className="form-group mb-3">
                 <label htmlFor="collegeRegisterNumber">College Register Number</label>
                 <input
                   type="text"
@@ -212,7 +231,7 @@ const StudentSignUp = () => {
                 />
               </div>
 
-              <div className="form-group">
+              <div className="form-group mb-3">
                 <label htmlFor="yearOfGraduation">Year of Graduation</label>
                 <select
                   id="yearOfGraduation"
@@ -224,12 +243,14 @@ const StudentSignUp = () => {
                 >
                   <option value="">Select Year</option>
                   {years.map((year) => (
-                    <option key={year} value={year}>{year}</option>
+                    <option key={year} value={year}>
+                      {year}
+                    </option>
                   ))}
                 </select>
               </div>
 
-              <div className="form-group">
+              <div className="form-group mb-3">
                 <label htmlFor="aadharNumber">Aadhar Number</label>
                 <input
                   type="text"
@@ -241,11 +262,16 @@ const StudentSignUp = () => {
                   maxLength="12"
                   required
                 />
+                {errors.aadharNumber && (
+                  <small className="text-danger">{errors.aadharNumber}</small>
+                )}
               </div>
             </>
           )}
 
-          <button type="submit" className="btn btn-primary btn-block mt-4">Sign Up</button>
+          <button type="submit" className="btn btn-primary btn-block mt-4">
+            Sign Up
+          </button>
         </form>
       </div>
     </div>

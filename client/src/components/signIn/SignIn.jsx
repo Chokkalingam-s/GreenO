@@ -1,8 +1,13 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { useNavigate } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './SignIn.css';
 import axios from 'axios';
+
+
+const AuthContext = React.createContext();
+
+export const useAuth = () => useContext(AuthContext);
 
 const SignIn = () => {
   const [isSignUpMode, setIsSignUpMode] = useState(false);
@@ -11,48 +16,69 @@ const SignIn = () => {
   const [role, setRole] = useState('');
   const [error, setError] = useState('');
   const navigate = useNavigate();
+  const { isAuthenticated, setIsAuthenticated } = useAuth();
 
+  useEffect(() => {
+    
+    const token = localStorage.getItem('token');
+    if (token) {
+      setIsAuthenticated(true);
+    }
+  }, [setIsAuthenticated]);
+
+  
   const handleSignUpClick = () => {
     setIsSignUpMode(true);
   };
 
+  
   const handleSignInClick = () => {
     setIsSignUpMode(false);
   };
 
+  
   const handleStudentSignUp = () => {
     navigate("/student-signup");
   };
 
+  
   const handleAdminSignUp = () => {
     navigate("/admin-signup");
   };
 
   const handleLogin = async (e) => {
     e.preventDefault();
+    console.log('Login Request Data:', { email, password, role }); 
     try {
-      const response = await axios.post('http://localhost:3000/login', {
-        email,
-        password,
-        role 
-      });
-      
-      const { token } = response.data; 
-      localStorage.setItem('token', token);
-      
- 
-      if (role === 'admin') {
-        navigate('/AdminHome'); 
-      } else if (role === 'student') {
-        navigate('/StudentHome'); 
-      }
+        const response = await axios.post('http://localhost:3000/login', {
+            email,
+            password,
+            role 
+        });
+        
+        const { token, userRole } = response.data; 
+        if (token) {
+            localStorage.setItem('token', token);
+            setIsAuthenticated(true);
+            setRole(userRole || role); 
+            
+            
+            if (userRole === 'admin') {
+                navigate('/AdminHome'); 
+            } else if (userRole === 'student') {
+                navigate('/StudentHome'); 
+            } else {
+                console.error("Role not recognized:", userRole);
+            }
+        }
     } catch (error) {
-      
-      setError(error.response?.data?.message || 'Login failed');
-      
-      setTimeout(() => setError(''), 3000); 
+        console.error('Error Details:', error.response); 
+        setError(error.response?.data?.message || 'Login failed');
+        setTimeout(() => setError(''), 3000);
     }
-  };
+};
+
+  
 
   return (
     <div className={`container ${isSignUpMode ? "sign-up-mode" : ""}`}>
@@ -81,33 +107,33 @@ const SignIn = () => {
               />
             </div>
             <div className="role-checkboxes">
-            <label>
-    <input
-        type="radio"
-        name="role"
-        value="student"
-        checked={role === 'student'}
-        onChange={() => setRole('student')}
-    />
-    Student
-</label>
-<label>
-    <input
-        type="radio"
-        name="role"
-        value="admin"
-        checked={role === 'admin'}
-        onChange={() => setRole('admin')}
-    />
-    Admin
-</label>
-
+              <label>
+                <input
+                  type="radio"
+                  name="role"
+                  value="student"
+                  checked={role === 'student'}
+                  onChange={() => setRole('student')}
+                />
+                Student
+              </label>
+              <label>
+                <input
+                  type="radio"
+                  name="role"
+                  value="admin"
+                  checked={role === 'admin'}
+                  onChange={() => setRole('admin')}
+                />
+                Admin
+              </label>
             </div>
             <input type="submit" value="Login" className="btn solid" />
             {error && <p className="error-message">{error}</p>}
           </form>
 
-          <form action="#" className="sign-up-form">
+          {/* Sign Up Form */}
+          <form className="sign-up-form">
             <h2 className="title">Sign up</h2>
             <div className="role-buttons">
               <button
@@ -154,5 +180,17 @@ const SignIn = () => {
     </div>
   );
 };
+
+export const AuthProvider = ({ children }) => {
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [role, setRole] = useState('');
+
+  return (
+    <AuthContext.Provider value={{ isAuthenticated, setIsAuthenticated, role, setRole }}>
+      {children}
+    </AuthContext.Provider>
+  );
+};
+
 
 export default SignIn;
