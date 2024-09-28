@@ -11,6 +11,7 @@ import Resource from './student/Resource';
 import Profile from './student/Profile';
 import ProtectedRoute from './components/ProtectedRoute';
 import './App.css';
+import OverallProgress from './admin/OverallProgress';
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(
@@ -85,6 +86,15 @@ function App() {
             </ProtectedRoute>
           }
         />
+        <Route
+          path="/admin-overallprogress"
+          element={
+            <ProtectedRoute isAuthenticated={isAuthenticated}>
+              <OverallProgress />
+            </ProtectedRoute>
+          }
+        />
+        
       </Routes>
     </Router>
   );

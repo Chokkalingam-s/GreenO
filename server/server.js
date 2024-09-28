@@ -311,6 +311,55 @@ app.get('/api/admin-data', authenticateToken, async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 });
+app.get('/api/overall-progress', async (req, res) => {
+  try {
+    const admins = await Admin.findAll();
+    const users = await User.findAll();
+    const progressData = [];
+
+    admins.forEach(admin => {
+      const departmentData = {
+        department: admin.department,
+        studentCount: 0 ,
+        uploadCount: admin.uploadCount,
+        yearCounts: {
+          firstYear: 0,
+          secondYear: 0,
+          thirdYear: 0,
+          fourthYear: 0,
+        }
+      };
+
+      users.forEach(user => {
+        if (user.department === admin.department) {
+          departmentData.studentCount += 1;
+          
+          const currentYear = new Date().getFullYear();
+          const graduationYear = parseInt(user.yearOfGraduation, 10);
+          const year = graduationYear - currentYear + 1; 
+
+          if (year === 1) {
+            departmentData.yearCounts.firstYear += 1;
+          } else if (year === 2) {
+            departmentData.yearCounts.secondYear += 1;
+          } else if (year === 3) {
+            departmentData.yearCounts.thirdYear += 1;
+          } else if (year === 4) {
+            departmentData.yearCounts.fourthYear += 1;
+          }
+        }
+      });
+
+      progressData.push(departmentData);
+    });
+
+    res.status(200).json(progressData);
+  } catch (error) {
+    console.error('Error fetching overall progress:', error);
+    res.status(500).json({ message: 'Internal server error' });
+  }
+});
+
 
 
 const PORT = process.env.PORT || 3000;

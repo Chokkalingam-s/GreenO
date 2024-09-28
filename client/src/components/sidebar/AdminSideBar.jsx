@@ -37,16 +37,6 @@ function AdminSideBar({ openSidebarToggle, OpenSidebar }) {
           </NavLink>
         </li>
         <li className='sidebar-list-item'>
-          <NavLink to="/Admin/DepartmentProgress" className={({ isActive }) => (isActive ? 'active' : '')}>
-            <BsFillGrid3X3GapFill className='icon' /> Department Progress
-          </NavLink>
-        </li>
-        <li className='sidebar-list-item'>
-          <NavLink to="/Admin/RankingIndia" className={({ isActive }) => (isActive ? 'active' : '')}>
-            <BsPeopleFill className='icon' /> Ranking All Over India
-          </NavLink>
-        </li>
-        <li className='sidebar-list-item'>
           <NavLink to="/Admin/Activities" className={({ isActive }) => (isActive ? 'active' : '')}>
             <BsListCheck className='icon' /> Activities
           </NavLink>
@@ -58,7 +48,7 @@ function AdminSideBar({ openSidebarToggle, OpenSidebar }) {
         </li>
         <li className='sidebar-list-item'>
           <NavLink to="/Admin/Settings" className={({ isActive }) => (isActive ? 'active' : '')}>
-            <BsFillGearFill className='icon' /> Setting
+            <BsFillGearFill className='icon' /> Settings
           </NavLink>
         </li>
         <li className='sidebar-list-item'>

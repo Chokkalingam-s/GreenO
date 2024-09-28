@@ -54,7 +54,7 @@ function AHome() {
         });
 
         const fetchedData = response.data.map(item => ({
-          department: abbreviateDepartmentName(item.department),
+          department: abbreviateDepartmentName(item.department), // Abbreviate department name
           Trees: item.uploadCount,
           Students: item.studentCount,
         }));
