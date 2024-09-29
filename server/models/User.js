@@ -6,9 +6,13 @@ const User = sequelize.define('User', {
     type: DataTypes.ENUM('student', 'admin'),
     allowNull: false
   },
+  adminType: {
+    type: DataTypes.ENUM('principal', 'hod'), 
+    allowNull: true 
+  },
   name: {
     type: DataTypes.STRING,
-    allowNull: false
+    allowNull: true 
   },
   email: {
     type: DataTypes.STRING,
@@ -25,15 +29,15 @@ const User = sequelize.define('User', {
   },
   state: {
     type: DataTypes.STRING,
-    allowNull: false
+    allowNull: true 
   },
   district: {
     type: DataTypes.STRING,
-    allowNull: false
+    allowNull: true 
   },
   collegeName: {
     type: DataTypes.STRING,
-    allowNull: false
+    allowNull: true 
   },
   department: {
     type: DataTypes.STRING,

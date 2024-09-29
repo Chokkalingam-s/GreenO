@@ -72,7 +72,7 @@ app.post('/signup', async (req, res) => {
       state,
       district,
       collegeName,
-      department: role === 'student' ? department : null,
+      department: role === 'student' ? department :'Default Admin Department',
       collegeRegisterNumber: role === 'student' ? collegeRegisterNumber : null,
       yearOfGraduation: role === 'student' ? yearOfGraduation : null,
       aadharNumber: role === 'student' ? aadharNumber : null,
@@ -110,26 +110,26 @@ app.post('/login', async (req, res) => {
   const { email, password, role } = req.body;
 
   try {
-      const user = await User.findOne({ where: { email } });
-      if (!user) {
-          return res.status(400).json({ message: 'Invalid email or password' });
-      }
+    const user = await User.findOne({ where: { email } });
+    if (!user) {
+      return res.status(400).json({ message: 'Invalid email or password' });
+    }
 
-      if (user.role !== role) {
-          console.log(`User role in DB: ${user.role}, Role provided: ${role}`);
-          return res.status(400).json({ message: 'Role does not match' });
-      }
+    if (user.role !== role) {
+      console.log(`User role in DB: ${user.role}, Role provided: ${role}`);
+      return res.status(400).json({ message: 'Role does not match' });
+    }
 
-      const isPasswordValid = await bcrypt.compare(password, user.password);
-      if (!isPasswordValid) {
-          return res.status(400).json({ message: 'Invalid email or password' });
-      }
+    const isPasswordValid = await bcrypt.compare(password, user.password);
+    if (!isPasswordValid) {
+      return res.status(400).json({ message: 'Invalid email or password' });
+    }
 
-      const token = jwt.sign({ userId: user.id, email: user.email, role: user.role }, JWT_SECRET, { expiresIn: '1h' });
-      res.status(200).json({ message: 'Login successful', token, userRole: user.role }); 
+    const token = jwt.sign({ userId: user.id, email: user.email, role: user.role }, JWT_SECRET, { expiresIn: '1h' });
+    res.status(200).json({ message: 'Login successful', token, userRole: user.role });
   } catch (error) {
-      console.error('Login Error:', error);
-      res.status(500).json({ error: error.message });
+    console.error('Login Error:', error);
+    res.status(500).json({ error: error.message });
   }
 });
 
@@ -313,6 +313,7 @@ app.get('/api/admin-data', authenticateToken, async (req, res) => {
 });
 app.get('/api/overall-progress', authenticateToken, async (req, res) => {
   const { email } = req.user;
+  console.log("User Email:", email);
 
   try {
     const user = await User.findOne({
@@ -374,6 +375,66 @@ app.get('/api/overall-progress', authenticateToken, async (req, res) => {
     res.status(500).json({ message: 'Internal server error' });
   }
 });
+app.get('/api/department-student-data', authenticateToken, async (req, res) => {
+  const { email } = req.user; 
+
+  try {
+    const hodUser = await User.findOne({
+      where: { email, role: 'hod', adminType: 'hod' },
+      attributes: ['collegeName', 'department'], 
+    });
+
+    if (!hodUser) {
+      return res.status(404).json({ message: 'HOD not found' });
+    }
+
+    const { collegeName, department } = hodUser; 
+    const adminData = await Admin.findOne({
+      where: { collegeName, department },
+      attributes: ['studentCount', 'uploadCount'], 
+    });
+
+    if (!adminData) {
+      return res.status(404).json({ message: 'No data found for this college and department' });
+    }
+
+    const totalStudents = adminData.studentCount; 
+    const totalSaplings = adminData.uploadCount || 0; 
+
+    const currentYear = new Date().getFullYear();
+    const yearCounts = {
+      '1st Year': 0,
+      '2nd Year': 0,
+      '3rd Year': 0,
+      '4th Year': 0,
+    };
+
+    const yearDistribution = await User.findAll({
+      where: { department, role: 'student' },
+      attributes: ['yearOfGraduation'],
+    });
+
+    yearDistribution.forEach(({ yearOfGraduation }) => {
+      const graduationYear = parseInt(yearOfGraduation, 10);
+      const yearDifference = graduationYear - currentYear + 1;
+
+      switch (yearDifference) {
+        case 1: yearCounts['1st Year']++; break;
+        case 2: yearCounts['2nd Year']++; break;
+        case 3: yearCounts['3rd Year']++; break;
+        case 4: yearCounts['4th Year']++; break;
+        default: break; 
+      }
+    });
+
+    res.status(200).json({ totalStudents, totalSaplings, yearCounts });
+  } catch (error) {
+    console.error('Error fetching department data:', error);
+    res.status(500).json({ error: 'An error occurred while fetching department data.' });
+  }
+});
+
+
 
 const PORT = process.env.PORT || 3000;
 
