@@ -12,6 +12,7 @@ import Profile from './student/Profile';
 import ProtectedRoute from './components/ProtectedRoute';
 import './App.css';
 import OverallProgress from './admin/OverallProgress';
+import DepartmentHome from './department/DepartmentHome';
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(
@@ -19,7 +20,6 @@ function App() {
   );
 
   useEffect(() => {
-
     const handleStorageChange = () => {
       setIsAuthenticated(localStorage.getItem("authToken") !== null);
     };
@@ -34,10 +34,11 @@ function App() {
   return (
     <Router>
       <Routes>
-      <Route path="/" element={<SignIn setIsAuthenticated={setIsAuthenticated} />} />
-      <Route path="/signin" element={<SignIn setIsAuthenticated={setIsAuthenticated} />} />
+        <Route path="/" element={<SignIn setIsAuthenticated={setIsAuthenticated} />} />
+        <Route path="/signin" element={<SignIn setIsAuthenticated={setIsAuthenticated} />} />
         <Route path="/student-signup" element={<StudentSignUp />} />
         <Route path="/admin-signup" element={<AdminSignUp />} />
+        
         <Route
           path="/StudentHome"
           element={
@@ -94,7 +95,14 @@ function App() {
             </ProtectedRoute>
           }
         />
-        
+        <Route
+          path="/HodHome"  // Route for HoD Home directly
+          element={
+            <ProtectedRoute isAuthenticated={isAuthenticated}>
+              <DepartmentHome />
+            </ProtectedRoute>
+          }
+        />
       </Routes>
     </Router>
   );

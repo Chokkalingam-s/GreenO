@@ -4,7 +4,6 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './SignIn.css';
 import axios from 'axios';
 
-
 const AuthContext = React.createContext();
 
 export const useAuth = () => useContext(AuthContext);
@@ -13,72 +12,68 @@ const SignIn = () => {
   const [isSignUpMode, setIsSignUpMode] = useState(false);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [role, setRole] = useState('');
+  const [role, setRole] = useState('');  
   const [error, setError] = useState('');
   const navigate = useNavigate();
   const { isAuthenticated, setIsAuthenticated } = useAuth();
 
   useEffect(() => {
-    
     const token = localStorage.getItem('token');
     if (token) {
       setIsAuthenticated(true);
     }
   }, [setIsAuthenticated]);
 
-  
   const handleSignUpClick = () => {
     setIsSignUpMode(true);
   };
 
-  
   const handleSignInClick = () => {
     setIsSignUpMode(false);
   };
 
-  
   const handleStudentSignUp = () => {
     navigate("/student-signup");
   };
 
-  
   const handleAdminSignUp = () => {
     navigate("/admin-signup");
   };
 
   const handleLogin = async (e) => {
     e.preventDefault();
-    console.log('Login Request Data:', { email, password, role }); 
+    console.log('Login Request Data:', { email, password, role });
     try {
-        const response = await axios.post('http://localhost:3000/login', {
-            email,
-            password,
-            role 
-        });
-        
-        const { token, userRole } = response.data; 
-        if (token) {
-            localStorage.setItem('token', token);
-            setIsAuthenticated(true);
-            setRole(userRole || role); 
-            
-            
-            if (userRole === 'admin') {
-                navigate('/AdminHome'); 
-            } else if (userRole === 'student') {
-                navigate('/StudentHome'); 
-            } else {
-                console.error("Role not recognized:", userRole);
-            }
-        }
-    } catch (error) {
-        console.error('Error Details:', error.response); 
-        setError(error.response?.data?.message || 'Login failed');
-        setTimeout(() => setError(''), 3000);
-    }
-};
+      const response = await axios.post('http://localhost:3000/login', {
+        email,
+        password,
+        role
+      });
 
-  
+      const { token, userRole } = response.data; 
+      if (token) {
+        localStorage.setItem('token', token);
+        setIsAuthenticated(true);
+        setRole(userRole || role); 
+
+        if (userRole === 'admin') {
+          navigate('/AdminHome'); 
+        } else if (userRole === 'hod') {
+          navigate('/HoDHome'); 
+        } else if (userRole === 'principal') {
+          navigate('/AdminHome'); 
+        } else if (userRole === 'student') {
+          navigate('/StudentHome'); 
+        } else {
+          console.error("Role not recognized:", userRole);
+        }
+      }
+    } catch (error) {
+      console.error('Error Details:', error.response); 
+      setError(error.response?.data?.message || 'Login failed');
+      setTimeout(() => setError(''), 3000);
+    }
+  };
 
   return (
     <div className={`container ${isSignUpMode ? "sign-up-mode" : ""}`}>
@@ -121,18 +116,28 @@ const SignIn = () => {
                 <input
                   type="radio"
                   name="role"
-                  value="admin"
-                  checked={role === 'admin'}
-                  onChange={() => setRole('admin')}
+                  value="hod"
+                  checked={role === 'hod'}
+                  onChange={() => setRole('hod')}
                 />
-                Admin
+                HoD
+              </label>
+              <label>
+                <input
+                  type="radio"
+                  name="role"
+                  value="principal"
+                  checked={role === 'principal'}
+                  onChange={() => setRole('principal')}
+                />
+                Principal
               </label>
             </div>
             <input type="submit" value="Login" className="btn solid" />
             {error && <p className="error-message">{error}</p>}
           </form>
 
-          {/* Sign Up Form */}
+
           <form className="sign-up-form">
             <h2 className="title">Sign up</h2>
             <div className="role-buttons">
@@ -191,6 +196,5 @@ export const AuthProvider = ({ children }) => {
     </AuthContext.Provider>
   );
 };
-
 
 export default SignIn;
