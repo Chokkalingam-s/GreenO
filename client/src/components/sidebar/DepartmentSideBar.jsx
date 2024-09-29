@@ -1,13 +1,19 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom'; 
 import {
   BsGrid1X2Fill, BsFillArchiveFill, BsListCheck, BsMenuButtonWideFill, BsFillGearFill, BsCart3
 } from 'react-icons/bs';
 
 function DepartmentSideBar({ openSidebarToggle, OpenSidebar }) {
+  const navigate = useNavigate(); 
 
   const handleLogout = () => {
     localStorage.removeItem('token');
     console.log("Logout Clicked");
+  };
+
+  const handleDepartmentProgress = () => {
+    navigate('/Hod/department-progress'); 
   };
 
   return (
@@ -21,27 +27,27 @@ function DepartmentSideBar({ openSidebarToggle, OpenSidebar }) {
 
       <ul className='sidebar-list'>
         <li className='sidebar-list-item'>
-          <span className='sidebar-list-item-link'>
+          <span className='sidebar-list-item-link' onClick={() => navigate('/HodHome')}>
             <BsGrid1X2Fill className='icon' /> Dashboard
           </span>
         </li>
         <li className='sidebar-list-item'>
-          <span className='sidebar-list-item-link'>
+          <span className='sidebar-list-item-link' onClick={handleDepartmentProgress}> 
             <BsFillArchiveFill className='icon' /> Department Progress
           </span>
         </li>
         <li className='sidebar-list-item'>
-          <span className='sidebar-list-item-link'>
+          <span className='sidebar-list-item-link' onClick={() => navigate('/Hod/activities')}>
             <BsListCheck className='icon' /> Activities
           </span>
         </li>
         <li className='sidebar-list-item'>
-          <span className='sidebar-list-item-link'>
+          <span className='sidebar-list-item-link' onClick={() => navigate('/Hod/reports')}>
             <BsMenuButtonWideFill className='icon' /> Reports
           </span>
         </li>
         <li className='sidebar-list-item'>
-          <span className='sidebar-list-item-link'>
+          <span className='sidebar-list-item-link' onClick={() => navigate('/Hod/settings')}>
             <BsFillGearFill className='icon' /> Settings
           </span>
         </li>

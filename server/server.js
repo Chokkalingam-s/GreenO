@@ -433,7 +433,69 @@ app.get('/api/department-student-data', authenticateToken, async (req, res) => {
     res.status(500).json({ error: 'An error occurred while fetching department data.' });
   }
 });
+app.get('/api/department-progress', authenticateToken, async (req, res) => {
+  const { email } = req.user; 
 
+  try {
+    const hodUser = await User.findOne({
+      where: { email, role: 'hod', adminType: 'hod' },
+      attributes: ['collegeName', 'department'],
+    });
+
+    if (!hodUser) {
+      return res.status(404).json({ error: 'HOD user not found' });
+    }
+
+    // Fetch only students from the same college and department
+    const students = await User.findAll({
+      where: {
+        collegeName: hodUser.collegeName,
+        department: hodUser.department,
+        role: 'student', // Filter to include only students
+      },
+      attributes: [
+        'name',
+        'collegeRegisterNumber',
+        'yearOfGraduation',
+        'uploadCount',
+      ],
+    });
+
+    if (!students || students.length === 0) {
+      return res.status(404).json({ error: 'No students found for this department' });
+    }
+
+    const currentYear = new Date().getFullYear();
+    const responseData = students.map(student => {
+      const graduationYear = parseInt(student.yearOfGraduation, 10);
+      const diff = graduationYear - currentYear;
+      let currentYearProgress;
+      if (diff === 2) {
+        currentYearProgress = 3; 
+      } else if (diff === 1) {
+        currentYearProgress = 4;
+      } else if (diff === 3) {
+        currentYearProgress = 2; 
+      } else if (diff === 4) {
+        currentYearProgress = 1; 
+      } else {
+        currentYearProgress = null; 
+      }
+
+      return {
+        name: student.name,
+        registerNumber: student.collegeRegisterNumber,
+        currentYear: currentYearProgress,
+        uploadCount: student.uploadCount,
+      };
+    });
+
+    res.status(200).json(responseData);
+  } catch (error) {
+    console.error('Error fetching department progress:', error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+});
 
 
 const PORT = process.env.PORT || 3000;
