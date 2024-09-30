@@ -1,0 +1,91 @@
+.grid-container {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 1rem;
+  }
+  
+  .report-content {
+    padding: 20px;
+    background-color: #ffffff;
+    color: #333;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .report-title {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #222;
+    margin-bottom: 1.5rem;
+    text-align: center;
+  }
+  
+  .loading-text, .no-data-text {
+    font-size: 1.2rem;
+    color: #666;
+    text-align: center;
+  }
+  
+  .pie-chart-section {
+    margin-bottom: 3rem;
+  }
+  
+  .pie-chart-container {
+    width: 400px;
+    height: 400px;
+    margin: 0 auto;
+    background-color: #fafafa;
+    border-radius: 50%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .section-title {
+    font-size: 1.6rem;
+    margin-bottom: 1rem;
+    font-weight: 500;
+    color: #444;
+    text-align: center;
+  }
+  
+  .top-departments-section {
+    margin-bottom: 2rem;
+  }
+  
+  .top-departments-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 0 auto;
+    font-size: 1rem;
+  }
+  
+  .top-departments-table th, .top-departments-table td {
+    border: 1px solid #ccc;
+    padding: 12px 15px;
+    text-align: center;
+  }
+  
+  .top-departments-table th {
+    background-color: #f0f0f0;
+    font-weight: bold;
+  }
+  
+  .top-departments-table tbody tr:nth-child(odd) {
+    background-color: #f9f9f9;
+  }
+  
+  .top-departments-table tbody tr:hover {
+    background-color: #e8f4ff;
+    transition: background-color 0.3s ease;
+  }
+  
+  .user-department-rank {
+    margin-top: 1.5rem;
+    font-size: 1.2rem;
+    text-align: center;
+  }
+  
+  .rank-info {
+    color: #333;
+    font-weight: bold;
+  }
+  

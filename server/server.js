@@ -445,13 +445,11 @@ app.get('/api/department-progress', authenticateToken, async (req, res) => {
     if (!hodUser) {
       return res.status(404).json({ error: 'HOD user not found' });
     }
-
-    // Fetch only students from the same college and department
     const students = await User.findAll({
       where: {
         collegeName: hodUser.collegeName,
         department: hodUser.department,
-        role: 'student', // Filter to include only students
+        role: 'student', 
       },
       attributes: [
         'name',
@@ -494,6 +492,37 @@ app.get('/api/department-progress', authenticateToken, async (req, res) => {
   } catch (error) {
     console.error('Error fetching department progress:', error);
     res.status(500).json({ error: 'Internal server error' });
+  }
+});
+app.get('/api/new-department-data', authenticateToken, async (req, res) => {
+  try {
+    const departments = await Admin.findAll({
+      attributes: ['department', 'studentCount', 'uploadCount'],
+    });
+
+    res.status(200).json(departments);
+  } catch (error) {
+    console.error('Error fetching department data:', error);
+    res.status(500).json({ error: error.message });
+  }
+});
+app.get('/api/new-user-details', authenticateToken, async (req, res) => {
+  const { email } = req.user; 
+
+  try {
+    const userDetails = await User.findOne({
+      where: { email: email },
+      attributes: ['name', 'email', 'mobileNumber', 'collegeName', 'department', 'yearOfGraduation'],
+    });
+
+    if (!userDetails) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+
+    res.status(200).json(userDetails);
+  } catch (error) {
+    console.error('Error fetching user details:', error);
+    res.status(500).json({ error: error.message });
   }
 });
 

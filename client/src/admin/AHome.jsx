@@ -13,7 +13,6 @@ const chartSetting = {
   tooltip: true,
 };
 
-
 const abbreviateDepartmentName = (department) => {
   return department
     .split(' ')

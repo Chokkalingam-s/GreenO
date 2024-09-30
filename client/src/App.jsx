@@ -14,6 +14,7 @@ import './App.css';
 import OverallProgress from './admin/OverallProgress';
 import DepartmentHome from './department/DepartmentHome';
 import DepartmentProgress from './department/DepartmentProgress';
+import Report from './department/Report'; 
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(
@@ -97,7 +98,7 @@ function App() {
           }
         />
         <Route
-          path="/HodHome" 
+          path="/HodHome"
           element={
             <ProtectedRoute isAuthenticated={isAuthenticated}>
               <DepartmentHome />
@@ -105,10 +106,18 @@ function App() {
           }
         />
         <Route
-          path="/Hod/department-progress" 
+          path="/Hod/department-progress"
           element={
             <ProtectedRoute isAuthenticated={isAuthenticated}>
               <DepartmentProgress />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/Hod/report"
+          element={
+            <ProtectedRoute isAuthenticated={isAuthenticated}>
+              <Report />
             </ProtectedRoute>
           }
         />

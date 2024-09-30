@@ -16,6 +16,10 @@ function DepartmentSideBar({ openSidebarToggle, OpenSidebar }) {
     navigate('/Hod/department-progress'); 
   };
 
+  const handleReports = () => {
+    navigate('/Hod/report'); 
+  };
+
   return (
     <aside id="sidebar" className={openSidebarToggle ? "sidebar-responsive" : ""}>
       <div className='sidebar-title'>
@@ -42,7 +46,7 @@ function DepartmentSideBar({ openSidebarToggle, OpenSidebar }) {
           </span>
         </li>
         <li className='sidebar-list-item'>
-          <span className='sidebar-list-item-link' onClick={() => navigate('/Hod/reports')}>
+          <span className='sidebar-list-item-link' onClick={handleReports}>
             <BsMenuButtonWideFill className='icon' /> Reports
           </span>
         </li>
