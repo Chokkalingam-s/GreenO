@@ -1,12 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
-import { Pie } from 'react-chartjs-2';
 import axios from 'axios';
+import { Chart } from 'react-google-charts';
+import { Link } from 'react-router-dom';
 import './Report.css';
 import DepartmentHeader from '../components/sidebar/DepartmentHeader';
 import DepartmentSideBar from '../components/sidebar/DepartmentSideBar';
-
-ChartJS.register(ArcElement, Tooltip, Legend);
 
 const Report = () => {
   const [departmentData, setDepartmentData] = useState([]);
@@ -53,17 +51,38 @@ const Report = () => {
     setOpenSidebarToggle(!openSidebarToggle);
   };
 
-  const pieData = {
-    labels: departmentData.map((dept) => dept.department),
-    datasets: [
-      {
-        data: departmentData.map((dept) => dept.uploadCount),
-        backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0', '#9966FF', '#FF9F40'],
-        hoverBackgroundColor: ['#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0', '#9966FF', '#FF9F40'],
-        borderColor: '#ffffff',
-        borderWidth: 2,
+  const shortenDepartmentName = (name) => {
+    return name
+      .split(' ')
+      .filter(word => word.toLowerCase() !== 'and' && word.toLowerCase() !== 'of')
+      .map(word => (word.startsWith('(') ? word : word[0].toUpperCase()))
+      .join('');
+  };
+
+  const pieChartData = [
+    ['Department', 'Upload Count'],
+    ...departmentData.map((dept) => [shortenDepartmentName(dept.department), dept.uploadCount]),
+  ];
+
+  const colors = [
+    "#FF6384", "#36A2EB", "#FFCE56", "#4BC0C0", "#9966FF", "#FF9F40",
+    "#FF6384", "#36A2EB", "#FFCE56", "#4BC0C0", "#9966FF", "#FF9F40"
+  ];
+
+  const pieChartOptions = {
+    title: 'Department-wise Upload Count',
+    pieHole: 0.4,
+    pieStartAngle: 100,
+    sliceVisibilityThreshold: 0.02,
+    legend: {
+      position: 'bottom',
+      alignment: 'center',
+      textStyle: {
+        color: '#233238',
+        fontSize: 14,
       },
-    ],
+    },
+    colors: colors.slice(0, departmentData.length),
   };
 
   return (
@@ -72,7 +91,13 @@ const Report = () => {
       <DepartmentSideBar openSidebarToggle={openSidebarToggle} OpenSidebar={OpenSidebar} />
 
       <div className="report-content">
-        <h2 className="report-title">What You Should Know</h2>
+        {/* Breadcrumb Navigation */}
+        <div className="breadcrumb-navigation">
+          <Link to="/HodHome" className="breadcrumb-link">Home</Link> &gt;&gt; Reports
+        </div>
+
+        {/* Unique and Appealing Report Title */}
+        <h2 className="report-title">Department Contribution Overview</h2>
 
         {loading ? (
           <p className="loading-text">Loading...</p>
@@ -82,7 +107,13 @@ const Report = () => {
               <div className="pie-chart-section">
                 <h3 className="section-title">Department-wise Upload Count</h3>
                 <div className="pie-chart-container">
-                  <Pie data={pieData} options={{ maintainAspectRatio: false, plugins: { legend: { position: 'right' } } }} />
+                  <Chart
+                    chartType="PieChart"
+                    data={pieChartData}
+                    options={pieChartOptions}
+                    width="100%"
+                    height="400px"
+                  />
                 </div>
               </div>
             ) : (
@@ -103,7 +134,7 @@ const Report = () => {
                   {topDepartments.map((dept, index) => (
                     <tr key={dept.department}>
                       <td>{index === 0 ? '🥇' : index === 1 ? '🥈' : '🥉'}</td>
-                      <td>{dept.department}</td>
+                      <td>{shortenDepartmentName(dept.department)}</td>
                       <td>{dept.uploadCount}</td>
                     </tr>
                   ))}
