@@ -89,14 +89,11 @@ const Report = () => {
     <div className="grid-container">
       <DepartmentHeader OpenSidebar={OpenSidebar} />
       <DepartmentSideBar openSidebarToggle={openSidebarToggle} OpenSidebar={OpenSidebar} />
-
+      
       <div className="report-content">
-        {/* Breadcrumb Navigation */}
-        <div className="breadcrumb-navigation">
+      <div className="breadcrumb-navigation">
           <Link to="/HodHome" className="breadcrumb-link">Home</Link> &gt;&gt; Reports
         </div>
-
-        {/* Unique and Appealing Report Title */}
         <h2 className="report-title">Department Contribution Overview</h2>
 
         {loading ? (

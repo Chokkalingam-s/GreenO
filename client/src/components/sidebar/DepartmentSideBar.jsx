@@ -9,9 +9,11 @@ function DepartmentSideBar({ openSidebarToggle, OpenSidebar }) {
 
   const handleLogout = () => {
     localStorage.removeItem('token');
-    console.log("Logout Clicked");
+    sessionStorage.removeItem('token');
+    navigate('/signin'); 
+    console.log("Logged out and token expired");
   };
-
+  
   const handleDepartmentProgress = () => {
     navigate('/Hod/department-progress'); 
   };

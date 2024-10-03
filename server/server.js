@@ -12,6 +12,8 @@ const Admin = require('./models/Admin');
 const UploadSnap = require('./models/UploadSnap'); 
 const app = express();
 const { Op } = require('sequelize');
+const nodemailer = require('nodemailer');
+const speakeasy = require('speakeasy');
 
 app.use(express.json());
 app.use(cors());
@@ -37,6 +39,55 @@ const storage = multer.diskStorage({
 });
 
 const upload = multer({ storage });
+const transporter = nodemailer.createTransport({
+  service: 'gmail',
+  auth: {
+    user: process.env.EMAIL_USER,
+    pass: process.env.EMAIL_PASS,
+  },
+});
+let otps = {}; 
+
+app.post('/send-otp', (req, res) => {
+  const { email } = req.body;
+
+  const otp = speakeasy.totp({
+    secret: process.env.JWT_SECRET,
+    encoding: 'base32',
+  });
+
+  otps[email] = otp; 
+
+  const mailOptions = {
+    from: process.env.EMAIL_USER,
+    to: email,
+    subject: 'Your OTP Code',
+    text: `Your OTP code is: ${otp}`,
+  };
+
+  transporter.sendMail(mailOptions, (error, info) => {
+    if (error) {
+      return res.status(500).send('Error sending email.');
+    }
+    res.status(200).send('OTP sent to email.');
+  });
+});
+
+app.post('/verify-otp', (req, res) => {
+  const { email, otp } = req.body;
+  const storedOtp = otps[email];
+
+  if (!storedOtp) {
+    return res.status(400).send('No OTP found for this email.');
+  }
+
+  if (otp === storedOtp) {
+    delete otps[email]; 
+    res.status(200).send({ success: true, token: 'YOUR_JWT_TOKEN' }); 
+  } else {
+    res.status(400).send('Invalid OTP.');
+  }
+});
 
 app.post('/signup', async (req, res) => {
   const {

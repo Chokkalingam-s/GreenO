@@ -1,6 +1,3 @@
-/* SignUp.css */
-
-/* Container styling */
 .container1 {
     padding: 30px;
     background-color: #f9f9f9;
@@ -16,40 +13,34 @@
   .signUpCard{
     padding-top: 20px;
     width: 550px !important;
-    margin: 10px auto; /* Added top and bottom margin for spacing */
+    margin: 10px auto;
     background-color: var(--lightest-green);
-    border-radius: 10px; /* Optional: Adds rounded corners */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Adds a subtle shadow */
-    transition: box-shadow 0.3s ease; /* Smooth transition for hover effect */
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.3s ease;
   }
   
-  /* Hover effect for the card */
   .card:hover {
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Enhanced shadow on hover */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
   }
   
-  /* Responsive design */
   @media screen and (max-width: 768px) {
     .card {
       width: 100%;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Maintain shadow on smaller screens */
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     }
   }
   
-  /* Form heading */
   h2 {
     color: #333;
     font-weight: bold;
     margin-bottom: 20px;
   }
   
-  /* Form labels */
   label {
     font-weight: bold;
     color: #555;
   }
-  
-  /* Input field styling */
 
   .form-group{
     width: 90% !important;
@@ -62,14 +53,12 @@
     transition: all 0.3s ease;
   }
   
-  /* Input field focus state */
   .form-control:focus {
     border-color: var(--light-green);
     box-shadow: 0 0 5px var(--dark-green);
     outline: none;
   }
   
-  /* Submit button */
   .btn-block {
     width: 100%;
     padding: 10px;
@@ -89,12 +78,11 @@
     border-color: var(--light-green);
   }
   
-  /* Form group margin */
   .form-group {
     margin-bottom: 20px;
   }
   
-  /* Responsive design */
+ 
   @media (max-width: 768px) {
     .container1 {
       padding: 20px;
@@ -103,11 +91,11 @@
     .signUpCard{
       padding-top: 20px;
       width: 95% !important;
-      margin: 10px; /* Added top and bottom margin for spacing */
+      margin: 10px;
       background-color: var(--lightest-green);
-      border-radius: 10px; /* Optional: Adds rounded corners */
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Adds a subtle shadow */
-      transition: box-shadow 0.3s ease; /* Smooth transition for hover effect */
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      transition: box-shadow 0.3s ease;
     }
 
     .form-control {
@@ -130,5 +118,27 @@
     .btn-block {
       font-size: 16px;
     }
+  }
+  
+  .signUpCard {
+    width: 100%;
+    max-width: 500px;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+  }
+  
+  .otp-input {
+    text-align: center;
+    font-size: 20px;
+    letter-spacing: 2px;
+    border: 2px solid #007bff;
+    border-radius: 5px;
+    transition: border-color 0.3s;
+  }
+  
+  .otp-input:focus {
+    border-color: #0056b3;
+    outline: none;
   }
   
