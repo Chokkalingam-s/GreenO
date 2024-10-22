@@ -60,20 +60,40 @@ const Profile = () => {
 
   const progressPercentage = (uploadedCount / totalImages) * 100;
 
-  const handleGenerateCertificate = () => {
+  const handleGenerateCertificate = async () => {
     const certificateElement = document.getElementById('certificate');
-
-    html2canvas(certificateElement, { scale: 2,useCORS: true,  }).then((canvas) => {
+  
+    if (!certificateElement) {
+      console.error('Certificate element not found!');
+      return;
+    }
+    certificateElement.style.visibility = 'visible';
+  certificateElement.style.position = 'absolute';
+  certificateElement.style.top = '0';
+  certificateElement.style.left = '0';
+  certificateElement.style.zIndex = '-1';
+  
+    try {
+      await new Promise((resolve) => setTimeout(resolve, 500));
+      // Use html2canvas to capture the certificate
+      const canvas = await html2canvas(certificateElement, {
+        scale: 2, // Improve quality by scaling
+        useCORS: true, // Allow cross-origin images
+      });
+  
+      // Convert canvas to an image and create a PDF or trigger download
       const imgData = canvas.toDataURL('image/png');
       const pdf = new jsPDF('landscape', 'mm', 'a4');
-      const imgWidth = 297;
-      const pdfWidth = 297;
-      const pdfHeight = 210;
-      const imgHeight = (canvas.height * imgWidth) / canvas.width;
-      pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
-      // pdf.addImage(imgData, 'PNG', 0, 0, imgWidth, imgHeight);
+      pdf.addImage(imgData, 'PNG', 0, 0, 297, 210);
       pdf.save(`${studentDetails.name}-Certificate.pdf`);
-    });
+    } catch (error) {
+      console.error('Error generating certificate:', error);
+    }finally {
+      // Re-hide the certificate after generation
+      certificateElement.style.visibility = 'hidden';
+      certificateElement.style.position = 'absolute';
+      certificateElement.style.top = '-9999px';
+    }
   };
 
   return (
@@ -169,7 +189,9 @@ const Profile = () => {
                       position: 'relative',
                       margin: '0 auto', // Center horizontally
                       overflow: 'hidden', // Ensure contents do not go outside
-                      backgroundColor: '#fff',
+                      // backgroundColor: '#fff',
+                      top: '-9999px', // Place out of the viewport to hide it
+          visibility: 'hidden',
                     }}
                   >
                     {/* Background Image */}
