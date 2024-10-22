@@ -192,12 +192,20 @@ const Profile = () => {
                       style={{
                         position: 'absolute',
                         zIndex: 2,
-                        top: '50%',
-                        left: '50%',
-                        transform: 'translate(-50%, -50%)', // Centers the content
-                        width: '90%', // Adjust width as needed
+                        top: '54%',
+                        left: '40%',
+                        width: '110%',
+                        transform: 'translate(-50%, -50%)', 
                         textAlign: 'center',
-                        fontFamily: 'Arial, sans-serif',
+                        fontSize: '18px',
+                        fontWeight: 'bold',
+                        lineHeight: '1.5',
+                        marginTop: '10px',
+                        padding: '10px',
+                        fontFamily: 'Times New Roman, serif',
+                        fontSize: '16px',
+                        lineHeight: '1',
+                        letterSpacing: '0.3em',
                         color: '#000',
                       }}
                     >
