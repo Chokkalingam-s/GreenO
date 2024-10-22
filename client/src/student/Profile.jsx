@@ -202,9 +202,9 @@ const Profile = () => {
                         lineHeight: '1.5',
                         marginTop: '10px',
                         padding: '10px',
-                        fontFamily: 'Times New Roman, serif',
+                        fontFamily: 'Arima, Medium 500 !important',
                         fontSize: '16px',
-                        lineHeight: '1',
+                        lineHeight: '0.4',
                         letterSpacing: '0.3em',
                         color: '#000',
                       }}
@@ -212,14 +212,13 @@ const Profile = () => {
 {studentDetails ? (
   <>
     <h2 style={{ marginBottom: '10px' }}> {studentDetails.name} </h2>
-    <p style={{ marginBottom: '5px' }}>
-      from <strong>{studentDetails.collegeName}</strong>
+    <p >
+      from <strong>{studentDetails.collegeName}</strong> </p>
+    <p >
+      of the <strong>{studentDetails.department}</strong> Department has 
     </p>
-    <p style={{ marginBottom: '5px' }}>
-      of the <strong>{studentDetails.department}</strong> Department
-    </p>
-    <p style={{ marginBottom: '5px' }}>
-      has successfully graduated in the year <strong>{studentDetails.yearOfGraduation}</strong>
+    <p >
+      Successfully Grown a Tree in academic period of <strong>{studentDetails.yearOfGraduation -4} - {studentDetails.yearOfGraduation}</strong>
     </p>
   </>
 ) : (
