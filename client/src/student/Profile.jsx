@@ -214,34 +214,35 @@ const Profile = () => {
                       style={{
                         position: 'absolute',
                         zIndex: 2,
-                        top: '54%',
-                        left: '40%',
+                        top: '50%',
+                        left: '45%',
                         width: '110%',
                         transform: 'translate(-50%, -50%)', 
                         textAlign: 'center',
-                        fontSize: '18px',
+                        fontSize: '35px',
                         fontWeight: 'bold',
                         lineHeight: '1.5',
                         marginTop: '10px',
                         padding: '10px',
                         fontFamily: 'Arima, Medium 500 !important',
-                        fontSize: '16px',
-                        lineHeight: '0.4',
-                        letterSpacing: '0.3em',
+                        lineHeight: '1',
+                        letterSpacing: '0.1em',
                         color: '#000',
                       }}
                     >
 {studentDetails ? (
   <>
-    <h2 style={{ marginBottom: '10px' }}> {studentDetails.name} </h2>
+    <h2 style={{ marginBottom: '8px' , fontSize : '40px' }}> {studentDetails.name} </h2>
     <p >
-      from <strong>{studentDetails.collegeName}</strong> </p>
+    Student of Department of <strong>{studentDetails.department}</strong>,
+    </p> 
     <p >
-      of the <strong>{studentDetails.department}</strong> Department has 
+    from <strong>{studentDetails.collegeName}</strong> 
     </p>
     <p >
       Successfully Grown a Tree in academic period of <strong>{studentDetails.yearOfGraduation -4} - {studentDetails.yearOfGraduation}</strong>
     </p>
+
   </>
 ) : (
   <p>Loading...</p>
