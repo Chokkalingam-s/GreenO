@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 import StudentSideBar from '../components/sidebar/StudentSideBar';
 import StudentHeader from '../components/sidebar/StudentHeader';
 import './UploadSnaps.css';
+import Location from './Location';
 
 function UploadSnaps() {
   const [email, setEmail] = useState('');
@@ -175,6 +176,7 @@ function UploadSnaps() {
   >
     Upload Snap
   </button>
+  <Location />
 </div>
 
 
