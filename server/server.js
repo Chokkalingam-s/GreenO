@@ -197,6 +197,7 @@ const authenticateToken = (req, res, next) => {
 
 app.post('/api/upload-snap', authenticateToken, upload.single('file'), async (req, res) => {
   const { email } = req.user;
+  const { latitude, longitude } = req.body; 
 
   if (!req.file) {
     return res.status(400).json({ message: 'No file uploaded.' });
@@ -218,7 +219,7 @@ app.post('/api/upload-snap', authenticateToken, upload.single('file'), async (re
     if (lastUpload) {
       const lastUploadTime = new Date(lastUpload.createdAt);
       const timeDifference = currentTime - lastUploadTime;
-      const fourMonthsInMillis = 4 * 30 * 24 * 60 * 60 * 1000; 
+      const fourMonthsInMillis = 4 * 30 * 24 * 60 * 60 * 1000;
 
       if (timeDifference < fourMonthsInMillis) {
         return res.status(403).json({ message: 'You can upload a new image only after 4 months from your last upload.' });
@@ -236,9 +237,10 @@ app.post('/api/upload-snap', authenticateToken, upload.single('file'), async (re
       filename: req.file.filename,
       filePath: relativeFilePath,
       count: user.uploadCount + 1,
-      lastUpload: currentTime
+      lastUpload: currentTime,
+      latitude: latitude, 
+      longitude: longitude 
     });
-
 
     const firstUpload = user.uploadCount === 0;
     const adminEntry = await Admin.findOne({ where: { collegeName: user.collegeName, department: user.department } });
@@ -251,6 +253,7 @@ app.post('/api/upload-snap', authenticateToken, upload.single('file'), async (re
     res.status(500).json({ error: error.message });
   }
 });
+
 
 app.get('/api/get-uploaded-images', authenticateToken, async (req, res) => {
   const { email } = req.user; 

@@ -17,6 +17,7 @@ function UploadSnaps() {
   const [isCaptchaValid, setIsCaptchaValid] = useState(false);
   const [isUploadEnabled, setIsUploadEnabled] = useState(false);
   const [openSidebarToggle, setOpenSidebarToggle] = useState(false);
+  const [location, setLocation] = useState({ latitude: '', longitude: '' }); 
 
   const OpenSidebar = () => {
     setOpenSidebarToggle(!openSidebarToggle);
@@ -63,6 +64,25 @@ function UploadSnaps() {
   };
 
   useEffect(() => {
+    const fetchLocation = () => {
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(
+          (position) => {
+            setLocation({
+              latitude: position.coords.latitude,
+              longitude: position.coords.longitude
+            });
+          },
+          (error) => {
+            toast.error('Location access denied.');
+          }
+        );
+      } else {
+        toast.error('Geolocation is not supported by this browser.');
+      }
+    };
+
+    fetchLocation();
     generateCaptcha();
     
     const fetchUploadedSnap = async () => {
@@ -89,11 +109,13 @@ function UploadSnaps() {
       toast.error('Captcha is incorrect. Please try again.');
       return;
     }
-  
+
     const formData = new FormData();
     formData.append('email', email);
     formData.append('file', file);
-  
+    formData.append('latitude', location.latitude); 
+    formData.append('longitude', location.longitude); 
+
     const token = localStorage.getItem('token');
     try {
       const response = await axios.post('http://localhost:3000/api/upload-snap', formData, {
@@ -107,7 +129,7 @@ function UploadSnaps() {
       generateCaptcha();
       setFile(null);
       setMessage('');
-  
+
       setTimeout(() => {
         window.location.reload();
       }, 1500);
@@ -120,7 +142,6 @@ function UploadSnaps() {
       }
     }
   };
-  
 
   return (
     <div className='grid-container'>
@@ -135,6 +156,11 @@ function UploadSnaps() {
           <div className='upload-snaps-content'>
             <div className='upload-snaps-body'>
               <h2>Upload Image</h2>
+
+              <div className='location-section'>
+                <p><strong>Latitude:</strong> {location.latitude || 'Fetching...'}</p>
+                <p><strong>Longitude:</strong> {location.longitude || 'Fetching...'}</p>
+              </div>
 
               <div className='captcha-section'>
                 <div className='captcha-container'>
@@ -158,25 +184,24 @@ function UploadSnaps() {
               </div>
               
               <div className='upload-section'>
-  <label className='custom-file-upload'>
-    <input 
-      type='file' 
-      onChange={handleFileChange}
-      className='file-input'
-    />
-    <i className='fa fa-cloud-upload'></i> Choose File
-  </label>
-  {file && <p className='file-name'>{file.name}</p>}
+                <label className='custom-file-upload'>
+                  <input 
+                    type='file' 
+                    onChange={handleFileChange}
+                    className='file-input'
+                  />
+                  <i className='fa fa-cloud-upload'></i> Choose File
+                </label>
+                {file && <p className='file-name'>{file.name}</p>}
 
-  <button 
-    onClick={handleUpload} 
-    disabled={!isUploadEnabled}
-    className={`upload-button ${isUploadEnabled ? 'enabled' : 'disabled'}`}
-  >
-    Upload Snap
-  </button>
-</div>
-
+                <button 
+                  onClick={handleUpload} 
+                  disabled={!isUploadEnabled}
+                  className={`upload-button ${isUploadEnabled ? 'enabled' : 'disabled'}`}
+                >
+                  Upload Snap
+                </button>
+              </div>
 
               {message && <p className='message'>{message}</p>}
 

@@ -10,7 +10,7 @@ const UploadSnap = sequelize.define('UploadSnap', {
     type: DataTypes.STRING,
     allowNull: false,
   },
-  filePath: {  
+  filePath: {
     type: DataTypes.STRING,
     allowNull: false,
   },
@@ -21,7 +21,15 @@ const UploadSnap = sequelize.define('UploadSnap', {
   lastUpload: {
     type: DataTypes.DATE,
     allowNull: true,
-  }
+  },
+  latitude: {
+    type: DataTypes.FLOAT,
+    allowNull: false,
+  },
+  longitude: {
+    type: DataTypes.FLOAT,
+    allowNull: false,
+  },
 }, {
   timestamps: true,
 });
