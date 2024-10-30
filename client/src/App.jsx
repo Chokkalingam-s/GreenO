@@ -40,7 +40,7 @@ function App() {
         <Route path="/signin" element={<SignIn setIsAuthenticated={setIsAuthenticated} />} />
         <Route path="/student-signup" element={<StudentSignUp />} />
         <Route path="/admin-signup" element={<AdminSignUp />} />
-        
+         
         <Route
           path="/StudentHome"
           element={

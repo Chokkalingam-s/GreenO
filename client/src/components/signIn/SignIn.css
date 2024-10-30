@@ -4,110 +4,149 @@
   --medium-green: #50B498;
   --dark-green: #468585;
 }
-
 body {
-  background-color: var(--lightest-green);
-  font-family: 'Arial', sans-serif;
-  color: var(--dark-green);
+  margin: 0;
+  overflow: hidden;
 }
 
-.container {
+.auth-container {
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh;
+  background-color: #f4f4f9;
   position: relative;
 }
 
-.forms-container {
-  background: white;
-  border-radius: 10px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-  overflow: hidden;
-  width: 100%;
-  max-width: 400px;
+.image-container {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.signin-signup {
-  display: flex;
-  flex-direction: column;
-  padding: 20px;
+.image-container img {
+  max-width: 100%;
+  height: auto;
+}
+
+.sign-in-form {
+  flex: 1;
+  max-width: 400px;
+  background: white;
+  padding: 30px;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  animation: fadeIn 0.5s;
+  margin-right: 80px;
+  
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .title {
-  margin-bottom: 20px;
-  font-size: 24px;
   text-align: center;
-  color: var(--dark-green);
+  margin-bottom: 20px;
+  color: #333;
 }
 
 .input-field {
-  position: relative;
-  margin-bottom: 20px;
+  margin-bottom: 15px;
 }
 
 .input-field input {
   width: 100%;
   padding: 10px;
-  border: 2px solid var(--medium-green);
-  border-radius: 5px;
-  font-size: 16px;
-  outline: none;
+  border: 2px solid #007bff;
+  border-radius: 4px;
   transition: border 0.3s;
 }
 
 .input-field input:focus {
-  border-color: var(--dark-green);
+  border-color: #0056b3;
+  outline: none;
 }
 
 .role-checkboxes {
-  margin-bottom: 20px;
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 15px;
+  padding: 10px;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
 .role-checkboxes label {
-  display: block;
-  margin-bottom: 5px;
-  color: var(--dark-green);
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  padding: 10px;
+  border-radius: 4px;
 }
 
+.role-checkboxes input[type="radio"] {
+  margin-right: 8px;
+  transform: scale(1.2);
+}
+
+.role-checkboxes label:hover {
+  background-color: #e9ecef;
+}
+
+.role-checkboxes label input[type="radio"]:checked + span {
+  color: #007bff;
+  font-weight: bold;
+}
+
+
 .btn {
-  background: var(--medium-green);
-  color: white;
-  padding: 10px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
   width: 100%;
-  transition: background 0.3s;
+  padding: 10px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
 }
 
 .btn:hover {
-  background: var(--dark-green);
+  background-color: #0056b3;
 }
 
 .forgot-password {
+  margin-top: 10px;
   background: none;
   border: none;
-  color: var(--dark-green);
+  color: #007bff;
   cursor: pointer;
+}
+
+.no-account {
+  cursor: pointer;
+  text-align: center;
+
+}
+
+.sign-up-section {
   text-align: center;
   margin-top: 10px;
 }
 
 .error-message, .success-message {
-  color: red;
   text-align: center;
-  margin-top: 10px;
-}
-
-.role-buttons {
-  display: flex;
-  justify-content: space-between;
-}
-
-.role-btn {
-  flex: 1;
-  margin: 5px;
+  color: red;
 }
 
 .otp-popup, .new-password-popup {
@@ -115,22 +154,75 @@ body {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background: white;
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  background-color: white;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
   z-index: 10;
+  animation: fadeIn 0.5s;
+  width: 90%;
+  max-width: 400px;
+}
+
+h3 {
+  text-align: center;
+  color: #333;
+  margin-bottom: 20px;
 }
 
 .otp-popup input, .new-password-popup input {
-  width: calc(100% - 20px);
-  padding: 10px;
-  border: 2px solid var(--medium-green);
-  border-radius: 5px;
-  margin-bottom: 10px;
+  width: 100%;
+  margin-bottom: 15px;
+  padding: 12px;
+  border: 2px solid #007bff;
+  border-radius: 6px;
+  transition: border 0.3s, box-shadow 0.3s;
 }
 
-.otp-popup button, .new-password-popup button {
-  width: 48%;
-  margin: 2% 1%;
+.otp-popup input:focus, .new-password-popup input:focus {
+  border-color: #0056b3;
+  box-shadow: 0 0 5px rgba(0, 86, 179, 0.5);
+  outline: none;
+}
+
+.otp-btn {
+  width: 100%;
+  padding: 12px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s;
+  font-weight: bold;
+}
+
+.otp-btn:hover {
+  background-color: #0056b3;
+}
+
+.otp-btn:active {
+  transform: scale(0.98);
+}
+
+.btn-secondary {
+  margin-top: 10px;
+  width: 100px;
+  background-color: #f44336;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s;  
+}
+
+.btn-secondary:hover {
+  background-color: #c62828;
+}
+
+.animated {
+  animation: fadeIn 0.5s ease;
+}
+
+.role-btn {
+  margin-top: 10px;
 }
