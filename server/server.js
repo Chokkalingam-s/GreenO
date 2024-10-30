@@ -17,6 +17,7 @@ const speakeasy = require('speakeasy');
 
 app.use(express.json());
 app.use(cors());
+const OTP_EXPIRATION = 5 * 60 * 1000; 
 
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
@@ -39,24 +40,22 @@ const storage = multer.diskStorage({
 });
 
 const upload = multer({ storage });
+const otps = {};
 const transporter = nodemailer.createTransport({
-  service: 'gmail',
+  service: 'gmail', 
   auth: {
-    user: process.env.EMAIL_USER,
-    pass: process.env.EMAIL_PASS,
+    user: process.env.EMAIL_USER, 
+    pass: process.env.EMAIL_PASS, 
   },
 });
-let otps = {}; 
 
 app.post('/send-otp', (req, res) => {
   const { email } = req.body;
 
-  const otp = speakeasy.totp({
-    secret: process.env.JWT_SECRET,
-    encoding: 'base32',
-  });
+  const otp = Math.floor(100000 + Math.random() * 900000).toString();
+  otps[email] = otp;
 
-  otps[email] = otp; 
+  console.log(`Stored OTP for ${email}: ${otp}`); 
 
   const mailOptions = {
     from: process.env.EMAIL_USER,
@@ -67,26 +66,34 @@ app.post('/send-otp', (req, res) => {
 
   transporter.sendMail(mailOptions, (error, info) => {
     if (error) {
+      console.error('Error sending email:', error);
       return res.status(500).send('Error sending email.');
     }
     res.status(200).send('OTP sent to email.');
   });
 });
 
-app.post('/verify-otp', (req, res) => {
-  const { email, otp } = req.body;
-  const storedOtp = otps[email];
 
-  if (!storedOtp) {
-    return res.status(400).send('No OTP found for this email.');
-  }
+app.post('/forgot-password', (req, res) => {
+  const { email } = req.body;
 
-  if (otp === storedOtp) {
-    delete otps[email]; 
-    res.status(200).send({ success: true, token: 'YOUR_JWT_TOKEN' }); 
-  } else {
-    res.status(400).send('Invalid OTP.');
-  }
+  const otp = Math.floor(100000 + Math.random() * 900000).toString();
+
+  otps[email] = otp; 
+
+  const mailOptions = {
+    from: process.env.EMAIL_USER,
+    to: email,
+    subject: 'Your Password Reset OTP Code',
+    text: `Your OTP code for resetting your password is: ${otp}`,
+  };
+
+  transporter.sendMail(mailOptions, (error, info) => {
+    if (error) {
+      return res.status(500).send('Error sending OTP email.');
+    }
+    res.status(200).send('OTP sent to email.');
+  });
 });
 
 app.post('/signup', async (req, res) => {

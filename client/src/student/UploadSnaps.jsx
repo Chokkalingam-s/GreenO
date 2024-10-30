@@ -62,7 +62,7 @@ function UploadSnaps() {
       setIsCaptchaValid(false);
     }
   };
-
+  
   useEffect(() => {
     const fetchLocation = () => {
       if (navigator.geolocation) {

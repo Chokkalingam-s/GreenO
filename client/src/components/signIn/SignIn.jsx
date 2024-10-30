@@ -14,6 +14,12 @@ const SignIn = () => {
   const [password, setPassword] = useState('');
   const [role, setRole] = useState('');  
   const [error, setError] = useState('');
+  const [success, setSuccess] = useState('');
+  const [showOtpPopup, setShowOtpPopup] = useState(false);
+  const [otp, setOtp] = useState('');
+  const [newPassword, setNewPassword] = useState('');
+  const [resetEmail, setResetEmail] = useState('');
+  const [showNewPasswordSetup, setShowNewPasswordSetup] = useState(false);
   const navigate = useNavigate();
   const { isAuthenticated, setIsAuthenticated } = useAuth();
 
@@ -24,55 +30,83 @@ const SignIn = () => {
     }
   }, [setIsAuthenticated]);
 
-  const handleSignUpClick = () => {
-    setIsSignUpMode(true);
-  };
-
-  const handleSignInClick = () => {
-    setIsSignUpMode(false);
-  };
-
-  const handleStudentSignUp = () => {
-    navigate("/student-signup");
-  };
-
-  const handleAdminSignUp = () => {
-    navigate("/admin-signup");
-  };
-
   const handleLogin = async (e) => {
     e.preventDefault();
-    console.log('Login Request Data:', { email, password, role });
     try {
-      const response = await axios.post('http://localhost:3000/login', {
-        email,
-        password,
-        role
-      });
-
-      const { token, userRole } = response.data; 
+      const response = await axios.post('http://localhost:3000/login', { email, password, role });
+      const { token, userRole } = response.data;
       if (token) {
         localStorage.setItem('token', token);
         setIsAuthenticated(true);
-        setRole(userRole || role); 
-
-        if (userRole === 'admin') {
-          navigate('/AdminHome'); 
-        } else if (userRole === 'hod') {
-          navigate('/HoDHome'); 
-        } else if (userRole === 'principal') {
-          navigate('/AdminHome'); 
-        } else if (userRole === 'student') {
-          navigate('/StudentHome'); 
-        } else {
-          console.error("Role not recognized:", userRole);
-        }
+        setRole(userRole || role);
+        navigate(userRole === 'admin' ? '/AdminHome' : userRole === 'hod' ? '/HoDHome' : '/StudentHome');
       }
     } catch (error) {
-      console.error('Error Details:', error.response); 
       setError(error.response?.data?.message || 'Login failed');
       setTimeout(() => setError(''), 3000);
     }
+  };
+
+  const handleForgotPassword = async () => {
+    if (!email) {
+      setError('Please enter your email address');
+      return;
+    }
+    try {
+      const response = await axios.post('http://localhost:3000/send-otp', { email });
+      if (response.data && response.data.includes("OTP sent to email")) {
+        setShowOtpPopup(true);
+        setResetEmail(email);
+      } else {
+        setError(response.data || 'Failed to send OTP');
+      }
+    } catch (error) {
+      setError('Error sending OTP. Please try again.');
+    }
+  };
+
+  const handleVerifyOtp = async () => {
+    if (!resetEmail || !otp) {
+      setError('Email and OTP are required');
+      return;
+    }
+  
+    try {
+      const response = await axios.post('http://localhost:3000/verify-otp', { email: resetEmail, otp });
+      if (response.data.success) {
+        setShowNewPasswordSetup(true);
+        setShowOtpPopup(false);
+      } else {
+        setError('Invalid OTP');
+      }
+    } catch (error) {
+      setError(error.response?.data?.message || 'OTP verification failed');
+    }
+  };
+
+  const handleResetPassword = async () => {
+    if (!resetEmail || !otp || !newPassword) {
+      setError('Email, OTP, and new password are required');
+      return;
+    }
+  
+    try {
+      const response = await axios.post('http://localhost:3000/reset-password', { email: resetEmail, otp, newPassword });
+      if (response.status === 200) {
+        setSuccess('Password reset successfully.');
+        setTimeout(() => setShowNewPasswordSetup(false), 3000);
+      }
+    } catch (error) {
+      setError(error.response?.data?.message || 'Password reset failed');
+    }
+  };
+
+  const handleStudentSignUp = () => {
+    alert('Student Sign Up logic goes here.');
+  };
+
+  const handleAdminSignUp = () => {
+    alert('Admin Sign Up logic goes here.');
   };
 
   return (
@@ -80,9 +114,8 @@ const SignIn = () => {
       <div className="forms-container">
         <div className="signin-signup">
           <form className="sign-in-form" onSubmit={handleLogin}>
-            <h2 className="title">Sign in</h2>
+            <h2 className="title">Sign In</h2>
             <div className="input-field">
-              <i className="fas fa-user"></i>
               <input
                 type="email"
                 placeholder="Email"
@@ -92,7 +125,6 @@ const SignIn = () => {
               />
             </div>
             <div className="input-field">
-              <i className="fas fa-lock"></i>
               <input
                 type="password"
                 placeholder="Password"
@@ -134,25 +166,20 @@ const SignIn = () => {
               </label>
             </div>
             <input type="submit" value="Login" className="btn solid" />
+            <button type="button" className="forgot-password" onClick={handleForgotPassword}>
+              Forgot Password?
+            </button>
             {error && <p className="error-message">{error}</p>}
+            {success && <p className="success-message">{success}</p>}
           </form>
 
-
           <form className="sign-up-form">
-            <h2 className="title">Sign up</h2>
+            <h2 className="title">Sign Up</h2>
             <div className="role-buttons">
-              <button
-                type="button"
-                className="btn role-btn student-btn"
-                onClick={handleStudentSignUp}
-              >
+              <button type="button" className="btn role-btn student-btn" onClick={handleStudentSignUp}>
                 Student
               </button>
-              <button
-                type="button"
-                className="btn role-btn admin-btn"
-                onClick={handleAdminSignUp}
-              >
+              <button type="button" className="btn role-btn admin-btn" onClick={handleAdminSignUp}>
                 Admin
               </button>
             </div>
@@ -160,28 +187,34 @@ const SignIn = () => {
         </div>
       </div>
 
-      <div className="panels-container">
-        <div className="panel left-panel">
-          <div className="content">
-            <h3>New here?</h3>
-            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Debitis, ex ratione. Aliquid!</p>
-            <button className="btn transparent" onClick={handleSignUpClick}>
-              Sign up
-            </button>
-          </div>
-          <img src="img/log.svg" className="image" alt="" />
+      {showOtpPopup && (
+        <div className="otp-popup">
+          <h3>Enter OTP</h3>
+          <input
+            type="text"
+            placeholder="Enter OTP"
+            value={otp}
+            onChange={(e) => setOtp(e.target.value)}
+            required
+          />
+          <button onClick={handleVerifyOtp}>Verify OTP</button>
+          <button onClick={() => setShowOtpPopup(false)}>Cancel</button>
         </div>
-        <div className="panel right-panel">
-          <div className="content">
-            <h3>One of us?</h3>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum laboriosam ad deleniti.</p>
-            <button className="btn transparent" onClick={handleSignInClick}>
-              Sign in
-            </button>
-          </div>
-          <img src="img/register.svg" className="image" alt="" />
+      )}
+
+      {showNewPasswordSetup && (
+        <div className="new-password-popup">
+          <h3>Set New Password</h3>
+          <input
+            type="password"
+            placeholder="New Password"
+            value={newPassword}
+            onChange={(e) => setNewPassword(e.target.value)}
+            required
+          />
+          <button onClick={handleResetPassword}>Reset Password</button>
         </div>
-      </div>
+      )}
     </div>
   );
 };
