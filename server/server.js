@@ -95,6 +95,25 @@ app.post('/forgot-password', (req, res) => {
     res.status(200).send('OTP sent to email.');
   });
 });
+app.post('/verify-otp', (req, res) => {
+  const { email, otp } = req.body;
+
+  const storedOtp = otps[email];
+
+  if (!storedOtp) {
+    return res.status(400).send('No OTP found for this email.');
+  }
+
+  if (otp === storedOtp) {
+    const token = jwt.sign({ email }, JWT_SECRET, { expiresIn: '1h' });
+    res.status(200).send({ success: true, token });
+  } else {
+    res.status(400).send('Invalid OTP.');
+  }
+});
+
+
+
 
 app.post('/signup', async (req, res) => {
   const {
