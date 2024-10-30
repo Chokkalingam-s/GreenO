@@ -111,7 +111,31 @@ app.post('/verify-otp', (req, res) => {
     res.status(400).send('Invalid OTP.');
   }
 });
+app.post('/reset-password', async (req, res) => {
+  const { email, otp, newPassword } = req.body;
+  console.log('Received request to reset password:', { email, otp, newPassword });
 
+  const storedOtp = otps[email];
+  console.log('Current stored OTPs:', otps);
+
+  if (!storedOtp) {
+    return res.status(400).send('No OTP found for this email.');
+  }
+  if (otp === storedOtp) {
+    try {
+      const hashedPassword = await bcrypt.hash(newPassword, 10);
+      await User.update({ password: hashedPassword }, { where: { email } });
+
+      delete otps[email];
+      res.status(200).send('Password reset successfully.');
+    } catch (error) {
+      console.error('Error updating password:', error);
+      res.status(500).send('Error resetting password.');
+    }
+  } else {
+    return res.status(400).send('Invalid OTP.');
+  }
+});
 
 
 
