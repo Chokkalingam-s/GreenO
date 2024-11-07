@@ -1,144 +1,137 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f4f7fa;
+  padding: 20px;
+}
+
 .container1 {
-    padding: 30px;
-    background-color: #f9f9f9;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    position: relative;
-    width: 100%;
-    background-color:var(--light-green);
-    min-height: 100vh;
-    overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+.card {
+  background-color: #9CDBA6;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 500px;
+}
+
+.signUpCard {
+  text-align: center;
+}
+
+h2 {
+  margin-bottom: 20px;
+  font-size: 1.5rem;
+  color: #333;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+label {
+  font-size: 1rem;
+  color: #333;
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+input, select {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 1rem;
+  background-color: #f9f9f9;
+  transition: border-color 0.3s;
+}
+
+input:focus, select:focus {
+  border-color: #0066cc;
+  outline: none;
+}
+
+input[type="text"]:disabled, input[type="email"]:disabled, select:disabled {
+  background-color: #e9ecef;
+}
+
+small.text-danger {
+  font-size: 0.8rem;
+  color: #e74c3c;
+}
+
+button {
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  background-color: #0066cc;
+  color: #fff;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+button:hover {
+  background-color: #005bb5;
+}
+
+button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.Toastify__toast {
+  font-size: 1rem;
+}
+
+@media (max-width: 768px) {
+  .card {
+    padding: 15px;
+    max-width: 90%;
   }
 
-  .signUpCard{
-    padding-top: 20px;
-    width: 550px !important;
-    margin: 10px auto;
-    background-color: var(--lightest-green);
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    transition: box-shadow 0.3s ease;
-  }
-  
-  .card:hover {
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-  }
-  
-  @media screen and (max-width: 768px) {
-    .card {
-      width: 100%;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    }
-  }
-  
   h2 {
-    color: #333;
-    font-weight: bold;
-    margin-bottom: 20px;
+    font-size: 1.3rem;
   }
-  
+
   label {
-    font-weight: bold;
-    color: #555;
+    font-size: 0.85rem;
   }
 
-  .form-group{
-    width: 90% !important;
+  input, select {
+    font-size: 0.95rem;
+    padding: 8px;
   }
-  .form-control {
-    margin-bottom: 15px;
-    font-size: 16px;
-    border: 1px solid #ced4da;
-    border-radius: 5px;
-    transition: all 0.3s ease;
+
+  button {
+    font-size: 0.95rem;
+    padding: 8px 12px;
   }
-  
-  .form-control:focus {
-    border-color: var(--light-green);
-    box-shadow: 0 0 5px var(--dark-green);
-    outline: none;
-  }
-  
-  .btn-block {
-    width: 100%;
+}
+
+
+@media (max-width: 1024px) {
+  .container1 {
     padding: 10px;
-    font-size: 18px;
-    font-weight: bold;
-    border-radius: 5px;
-    transition: background-color 0.3s ease;
   }
-  
-  .btn-primary {
-    background-color: var(--medium-green);
-    border-color: var(--dark-green);
-  }
-  
-  .btn-primary:hover {
-    background-color: var(--dark-green);
-    border-color: var(--light-green);
-  }
-  
-  .form-group {
-    margin-bottom: 20px;
-  }
-  
- 
-  @media (max-width: 768px) {
-    .container1 {
-      padding: 20px;
-    }
-    
-    .signUpCard{
-      padding-top: 20px;
-      width: 95% !important;
-      margin: 10px;
-      background-color: var(--lightest-green);
-      border-radius: 10px;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-      transition: box-shadow 0.3s ease;
-    }
+}
 
-    .form-control {
-      margin-bottom: 15px;
-      font-size: 16px;
-      border: 1px solid #ced4da;
-      border-radius: 5px;
-      transition: all 0.3s ease;
-      margin-left:-10% ;
-      width: 120% !important;
-    }
-    h2 {
-      font-size: 24px;
-    }
-  
-    .form-control {
-      font-size: 14px;
-    }
-  
-    .btn-block {
-      font-size: 16px;
-    }
+
+@media (min-width: 1200px) {
+  .container1 {
+    max-width: 90%;
   }
-  
-  .signUpCard {
-    width: 100%;
-    max-width: 500px;
-    padding: 20px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    border-radius: 8px;
-  }
-  
-  .otp-input {
-    text-align: center;
-    font-size: 20px;
-    letter-spacing: 2px;
-    border: 2px solid #007bff;
-    border-radius: 5px;
-    transition: border-color 0.3s;
-  }
-  
-  .otp-input:focus {
-    border-color: #0056b3;
-    outline: none;
-  }
-  
+}
+

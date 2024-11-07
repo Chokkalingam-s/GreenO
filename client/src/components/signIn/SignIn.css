@@ -5,14 +5,9 @@
   --dark-green: #468585;
 }
 
-body {
-  margin: 0;
-  overflow: hidden;
-  font-family: Arial, sans-serif;
-  background-color: var(--background-color);
-}
 
 .auth-container {
+  overflow: hidden;
   display: flex;
   justify-content: center;
   align-items: center;
