@@ -100,9 +100,9 @@ const SignIn = () => {
   };
 
   return (
-    <div className="auth-container">
+    <div className="auth-container scrollable-container">
       <div className="image-container">
-        <img src="Images/treegrow.png" alt="Tree Grow" />
+        <img src="Images/treegrow.png" alt="Tree Grow" className="responsive-image" />
       </div>
       <form className="sign-in-form" onSubmit={handleLogin}>
         <h2 className="title">🚀 Sign In</h2>
@@ -163,17 +163,17 @@ const SignIn = () => {
         <p className="error-message">{error}</p>
         <p className="success-message">{success}</p>
         <p className="no-account" onClick={() => setShowSignUp(!showSignUp)}>
-          🤔 Don't have an account? 
+          🤔 Don't have an account?
         </p>
         {showSignUp && (
-          <button className="btn role-btn student-btn animated fadeIn" onClick={() => navigate('/student-signup')}>
+          <button className="btn role-btn student-btn" onClick={() => navigate('/student-signup')}>
             🌱 Student Sign Up
           </button>
         )}
       </form>
 
       {showOtpPopup && (
-        <div className="otp-popup animated fadeIn">
+        <div className="otp-popup">
           <h3>🔒 Enter OTP</h3>
           <input
             type="text"
@@ -188,7 +188,7 @@ const SignIn = () => {
       )}
 
       {showNewPasswordSetup && (
-        <div className="new-password-popup animated fadeIn">
+        <div className="new-password-popup">
           <h3>🔑 Set New Password</h3>
           <input
             type="password"
