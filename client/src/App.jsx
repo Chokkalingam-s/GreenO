@@ -1,48 +1,53 @@
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import { useState, useEffect } from 'react';
-import SignIn from './components/signIn/SignIn';
-import StudentSignUp from './components/signUp/StudentSignUp';
-import AdminSignUp from './components/signUp/AdminSignUp';
-import StudentHome from './student/StudentHome';
-import AdminHome from './admin/AdminHome';
-import MyActivities from './student/MyActivities';
-import UploadSnaps from './student/UploadSnaps';
-import Resource from './student/Resource';
-import Profile from './student/Profile';
-import ProtectedRoute from './components/ProtectedRoute';
-import './App.css';
-import OverallProgress from './admin/OverallProgress';
-import DepartmentHome from './department/DepartmentHome';
-import DepartmentProgress from './department/DepartmentProgress';
-import Report from './department/Report'; 
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
+import { useState, useEffect } from 'react'
+import SignIn from './components/signIn/SignIn'
+import StudentSignUp from './components/signUp/StudentSignUp'
+import AdminSignUp from './components/signUp/AdminSignUp'
+import StudentHome from './student/StudentHome'
+import AdminHome from './admin/AdminHome'
+import MyActivities from './student/MyActivities'
+import UploadSnaps from './student/UploadSnaps'
+import Resource from './student/Resource'
+import Profile from './student/Profile'
+import ProtectedRoute from './components/ProtectedRoute'
+import OverallProgress from './admin/OverallProgress'
+import DepartmentHome from './department/DepartmentHome'
+import DepartmentProgress from './department/DepartmentProgress'
+import Report from './department/Report'
 
-function App() {
+export default function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(
-    localStorage.getItem("authToken") !== null
-  );
+    localStorage.getItem('authToken') !== null
+  )
 
   useEffect(() => {
     const handleStorageChange = () => {
-      setIsAuthenticated(localStorage.getItem("authToken") !== null);
-    };
+      setIsAuthenticated(localStorage.getItem('authToken') !== null)
+    }
 
-    window.addEventListener("storage", handleStorageChange);
-    
+    window.addEventListener('storage', handleStorageChange)
+
     return () => {
-      window.removeEventListener("storage", handleStorageChange);
-    };
-  }, []);
+      window.removeEventListener('storage', handleStorageChange)
+    }
+  }, [])
 
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<SignIn setIsAuthenticated={setIsAuthenticated} />} />
-        <Route path="/signin" element={<SignIn setIsAuthenticated={setIsAuthenticated} />} />
-        <Route path="/student-signup" element={<StudentSignUp />} />
-        <Route path="/admin-signup" element={<AdminSignUp />} />
-         
         <Route
-          path="/StudentHome"
+          path='/'
+          element={<SignIn setIsAuthenticated={setIsAuthenticated} />}
+        />
+        <Route
+          path='/signin'
+          element={<SignIn setIsAuthenticated={setIsAuthenticated} />}
+        />
+        <Route path='/student-signup' element={<StudentSignUp />} />
+        <Route path='/admin-signup' element={<AdminSignUp />} />
+
+        <Route
+          path='/StudentHome'
           element={
             <ProtectedRoute isAuthenticated={isAuthenticated}>
               <StudentHome />
@@ -50,7 +55,7 @@ function App() {
           }
         />
         <Route
-          path="/AdminHome"
+          path='/AdminHome'
           element={
             <ProtectedRoute isAuthenticated={isAuthenticated}>
               <AdminHome />
@@ -58,7 +63,7 @@ function App() {
           }
         />
         <Route
-          path="/Student/my-activities"
+          path='/Student/my-activities'
           element={
             <ProtectedRoute isAuthenticated={isAuthenticated}>
               <MyActivities />
@@ -66,7 +71,7 @@ function App() {
           }
         />
         <Route
-          path="/Student/upload-snaps"
+          path='/Student/upload-snaps'
           element={
             <ProtectedRoute isAuthenticated={isAuthenticated}>
               <UploadSnaps />
@@ -74,7 +79,7 @@ function App() {
           }
         />
         <Route
-          path="/Student/Resources"
+          path='/Student/Resources'
           element={
             <ProtectedRoute isAuthenticated={isAuthenticated}>
               <Resource />
@@ -82,7 +87,7 @@ function App() {
           }
         />
         <Route
-          path="/Student/Profile"
+          path='/Student/Profile'
           element={
             <ProtectedRoute isAuthenticated={isAuthenticated}>
               <Profile />
@@ -90,7 +95,7 @@ function App() {
           }
         />
         <Route
-          path="/admin-overallprogress"
+          path='/admin-overallprogress'
           element={
             <ProtectedRoute isAuthenticated={isAuthenticated}>
               <OverallProgress />
@@ -98,7 +103,7 @@ function App() {
           }
         />
         <Route
-          path="/HodHome"
+          path='/HodHome'
           element={
             <ProtectedRoute isAuthenticated={isAuthenticated}>
               <DepartmentHome />
@@ -106,7 +111,7 @@ function App() {
           }
         />
         <Route
-          path="/Hod/department-progress"
+          path='/Hod/department-progress'
           element={
             <ProtectedRoute isAuthenticated={isAuthenticated}>
               <DepartmentProgress />
@@ -114,7 +119,7 @@ function App() {
           }
         />
         <Route
-          path="/Hod/report"
+          path='/Hod/report'
           element={
             <ProtectedRoute isAuthenticated={isAuthenticated}>
               <Report />
@@ -123,7 +128,5 @@ function App() {
         />
       </Routes>
     </Router>
-  );
+  )
 }
-
-export default App;

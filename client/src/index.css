@@ -1,0 +1,42 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.container {
+  @apply mx-auto min-h-screen;
+}
+
+body {
+  @apply text-black bg-primary;
+  /* background: linear-gradient(45deg, #dff7e6, #b7d3c6); */
+}
+
+.center {
+  @apply flex items-center justify-center;
+}
+
+input {
+  @apply bg-primary shadow-lg hover:shadow-sm pl-6;
+}
+
+.glassy {
+  @apply backdrop-blur-lg bg-secondary/80;
+}
+
+.input-field input:focus {
+  @apply border-2 border-tertiary;
+}
+
+input,
+button {
+  @apply shadow-lg rounded-lg px-4 py-2 my-2 text-base hover:shadow-sm;
+}
+button {
+  @apply bg-tertiary hover:bg-primary text-black font-bold;
+  p {
+    @apply text-primary text-base;
+  }
+}
+.line {
+  @apply w-full h-1 bg-primary rounded-full;
+}

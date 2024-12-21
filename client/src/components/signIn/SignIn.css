@@ -1,26 +1,3 @@
-:root {
-  --lightest-green: #DEF9C4;
-  --light-green: #9CDBA6;
-  --medium-green: #50B498;
-  --dark-green: #468585;
-}
-
-
-.auth-container {
-  overflow: hidden;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  padding: 20px;
-  background-color: var(--background-color);
-}
-
-.image-container img {
-  max-width: 80%;
-  height: auto;
-}
-
 .image-container img {
   max-width: 80%;
   height: auto;
@@ -28,7 +5,6 @@
 
 .sign-in-form {
   max-width: 400px;
-  background: white;
   padding: 30px;
   border-radius: 10px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
@@ -283,4 +259,3 @@ h3 {
 .otp-popup h3, .new-password-popup h3 {
   text-align: center;
 }
-
