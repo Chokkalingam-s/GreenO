@@ -1,9 +1,8 @@
 import { useState } from 'react'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
-import './SignUp.css'
 
-const AdminSignUp = () => {
+export default function AdminSignUp() {
   const navigate = useNavigate()
   const [formData, setFormData] = useState({
     role: 'admin',
@@ -49,134 +48,98 @@ const AdminSignUp = () => {
   }
 
   return (
-    <div className='container1'>
-      <div className='card signUpCard'>
-        <h2 className='text-center'>Admin Sign Up</h2>
-        <form onSubmit={handleSubmit} className='mt-4'>
-          <div className='form-group'>
-            <label htmlFor='name'>Faculty Name</label>
-            <input
-              type='text'
-              className='form-control'
-              id='name'
-              name='name'
-              value={formData.name}
-              onChange={handleChange}
-              required
-            />
-          </div>
-
-          <div className='form-group'>
-            <label htmlFor='email'>Email</label>
-            <input
-              type='email'
-              className='form-control'
-              id='email'
-              name='email'
-              value={formData.email}
-              onChange={handleChange}
-              required
-            />
-          </div>
-
-          <div className='form-group'>
-            <label htmlFor='password'>Password</label>
-            <input
-              type='password'
-              className='form-control'
-              id='password'
-              name='password'
-              value={formData.password}
-              onChange={handleChange}
-              required
-            />
-          </div>
-
-          <div className='form-group'>
-            <label htmlFor='mobileNumber'>Mobile Number</label>
-            <input
-              type='text'
-              className='form-control'
-              id='mobileNumber'
-              name='mobileNumber'
-              value={formData.mobileNumber}
-              onChange={handleChange}
-              required
-            />
-          </div>
-
-          <div className='form-group'>
-            <label htmlFor='state'>State</label>
-            <input
-              type='text'
-              className='form-control'
-              id='state'
-              name='state'
-              value={formData.state}
-              onChange={handleChange}
-              required
-            />
-          </div>
-
-          <div className='form-group'>
-            <label htmlFor='district'>District</label>
-            <input
-              type='text'
-              className='form-control'
-              id='district'
-              name='district'
-              value={formData.district}
-              onChange={handleChange}
-              required
-            />
-          </div>
-
-          <div className='form-group'>
-            <label htmlFor='collegeName'>College Name</label>
-            <input
-              type='text'
-              className='form-control'
-              id='collegeName'
-              name='collegeName'
-              value={formData.collegeName}
-              onChange={handleChange}
-              required
-            />
-          </div>
-
-          <div className='form-group'>
-            <label htmlFor='principalName'>Principal Name</label>
-            <input
-              type='text'
-              className='form-control'
-              id='principalName'
-              name='principalName'
-              value={formData.principalName}
-              onChange={handleChange}
-              required
-            />
-          </div>
-
-          <div className='form-group'>
-            <label htmlFor='pocNumber'>POC Number</label>
-            <input
-              type='text'
-              className='form-control'
-              id='pocNumber'
-              name='pocNumber'
-              value={formData.pocNumber}
-              onChange={handleChange}
-              required
-            />
-          </div>
-
-          <button type='submit' className='btn btn-primary btn-block mt-4'>
-            Sign Up
-          </button>
+    <div className='container center'>
+      <div className='main'>
+        <img src='/treegrow.png' alt='Tree Grow' className='w-1/2' />
+        <form onSubmit={handleSubmit} className='w-1/2 pl-4' required>
+          <h2 className='head'>Admin Sign Up</h2>
+          <input
+            type='text'
+            className='form-control'
+            name='name'
+            value={formData.name}
+            onChange={handleChange}
+            placeholder='Faculty Name'
+          />
+          <input
+            type='email'
+            className='form-control'
+            name='email'
+            value={formData.email}
+            onChange={handleChange}
+            placeholder='Email'
+          />
+          <input
+            type='password'
+            className='form-control'
+            name='password'
+            value={formData.password}
+            onChange={handleChange}
+            placeholder='Password'
+          />
+          <input
+            type='text'
+            className='form-control'
+            name='mobileNumber'
+            value={formData.mobileNumber}
+            onChange={handleChange}
+            placeholder='Mobile Number'
+          />
+          <input
+            type='text'
+            className='form-control'
+            name='state'
+            value={formData.state}
+            onChange={handleChange}
+            placeholder='State'
+          />
+          <input
+            type='text'
+            className='form-control'
+            name='district'
+            value={formData.district}
+            onChange={handleChange}
+            placeholder='District'
+          />
+          <input
+            type='text'
+            className='form-control'
+            name='collegeName'
+            value={formData.collegeName}
+            onChange={handleChange}
+            placeholder='College Name'
+          />
+          <input
+            type='text'
+            className='form-control'
+            name='principalName'
+            value={formData.principalName}
+            onChange={handleChange}
+            placeholder='Principal Name'
+          />
+          <input
+            type='text'
+            className='form-control'
+            name='pocNumber'
+            value={formData.pocNumber}
+            onChange={handleChange}
+            placeholder='POC Number'
+          />
+          <span className='flex items-center justify-end gap-x-4'>
+            <button type='submit' className='center'>
+              <p>Finish</p>
+              {/* <img
+                      src='/arrow-right-to-bracket-solid.svg'
+                      alt='sign in icon'
+                      className='w-6'
+                    /> */}
+            </button>
+            <button className='cancel' onClick={() => navigate('/')}>
+              Cancel
+            </button>
+          </span>
         </form>
       </div>
     </div>
   )
 }
-
-export default AdminSignUp

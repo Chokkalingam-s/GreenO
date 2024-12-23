@@ -133,7 +133,6 @@ export default function StudentSignUp() {
             <h2 className='head'>Student Sign Up</h2>
             <input
               type='text'
-              className='form-control'
               id='name'
               name='name'
               value={formData.name}
@@ -143,7 +142,6 @@ export default function StudentSignUp() {
             />
             <input
               type='email'
-              className='form-control'
               id='email'
               name='email'
               value={formData.email}
@@ -156,7 +154,6 @@ export default function StudentSignUp() {
             )}
             <input
               type='password'
-              className='form-control'
               id='password'
               name='password'
               value={formData.password}
@@ -226,7 +223,6 @@ export default function StudentSignUp() {
               <>
                 <input
                   type='number'
-                  className='form-control'
                   id='mobileNumber'
                   name='mobileNumber'
                   value={formData.mobileNumber}
@@ -268,7 +264,6 @@ export default function StudentSignUp() {
                 </span>
                 <input
                   type='text'
-                  className='form-control'
                   id='collegeRegisterNumber'
                   name='collegeRegisterNumber'
                   value={formData.collegeRegisterNumber}
@@ -285,7 +280,6 @@ export default function StudentSignUp() {
 
                 <input
                   type='text'
-                  className='form-control'
                   id='aadharNumber'
                   name='aadharNumber'
                   value={formData.aadharNumber}
