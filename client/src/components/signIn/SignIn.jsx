@@ -114,10 +114,10 @@ export default function SignIn() {
   }
   return (
     <div className='container center'>
-      <div className='w-7/12 glassy center px-4 rounded-2xl shadow-lg py-10'>
+      <div className='main'>
         <img src='/treegrow.png' alt='Tree Grow' className='w-1/2' />
         <form className='w-1/2 pl-4' onSubmit={handleLogin}>
-          <h2 className='text-3xl font-bold text-center mb-4'>LOGIN</h2>
+          <h2 className='head'>LOGIN</h2>
           <div className='input-field'>
             <input
               type='email'
@@ -136,13 +136,15 @@ export default function SignIn() {
               required
             />
           </div>
-          <p
-            className='cursor-pointer text-tertiary font-bold tracking-wide text-sm text-end'
-            onClick={handleForgotPassword}>
-            Forgot Password?
-          </p>
+          <span className='flex items-center justify-end'>
+            <p
+              className='cursor-pointer text-tertiary w-fit font-bold tracking-wide text-sm '
+              onClick={handleForgotPassword}>
+              Forgot Password?
+            </p>
+          </span>
 
-          <div className='grid grid-cols-3 overflow-hidden mt-2 bg-primary rounded-lg shadow-lg p-1'>
+          <div className='grid grid-cols-3 overflow-hidden mt-2 bg-primary rounded-lg shadow-lg p-1 type'>
             {roles.map(roleObj => (
               <RoleButton
                 key={roleObj.role}
@@ -155,7 +157,7 @@ export default function SignIn() {
           </div>
 
           <span className='flex items-center justify-end'>
-            <button type='submit'>
+            <button type='submit' className='px-10'>
               <img
                 src='/arrow-right-to-bracket-solid.svg'
                 alt='sign in icon'
@@ -164,14 +166,19 @@ export default function SignIn() {
             </button>
           </span>
 
-          <p className='text-red-500 text-sm center'>{error}</p>
-          <p className='success-message'>{success}</p>
+          <p className='text-red-500 text-sm'>{error}</p>
+          <p className='text-tertiary text-sm'>{success}</p>
 
-          <div className='flex items-center justify-center gap-x-2 w-8/12 mx-auto'>
+          <div className='flex items-center justify-center gap-x-2 w-11/12 mx-auto'>
             <div className='line'></div>
-            <p className='text-sm font-bold opacity-80'>OR</p>
+            <p
+              className='text-sm font-bold text-primary'
+              style={{ textShadow: '0px 2px 2px rgba(0,0,0,0.4)' }}>
+              OR
+            </p>
             <div className='line'></div>
           </div>
+
           <span className='center'>
             <button
               type='button'
@@ -189,7 +196,7 @@ export default function SignIn() {
 
         {showOtpPopup && (
           <div className='otp-popup'>
-            <h3>🔒 Enter OTP</h3>
+            <h3>Enter OTP</h3>
             <input
               type='text'
               placeholder='Enter OTP'

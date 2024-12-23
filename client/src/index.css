@@ -8,19 +8,14 @@
 
 body {
   @apply text-black bg-primary;
-  /* background: linear-gradient(45deg, #dff7e6, #b7d3c6); */
 }
 
 .center {
   @apply flex items-center justify-center;
 }
 
-input {
-  @apply bg-primary shadow-lg hover:shadow-sm pl-6;
-}
-
 .glassy {
-  @apply backdrop-blur-lg bg-secondary/80;
+  @apply backdrop-blur-lg bg-secondary/60;
 }
 
 .input-field input:focus {
@@ -28,15 +23,57 @@ input {
 }
 
 input,
-button {
-  @apply shadow-lg rounded-lg px-4 py-2 my-2 text-base hover:shadow-sm;
+select,select:disabled {
+  @apply shadow-lg rounded-lg px-4 py-2 my-2 text-base hover:shadow-sm bg-primary;
 }
-button {
-  @apply bg-tertiary hover:bg-primary text-black font-bold;
+select:disabled {
+  opacity: .6;
+}
+/* button:not(.Toastify__close-button,.button-30) {
+  @apply bg-tertiary hover:bg-primary text-white hover:text-black font-bold w-2/6;
   p {
     @apply text-primary text-base;
   }
-}
+} */
 .line {
-  @apply w-full h-1 bg-primary rounded-full;
+  @apply w-full h-1 bg-primary rounded-full shadow-2xl;
+}
+
+.head {
+  @apply text-3xl font-bold text-center mb-4;
+}
+
+.main {
+  @apply w-11/12 md:w-7/12 glassy center px-4 rounded-2xl shadow-lg py-10;
+}
+
+.type button {
+  @apply text-black;
+}
+
+button:not(.type button,.Toastify__close-button) {
+  @apply -translate-y-1;
+  &:hover,&:active{
+    @apply translate-y-0;
+  }
+}
+
+button {
+  @apply rounded-lg text-base center px-4 bg-secondary py-2 my-2 font-bold transition-shadow shadow-xl;
+  touch-action: manipulation;
+  white-space: nowrap;
+  will-change: box-shadow,transform;
+  &:focus {
+    box-shadow: #aad8b0 0 0 0 1.5px inset, rgba(45, 35, 66, 0.2) 0 2px 4px, rgba(45, 35, 66, 0.3) 0 7px 13px -3px, #aad8b0 0 -3px 0 inset;
+  }
+  &:hover {
+    box-shadow: rgba(45, 35, 66, 0.1) 0 4px 8px;
+  }
+  &:active {
+    box-shadow: #aad8b0 0 3px 7px inset;
+  }
+}
+
+.cancel {
+  @apply bg-red-500 text-white;
 }

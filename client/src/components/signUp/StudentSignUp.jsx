@@ -1,30 +1,14 @@
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import axios from 'axios'
-import './SignUp.css'
 import { useNavigate } from 'react-router-dom'
 import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
-
-const departments = [
-  'Artificial Intelligence and Data Science',
-  'Civil Engineering',
-  'Computer Science and Business Systems',
-  'Computer Science and Design',
-  'Computer Science and Engineering',
-  'Electrical and Electronics Engineering',
-  'Electronics and Communication Engineering',
-  'Electronics and Communication (Advanced Communication Technology)',
-  'Electronics Engineering (VLSI Design and Technology)',
-  'Electronics and Instrumentation Engineering',
-  'Information Technology',
-  'Mechanical Engineering',
-  'Science and Humanities',
-]
+import { departments, states } from './data'
 
 const currentYear = new Date().getFullYear()
 const years = Array.from({ length: 4 }, (_, i) => currentYear + i)
 
-const StudentSignUp = () => {
+export default function StudentSignUp() {
   const [formData, setFormData] = useState({
     role: 'student',
     name: '',
@@ -41,12 +25,25 @@ const StudentSignUp = () => {
     principalName: '',
     pocNumber: '',
   })
-
   const [errors, setErrors] = useState({})
   const [otp, setOtp] = useState('')
   const [otpSent, setOtpSent] = useState(false)
   const [loading, setLoading] = useState(false)
+  const statesRef = useRef([])
+  const districtsRef = useRef([])
   const navigate = useNavigate()
+
+  useEffect(() => {
+    states.forEach(({ state, districts }) => {
+      statesRef.current.push(state)
+      districtsRef.current.push(districts)
+    })
+    setFormData(prevData => ({
+      ...prevData,
+      state: statesRef.current[0],
+      district: districtsRef.current[0][0],
+    }))
+  }, [])
 
   const handleChange = e => {
     const { name, value } = e.target
@@ -59,22 +56,18 @@ const StudentSignUp = () => {
   const validateForm = () => {
     const newErrors = {}
 
-    if (formData.mobileNumber.length !== 10) {
+    if (formData.mobileNumber.length !== 10)
       newErrors.mobileNumber = 'Mobile number must be 10 digits.'
-    }
 
-    if (formData.aadharNumber.length !== 12) {
+    if (formData.aadharNumber.length !== 12)
       newErrors.aadharNumber = 'Aadhar number must be 12 digits.'
-    }
 
-    if (!formData.email.endsWith('@rmkec.ac.in')) {
+    if (!formData.email.endsWith('@rmkec.ac.in'))
       newErrors.email = 'Email must end with "@rmkec.ac.in".'
-    }
 
-    if (formData.collegeRegisterNumber.length !== 12) {
+    if (formData.collegeRegisterNumber.length !== 12)
       newErrors.collegeRegisterNumber =
         'College register number must be exactly 12 digits.'
-    }
 
     setErrors(newErrors)
     return Object.keys(newErrors).length === 0
@@ -83,9 +76,7 @@ const StudentSignUp = () => {
   const handleSubmit = async e => {
     e.preventDefault()
 
-    if (!validateForm()) {
-      return
-    }
+    if (!validateForm()) return
 
     try {
       setLoading(true)
@@ -133,218 +124,214 @@ const StudentSignUp = () => {
   }
 
   return (
-    <div className='container1'>
+    <div className='container center'>
       <ToastContainer />
-      <div className='card signUpCard'>
-        <h2 className='text-center'>Student SignUp</h2>
+      <div className='main'>
+        <img src='/treegrow.png' alt='Tree Grow' className='w-1/2' />
         {!otpSent ? (
-          <form onSubmit={handleSubmit} className='mt-4'>
-            <div className='form-group mb-3'>
-              <label htmlFor='name'>Name</label>
-              <input
-                type='text'
-                className='form-control'
-                id='name'
-                name='name'
-                value={formData.name}
-                onChange={handleChange}
-                required
-              />
-            </div>
+          <form onSubmit={handleSubmit} className='w-1/2 pl-4'>
+            <h2 className='head'>Student Sign Up</h2>
+            <input
+              type='text'
+              className='form-control'
+              id='name'
+              name='name'
+              value={formData.name}
+              onChange={handleChange}
+              placeholder='Name'
+              required
+            />
+            <input
+              type='email'
+              className='form-control'
+              id='email'
+              name='email'
+              value={formData.email}
+              onChange={handleChange}
+              placeholder='Email'
+              required
+            />
+            {errors.email && (
+              <small className='text-danger'>{errors.email}</small>
+            )}
+            <input
+              type='password'
+              className='form-control'
+              id='password'
+              name='password'
+              value={formData.password}
+              onChange={handleChange}
+              placeholder='Password'
+              required
+            />
 
-            <div className='form-group mb-3'>
-              <label htmlFor='email'>Email</label>
-              <input
-                type='email'
-                className='form-control'
-                id='email'
-                name='email'
-                value={formData.email}
-                onChange={handleChange}
-                required
-              />
-              {errors.email && (
-                <small className='text-danger'>{errors.email}</small>
-              )}
-            </div>
-
-            <div className='form-group mb-3'>
-              <label htmlFor='password'>Password</label>
-              <input
-                type='password'
-                className='form-control'
-                id='password'
-                name='password'
-                value={formData.password}
-                onChange={handleChange}
-                required
-              />
-            </div>
-
-            <div className='form-group mb-3'>
-              <div className='row'>
-                <div className='col-6'>
-                  <label htmlFor='state'>State</label>
-                  <input
-                    type='text'
-                    className='form-control'
-                    id='state'
-                    name='state'
-                    value={formData.state}
-                    onChange={handleChange}
-                    required
-                  />
-                </div>
-                <div className='col-6'>
-                  <label htmlFor='district'>District</label>
-                  <input
-                    type='text'
-                    className='form-control'
-                    id='district'
-                    name='district'
-                    value={formData.district}
-                    onChange={handleChange}
-                    required
-                  />
-                </div>
-              </div>
-            </div>
-
-            <div className='form-group mb-3'>
-              <label htmlFor='collegeName'>College Name</label>
+            <span className='center gap-x-2'>
               <select
-                id='collegeName'
-                name='collegeName'
-                className='form-control'
-                value={formData.collegeName}
-                onChange={handleChange}
-                required
-                disabled>
-                <option value='R.M.K. Engineering College'>
-                  R.M.K. Engineering College
-                </option>
-              </select>
-            </div>
+                type='text'
+                id='state'
+                name='state'
+                value={formData.state}
+                onChange={e => {
+                  const selectedState = e.target.value
+                  const stateIndex = statesRef.current.indexOf(selectedState)
 
+                  setFormData({
+                    ...formData,
+                    state: selectedState,
+                    district: districtsRef.current[stateIndex][0],
+                  })
+                }}
+                required>
+                {statesRef.current.map((state, index) => (
+                  <option value={state} key={index}>
+                    {state}
+                  </option>
+                ))}
+              </select>
+
+              <select
+                type='text'
+                id='district'
+                name='district'
+                value={formData.district}
+                onChange={e => {
+                  setFormData({
+                    ...formData,
+                    district: e.target.value,
+                  })
+                }}
+                required>
+                {districtsRef.current[
+                  statesRef.current.indexOf(formData.state)
+                ]?.map((district, index) => (
+                  <option value={district} key={index}>
+                    {district}
+                  </option>
+                ))}
+              </select>
+            </span>
+
+            <select
+              id='collegeName'
+              name='collegeName'
+              value={formData.collegeName}
+              onChange={handleChange}
+              required
+              disabled>
+              <option value='R.M.K. Engineering College'>
+                R.M.K. Engineering College
+              </option>
+            </select>
             {formData.role === 'student' && (
               <>
-                <div className='form-group mb-3'>
-                  <label htmlFor='mobileNumber'>Mobile Number</label>
-                  <input
-                    type='text'
-                    className='form-control'
-                    id='mobileNumber'
-                    name='mobileNumber'
-                    value={formData.mobileNumber}
-                    onChange={handleChange}
-                    maxLength='10'
-                    required
-                  />
-                  {errors.mobileNumber && (
-                    <small className='text-danger'>{errors.mobileNumber}</small>
-                  )}
-                </div>
-
-                <div className='form-group mb-3'>
-                  <label htmlFor='department'>Department</label>
+                <input
+                  type='number'
+                  className='form-control'
+                  id='mobileNumber'
+                  name='mobileNumber'
+                  value={formData.mobileNumber}
+                  onChange={handleChange}
+                  maxLength='10'
+                  placeholder='Mobile Number'
+                  required
+                />
+                {errors.mobileNumber && (
+                  <small className='text-danger'>{errors.mobileNumber}</small>
+                )}
+                <span className='center gap-x-2'>
                   <select
                     id='department'
                     name='department'
-                    className='form-control'
                     value={formData.department}
                     onChange={handleChange}
                     required>
-                    <option value=''>Select Department</option>
+                    <option value=''>Department ?</option>
                     {departments.map(dept => (
                       <option key={dept} value={dept}>
                         {dept}
                       </option>
                     ))}
                   </select>
-                </div>
-
-                <div className='form-group mb-3'>
-                  <label htmlFor='collegeRegisterNumber'>
-                    College Register Number
-                  </label>
-                  <input
-                    type='text'
-                    className='form-control'
-                    id='collegeRegisterNumber'
-                    name='collegeRegisterNumber'
-                    value={formData.collegeRegisterNumber}
-                    onChange={handleChange}
-                    maxLength='12'
-                    required
-                  />
-                  {errors.collegeRegisterNumber && (
-                    <small className='text-danger'>
-                      {errors.collegeRegisterNumber}
-                    </small>
-                  )}
-                </div>
-
-                <div className='form-group mb-3'>
-                  <label htmlFor='yearOfGraduation'>Year of Graduation</label>
                   <select
                     id='yearOfGraduation'
                     name='yearOfGraduation'
-                    className='form-control'
                     value={formData.yearOfGraduation}
                     onChange={handleChange}
                     required>
-                    <option value=''>Select Year</option>
+                    <option value=''>Graduation Year</option>
                     {years.map(year => (
                       <option key={year} value={year}>
                         {year}
                       </option>
                     ))}
                   </select>
-                </div>
+                </span>
+                <input
+                  type='text'
+                  className='form-control'
+                  id='collegeRegisterNumber'
+                  name='collegeRegisterNumber'
+                  value={formData.collegeRegisterNumber}
+                  onChange={handleChange}
+                  maxLength='12'
+                  placeholder='College Register Number'
+                  required
+                />
+                {errors.collegeRegisterNumber && (
+                  <small className='text-danger'>
+                    {errors.collegeRegisterNumber}
+                  </small>
+                )}
 
-                <div className='form-group mb-3'>
-                  <label htmlFor='aadharNumber'>Aadhar Number</label>
-                  <input
-                    type='text'
-                    className='form-control'
-                    id='aadharNumber'
-                    name='aadharNumber'
-                    value={formData.aadharNumber}
-                    onChange={handleChange}
-                    maxLength='12'
-                    required
-                  />
-                  {errors.aadharNumber && (
-                    <small className='text-danger'>{errors.aadharNumber}</small>
-                  )}
-                </div>
+                <input
+                  type='text'
+                  className='form-control'
+                  id='aadharNumber'
+                  name='aadharNumber'
+                  value={formData.aadharNumber}
+                  onChange={handleChange}
+                  maxLength='12'
+                  placeholder='Aadhar Number'
+                  required
+                />
+                {errors.aadharNumber && (
+                  <small className='text-danger'>{errors.aadharNumber}</small>
+                )}
               </>
             )}
-
-            <button
-              type='submit'
-              className='btn btn-primary btn-block mt-4'
-              disabled={loading}>
-              {loading ? 'Loading...' : 'Sign Up'}
-            </button>
+            <span className='flex items-center justify-end gap-x-4'>
+              <button type='submit' className='center' disabled={loading}>
+                {loading ? (
+                  'Loading...'
+                ) : (
+                  <>
+                    <p>Finish</p>
+                    {/* <img
+                      src='/arrow-right-to-bracket-solid.svg'
+                      alt='sign in icon'
+                      className='w-6'
+                    /> */}
+                  </>
+                )}
+              </button>
+              <button className='cancel' onClick={() => navigate('/')}>
+                Cancel
+              </button>
+            </span>
           </form>
         ) : (
-          // OTP Verification Form
-          <form onSubmit={verifyOtp} className='mt-4'>
-            <div className='form-group mb-3'>
-              <label htmlFor='otp'>Enter OTP sent to your email</label>
-              <input
-                type='text'
-                className='form-control otp-input'
-                id='otp'
-                value={otp}
-                onChange={e => setOtp(e.target.value)}
-                maxLength='6' // Restrict input length to 6
-                required
-              />
-            </div>
-            <button type='submit' className='btn btn-primary btn-block mt-4'>
-              Verify OTP
+          <form onSubmit={verifyOtp}>
+            <label htmlFor='otp'>Enter OTP sent to your email</label>
+            <input
+              type='text'
+              id='otp'
+              value={otp}
+              onChange={e => setOtp(e.target.value)}
+              maxLength='6'
+              required
+            />
+            <button type='submit' className='float-end'>
+              Verify
             </button>
           </form>
         )}
@@ -352,5 +339,3 @@ const StudentSignUp = () => {
     </div>
   )
 }
-
-export default StudentSignUp
