@@ -2,13 +2,10 @@ import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import { useAuth } from './AuthContext'
-import { roles } from './data'
-import RoleButton from './RoleButton'
 
 export default function SignIn() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
-  const [role, setRole] = useState('')
   const [error, setError] = useState('')
   const [success, setSuccess] = useState('')
   const [showOtpPopup, setShowOtpPopup] = useState(false)
@@ -33,7 +30,6 @@ export default function SignIn() {
       const response = await axios.post('http://localhost:3000/login', {
         email,
         password,
-        role,
       })
       const { token, userRole } = response.data
       if (token) {
@@ -49,7 +45,7 @@ export default function SignIn() {
       }
     } catch (error) {
       setError(error.response?.data?.message || 'Login failed')
-      setTimeout(() => setError(''), 3000)
+      setTimeout(() => setError(''), 6000)
     }
   }
 
@@ -118,24 +114,20 @@ export default function SignIn() {
         <img src='/treegrow.png' alt='Tree Grow' className='w-1/2' />
         <form className='w-1/2 pl-4' onSubmit={handleLogin}>
           <h2 className='head'>LOGIN</h2>
-          <div className='input-field'>
-            <input
-              type='email'
-              placeholder='Email'
-              value={email}
-              onChange={e => setEmail(e.target.value)}
-              required
-            />
-          </div>
-          <div className='input-field'>
-            <input
-              type='password'
-              placeholder='Password'
-              value={password}
-              onChange={e => setPassword(e.target.value)}
-              required
-            />
-          </div>
+          <input
+            type='email'
+            placeholder='Email'
+            value={email}
+            onChange={e => setEmail(e.target.value)}
+            required
+          />
+          <input
+            type='password'
+            placeholder='Password'
+            value={password}
+            onChange={e => setPassword(e.target.value)}
+            required
+          />
           <span className='flex items-center justify-end'>
             <p
               className='cursor-pointer text-tertiary w-fit font-bold tracking-wide text-sm '
@@ -143,18 +135,6 @@ export default function SignIn() {
               Forgot Password?
             </p>
           </span>
-
-          <div className='grid grid-cols-3 overflow-hidden mt-2 bg-primary rounded-lg shadow-lg p-1 type'>
-            {roles.map(roleObj => (
-              <RoleButton
-                key={roleObj.role}
-                role={roleObj.role}
-                selectedRole={role}
-                setRole={setRole}
-                label={roleObj.label}
-              />
-            ))}
-          </div>
 
           <span className='flex items-center justify-end'>
             <button type='submit' className='px-10'>

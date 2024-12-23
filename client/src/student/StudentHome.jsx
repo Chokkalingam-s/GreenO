@@ -1,20 +1,11 @@
-import { useState } from 'react'
 import StudentHeader from '../components/sidebar/StudentHeader'
 import SHome from './SHome'
-import './Student.css'
 
-const StudentHome = () => {
-  const [openSidebarToggle, setOpenSidebarToggle] = useState(false)
-
-  const OpenSidebar = () => {
-    setOpenSidebarToggle(!openSidebarToggle)
-  }
+export default function StudentHome() {
   return (
-    <div className='grid-container'>
-      <StudentHeader OpenSidebar={OpenSidebar} />
+    <>
+      <StudentHeader />
       <SHome />
-    </div>
+    </>
   )
 }
-
-export default StudentHome

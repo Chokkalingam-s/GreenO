@@ -1,81 +1,60 @@
 export default function SHome() {
   return (
-    <main className='main-container'>
-      <div className='main-title'></div>
-      <div className='main-cards'>
-        <div className='row'>
-          <div className='col-12'>
-            <div className='card '>
-              <div className='card-inner'>
-                <h3 className='card-title'>About Us</h3>
-              </div>
-              <div className='card_student'>
-                <img src='/home.jpg' alt='product' className='card_img' />
-                <p className='card_description'>
-                  A sustainable environmental initiative that promotes
-                  afforestation by encouraging students to plant and nurture a
-                  tree during their academic journey. The project aims to
-                  instill a sense of environmental responsibility among
-                  students, fostering a connection between education and
-                  ecological conservation. By linking each student with the
-                  growth of a tree, the initiative contributes to carbon
-                  sequestration biodiversity, and overall environmental
-                  well-being. It serves as a practical and tangible way for
-                  educational institutions to engage their students in fostering
-                  a greener and healthier planet. &quot;One Student One
-                  Tree&quot; embodies the idea that small individual actions
-                  collectively create a significant positive impact on the
-                  environment.
-                </p>
-              </div>
-            </div>
-          </div>
-
-          <div className='col-12'>
-            <div className='card '>
-              <div className='card-inner'>
-                <h3 className='card-title'>How to Use This App !?</h3>
-              </div>
-              <div className='card_student'>
-                <p className='card_description'>
-                  <ul>
-                    <li>
-                      <i className='uil uil-arrow-circle-right' /> Allow the app
-                      to access your location for ensuring the accuracy and
-                      legitimacy.
-                    </li>
-                    <li>
-                      <i className='uil uil-arrow-circle-right' /> Upload images
-                      of trees you've planted during each semester.
-                    </li>
-                    <li>
-                      <i className='uil uil-arrow-circle-right' /> Any
-                      suspicious or unauthorized activities will be reported to
-                      the college for verification.
-                    </li>
-                    <li>
-                      <i className='uil uil-arrow-circle-right' /> Explore a
-                      dedicated section to view a comprehensive record of your
-                      tree planting activities.
-                    </li>
-                    <li>
-                      <i className='uil uil-arrow-circle-right' /> When done,
-                      always log out securely to protect your account. This
-                      ensures the privacy and security of your data.
-                    </li>
-                  </ul>
-                </p>
-                <img
-                  src='/homeImg2.png'
-                  alt='product'
-                  className='card_img img2'
-                />
-              </div>
-            </div>
+    <main className='container center relative top-16'>
+      <article className='md:max-w-[75ch] center flex-col gap-y-4 p-4'>
+        <h2 className='head'>About Us</h2>
+        <div className='grid md:grid-cols-[30%_70%] gap-x-4 items-center justify-center glassy rounded-xl shadow-lg p-2 text-sm'>
+          <img src='/home.jpg' alt='product' className='-translate-x-6' />
+          <p className='-translate-x-6'>
+            A sustainable initiative encouraging students to
+            <strong> plant</strong> and <strong>care</strong> for a
+            <strong> tree</strong> during their academic journey. It aims to
+            instill <strong>environmental responsibility</strong> and connect
+            education with <strong>ecological conservation</strong>. By linking
+            students with tree growth, the project contributes to
+            <strong>carbon sequestration</strong>, <strong>biodiversity</strong>
+            , and overall <strong>environmental well-being</strong>. “
+            <i>
+              <strong>One Student One Tree</strong>
+            </i>
+            ” demonstrates how small actions can collectively make a significant
+            positive
+            <strong>environmental impact</strong>.
+          </p>
+        </div>
+        <div className='glassy p-4 rounded-xl shadow-lg'>
+          <h3 className='font-bold text-2xl'>How to Use This App !?</h3>
+          <div className='grid md:grid-cols-[70%_30%] gap-x-4 items-center justify-center p-2 text-sm'>
+            <ul className='list flex flex-col gap-y-4'>
+              <li>
+                <img src='/tree-solid.svg' alt='point icon' className='icon' />
+                Allow the app to access your location for accuracy and
+                legitimacy.
+              </li>
+              <li>
+                <img src='/tree-solid.svg' alt='point icon' className='icon' />
+                Upload images of trees planted each semester.
+              </li>
+              <li>
+                <img src='/tree-solid.svg' alt='point icon' className='icon' />
+                Suspicious or unauthorized activities will be reported to the
+                college for verification.
+              </li>
+              <li>
+                <img src='/tree-solid.svg' alt='point icon' className='icon' />
+                View a comprehensive record of your tree planting activities in
+                a dedicated section.
+              </li>
+              <li>
+                <img src='/tree-solid.svg' alt='point icon' className='icon' />
+                Log out securely when done to protect your account and data
+                privacy.
+              </li>
+            </ul>
+            <img src='/homeImg2.png' alt='product' className="translate-x-10 bg-secondary"/>
           </div>
         </div>
-      </div>
-      <div className='charts'></div>
+      </article>
     </main>
   )
 }

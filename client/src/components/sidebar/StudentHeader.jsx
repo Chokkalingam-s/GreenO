@@ -1,22 +1,24 @@
-import React from 'react';
-import { BsFillBellFill, BsCameraFill, BsPersonCircle, BsSearch, BsJustify } from 'react-icons/bs';
+import { useNavigate } from 'react-router-dom'
 
-
-function StudentHeader({ OpenSidebar }) {
-  return (
-    <header className="header">
-      <div className="menu-icon">
-        <BsJustify className="icon" onClick={OpenSidebar} />
-      </div>
-      <div className="header-left">
-      </div>
-      <div className="header-right">
-        <BsFillBellFill className="icon" />
-        <BsCameraFill className="icon" />
-        <BsPersonCircle className="icon" />
-      </div>
-    </header>
-  );
+function LogoutButton() {
+  const navigate = useNavigate()
+  function handleLogout() {
+    localStorage.removeItem('token')
+    navigate('/')
+  }
+  return <button onClick={handleLogout}>Logout</button>
 }
 
-export default StudentHeader;
+export default function StudentHeader() {
+  return (
+    <header className='md:min-w-[60vw] rounded-full flex items-center justify-between px-4 glassy fixed top-2 left-1/2 -translate-x-1/2 shadow-lg z-10'>
+      <img src='/treegrow.png' alt='App Logo' className='w-10' />
+      <div className='center'>
+        <img src='/heart-regular.svg' alt='' className='icon' />
+        <img src='/file-image-regular.svg' alt='' className='icon' />
+        <img src='/user-regular.svg' alt='' className='icon' />
+        <LogoutButton />
+      </div>
+    </header>
+  )
+}

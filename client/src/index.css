@@ -8,6 +8,13 @@
 
 body {
   @apply text-black bg-primary;
+  p {
+    @apply text-base;
+  }
+}
+
+strong {
+  @apply text-tertiary;
 }
 
 .center {
@@ -22,10 +29,6 @@ body {
   @apply border-2 border-tertiary;
 }
 
-.type {
-  @apply mb-2;
-}
-
 input,
 select,
 select:disabled {
@@ -34,18 +37,12 @@ select:disabled {
 select:disabled {
   opacity: 0.6;
 }
-/* button:not(.Toastify__close-button,.button-30) {
-  @apply bg-tertiary hover:bg-primary text-white hover:text-black font-bold w-2/6;
-  p {
-    @apply text-primary text-base;
-  }
-} */
 .line {
   @apply w-full h-1 bg-primary rounded-full shadow-2xl;
 }
 
 .head {
-  @apply text-3xl font-bold text-center mb-4;
+  @apply text-3xl font-bold text-center mb-2;
 }
 
 .main {
@@ -83,4 +80,17 @@ button {
 
 .cancel {
   @apply bg-red-500 text-white;
+}
+
+.icon {
+  @apply w-6 h-6 rounded-none shadow-none aspect-square mx-2;
+}
+
+article img {
+  @apply rounded-lg shadow-lg;
+}
+.list {
+  li {
+    @apply flex items-center;
+  }
 }
