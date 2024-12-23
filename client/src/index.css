@@ -22,6 +22,10 @@ body {
   @apply border-2 border-tertiary;
 }
 
+.type {
+  @apply mb-2;
+}
+
 input,
 select,
 select:disabled {
