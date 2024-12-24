@@ -103,6 +103,12 @@ export default function App() {
               }
             />
           ))}
+
+          {/* Catch-all route */}
+          <Route
+            path='*'
+            element={<SignIn setIsAuthenticated={setIsAuthenticated} />}
+          />
         </Routes>
       </Suspense>
     </Router>

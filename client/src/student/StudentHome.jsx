@@ -1,11 +1,11 @@
-import { SHome, StudentHeader, StudentNavBar } from '../exp_components'
+import { Layout, SHome } from '../exp_components'
 
 export default function StudentHome() {
   return (
     <>
-      <StudentHeader />
-      <SHome />
-      <StudentNavBar />
+      <Layout>
+        <SHome />
+      </Layout>
     </>
   )
 }

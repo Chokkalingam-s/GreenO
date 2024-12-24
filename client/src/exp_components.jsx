@@ -16,7 +16,10 @@ const Report = lazy(() => import('./department/Report'))
 const StudentHeader = lazy(() => import('./components/sidebar/StudentHeader'))
 const StudentNavBar = lazy(() => import('./components/sidebar/studentNavBar'))
 const SHome = lazy(() => import('./student/SHome'))
+const Layout = lazy(() => import('./Layout'))
+
 export {
+  Layout,
   SignIn,
   StudentSignUp,
   AdminSignUp,

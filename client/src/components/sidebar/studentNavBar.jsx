@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom'
 
 export default function StudentNavBar() {
   return (
-    <nav className='md:hidden w-full md:min-w-[60vw] rounded-xl flex items-center justify-between px-4 glassy fixed bottom-2 left-1/2 -translate-x-1/2 shadow-lg z-10'>
+    <nav className='md:hidden w-full rounded-full md:min-w-[60vw] flex items-center justify-between px-4 glassy fixed bottom-2 left-1/2 -translate-x-1/2 shadow-lg z-10 py-2'>
       <Link to='/StudentHome'>
         <img src='/house-solid.svg' alt='Home Icon' className='icon' />
         <p>Home</p>

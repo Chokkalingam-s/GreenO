@@ -86,3 +86,11 @@ article img {
     @apply flex items-center;
   }
 }
+
+nav a {
+  @apply center flex-col;
+}
+
+.Toastify {
+  @apply absolute top-4 right-2;
+}
