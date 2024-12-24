@@ -9,7 +9,7 @@ require('dotenv').config();
 const sequelize = require('./db');
 const User = require('./models/User');
 const Admin = require('./models/Admin');
-const UploadSnap = require('./models/UploadSnap'); 
+const UploadSnap = require('./models/UploadSnap');
 const app = express();
 const { Op } = require('sequelize');
 const nodemailer = require('nodemailer');
@@ -17,7 +17,7 @@ const speakeasy = require('speakeasy');
 
 app.use(express.json());
 app.use(cors());
-const OTP_EXPIRATION = 5 * 60 * 1000; 
+const OTP_EXPIRATION = 5 * 60 * 1000;
 
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
@@ -25,7 +25,7 @@ const JWT_SECRET = process.env.JWT_SECRET || 'your_jwt_secret';
 const uploadDir = path.join(__dirname, 'uploads');
 
 if (!fs.existsSync(uploadDir)) {
-  fs.mkdirSync(uploadDir, { recursive: true }); 
+  fs.mkdirSync(uploadDir, { recursive: true });
 }
 
 const storage = multer.diskStorage({
@@ -33,7 +33,7 @@ const storage = multer.diskStorage({
     cb(null, uploadDir);
   },
   filename: (req, file, cb) => {
-    const email = req.user.email; 
+    const email = req.user.email;
     const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
     cb(null, `${email}-${uniqueSuffix}${path.extname(file.originalname)}`);
   }
@@ -42,10 +42,10 @@ const storage = multer.diskStorage({
 const upload = multer({ storage });
 const otps = {};
 const transporter = nodemailer.createTransport({
-  service: 'gmail', 
+  service: 'gmail',
   auth: {
-    user: process.env.EMAIL_USER, 
-    pass: process.env.EMAIL_PASS, 
+    user: process.env.EMAIL_USER,
+    pass: process.env.EMAIL_PASS,
   },
 });
 
@@ -55,7 +55,7 @@ app.post('/send-otp', (req, res) => {
   const otp = Math.floor(100000 + Math.random() * 900000).toString();
   otps[email] = otp;
 
-  console.log(`Stored OTP for ${email}: ${otp}`); 
+  console.log(`Stored OTP for ${email}: ${otp}`);
 
   const mailOptions = {
     from: process.env.EMAIL_USER,
@@ -79,7 +79,7 @@ app.post('/forgot-password', (req, res) => {
 
   const otp = Math.floor(100000 + Math.random() * 900000).toString();
 
-  otps[email] = otp; 
+  otps[email] = otp;
 
   const mailOptions = {
     from: process.env.EMAIL_USER,
@@ -208,7 +208,7 @@ app.post('/signup', async (req, res) => {
 
 
 app.post('/login', async (req, res) => {
-  const { email, password, role } = req.body;
+  const { email, password } = req.body;
 
   try {
     const user = await User.findOne({ where: { email } });
@@ -216,10 +216,10 @@ app.post('/login', async (req, res) => {
       return res.status(400).json({ message: 'Invalid email or password' });
     }
 
-    if (user.role !== role) {
-      console.log(`User role in DB: ${user.role}, Role provided: ${role}`);
-      return res.status(400).json({ message: 'Role does not match' });
-    }
+    // if (user.role !== role) {
+    //   console.log(`User role in DB: ${user.role}, Role provided: ${role}`);
+    //   return res.status(400).json({ message: 'Role does not match' });
+    // }
 
     const isPasswordValid = await bcrypt.compare(password, user.password);
     if (!isPasswordValid) {
@@ -247,7 +247,7 @@ const authenticateToken = (req, res, next) => {
 
 app.post('/api/upload-snap', authenticateToken, upload.single('file'), async (req, res) => {
   const { email } = req.user;
-  const { latitude, longitude } = req.body; 
+  const { latitude, longitude } = req.body;
 
   if (!req.file) {
     return res.status(400).json({ message: 'No file uploaded.' });
@@ -288,8 +288,8 @@ app.post('/api/upload-snap', authenticateToken, upload.single('file'), async (re
       filePath: relativeFilePath,
       count: user.uploadCount + 1,
       lastUpload: currentTime,
-      latitude: latitude, 
-      longitude: longitude 
+      latitude: latitude,
+      longitude: longitude
     });
 
     const firstUpload = user.uploadCount === 0;
@@ -306,8 +306,8 @@ app.post('/api/upload-snap', authenticateToken, upload.single('file'), async (re
 
 
 app.get('/api/get-uploaded-images', authenticateToken, async (req, res) => {
-  const { email } = req.user; 
-  
+  const { email } = req.user;
+
   try {
     const uploadedImages = await UploadSnap.findAll({
       where: { email: email },
@@ -321,13 +321,13 @@ app.get('/api/get-uploaded-images', authenticateToken, async (req, res) => {
 });
 
 app.get('/api/get-uploaded-images-count', authenticateToken, async (req, res) => {
-  const { email } = req.user; 
-  
+  const { email } = req.user;
+
   try {
     const latestUpload = await UploadSnap.findOne({
       where: { email: email },
-      order: [['count', 'DESC']],  
-      attributes: ['count'],     
+      order: [['count', 'DESC']],
+      attributes: ['count'],
     });
 
     const uploadedImagesCount = latestUpload ? latestUpload.count : 0;
@@ -339,8 +339,8 @@ app.get('/api/get-uploaded-images-count', authenticateToken, async (req, res) =>
 });
 
 app.get('/api/get-user-detailss', authenticateToken, async (req, res) => {
-  const { email } = req.user; 
-  
+  const { email } = req.user;
+
   try {
     const studentDetails = await User.findAll({
       where: { email: email }
@@ -353,20 +353,20 @@ app.get('/api/get-user-detailss', authenticateToken, async (req, res) => {
 });
 
 app.get('/api/uploaded-snaps', authenticateToken, async (req, res) => {
-  const { email } = req.user; 
+  const { email } = req.user;
 
   try {
-    
+
     const uploads = await UploadSnap.findOne({
       where: { email },
-      order: [['createdAt', 'DESC']], 
+      order: [['createdAt', 'DESC']],
     });
 
     if (!uploads) {
       return res.status(404).json({ message: 'No images found for the user' });
     }
 
-    res.status(200).json(uploads); 
+    res.status(200).json(uploads);
   } catch (error) {
     console.error('Error fetching uploaded snaps:', error);
     res.status(500).json({ error: error.message });
@@ -422,7 +422,7 @@ app.get('/api/overall-progress', authenticateToken, async (req, res) => {
   try {
     const user = await User.findOne({
       where: { email: email },
-      attributes: ['collegeName'], 
+      attributes: ['collegeName'],
     });
 
     if (!user) {
@@ -480,30 +480,30 @@ app.get('/api/overall-progress', authenticateToken, async (req, res) => {
   }
 });
 app.get('/api/department-student-data', authenticateToken, async (req, res) => {
-  const { email } = req.user; 
+  const { email } = req.user;
 
   try {
     const hodUser = await User.findOne({
       where: { email, role: 'hod', adminType: 'hod' },
-      attributes: ['collegeName', 'department'], 
+      attributes: ['collegeName', 'department'],
     });
 
     if (!hodUser) {
       return res.status(404).json({ message: 'HOD not found' });
     }
 
-    const { collegeName, department } = hodUser; 
+    const { collegeName, department } = hodUser;
     const adminData = await Admin.findOne({
       where: { collegeName, department },
-      attributes: ['studentCount', 'uploadCount'], 
+      attributes: ['studentCount', 'uploadCount'],
     });
 
     if (!adminData) {
       return res.status(404).json({ message: 'No data found for this college and department' });
     }
 
-    const totalStudents = adminData.studentCount; 
-    const totalSaplings = adminData.uploadCount || 0; 
+    const totalStudents = adminData.studentCount;
+    const totalSaplings = adminData.uploadCount || 0;
 
     const currentYear = new Date().getFullYear();
     const yearCounts = {
@@ -527,7 +527,7 @@ app.get('/api/department-student-data', authenticateToken, async (req, res) => {
         case 2: yearCounts['2nd Year']++; break;
         case 3: yearCounts['3rd Year']++; break;
         case 4: yearCounts['4th Year']++; break;
-        default: break; 
+        default: break;
       }
     });
 
@@ -538,7 +538,7 @@ app.get('/api/department-student-data', authenticateToken, async (req, res) => {
   }
 });
 app.get('/api/department-progress', authenticateToken, async (req, res) => {
-  const { email } = req.user; 
+  const { email } = req.user;
 
   try {
     const hodUser = await User.findOne({
@@ -553,7 +553,7 @@ app.get('/api/department-progress', authenticateToken, async (req, res) => {
       where: {
         collegeName: hodUser.collegeName,
         department: hodUser.department,
-        role: 'student', 
+        role: 'student',
       },
       attributes: [
         'name',
@@ -573,15 +573,15 @@ app.get('/api/department-progress', authenticateToken, async (req, res) => {
       const diff = graduationYear - currentYear;
       let currentYearProgress;
       if (diff === 2) {
-        currentYearProgress = 3; 
+        currentYearProgress = 3;
       } else if (diff === 1) {
         currentYearProgress = 4;
       } else if (diff === 3) {
-        currentYearProgress = 2; 
+        currentYearProgress = 2;
       } else if (diff === 4) {
-        currentYearProgress = 1; 
+        currentYearProgress = 1;
       } else {
-        currentYearProgress = null; 
+        currentYearProgress = null;
       }
 
       return {
@@ -611,7 +611,7 @@ app.get('/api/new-department-data', authenticateToken, async (req, res) => {
   }
 });
 app.get('/api/new-user-details', authenticateToken, async (req, res) => {
-  const { email } = req.user; 
+  const { email } = req.user;
 
   try {
     const userDetails = await User.findOne({
@@ -640,4 +640,3 @@ sequelize.sync().then(() => {
 }).catch((error) => {
   console.error('Unable to connect to the database:', error);
 });
-

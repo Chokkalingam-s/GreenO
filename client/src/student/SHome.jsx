@@ -1,11 +1,11 @@
 export default function SHome() {
   return (
-    <main className='container center relative top-16'>
+    <main className='container center relative top-12 md:top-0'>
       <article className='md:max-w-[75ch] center flex-col gap-y-4 p-4'>
         <h2 className='head'>About Us</h2>
         <div className='grid md:grid-cols-[30%_70%] gap-x-4 items-center justify-center glassy rounded-xl shadow-lg p-2 text-sm'>
-          <img src='/home.jpg' alt='product' className='-translate-x-6' />
-          <p className='-translate-x-6'>
+          <img src='/home.jpg' alt='product' className='md:-translate-x-6' />
+          <p className='md:-translate-x-6'>
             A sustainable initiative encouraging students to
             <strong> plant</strong> and <strong>care</strong> for a
             <strong> tree</strong> during their academic journey. It aims to
@@ -22,7 +22,7 @@ export default function SHome() {
             <strong>environmental impact</strong>.
           </p>
         </div>
-        <div className='glassy p-4 rounded-xl shadow-lg'>
+        <div className='glassy p-2 rounded-xl shadow-lg'>
           <h3 className='font-bold text-2xl'>How to Use This App !?</h3>
           <div className='grid md:grid-cols-[70%_30%] gap-x-4 items-center justify-center p-2 text-sm'>
             <ul className='list flex flex-col gap-y-4'>
@@ -51,7 +51,11 @@ export default function SHome() {
                 privacy.
               </li>
             </ul>
-            <img src='/homeImg2.png' alt='product' className="translate-x-10 bg-secondary"/>
+            <img
+              src='/homeImg2.png'
+              alt='product'
+              className='md:translate-x-10 bg-secondary mt-4 md:mt-0'
+            />
           </div>
         </div>
       </article>
