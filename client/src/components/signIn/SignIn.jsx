@@ -113,7 +113,7 @@ export default function SignIn() {
       <div className='main flex-col md:flex-row'>
         <img src='/treegrow.png' alt='Tree Grow' className='w-1/2' />
         <form className='md:w-1/2 px-4' onSubmit={handleLogin}>
-          <h2 className='head'>LOGIN</h2>
+          <h2 className='head'>Welcome Back!</h2>
           <input
             type='email'
             placeholder='Email'
@@ -137,7 +137,8 @@ export default function SignIn() {
           </span>
 
           <span className='flex items-center justify-end'>
-            <button type='submit' className='px-10'>
+            <button type='submit' className='gap-x-2'>
+              <p>Sign in</p>
               <img
                 src='/arrow-right-to-bracket-solid.svg'
                 alt='sign in icon'
@@ -163,7 +164,7 @@ export default function SignIn() {
             <button
               type='button'
               className='flex gap-x-4 group'
-              onClick={() => navigate('/student-signup')}>
+              onClick={() => navigate('/signup')}>
               <p className='group-hover:text-tertiary'>New here ?</p>
               <img
                 src='/arrow-right-to-bracket-solid.svg'

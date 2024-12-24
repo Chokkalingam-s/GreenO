@@ -126,10 +126,10 @@ export default function StudentSignUp() {
   return (
     <div className='container center'>
       <ToastContainer />
-      <div className='main'>
+      <div className='main flex-col md:flex-row'>
         <img src='/treegrow.png' alt='Tree Grow' className='w-1/2' />
         {!otpSent ? (
-          <form onSubmit={handleSubmit} className='w-1/2 pl-4'>
+          <form onSubmit={handleSubmit} className='md:w-1/2 px-4'>
             <h2 className='head'>Student Sign Up</h2>
             <input
               type='text'
@@ -308,7 +308,7 @@ export default function StudentSignUp() {
                   </>
                 )}
               </button>
-              <button className='cancel' onClick={() => navigate('/')}>
+              <button className='cancel' onClick={() => navigate('/signin')}>
                 Cancel
               </button>
             </span>

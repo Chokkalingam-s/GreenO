@@ -28,7 +28,7 @@ strong {
 input,
 select,
 select:disabled {
-  @apply w-full shadow-lg rounded-lg px-4 py-2 my-2 text-base hover:shadow-sm bg-primary;
+  @apply w-full shadow-lg rounded-lg px-4 py-2 my-2 text-base hover:shadow-sm bg-primary focus:outline-tertiary focus:outline-2 outline-offset-2;
 }
 select:disabled {
   opacity: 0.6;
@@ -42,11 +42,7 @@ select:disabled {
 }
 
 .main {
-  @apply w-11/12 md:w-7/12 glassy center md:px-4 rounded-2xl shadow-lg py-10;
-}
-
-.type button {
-  @apply text-black;
+  @apply w-11/12 md:w-7/12 glassy center md:px-4 rounded-2xl shadow-lg md:py-10;
 }
 
 button:not(.type button, .Toastify__close-button) {

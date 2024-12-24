@@ -62,15 +62,11 @@ export default function App() {
       <Suspense fallback={<div>Loading...</div>}>
         <Routes>
           <Route
-            path='/'
-            element={<SignIn setIsAuthenticated={setIsAuthenticated} />}
-          />
-          <Route
             path='/signin'
             element={<SignIn setIsAuthenticated={setIsAuthenticated} />}
           />
-          <Route path='/student-signup' element={<StudentSignUp />} />
-          <Route path='/admin-signup' element={<AdminSignUp />} />
+          <Route path='/signup' element={<StudentSignUp />} />
+          <Route path='/admin_signup' element={<AdminSignUp />} />
 
           {studentRoutes.map(route => (
             <Route
