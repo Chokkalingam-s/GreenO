@@ -127,6 +127,11 @@ export default function StudentSignUp() {
     <div className='container center'>
       <ToastContainer />
       <div className='main py-2'>
+        <img
+          src='/treegrow.png'
+          alt='Tree Grow'
+          className='w-1/2 md:block hidden'
+        />
         {!otpSent ? (
           <form onSubmit={handleSubmit} className='md:w-1/2 px-4'>
             <h2 className='head'>Student Sign Up</h2>
