@@ -1,6 +1,6 @@
 export default function SHome() {
   return (
-    <main className='container center relative top-12 md:top-0'>
+    <main className='container center relative top-12 mb-24 md:top-0'>
       <article className='md:max-w-[75ch] center flex-col gap-y-4 p-4'>
         <h2 className='head'>About Us</h2>
         <div className='grid md:grid-cols-[30%_70%] gap-x-4 items-center justify-center glassy rounded-xl shadow-lg p-2 text-sm'>

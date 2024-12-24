@@ -1,28 +1,25 @@
 import { useNavigate } from 'react-router-dom'
 
-function LogoutButton() {
+const Logout = () => {
   const navigate = useNavigate()
-  function handleLogout() {
+  function handleClick() {
     localStorage.removeItem('token')
     navigate('/')
   }
-  return <button onClick={handleLogout}>Logout</button>
+  return (
+    <button onClick={handleClick}>
+      <img src='/user-regular.svg' alt='Logout Icon' className='icon' />
+      <p>Logout</p>
+    </button>
+  )
 }
 
 export default function StudentHeader() {
   return (
-    <header className='md:min-w-[60vw] rounded-full flex items-center justify-between px-4 glassy fixed top-2 left-1/2 -translate-x-1/2 shadow-lg z-10'>
+    <header className='w-full md:min-w-[60vw] rounded-xl flex items-center justify-between px-4 glassy md:fixed top-2 left-1/2 md:-translate-x-1/2 shadow-lg z-10'>
       <img src='/treegrow.png' alt='App Logo' className='w-10' />
       <div className='center'>
-        <img src='/house-solid.svg' alt='House Icon' className='icon' />
-        <img src='/heart-regular.svg' alt='Heart Icon' className='icon' />
-        <img
-          src='/file-image-regular.svg'
-          alt='File Image Icon'
-          className='icon'
-        />
-        <img src='/user-regular.svg' alt='User Icon' className='icon' />
-        <LogoutButton />
+        <Logout />
       </div>
     </header>
   )
