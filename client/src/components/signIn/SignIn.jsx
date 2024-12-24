@@ -110,9 +110,9 @@ export default function SignIn() {
   }
   return (
     <div className='container center'>
-      <div className='main'>
+      <div className='main flex-col md:flex-row'>
         <img src='/treegrow.png' alt='Tree Grow' className='w-1/2' />
-        <form className='w-1/2 pl-4' onSubmit={handleLogin}>
+        <form className='md:w-1/2 px-4' onSubmit={handleLogin}>
           <h2 className='head'>LOGIN</h2>
           <input
             type='email'

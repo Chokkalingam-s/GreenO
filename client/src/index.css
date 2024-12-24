@@ -25,10 +25,6 @@ strong {
   @apply backdrop-blur-lg bg-secondary/60;
 }
 
-.input-field input:focus {
-  @apply border-2 border-tertiary;
-}
-
 input,
 select,
 select:disabled {
@@ -46,7 +42,7 @@ select:disabled {
 }
 
 .main {
-  @apply w-11/12 md:w-7/12 glassy center px-4 rounded-2xl shadow-lg py-10;
+  @apply w-11/12 md:w-7/12 glassy center md:px-4 rounded-2xl shadow-lg py-10;
 }
 
 .type button {
