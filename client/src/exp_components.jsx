@@ -17,8 +17,10 @@ const StudentHeader = lazy(() => import('./components/sidebar/StudentHeader'))
 const StudentNavBar = lazy(() => import('./components/sidebar/studentNavBar'))
 const SHome = lazy(() => import('./student/SHome'))
 const Layout = lazy(() => import('./Layout'))
+const Splash = lazy(() => import('./components/Splashscreen'))
 
 export {
+  Splash,
   Layout,
   SignIn,
   StudentSignUp,

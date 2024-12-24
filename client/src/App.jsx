@@ -15,6 +15,7 @@ import {
   DepartmentHome,
   DepartmentProgress,
   Report,
+  Splash,
 } from './exp_components'
 
 const ProtectedRouteWrapper = ({ children, isAuthenticated }) => (
@@ -59,7 +60,7 @@ export default function App() {
 
   return (
     <Router>
-      <Suspense fallback={<div>Loading...</div>}>
+      <Suspense fallback={<Splash />}>
         <Routes>
           <Route
             path='/signin'
@@ -67,7 +68,6 @@ export default function App() {
           />
           <Route path='/signup' element={<StudentSignUp />} />
           <Route path='/admin_signup' element={<AdminSignUp />} />
-
           {studentRoutes.map(route => (
             <Route
               key={route.path}
@@ -79,7 +79,6 @@ export default function App() {
               }
             />
           ))}
-
           {adminRoutes.map(route => (
             <Route
               key={route.path}
@@ -91,7 +90,6 @@ export default function App() {
               }
             />
           ))}
-
           {departmentRoutes.map(route => (
             <Route
               key={route.path}
@@ -103,8 +101,6 @@ export default function App() {
               }
             />
           ))}
-
-          {/* Catch-all route */}
           <Route
             path='*'
             element={<SignIn setIsAuthenticated={setIsAuthenticated} />}
