@@ -54,7 +54,7 @@ export default function SHome() {
             <img
               src='/homeImg2.png'
               alt='product'
-              className='md:translate-x-10 bg-secondary mt-4 md:mt-0'
+              className='md:translate-x-8 bg-secondary mt-4 md:mt-0'
             />
           </div>
         </div>

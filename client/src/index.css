@@ -86,9 +86,11 @@ article img {
     @apply flex items-center;
   }
 }
-
+.round {
+  @apply rounded-xl shadow-lg;
+}
 nav a {
-  @apply center flex-col;
+  @apply center flex-col md:flex-row;
 }
 
 .Toastify {
