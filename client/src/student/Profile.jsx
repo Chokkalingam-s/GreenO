@@ -3,7 +3,6 @@ import axios from 'axios'
 import { Gauge, gaugeClasses } from '@mui/x-charts/Gauge'
 import html2canvas from 'html2canvas'
 import jsPDF from 'jspdf'
-import './Profile.css'
 import certificateImage from './Certificate.png'
 import { Layout } from '../exp_components.jsx'
 

@@ -1,13 +1,17 @@
 import { useNavigate } from 'react-router-dom'
-export default function Logout() {
+export default function Logout({ hide }) {
   const navigate = useNavigate()
   function handleClick() {
     localStorage.removeItem('token')
     navigate('/signin')
   }
   return (
-    <button onClick={handleClick}>
-      <img src='/user-regular.svg' alt='Logout Icon' className='icon' />
+    <button onClick={handleClick} className={hide ? 'logout center' : ''}>
+      <img
+        src='/arrow-right-to-bracket-solid.svg'
+        alt='Logout Icon'
+        className='icon'
+      />
       <p>Logout</p>
     </button>
   )

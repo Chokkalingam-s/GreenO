@@ -11,8 +11,8 @@ export default function SplashScreen() {
     return () => clearInterval(interval)
   }, [])
   return (
-    <div className='flex flex-col items-center justify-center h-screen bg-gray-100'>
-      <img src='/home.jpg' alt='Splash' className='w-40 h-40 mb-5' />
+    <div className='flex flex-col items-center justify-center h-screen bg-primary'>
+      <img src='/home.jpg' alt='Splash' className='w-40 h-40 mb-5 round' />
       <p className='text-lg text-primary'>{loadingText}</p>
     </div>
   )

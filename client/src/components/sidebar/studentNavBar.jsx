@@ -1,8 +1,9 @@
 import { Link } from 'react-router-dom'
+import { LogOut } from '../../exp_components'
 
 export default function StudentNavBar() {
   return (
-    <nav className='w-full px-4 py-2 glassy fixed bottom-2 left-1/2 -translate-x-1/2 shadow-lg z-10 flex items-center justify-between rounded-full md:max-w-[60vw] md:bottom-0 md:top-2 h-fit'>
+    <nav className='w-full px-4 py-2 glassy fixed bottom-2 left-1/2 -translate-x-1/2 shadow-lg z-10 flex items-center justify-between rounded-full md:max-w-[60vw] md:bottom-0 md:top-2 h-fit font-medium'>
       <img
         src='/treegrow.png'
         alt='App Logo'
@@ -40,6 +41,7 @@ export default function StudentNavBar() {
         <img src='/user-regular.svg' alt='Profile Icon' className='icon' />
         <p>Profile</p>
       </Link>
+      <LogOut hide={true}/>
     </nav>
   )
 }

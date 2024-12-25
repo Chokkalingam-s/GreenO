@@ -145,89 +145,81 @@ export default function UploadSnaps() {
   return (
     <Layout>
       <ToastContainer />
-      <div className='flex-col flex'>
-        <div className='flex'>
-          <Link to='/StudentHome' className='font-bold'>
-            Home
-          </Link>
-          &gt; <span className='up-img'>Upload Image</span>
-        </div>
-        <div className='main p-4'>
-          <div className='upload-snaps-content'>
-            <div className='upload-snaps-body'>
-              <h2>Upload Image</h2>
+      <div className='flex-col'>
+        <Link to='/StudentHome' className='font-bold'>
+          Home
+        </Link>
+        &gt; <span className='up-img'>Upload Image</span>
+        <div className='main p-4 flex-col'>
+          <h2>Upload Image</h2>
 
-              <div className='location-section'>
-                <p>
-                  <strong>Latitude:</strong>{' '}
-                  {location.latitude || 'Fetching...'}
-                </p>
-                <p>
-                  <strong>Longitude:</strong>{' '}
-                  {location.longitude || 'Fetching...'}
-                </p>
-              </div>
+          <div className='location-section'>
+            <p>
+              <strong>Latitude:</strong> {location.latitude || 'Fetching...'}
+            </p>
+            <p>
+              <strong>Longitude:</strong> {location.longitude || 'Fetching...'}
+            </p>
+          </div>
 
-              <div className='captcha-section'>
-                <div className='captcha-container'>
-                  <p className='captcha'>{captcha}</p>
-                </div>
-                <div className='captcha-input-section'>
-                  <input
-                    type='text'
-                    placeholder='Enter captcha'
-                    value={captchaInput}
-                    onChange={handleCaptchaInput}
-                    className='captcha-input'
-                  />
-                  <button
-                    className={`verify-check ${
-                      isCaptchaValid ? 'valid' : 'invalid'
-                    }`}
-                    onClick={handleVerifyCaptcha}>
-                    Verify Captcha
-                  </button>
-                </div>
-              </div>
-
-              <div className='upload-section'>
-                <label className='custom-file-upload'>
-                  <input
-                    type='file'
-                    onChange={handleFileChange}
-                    className='file-input'
-                  />
-                  <i className='fa fa-cloud-upload'></i> Choose File
-                </label>
-                {file && <p className='file-name'>{file.name}</p>}
-
-                <button
-                  onClick={handleUpload}
-                  disabled={!isUploadEnabled}
-                  className={`upload-button ${
-                    isUploadEnabled ? 'enabled' : 'disabled'
-                  }`}>
-                  Upload Snap
-                </button>
-              </div>
-
-              {message && <p className='message'>{message}</p>}
-
-              <div className='uploaded-images'>
-                {uploadedImage ? (
-                  <div className='uploaded-image'>
-                    <p className='prev'>Previously uploaded Image</p>
-                    <img
-                      src={`http://localhost:3000/uploads/${uploadedImage.filename}`}
-                      alt='Uploaded snap'
-                      className='uploaded-image-img'
-                    />
-                  </div>
-                ) : (
-                  <p>No image uploaded yet.</p>
-                )}
-              </div>
+          <div className='captcha-section'>
+            <div className='captcha-container'>
+              <p className='captcha'>{captcha}</p>
             </div>
+            <div className='captcha-input-section'>
+              <input
+                type='text'
+                placeholder='Enter captcha'
+                value={captchaInput}
+                onChange={handleCaptchaInput}
+                className='captcha-input'
+              />
+              <button
+                className={`verify-check ${
+                  isCaptchaValid ? 'valid' : 'invalid'
+                }`}
+                onClick={handleVerifyCaptcha}>
+                Verify Captcha
+              </button>
+            </div>
+          </div>
+
+          <div className='upload-section'>
+            <label className='custom-file-upload'>
+              <input
+                type='file'
+                onChange={handleFileChange}
+                className='file-input'
+              />
+              <i className='fa fa-cloud-upload'></i> Choose File
+            </label>
+            {file && <p className='file-name'>{file.name}</p>}
+
+            <button
+              onClick={handleUpload}
+              disabled={!isUploadEnabled}
+              className={`upload-button ${
+                isUploadEnabled ? 'enabled' : 'disabled'
+              }`}>
+              Upload Snap
+            </button>
+          </div>
+
+          {message && <p className='message'>{message}</p>}
+
+          <div className='uploaded-images'>
+            {uploadedImage ? (
+              <div className='uploaded-image'>
+                <p className='prev'>Previously uploaded Image</p>
+                <img
+                  src={`http://localhost:3000/uploads/${uploadedImage.filename}`}
+                  alt='Uploaded snap'
+                  className='uploaded-image-img'
+                />
+              </div>
+            ) : (
+              <p>No image uploaded yet.</p>
+            )}
           </div>
         </div>
       </div>

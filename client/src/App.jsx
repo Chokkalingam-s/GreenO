@@ -17,6 +17,7 @@ import {
   Report,
   Splash,
 } from './exp_components'
+import VProfile from './student/v2Profile'
 
 const ProtectedRouteWrapper = ({ children, isAuthenticated }) => (
   <ProtectedRoute isAuthenticated={isAuthenticated}>{children}</ProtectedRoute>
@@ -27,7 +28,7 @@ const studentRoutes = [
   { path: '/Student/my-activities', component: <MyActivities /> },
   { path: '/Student/upload-snaps', component: <UploadSnaps /> },
   { path: '/Student/Resources', component: <Resource /> },
-  { path: '/Student/Profile', component: <Profile /> },
+  { path: '/Student/Profile', component: <VProfile /> },
 ]
 
 const adminRoutes = [
@@ -101,10 +102,6 @@ export default function App() {
               }
             />
           ))}
-          <Route
-            path='*'
-            element={<SignIn setIsAuthenticated={setIsAuthenticated} />}
-          />
         </Routes>
       </Suspense>
     </Router>

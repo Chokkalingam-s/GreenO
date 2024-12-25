@@ -18,7 +18,7 @@ export default function Resource() {
 
   return (
     <Layout>
-      <div className='grid grid-cols-1 w-8/12'>
+      <div className='grid grid-cols-1 w-8/12 relative top-16'>
         <main className='container mx-auto p-4'>
           <div className='space-y-8'>
             <section className='p-6 glassy rounded-xl shadow-lg'>
