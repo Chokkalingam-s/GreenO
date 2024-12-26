@@ -52,7 +52,7 @@ button:not(.type button, .Toastify__close-button, .logout) {
     @apply translate-y-0;
   }
 }
-button:not(.cancel){
+button:not(.cancel,.logout){
   @apply bg-secondary;
 }
 button:not(.logout) {

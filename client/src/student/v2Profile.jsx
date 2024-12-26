@@ -90,7 +90,7 @@ export default function Profile() {
             ) : (
               <div className='grid space-x-4'>
                 <h3 className='text-2xl font-semibold mb-4 col-span-2'>
-                  Student Profile
+                  {studentDetails.name}&apos;s Profile
                 </h3>
                 <section className='details_table'>
                   <h4>Personal Details</h4>
@@ -178,7 +178,7 @@ export default function Profile() {
               My Progress
             </p>
           </div>
-          <div className='p-4 glassy round overflow-hidden'>
+          <div className='center'>
             <button
               className='btn btn-primary mt-3'
               onClick={() => SetModal(true)}>
@@ -190,9 +190,7 @@ export default function Profile() {
 
       {modal && (
         <div className='absolute inset-0 glassy aspect-video w-11/12 top-1/2 -translate-y-1/2 mx-auto p-2 round z-20 center gap-x-2'>
-          <div
-            id='certificate'
-            className='w-[297mm] h-[210mm] relative'>
+          <div id='certificate' className='w-[297mm] h-[210mm] relative'>
             <img
               src={certificateImage}
               alt='Certificate Background'

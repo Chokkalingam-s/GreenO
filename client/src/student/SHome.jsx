@@ -9,7 +9,7 @@ export default function SHome() {
           <img
             src='/home.jpg'
             alt='product'
-            className='md:-translate-x-4 opacity-0'
+            className='md:-translate-x-4'
           />
           <p className='md:-translate-x-4'>
             A sustainable initiative encouraging students to
