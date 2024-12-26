@@ -9,7 +9,6 @@ import {
   MyActivities,
   UploadSnaps,
   Resource,
-  Profile,
   ProtectedRoute,
   OverallProgress,
   DepartmentHome,

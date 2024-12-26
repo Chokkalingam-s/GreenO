@@ -52,9 +52,11 @@ button:not(.type button, .Toastify__close-button, .logout) {
     @apply translate-y-0;
   }
 }
-
+button:not(.cancel){
+  @apply bg-secondary;
+}
 button:not(.logout) {
-  @apply rounded-lg text-base center px-4 bg-secondary py-2 my-2 font-bold transition-shadow shadow-xl;
+  @apply rounded-lg text-base center px-4 py-2 my-2 font-bold transition-shadow shadow-xl;
   touch-action: manipulation;
   white-space: nowrap;
   will-change: box-shadow, transform;
@@ -95,4 +97,19 @@ nav a {
 
 .Toastify {
   @apply absolute top-4 right-2;
+}
+
+.details_table {
+  h4 {
+    @apply text-xl mb-2;
+  }
+  table {
+    @apply max-w-full table-auto border-collapse round overflow-hidden mb-4;
+  }
+  th {
+    @apply glassy;
+  }
+  td {
+    @apply p-2 text-sm;
+  }
 }
