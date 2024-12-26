@@ -71,7 +71,7 @@ export default function UploadSnaps() {
         toast.error('Geolocation is not supported by this browser.')
       }
     }
-
+ 
     fetchLocation()
     generateCaptcha()
 
@@ -145,7 +145,7 @@ export default function UploadSnaps() {
   return (
     <Layout>
       <ToastContainer />
-      <div className='flex-col'>
+      <div className='tracking-wider w-full'>
         <Link to='/StudentHome' className='font-bold'>
           Home
         </Link>

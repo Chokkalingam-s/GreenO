@@ -45,17 +45,17 @@ select:disabled {
   @apply w-11/12 md:w-7/12 glassy center md:px-4 rounded-2xl shadow-lg md:py-10;
 }
 
-button:not(.type button, .Toastify__close-button, .logout) {
+button:not(.type button, .logout, .Toastify__close-button) {
   @apply -translate-y-1;
   &:hover,
   &:active {
     @apply translate-y-0;
   }
 }
-button:not(.cancel,.logout){
+button:not(.cancel, .logout, .Toastify__close-button) {
   @apply bg-secondary;
 }
-button:not(.logout) {
+button:not(.logout, .Toastify__close-button) {
   @apply rounded-lg text-base center px-4 py-2 my-2 font-bold transition-shadow shadow-xl;
   touch-action: manipulation;
   white-space: nowrap;

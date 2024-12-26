@@ -3,7 +3,6 @@ import axios from 'axios'
 import { Gauge, gaugeClasses } from '@mui/x-charts/Gauge'
 import html2canvas from 'html2canvas'
 import jsPDF from 'jspdf'
-import certificateImage from '/Certificate.png'
 import { Layout } from '../exp_components.jsx'
 
 export default function Profile() {
@@ -192,7 +191,7 @@ export default function Profile() {
         <div className='absolute inset-0 glassy aspect-video w-11/12 top-1/2 -translate-y-1/2 mx-auto p-2 round z-20 center gap-x-2'>
           <div id='certificate' className='w-[297mm] h-[210mm] relative'>
             <img
-              src={certificateImage}
+              src='/Certificate.png'
               alt='Certificate Background'
               className='w-full h-full round'
             />
