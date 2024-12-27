@@ -22,7 +22,7 @@ strong {
 }
 
 .glassy {
-  @apply backdrop-blur-lg bg-secondary/60;
+  @apply backdrop-blur-lg bg-secondary/40 px-2;
 }
 
 input,

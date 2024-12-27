@@ -15,7 +15,7 @@ export default function Resource() {
     setShowModal(false)
     setSelectedCard(null)
   }
-
+``
   return (
     <Layout>
       <div className='grid grid-cols-1 md:w-8/12 relative top-16'>

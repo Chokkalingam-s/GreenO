@@ -144,73 +144,66 @@ export default function UploadSnaps() {
   return (
     <Layout>
       <ToastContainer />
-      <div className='main p-4 flex-col'>
-        <h2 className='head'>Upload Image</h2>
-        <div className='gap-x-4 hidden'>
-          <p>
-            <strong>Latitude:</strong>
-            {Math.round(location.latitude) || 'Fetching...'}
-          </p>
-          <p>
-            <strong>Longitude:</strong>
-            {Math.round(location.longitude) || 'Fetching...'}
-          </p>
-        </div>
-        <div className='flex'>
-          <p className='font-bold tracking-tighter'>{captcha}</p>
+      <div className='main p-6 flex flex-col items-center glassy rounded-lg shadow-lg'>
+        <h2 className='text-3xl font-semibold text-gray-800 mb-6'>
+          Upload Image
+        </h2>
+        <div className='captcha-section flex items-center gap-4 mb-6'>
+          <input
+            type='text'
+            name='captcha'
+            value={captcha}
+            className='font-bold text-xl w-40 text-center py-2 px-4 border-2 border-tertiary rounded-lg shadow-sm focus:ring-2 focus:ring-tertiary'
+            readOnly
+          />
           <input
             type='text'
             placeholder='Enter captcha'
             value={captchaInput}
+            className='w-64 px-4 py-2 border-2 border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-primary'
             onChange={handleCaptchaInput}
           />
-          <button
-            className={`verify-check ${isCaptchaValid ? 'valid' : 'invalid'}`}
-            onClick={handleVerifyCaptcha}>
-            Verify
-          </button>
+          <button onClick={handleVerifyCaptcha}>Verify</button>
         </div>
 
-        <div className='p-4 glassy round flex'>
-          <span className='relative'>
-            <button
-              type='button'
-              className='px-6 py-3 font-semibold round cursor-pointer transition duration-300'>
-              Choose File
-            </button>
-            <input
-              type='file'
-              onChange={handleFileChange}
-              className='opacity-0 absolute'
-            />
-          </span>
-
-          {file && (
-            <p className='file-name mt-2 text-sm text-gray-700'>{file.name}</p>
-          )}
-
-          <button
-            onClick={handleUpload}
-            disabled={!isUploadEnabled}
-            className={`mt-4 px-6 py-3 rounded-md font-semibold text-white transition duration-300 focus:outline-none ${
-              isUploadEnabled
-                ? 'bg-green-500 hover:bg-green-600'
-                : 'bg-gray-400 cursor-not-allowed'
-            }`}>
-            Upload
-          </button>
+        <div className='p-2 w-1/2 border-4 border-dashed border-secondary h-64 glassy round center'>
+          <label
+            htmlFor='file-input'
+            className='cursor-pointer py-3 px-6 font-semibold text-lg bg-tertiary text-white rounded-lg transition duration-300 hover:bg-green-600'>
+            Choose File
+          </label>
+          <input
+            id='file-input'
+            type='file'
+            onChange={handleFileChange}
+            className='opacity-0 absolute inset-0'
+          />
+          {file && <p className='text-gray-600 ml-4 text-sm'>{file.name}</p>}
         </div>
 
-        {message && <p className='message'>{message}</p>}
+        <button
+          onClick={handleUpload}
+          disabled={!isUploadEnabled}
+          className={`mt-6 py-3 px-6 rounded-lg font-semibold text-white transition duration-300 ${
+            isUploadEnabled
+              ? 'bg-green-500 hover:bg-green-600'
+              : 'bg-gray-400 cursor-not-allowed'
+          }`}>
+          Upload
+        </button>
 
-        <div className='uploaded-images'>
+        {message && <p className='mt-4 text-red-500'>{message}</p>}
+
+        <div className='uploaded-images mt-6 w-full'>
           {uploadedImage ? (
             <div className='uploaded-image'>
-              <p className='prev'>Previously uploaded Image</p>
+              <p className='text-lg font-semibold mb-2'>
+                Previously Uploaded Image
+              </p>
               <img
                 src={`http://localhost:3000/uploads/${uploadedImage.filename}`}
                 alt='Uploaded snap'
-                className='uploaded-image-img'
+                className='rounded-lg shadow-lg w-full max-w-md'
               />
             </div>
           ) : (
