@@ -6,9 +6,7 @@ export default function Logout({ hide }) {
     navigate('/signin')
   }
   return (
-    <button
-      onClick={handleClick}
-      className={`hidden ${hide ? 'logout' : 'center'}`}>
+    <button onClick={handleClick} className={`${hide ? 'logout center' : ''}`}>
       <img
         src='/arrow-right-to-bracket-solid.svg'
         alt='Logout Icon'
