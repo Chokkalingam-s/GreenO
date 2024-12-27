@@ -18,11 +18,11 @@ export default function Resource() {
 
   return (
     <Layout>
-      <div className='grid grid-cols-1 w-8/12 relative top-16'>
+      <div className='grid grid-cols-1 md:w-8/12 relative top-16'>
         <main className='container mx-auto p-4'>
           <div className='space-y-8'>
             <section className='p-6 glassy rounded-xl shadow-lg'>
-              <h2 className='text-2xl font-bold text-green-800 mb-4'>
+              <h2 className='head mb-4'>
                 GreenO Plant Care
               </h2>
               <ul className='pl-2'>

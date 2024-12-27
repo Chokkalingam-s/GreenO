@@ -13,7 +13,6 @@ const UploadSnap = require('./models/UploadSnap');
 const app = express();
 const { Op } = require('sequelize');
 const nodemailer = require('nodemailer');
-const speakeasy = require('speakeasy');
 
 app.use(express.json());
 app.use(cors());

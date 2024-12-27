@@ -38,37 +38,42 @@ select:disabled {
 }
 
 .head {
-  @apply text-2xl font-bold text-center mb-2;
+  @apply text-2xl font-bold mb-2;
 }
 
 .main {
   @apply w-11/12 md:w-7/12 glassy center md:px-4 rounded-2xl shadow-lg md:py-10;
 }
-
-button:not(.type button, .logout, .Toastify__close-button) {
+button:not(.type, .logout, .Toastify__close-button) {
   @apply -translate-y-1;
   &:hover,
   &:active {
     @apply translate-y-0;
+    box-shadow: rgba(45, 35, 66, 0.05) 0 2px 4px; /* Reduced shadow */
   }
 }
+
 button:not(.cancel, .logout, .Toastify__close-button) {
   @apply bg-secondary;
 }
+
 button:not(.logout, .Toastify__close-button) {
   @apply rounded-lg text-base center px-4 py-2 my-2 font-bold transition-shadow shadow-xl;
   touch-action: manipulation;
   white-space: nowrap;
   will-change: box-shadow, transform;
+
   &:focus {
-    box-shadow: #aad8b0 0 0 0 1.5px inset, rgba(45, 35, 66, 0.2) 0 2px 4px,
-      rgba(45, 35, 66, 0.3) 0 7px 13px -3px, #aad8b0 0 -3px 0 inset;
+    box-shadow: #aad8b0 0 0 0 1.5px inset, rgba(45, 35, 66, 0.1) 0 2px 4px,
+      rgba(45, 35, 66, 0.15) 0 7px 13px -3px, #aad8b0 0 -3px 0 inset;
   }
+
   &:hover {
-    box-shadow: rgba(45, 35, 66, 0.1) 0 4px 8px;
+    box-shadow: rgba(45, 35, 66, 0.05) 0 4px 4px;
   }
+
   &:active {
-    box-shadow: #aad8b0 0 3px 7px inset;
+    box-shadow: #aad8b0 0 3px 4px inset;
   }
 }
 
@@ -111,5 +116,10 @@ nav a {
   }
   td {
     @apply p-2 text-sm;
+  }
+}
+button:disabled {
+  &:hover {
+    @apply shadow-none -translate-x-0;
   }
 }

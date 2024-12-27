@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react'
 import axios from 'axios'
 import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
-import { Link } from 'react-router-dom'
 import { Layout } from '../exp_components'
 
 export default function UploadSnaps() {
@@ -71,7 +70,7 @@ export default function UploadSnaps() {
         toast.error('Geolocation is not supported by this browser.')
       }
     }
- 
+
     fetchLocation()
     generateCaptcha()
 
@@ -145,82 +144,78 @@ export default function UploadSnaps() {
   return (
     <Layout>
       <ToastContainer />
-      <div className='tracking-wider w-full'>
-        <Link to='/StudentHome' className='font-bold'>
-          Home
-        </Link>
-        &gt; <span className='up-img'>Upload Image</span>
-        <div className='main p-4 flex-col'>
-          <h2>Upload Image</h2>
+      <div className='main p-4 flex-col'>
+        <h2 className='head'>Upload Image</h2>
+        <div className='gap-x-4 hidden'>
+          <p>
+            <strong>Latitude:</strong>
+            {Math.round(location.latitude) || 'Fetching...'}
+          </p>
+          <p>
+            <strong>Longitude:</strong>
+            {Math.round(location.longitude) || 'Fetching...'}
+          </p>
+        </div>
+        <div className='flex'>
+          <p className='font-bold tracking-tighter'>{captcha}</p>
+          <input
+            type='text'
+            placeholder='Enter captcha'
+            value={captchaInput}
+            onChange={handleCaptchaInput}
+          />
+          <button
+            className={`verify-check ${isCaptchaValid ? 'valid' : 'invalid'}`}
+            onClick={handleVerifyCaptcha}>
+            Verify
+          </button>
+        </div>
 
-          <div className='location-section'>
-            <p>
-              <strong>Latitude:</strong> {location.latitude || 'Fetching...'}
-            </p>
-            <p>
-              <strong>Longitude:</strong> {location.longitude || 'Fetching...'}
-            </p>
-          </div>
-
-          <div className='captcha-section'>
-            <div className='captcha-container'>
-              <p className='captcha'>{captcha}</p>
-            </div>
-            <div className='captcha-input-section'>
-              <input
-                type='text'
-                placeholder='Enter captcha'
-                value={captchaInput}
-                onChange={handleCaptchaInput}
-                className='captcha-input'
-              />
-              <button
-                className={`verify-check ${
-                  isCaptchaValid ? 'valid' : 'invalid'
-                }`}
-                onClick={handleVerifyCaptcha}>
-                Verify Captcha
-              </button>
-            </div>
-          </div>
-
-          <div className='upload-section'>
-            <label className='custom-file-upload'>
-              <input
-                type='file'
-                onChange={handleFileChange}
-                className='file-input'
-              />
-              <i className='fa fa-cloud-upload'></i> Choose File
-            </label>
-            {file && <p className='file-name'>{file.name}</p>}
-
+        <div className='p-4 glassy round flex'>
+          <span className='relative'>
             <button
-              onClick={handleUpload}
-              disabled={!isUploadEnabled}
-              className={`upload-button ${
-                isUploadEnabled ? 'enabled' : 'disabled'
-              }`}>
-              Upload Snap
+              type='button'
+              className='px-6 py-3 font-semibold round cursor-pointer transition duration-300'>
+              Choose File
             </button>
-          </div>
+            <input
+              type='file'
+              onChange={handleFileChange}
+              className='opacity-0 absolute'
+            />
+          </span>
 
-          {message && <p className='message'>{message}</p>}
+          {file && (
+            <p className='file-name mt-2 text-sm text-gray-700'>{file.name}</p>
+          )}
 
-          <div className='uploaded-images'>
-            {uploadedImage ? (
-              <div className='uploaded-image'>
-                <p className='prev'>Previously uploaded Image</p>
-                <img
-                  src={`http://localhost:3000/uploads/${uploadedImage.filename}`}
-                  alt='Uploaded snap'
-                  className='uploaded-image-img'
-                />
-              </div>
-            ) : (
-              <p>No image uploaded yet.</p>
-            )}
-          </div>
+          <button
+            onClick={handleUpload}
+            disabled={!isUploadEnabled}
+            className={`mt-4 px-6 py-3 rounded-md font-semibold text-white transition duration-300 focus:outline-none ${
+              isUploadEnabled
+                ? 'bg-green-500 hover:bg-green-600'
+                : 'bg-gray-400 cursor-not-allowed'
+            }`}>
+            Upload
+          </button>
+        </div>
+
+        {message && <p className='message'>{message}</p>}
+
+        <div className='uploaded-images'>
+          {uploadedImage ? (
+            <div className='uploaded-image'>
+              <p className='prev'>Previously uploaded Image</p>
+              <img
+                src={`http://localhost:3000/uploads/${uploadedImage.filename}`}
+                alt='Uploaded snap'
+                className='uploaded-image-img'
+              />
+            </div>
+          ) : (
+            <p>No image uploaded yet.</p>
+          )}
         </div>
       </div>
     </Layout>
