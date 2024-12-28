@@ -8,8 +8,6 @@ import 'react-toastify/dist/ReactToastify.css' // Make sure you import the style
 export default function SignIn() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
-  const [error, setError] = useState('')
-  const [success, setSuccess] = useState('')
   const [showOtpPopup, setShowOtpPopup] = useState(false)
   const [otp, setOtp] = useState('')
   const [newPassword, setNewPassword] = useState('')
@@ -17,12 +15,12 @@ export default function SignIn() {
   const [showNewPasswordSetup, setShowNewPasswordSetup] = useState(false)
   const navigate = useNavigate()
   const { setIsAuthenticated } = useAuth()
+  const [passwordToggle, setPasswordToggle] = useState(false)
 
   useEffect(() => {
     const token = localStorage.getItem('token')
     if (token) {
       setIsAuthenticated(true)
-      navigate('/StudentHome')
     }
   }, [setIsAuthenticated, navigate])
 
@@ -41,47 +39,42 @@ export default function SignIn() {
           userRole === 'admin'
             ? '/AdminHome'
             : userRole === 'hod'
-            ? '/HoDHome'
+            ? '/HodHome'
             : '/StudentHome'
         )
-        toast.success('Login successful!') // Success toast
+        toast.success('Login successful!')
       }
     } catch (error) {
       const errorMsg = error.response?.data?.message || 'Login failed'
-      setError(errorMsg)
-      toast.error(errorMsg) // Error toast
-      setTimeout(() => setError(''), 6000)
+      toast.error(errorMsg)
     }
   }
 
   const handleForgotPassword = async () => {
     if (!email) {
-      setError('Please enter your email address')
-      toast.error('Please enter your email address') // Error toast
+      toast.error('Please enter your email address')
       return
     }
+    if (email) toast.success('OTP is being sent...')
     try {
       const response = await axios.post('http://localhost:3000/send-otp', {
         email,
       })
-      if (response.data && response.data.includes('OTP sent to email')) {
+      if (response.status == 200) {
         setShowOtpPopup(true)
         setResetEmail(email)
-        toast.success('OTP sent to email!') // Success toast
+        toast.success('OTP sent to email!')
       } else {
-        setError(response.data || 'Failed to send OTP')
-        toast.error(response.data || 'Failed to send OTP') // Error toast
+        toast.error(response.data || 'Failed to send OTP')
       }
     } catch (e) {
-      setError('Error sending OTP. Please try again.')
-      toast.error('Error sending OTP. Please try again.') // Error toast
+      toast.error(`Error sending OTP. Please try again. ${e}`)
     }
   }
 
   const handleVerifyOtp = async () => {
     if (!resetEmail || !otp) {
-      setError('Email and OTP are required')
-      toast.error('Email and OTP are required') // Error toast
+      toast.error('Email and OTP are required')
       return
     }
     try {
@@ -92,21 +85,18 @@ export default function SignIn() {
       if (response.data.success) {
         setShowNewPasswordSetup(true)
         setShowOtpPopup(false)
-        toast.success('OTP verified! Set your new password.') // Success toast
+        toast.success('OTP verified! Set your new password.')
       } else {
-        setError('Invalid OTP')
-        toast.error('Invalid OTP') // Error toast
+        toast.error('Invalid OTP')
       }
     } catch (error) {
-      setError(error.response?.data?.message || 'OTP verification failed')
-      toast.error(error.response?.data?.message || 'OTP verification failed') // Error toast
+      toast.error(error.response?.data?.message || 'OTP verification failed')
     }
   }
 
   const handleResetPassword = async () => {
     if (!resetEmail || !otp || !newPassword) {
-      setError('Email, OTP, and new password are required')
-      toast.error('Email, OTP, and new password are required') // Error toast
+      toast.error('Email, OTP, and new password are required')
       return
     }
     try {
@@ -115,83 +105,88 @@ export default function SignIn() {
         { email: resetEmail, otp, newPassword }
       )
       if (response.status === 200) {
-        setSuccess('Password reset successfully.')
-        toast.success('Password reset successfully!') // Success toast
+        toast.success('Password reset successfully!')
         setTimeout(() => setShowNewPasswordSetup(false), 3000)
       }
     } catch (error) {
-      setError(error.response?.data?.message || 'Password reset failed')
-      toast.error(error.response?.data?.message || 'Password reset failed') // Error toast
+      toast.error(error.response?.data?.message || 'Password reset failed')
     }
   }
 
+  const handlePasswordToggle = e => {
+    setPasswordToggle(prevState => {
+      const newPasswordToggle = !prevState
+      const src = e.target.src
+      const newSrc = newPasswordToggle
+        ? src.replace('regular', 'slash-regular')
+        : src.replace('slash-regular', 'regular')
+      e.target.src = newSrc
+      return newPasswordToggle
+    })
+  }
+
   return (
-    <div className='container center'>
-      <div className='main flex-col md:flex-row'>
-        <img src='/treegrow.png' alt='Tree Grow' className='w-1/2' />
-        <form className='md:w-1/2 px-4' onSubmit={handleLogin}>
-          <h2 className='head'>Welcome Back!</h2>
-          <input
-            type='email'
-            placeholder='Email'
-            value={email}
-            onChange={e => setEmail(e.target.value)}
-            required
-          />
-          <input
-            type='password'
-            placeholder='Password'
-            value={password}
-            onChange={e => setPassword(e.target.value)}
-            required
-          />
-          <span className='flex items-center justify-end'>
-            <p
-              className='cursor-pointer text-tertiary w-fit font-bold tracking-wide text-sm '
-              onClick={handleForgotPassword}>
-              Forgot Password?
-            </p>
-          </span>
-
-          <span className='flex items-center justify-end'>
-            <button type='submit' className='gap-x-2'>
-              <p>Sign in</p>
-              <img
-                src='/arrow-right-to-bracket-solid.svg'
-                alt='sign in icon'
-                className='w-6'
+    <div className='container center relative z-10'>
+      <div className='md:w-2/6 mx-4 aspect-square glassy center round'>
+        {!showOtpPopup && !showNewPasswordSetup && (
+          <form className='p-4' onSubmit={handleLogin}>
+            <h2 className='head'>Welcome Back!</h2>
+            <input
+              type='email'
+              placeholder='Email'
+              value={email}
+              onChange={e => setEmail(e.target.value)}
+              required
+            />
+            <span className='relative'>
+              <input
+                type={passwordToggle ? 'text' : 'password'}
+                placeholder='Password'
+                value={password}
+                onChange={e => setPassword(e.target.value)}
               />
-            </button>
-          </span>
-
-          <div className='flex items-center justify-center gap-x-2 w-11/12 mx-auto'>
-            <div className='line'></div>
-            <p
-              className='text-sm font-bold text-primary'
-              style={{ textShadow: '0px 2px 2px rgba(0,0,0,0.4)' }}>
-              OR
-            </p>
-            <div className='line'></div>
-          </div>
-
-          <span className='center'>
-            <button
-              type='button'
-              className='flex gap-x-4 group'
-              onClick={() => navigate('/signup')}>
-              <p className='group-hover:text-tertiary'>New here ?</p>
               <img
-                src='/arrow-right-to-bracket-solid.svg'
-                alt='sign in icon'
-                className='w-6'
+                src='/eye-regular.svg'
+                alt='Toggle visibility'
+                onClick={handlePasswordToggle}
+                className='cursor-pointer icon absolute right-0 top-1/2 -translate-y-1/2'
               />
-            </button>
-          </span>
-        </form>
+            </span>
+            <span className='flex items-center justify-between'>
+              <p
+                className='cursor-pointer text-tertiary font-medium tracking-wider'
+                onClick={handleForgotPassword}>
+                Forgot Password?
+              </p>
+              <button type='submit' className='gap-x-2'>
+                <p>Sign in</p>
+              </button>
+            </span>
+
+            <div className='flex items-center justify-center gap-x-2 w-11/12 mx-auto'>
+              <div className='line'></div>
+              <p
+                className='text-sm font-bold text-primary'
+                style={{ textShadow: '0px 2px 2px rgba(0,0,0,0.4)' }}>
+                OR
+              </p>
+              <div className='line'></div>
+            </div>
+
+            <span className='center'>
+              <button
+                type='button'
+                className='flex gap-x-4'
+                onClick={() => navigate('/signup')}>
+                <p>New here ?</p>
+              </button>
+            </span>
+          </form>
+        )}
 
         {showOtpPopup && (
-          <div className='otp-popup'>
-            <h3>Enter OTP</h3>
+          <div className='w-10/12'>
+            <h3 className='head'>Verification</h3>
             <input
               type='text'
               placeholder='Enter OTP'
@@ -199,30 +194,33 @@ export default function SignIn() {
               onChange={e => setOtp(e.target.value)}
               required
             />
-            <button className='otp-btn' onClick={handleVerifyOtp}>
-              ✅ Verify OTP
-            </button>
-            <button
-              className='btn-secondary'
-              onClick={() => setShowOtpPopup(false)}>
-              ❌ Cancel
-            </button>
+            <span className='center space-x-2'>
+              <button onClick={handleVerifyOtp}>Verify OTP</button>
+              <button className='cancel' onClick={() => setShowOtpPopup(false)}>
+                Cancel
+              </button>
+            </span>
           </div>
         )}
 
         {showNewPasswordSetup && (
-          <div className='new-password-popup'>
-            <h3>🔑 Set New Password</h3>
+          <div>
+            <h3 className='head'>Set New Password</h3>
             <input
               type='password'
-              placeholder='New Password'
+              placeholder='Enter New Password'
               value={newPassword}
               onChange={e => setNewPassword(e.target.value)}
               required
             />
-            <button className='otp-btn' onClick={handleResetPassword}>
-              ✅ Reset Password
-            </button>
+            <span className='center space-x-2'>
+              <button onClick={handleResetPassword}>Reset</button>
+              <button
+                className='cancel'
+                onClick={() => showNewPasswordSetup(false)}>
+                Cancel
+              </button>
+            </span>
           </div>
         )}
       </div>
