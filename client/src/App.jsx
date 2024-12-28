@@ -32,7 +32,7 @@ const studentRoutes = [
 
 const adminRoutes = [
   { path: '/AdminHome', component: <AdminHome /> },
-  { path: '/admin-overallprogress', component: <OverallProgress /> },
+  { path: '/overallprogress', component: <OverallProgress /> },
 ]
 
 const departmentRoutes = [

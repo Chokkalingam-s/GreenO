@@ -220,11 +220,6 @@ app.post('/login', async (req, res) => {
       return res.status(400).json({ message: 'Invalid email or password' })
     }
 
-    // if (user.role !== role) {
-    //   console.log(`User role in DB: ${user.role}, Role provided: ${role}`);
-    //   return res.status(400).json({ message: 'Role does not match' });
-    // }
-
     const isPasswordValid = await bcrypt.compare(password, user.password)
     if (!isPasswordValid) {
       return res.status(400).json({ message: 'Invalid email or password' })
@@ -419,13 +414,12 @@ app.get('/api/student-count', async (req, res) => {
 })
 
 app.get('/api/admin-data', authenticateToken, async (req, res) => {
-  const { email } = req.user // Extract email from the authenticated user
+  const { email } = req.user
 
   try {
-    // Fetch user's collegeName based on their email from the User table
     const user = await User.findOne({
       where: { email: email },
-      attributes: ['collegeName'], // Only select the collegeName field
+      attributes: ['collegeName'],
     })
 
     if (!user) {

@@ -2,6 +2,8 @@ import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import { useAuth } from './AuthContext'
+import { toast, ToastContainer } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css' // Make sure you import the styles
 
 export default function SignIn() {
   const [email, setEmail] = useState('')
@@ -42,9 +44,12 @@ export default function SignIn() {
             ? '/HoDHome'
             : '/StudentHome'
         )
+        toast.success('Login successful!') // Success toast
       }
     } catch (error) {
-      setError(error.response?.data?.message || 'Login failed')
+      const errorMsg = error.response?.data?.message || 'Login failed'
+      setError(errorMsg)
+      toast.error(errorMsg) // Error toast
       setTimeout(() => setError(''), 6000)
     }
   }
@@ -52,6 +57,7 @@ export default function SignIn() {
   const handleForgotPassword = async () => {
     if (!email) {
       setError('Please enter your email address')
+      toast.error('Please enter your email address') // Error toast
       return
     }
     try {
@@ -61,17 +67,21 @@ export default function SignIn() {
       if (response.data && response.data.includes('OTP sent to email')) {
         setShowOtpPopup(true)
         setResetEmail(email)
+        toast.success('OTP sent to email!') // Success toast
       } else {
         setError(response.data || 'Failed to send OTP')
+        toast.error(response.data || 'Failed to send OTP') // Error toast
       }
     } catch (e) {
-      setError('Error sending OTP. Please try again.', e)
+      setError('Error sending OTP. Please try again.')
+      toast.error('Error sending OTP. Please try again.') // Error toast
     }
   }
 
   const handleVerifyOtp = async () => {
     if (!resetEmail || !otp) {
       setError('Email and OTP are required')
+      toast.error('Email and OTP are required') // Error toast
       return
     }
     try {
@@ -82,17 +92,21 @@ export default function SignIn() {
       if (response.data.success) {
         setShowNewPasswordSetup(true)
         setShowOtpPopup(false)
+        toast.success('OTP verified! Set your new password.') // Success toast
       } else {
         setError('Invalid OTP')
+        toast.error('Invalid OTP') // Error toast
       }
     } catch (error) {
       setError(error.response?.data?.message || 'OTP verification failed')
+      toast.error(error.response?.data?.message || 'OTP verification failed') // Error toast
     }
   }
 
   const handleResetPassword = async () => {
     if (!resetEmail || !otp || !newPassword) {
       setError('Email, OTP, and new password are required')
+      toast.error('Email, OTP, and new password are required') // Error toast
       return
     }
     try {
@@ -102,12 +116,15 @@ export default function SignIn() {
       )
       if (response.status === 200) {
         setSuccess('Password reset successfully.')
+        toast.success('Password reset successfully!') // Success toast
         setTimeout(() => setShowNewPasswordSetup(false), 3000)
       }
     } catch (error) {
       setError(error.response?.data?.message || 'Password reset failed')
+      toast.error(error.response?.data?.message || 'Password reset failed') // Error toast
     }
   }
+
   return (
     <div className='container center'>
       <div className='main flex-col md:flex-row'>
@@ -146,9 +163,6 @@ export default function SignIn() {
               />
             </button>
           </span>
-
-          <p className='text-red-500 text-sm'>{error}</p>
-          <p className='text-tertiary text-sm'>{success}</p>
 
           <div className='flex items-center justify-center gap-x-2 w-11/12 mx-auto'>
             <div className='line'></div>
@@ -212,6 +226,7 @@ export default function SignIn() {
           </div>
         )}
       </div>
+      <ToastContainer />
     </div>
   )
 }

@@ -123,3 +123,13 @@ button:disabled {
     @apply shadow-none -translate-x-0;
   }
 }
+.error {
+  @apply text-red-500 font-semibold;
+}
+.admin_detail {
+  @apply glassy round flex items-center p-4 justify-evenly w-80;
+
+  img {
+    @apply w-12 aspect-square;
+  }
+}

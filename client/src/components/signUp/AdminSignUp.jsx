@@ -134,7 +134,7 @@ export default function AdminSignUp() {
                       className='w-6'
                     /> */}
             </button>
-            <button className='cancel' onClick={() => navigate('/')}>
+            <button className='cancel' onClick={() => navigate('/signin')}>
               Cancel
             </button>
           </span>

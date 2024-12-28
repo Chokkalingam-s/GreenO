@@ -153,9 +153,7 @@ export default function StudentSignUp() {
               placeholder='Email'
               required
             />
-            {errors.email && (
-              <small className='text-danger'>{errors.email}</small>
-            )}
+            {errors.email && <small className='error'>{errors.email}</small>}
             <input
               type='password'
               id='password'
@@ -236,7 +234,7 @@ export default function StudentSignUp() {
                   required
                 />
                 {errors.mobileNumber && (
-                  <small className='text-danger'>{errors.mobileNumber}</small>
+                  <small className='error'>{errors.mobileNumber}</small>
                 )}
                 <span className='center gap-x-2'>
                   <select
@@ -277,7 +275,7 @@ export default function StudentSignUp() {
                   required
                 />
                 {errors.collegeRegisterNumber && (
-                  <small className='text-danger'>
+                  <small className='error'>
                     {errors.collegeRegisterNumber}
                   </small>
                 )}
@@ -293,7 +291,7 @@ export default function StudentSignUp() {
                   required
                 />
                 {errors.aadharNumber && (
-                  <small className='text-danger'>{errors.aadharNumber}</small>
+                  <small className='error'>{errors.aadharNumber}</small>
                 )}
               </>
             )}
