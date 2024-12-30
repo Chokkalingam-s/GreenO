@@ -10,8 +10,8 @@ export default function StudentNavBar() {
         className='w-10 hidden md:block'
       />
       <Link to='/StudentHome'>
-        <img src='/house-solid.svg' alt='Home Icon' className='icon' />
-        <p>Home</p>
+        <img src='/at-solid.svg' alt='Home Icon' className='icon' />
+        <p>About</p>
       </Link>
       <Link to='/Student/my-activities'>
         <img
@@ -31,7 +31,7 @@ export default function StudentNavBar() {
       </Link>
       <Link to='/Student/Resources'>
         <img
-          src='/file-image-regular.svg'
+          src='/file-regular.svg'
           alt='Resources Icon'
           className='icon'
         />
