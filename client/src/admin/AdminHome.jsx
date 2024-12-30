@@ -9,6 +9,7 @@ const chartSetting = {
     verticalLines: true,
     horizontalLines: true,
   },
+  tooltip: true,
 }
 
 const abbreviateDepartmentName = department => {
@@ -80,7 +81,7 @@ export default function AHome() {
     <Layout>
       <main className='w-10/12 main_lg flex-col'>
         <h3 className='head text-center'>Dashboard</h3>
-        <div className='grid grid-cols-1 md:grid-cols-2 items-center justify-items-center'>
+        <div className='grid grid-cols-1 md:grid-cols-2 items-center justify-items-center gap-x-4'>
           <div className='admin_detail'>
             <img src='/user-group-solid.svg' alt='Students Icon' />
             <h3>Students Onboarded</h3>
@@ -93,7 +94,7 @@ export default function AHome() {
           </div>
         </div>
 
-        <div className='charts-container mt-8'>
+        <div className='charts-container mt-8 w-1/2'>
           <BarChart
             dataset={data}
             borderRadius={20}

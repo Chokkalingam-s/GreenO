@@ -23,7 +23,7 @@ body {
   p {
     @apply text-base;
   }
-  &::after{
+  &::after {
     content: '';
     @apply absolute inset-0 bg-black/20;
   }
@@ -57,10 +57,10 @@ select:disabled {
   @apply text-2xl font-medium mb-6 text-center;
 }
 .c_main {
-  @apply md:px-4 round md:py-10;
+  @apply md:px-4 round md:py-6 relative top-6;
 }
 .main {
-  @apply w-11/12 md:w-7/12 glassy center c_main relative top-6;
+  @apply w-11/12 md:w-7/12 glassy center c_main;
 }
 .main_lg {
   @apply w-11/12 glassy center round c_main;
