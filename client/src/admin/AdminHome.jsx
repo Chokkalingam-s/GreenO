@@ -9,7 +9,6 @@ const chartSetting = {
     verticalLines: true,
     horizontalLines: true,
   },
-  tooltip: true,
 }
 
 const abbreviateDepartmentName = department => {
@@ -79,17 +78,17 @@ export default function AHome() {
 
   return (
     <Layout>
-      <main className='w-10/12'>
+      <main className='w-10/12 main_lg flex-col'>
         <h3 className='head text-center'>Dashboard</h3>
         <div className='grid grid-cols-1 md:grid-cols-2 items-center justify-items-center'>
           <div className='admin_detail'>
             <img src='/user-group-solid.svg' alt='Students Icon' />
-            <h3 className='text-lg font-semibold'>Students Onboarded</h3>
+            <h3>Students Onboarded</h3>
             <h1 className='text-3xl font-bold'>{studentCount}</h1>
           </div>
           <div className='admin_detail'>
             <img src='/seedling-solid.svg' alt='Trees Icon' />
-            <h3 className='text-lg font-semibold'>Trees Planted</h3>
+            <h3>Trees Planted</h3>
             <h1 className='text-3xl font-bold'>{saplingCount}</h1>
           </div>
         </div>

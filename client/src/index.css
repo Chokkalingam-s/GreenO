@@ -2,6 +2,16 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --translate-y: 0.2rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --translate-y: 0;
+  }
+}
+
 .container {
   @apply mx-auto min-h-screen;
 }
@@ -42,13 +52,18 @@ select:disabled {
 .head {
   @apply text-2xl font-medium mb-6 text-center;
 }
-
+.c_main {
+  @apply md:px-4 round md:py-10;
+}
 .main {
-  @apply w-11/12 md:w-7/12 glassy center md:px-4 rounded-2xl shadow-lg md:py-10;
+  @apply w-11/12 md:w-7/12 glassy center c_main;
+}
+.main_lg {
+  @apply w-11/12 glassy center round c_main;
 }
 
 button:not(.logout, .Toastify__close-button) {
-  @apply -translate-y-1 rounded-lg text-base center px-4 py-2 my-2 font-medium transition-shadow shadow-xl;
+  @apply -translate-y-[var(--translate-y)] rounded-lg text-base center px-4 py-2 my-2 font-medium transition-shadow shadow-xl;
   touch-action: manipulation;
   will-change: box-shadow, transform;
   &:hover,
@@ -92,7 +107,7 @@ article img {
   }
 }
 .round {
-  @apply rounded-xl shadow-lg;
+  @apply rounded-2xl shadow-lg;
 }
 nav a {
   @apply center flex-col md:flex-row;
@@ -122,8 +137,14 @@ nav a {
 }
 .admin_detail {
   @apply glassy round flex items-center p-4 justify-evenly w-80;
-
+  h3,
+  h1 {
+    @apply font-medium;
+  }
+  h3 {
+    @apply text-lg;
+  }
   img {
-    @apply w-12 aspect-square;
+    @apply w-10 aspect-square;
   }
 }
