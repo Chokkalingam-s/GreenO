@@ -23,6 +23,10 @@ body {
   p {
     @apply text-base;
   }
+  &::after{
+    content: '';
+    @apply absolute inset-0 bg-black/20;
+  }
 }
 
 strong {

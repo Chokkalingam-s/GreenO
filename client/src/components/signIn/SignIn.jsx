@@ -3,7 +3,6 @@ import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import { useAuth } from './AuthContext'
 import { toast, ToastContainer } from 'react-toastify'
-import 'react-toastify/dist/ReactToastify.css' // Make sure you import the styles
 
 export default function SignIn() {
   const [email, setEmail] = useState('')
@@ -19,9 +18,8 @@ export default function SignIn() {
 
   useEffect(() => {
     const token = localStorage.getItem('token')
-    if (token) {
-      setIsAuthenticated(true)
-    }
+    if (token) setIsAuthenticated(true)
+    console.log(token)
   }, [setIsAuthenticated, navigate])
 
   const handleLogin = async e => {

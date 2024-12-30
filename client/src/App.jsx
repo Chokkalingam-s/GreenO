@@ -15,8 +15,8 @@ import {
   DepartmentProgress,
   Report,
   Splash,
+  Profile,
 } from './exp_components'
-import VProfile from './student/v2Profile'
 
 const ProtectedRouteWrapper = ({ children, isAuthenticated }) => (
   <ProtectedRoute isAuthenticated={isAuthenticated}>{children}</ProtectedRoute>
@@ -27,7 +27,7 @@ const studentRoutes = [
   { path: '/Student/my-activities', component: <MyActivities /> },
   { path: '/Student/upload-snaps', component: <UploadSnaps /> },
   { path: '/Student/Resources', component: <Resource /> },
-  { path: '/Student/Profile', component: <VProfile /> },
+  { path: '/Student/Profile', component: <Profile /> },
 ]
 
 const adminRoutes = [
@@ -43,12 +43,12 @@ const departmentRoutes = [
 
 export default function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(
-    localStorage.getItem('authToken') !== null
+    localStorage.getItem('token') !== null
   )
 
   useEffect(() => {
     const handleStorageChange = () => {
-      setIsAuthenticated(localStorage.getItem('authToken') !== null)
+      setIsAuthenticated(localStorage.getItem('token') !== null)
     }
 
     window.addEventListener('storage', handleStorageChange)
