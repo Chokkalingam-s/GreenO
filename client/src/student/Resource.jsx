@@ -65,16 +65,14 @@ export default function Resource() {
           </section>
 
           <section>
-            <h2 className='text-2xl font-bold mb-4'>Plant Growth Process</h2>
+            <h2 className='head my-4'>Plant Growth Process</h2>
             <div className='grid grid-cols-1 md:grid-cols-3 gap-4 relative'>
               {plantGrowthData.map((data, index) => (
-                <div
-                  key={index}
-                  className='glassy round p-4'>
+                <div key={index} className='glassy round p-4'>
                   <h3 className='font-bold text-lg mb-2'>{data.title}</h3>
-                  <p className='text-gray-600 mb-4'>{data.description}</p>
+                  <p>{data.description}</p>
                   <button
-                    className='absolute right-2 bottom-0'
+                    className='relative -bottom-4 float-end'
                     onClick={() => handleLearnMoreClick(data)}>
                     Learn More
                   </button>
@@ -85,13 +83,11 @@ export default function Resource() {
 
           {showModal && (
             <div className='fixed inset-0 bg-black/50 flex items-center justify-center z-50 text-primary'>
-              <div className='glassy round p-6 w-4/5 max-w-md'>
+              <div className='main flex-col'>
                 <h3 className='text-xl font-bold mb-4 underline underline-offset-2'>
                   {selectedCard?.title}
                 </h3>
-                <p className='text-gray-700 text-inherit'>
-                  {selectedCard?.detailedContent}
-                </p>
+                <p>{selectedCard?.detailedContent}</p>
                 <div className='mt-4 text-right'>
                   <button className='cancel float-end' onClick={handleClose}>
                     Close
@@ -102,10 +98,13 @@ export default function Resource() {
           )}
 
           <section>
-            <h2 className='text-2xl font-bold mb-4'>Video Resources</h2>
+            <h2 className='head my-4'>Video Resources</h2>
             <div className='grid md:grid-cols-2 gap-4'>
               {videoData.map(video => (
                 <div key={video.id} className='glassy round p-2'>
+                  <p className=' text-white font-semibold'>
+                    {video.description}
+                  </p>
                   <iframe
                     className='w-full round'
                     height='200'
@@ -113,13 +112,12 @@ export default function Resource() {
                     title={video.title}
                     allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture'
                     allowFullScreen></iframe>
-                  <p className='mt-1 font-bold'>{video.description}</p>
                 </div>
               ))}
             </div>
           </section>
         </main>
       </div>
-     </Layout>
+    </Layout>
   )
 }

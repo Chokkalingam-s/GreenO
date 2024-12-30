@@ -188,7 +188,7 @@ export default function Profile() {
       </div>
 
       {modal && (
-        <div className='absolute inset-0 glassy aspect-video w-11/12 top-1/2 -translate-y-1/2 mx-auto p-2 round z-20 center gap-x-2'>
+        <div className='absolute inset-0 glassy aspect-video w-10/12 top-1/2 -translate-y-1/2 mx-auto p-2 round z-20 center gap-x-2'>
           <div id='certificate' className='w-[297mm] h-[210mm] relative'>
             <img
               src='/Certificate.png'
@@ -220,8 +220,8 @@ export default function Profile() {
               )}
             </div>
           </div>
-          <div>
-            <button onClick={handleGenerateCertificate}>Download as PDF</button>
+          <div className='absolute right-0 bg-gradient-to-r from-transparent to-black/15 h-full center flex-col p-2 rounded-xl'>
+            <button onClick={handleGenerateCertificate}>Download PDF</button>
             <button onClick={() => SetModal(!modal)} className='cancel w-full'>
               Cancel
             </button>

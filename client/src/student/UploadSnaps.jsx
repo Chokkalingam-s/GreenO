@@ -160,28 +160,31 @@ export default function UploadSnaps() {
           </div>
         )}
         {isCaptchaValid && (
-          <div className='p-2 w-1/2 border-4 border-dashed border-secondary h-64 glassy round center'>
-            <label
-              htmlFor='file-input'
-              className='cursor-pointer py-3 px-6 font-semibold text-lg bg-tertiary text-white rounded-lg transition duration-300 hover:bg-green-600'>
-              Choose File
-            </label>
-            <input
-              id='file-input'
-              type='file'
-              onChange={handleFileChange}
-              className='opacity-0 absolute inset-0'
-            />
-            {file && <p className='text-gray-600 ml-4 text-sm'>{file.name}</p>}
-          </div>
+          <>
+            <div className='p-2 w-1/2 border-4 border-dashed border-secondary h-64 glassy round center'>
+              <label
+                htmlFor='file-input'
+                className='cursor-pointer py-3 px-6 font-semibold text-lg bg-tertiary text-white rounded-lg transition duration-300 hover:bg-green-600'>
+                Choose File
+              </label>
+              <input
+                id='file-input'
+                type='file'
+                onChange={handleFileChange}
+                className='opacity-0 absolute inset-0'
+              />
+              {file && (
+                <p className='text-gray-600 ml-4 text-sm'>{file.name}</p>
+              )}
+            </div>
+            <button
+              onClick={handleUpload}
+              disabled={!isUploadEnabled}
+              className='transition duration-300'>
+              Upload
+            </button>
+          </>
         )}
-
-        <button
-          onClick={handleUpload}
-          disabled={!isUploadEnabled}
-          className='transition duration-300'>
-          Upload
-        </button>
 
         {message && <p className='mt-4 text-red-500'>{message}</p>}
 
