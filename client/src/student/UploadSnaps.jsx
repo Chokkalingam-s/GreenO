@@ -84,11 +84,11 @@ export default function UploadSnaps() {
           }
         )
         setUploadedImage(response.data)
+        console.log('response', response)
       } catch (error) {
         console.error('Error fetching uploaded snap:', error)
       }
     }
-
     fetchUploadedSnap()
   }, [])
 
@@ -184,19 +184,17 @@ export default function UploadSnaps() {
         <button
           onClick={handleUpload}
           disabled={!isUploadEnabled}
-          className={`mt-6 py-3 px-6 rounded-lg font-semibold text-white transition duration-300 ${
-            isUploadEnabled
-              ? 'bg-green-500 hover:bg-green-600'
-              : 'bg-gray-400 cursor-not-allowed'
+          className={`transition duration-300 ${
+            isUploadEnabled ? 'bg-secondary' : 'bg-gray-400 cursor-not-allowed'
           }`}>
           Upload
         </button>
 
         {message && <p className='mt-4 text-red-500'>{message}</p>}
 
-        <div className='uploaded-images mt-6 w-full'>
+        <div className='mt-6 w-full'>
           {uploadedImage ? (
-            <div className='uploaded-image'>
+            <div className='grid md:grid-cols-3 grid-cols-1'>
               <p className='text-lg font-semibold mb-2'>
                 Previously Uploaded Image
               </p>
