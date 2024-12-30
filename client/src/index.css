@@ -22,11 +22,11 @@ body {
   @apply text-black bg-primary bg-cover bg-center font-normal bg-fixed;
   p {
     @apply text-base;
-  }
-  &::after {
+   }
+  /*&::after {
     content: '';
     @apply absolute inset-0 bg-black/20;
-  }
+  } */
 }
 
 strong {

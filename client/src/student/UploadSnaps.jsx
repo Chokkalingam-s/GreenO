@@ -61,9 +61,8 @@ export default function UploadSnaps() {
               longitude: position.coords.longitude,
             })
           },
-          error => {
-            toast.error('Location access denied.')
-            console.log(error)
+          () => {
+            toast.error('Location access denied')
           }
         )
       } else {
@@ -148,51 +147,45 @@ export default function UploadSnaps() {
         <h2 className='text-3xl font-semibold text-gray-800 mb-6'>
           Upload Image
         </h2>
-        <div className='captcha-section flex items-center gap-4 mb-6'>
-          <input
-            type='text'
-            name='captcha'
-            value={captcha}
-            className='font-bold text-xl w-40 text-center py-2 px-4 border-2 border-tertiary rounded-lg shadow-sm focus:ring-2 focus:ring-tertiary'
-            readOnly
-          />
-          <input
-            type='text'
-            placeholder='Enter captcha'
-            value={captchaInput}
-            className='w-64 px-4 py-2 border-2 border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-primary'
-            onChange={handleCaptchaInput}
-          />
-          <button onClick={handleVerifyCaptcha}>Verify</button>
-        </div>
-
-        <div className='p-2 w-1/2 border-4 border-dashed border-secondary h-64 glassy round center'>
-          <label
-            htmlFor='file-input'
-            className='cursor-pointer py-3 px-6 font-semibold text-lg bg-tertiary text-white rounded-lg transition duration-300 hover:bg-green-600'>
-            Choose File
-          </label>
-          <input
-            id='file-input'
-            type='file'
-            onChange={handleFileChange}
-            className='opacity-0 absolute inset-0'
-          />
-          {file && <p className='text-gray-600 ml-4 text-sm'>{file.name}</p>}
-        </div>
+        {!isCaptchaValid && (
+          <div className='captcha-section flex items-center gap-4 mb-6'>
+            <input type='text' name='captcha' value={captcha} readOnly />
+            <input
+              type='text'
+              placeholder='Enter captcha'
+              value={captchaInput}
+              onChange={handleCaptchaInput}
+            />
+            <button onClick={handleVerifyCaptcha}>Verify</button>
+          </div>
+        )}
+        {isCaptchaValid && (
+          <div className='p-2 w-1/2 border-4 border-dashed border-secondary h-64 glassy round center'>
+            <label
+              htmlFor='file-input'
+              className='cursor-pointer py-3 px-6 font-semibold text-lg bg-tertiary text-white rounded-lg transition duration-300 hover:bg-green-600'>
+              Choose File
+            </label>
+            <input
+              id='file-input'
+              type='file'
+              onChange={handleFileChange}
+              className='opacity-0 absolute inset-0'
+            />
+            {file && <p className='text-gray-600 ml-4 text-sm'>{file.name}</p>}
+          </div>
+        )}
 
         <button
           onClick={handleUpload}
           disabled={!isUploadEnabled}
-          className={`transition duration-300 ${
-            isUploadEnabled ? 'bg-secondary' : 'bg-gray-400 cursor-not-allowed'
-          }`}>
+          className='transition duration-300'>
           Upload
         </button>
 
         {message && <p className='mt-4 text-red-500'>{message}</p>}
 
-        <div className='mt-6 w-full'>
+        <div className='mt-6 w-full center'>
           {uploadedImage ? (
             <div className='grid md:grid-cols-3 grid-cols-1'>
               <p className='text-lg font-semibold mb-2'>
