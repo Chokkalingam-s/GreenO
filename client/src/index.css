@@ -18,15 +18,11 @@
 
 body {
   font-family: 'Poppins', serif;
-  background-image: url('/michael-benz--IZ2sgQKIhM-unsplash.jpg');
+  background-image: url('/michael-benz--IZ2sgQKIhM-unsplash.webp');
   @apply text-black bg-primary bg-cover bg-center font-normal bg-fixed;
   p {
     @apply text-base max-w-[70ch];
   }
-  /*&::after {
-    content: '';
-    @apply absolute inset-0 bg-black/20;
-  } */
 }
 
 strong {
@@ -57,13 +53,10 @@ select:disabled {
   @apply text-2xl font-medium mb-6;
 }
 .c_main {
-  @apply md:px-4 round md:py-6 relative top-6;
+  @apply md:px-4 round md:py-6 relative top-6 glassy center w-11/12;
 }
 .main {
-  @apply w-11/12 md:w-7/12 glassy center c_main;
-}
-.main_lg {
-  @apply w-11/12 glassy center round c_main;
+  @apply md:w-7/12 c_main;
 }
 
 button:not(.logout, .Toastify__close-button) {

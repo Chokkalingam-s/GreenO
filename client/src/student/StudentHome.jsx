@@ -1,12 +1,12 @@
 export default function StudentHome() {
   return (
-    <article className='md:max-w-[75ch] center flex-col gap-y-4 p-4 relative top-10'>
+    <article className='center flex-col gap-y-4 p-4 relative top-10'>
       <div className='grid md:grid-cols-[30%_70%] gap-x-4 items-center justify-center glassy round p-2 text-sm relative'>
-        <h2 className='head absolute left-0 -translate-x-1/2 z-10 -rotate-90'>
+        <h2 className='head'>
           About Us
         </h2>
         <img src='/home.jpg' alt='product' className='md:-translate-x-4' />
-        <p className='md:-translate-x-4'>
+        <p>
           A sustainable initiative encouraging students to
           <strong> plant</strong> and <strong>care</strong> for a
           <strong> tree</strong> during their academic journey. It aims to
@@ -23,7 +23,7 @@ export default function StudentHome() {
           <strong> environmental impact</strong>.
         </p>
       </div>
-      <div className='glassy p-2 rounded-xl shadow-lg'>
+      <div className='main'>
         <h3 className='font-bold text-2xl'>How to Use This App !?</h3>
         <div className='grid md:grid-cols-[70%_30%] gap-x-4 items-center justify-center p-2 text-sm'>
           <ul className='list flex flex-col gap-y-4'>
