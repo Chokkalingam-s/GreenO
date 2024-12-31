@@ -1,9 +1,8 @@
 import { useEffect, useRef, useState } from 'react'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
-import { ToastContainer, toast } from 'react-toastify'
-import 'react-toastify/dist/ReactToastify.css'
 import { departments, states } from './data'
+import { toast } from 'react-toastify'
 
 const currentYear = new Date().getFullYear()
 const years = Array.from({ length: 4 }, (_, i) => currentYear + i)
@@ -125,7 +124,6 @@ export default function StudentSignUp() {
 
   return (
     <div className='container center'>
-      <ToastContainer />
       <div className='main py-2'>
         <img
           src='/treegrow.png'

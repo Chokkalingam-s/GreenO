@@ -1,8 +1,6 @@
 import { useState, useEffect } from 'react'
 import axios from 'axios'
-import { ToastContainer, toast } from 'react-toastify'
-import 'react-toastify/dist/ReactToastify.css'
-import { Layout } from '../exp_components'
+import { toast } from 'react-toastify'
 
 export default function UploadSnaps() {
   const [email] = useState('')
@@ -141,8 +139,7 @@ export default function UploadSnaps() {
   }
 
   return (
-    <Layout>
-      <ToastContainer />
+    <>
       <div className='main p-6 flex flex-col items-center glassy rounded-lg shadow-lg'>
         <h2 className='text-3xl font-semibold text-gray-800 mb-6'>
           Upload Image
@@ -205,6 +202,6 @@ export default function UploadSnaps() {
           )}
         </div>
       </div>
-    </Layout>
+    </>
   )
 }

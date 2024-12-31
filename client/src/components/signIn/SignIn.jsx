@@ -19,7 +19,6 @@ export default function SignIn() {
   useEffect(() => {
     const token = localStorage.getItem('token')
     if (token) setIsAuthenticated(true)
-    console.log(token)
   }, [setIsAuthenticated, navigate])
 
   const handleLogin = async e => {
@@ -35,10 +34,10 @@ export default function SignIn() {
         setIsAuthenticated(true)
         navigate(
           userRole === 'admin'
-            ? '/AdminHome'
+            ? '/admin'
             : userRole === 'hod'
-            ? '/HodHome'
-            : '/StudentHome'
+            ? '/department'
+            : '/home'
         )
         toast.success('Login successful!')
       }

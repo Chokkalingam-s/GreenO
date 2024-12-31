@@ -3,7 +3,6 @@ import axios from 'axios'
 import { Gauge, gaugeClasses } from '@mui/x-charts/Gauge'
 import html2canvas from 'html2canvas'
 import jsPDF from 'jspdf'
-import { Layout } from '../exp_components.jsx'
 
 export default function Profile() {
   const [studentDetails, setStudentDetails] = useState(null)
@@ -78,7 +77,7 @@ export default function Profile() {
   }
 
   return (
-    <Layout>
+    <>
       <div className='container center'>
         <div className='relative md:top-10 gap-4 grid grid-cols-2 md:max-w-[60vw]'>
           <div className='p-2 glassy round col-span-2'>
@@ -228,6 +227,6 @@ export default function Profile() {
           </div>
         </div>
       )}
-    </Layout>
+    </>
   )
 }

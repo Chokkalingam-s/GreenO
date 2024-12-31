@@ -16,30 +16,12 @@ import {
   Report,
   Splash,
   Profile,
+  Layout,
 } from './exp_components'
 
 const ProtectedRouteWrapper = ({ children, isAuthenticated }) => (
   <ProtectedRoute isAuthenticated={isAuthenticated}>{children}</ProtectedRoute>
 )
-
-const studentRoutes = [
-  { path: '/StudentHome', component: <StudentHome /> },
-  { path: '/Student/my-activities', component: <MyActivities /> },
-  { path: '/Student/upload-snaps', component: <UploadSnaps /> },
-  { path: '/Student/Resources', component: <Resource /> },
-  { path: '/Student/Profile', component: <Profile /> },
-]
-
-const adminRoutes = [
-  { path: '/AdminHome', component: <AdminHome /> },
-  { path: '/overallprogress', component: <OverallProgress /> },
-]
-
-const departmentRoutes = [
-  { path: '/HodHome', component: <DepartmentHome /> },
-  { path: '/Hod/department-progress', component: <DepartmentProgress /> },
-  { path: '/Hod/report', component: <Report /> },
-]
 
 export default function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(
@@ -67,40 +49,30 @@ export default function App() {
             element={<SignIn setIsAuthenticated={setIsAuthenticated} />}
           />
           <Route path='/signup' element={<StudentSignUp />} />
-          <Route path='/admin_signup' element={<AdminSignUp />} />
-          {studentRoutes.map(route => (
+          <Route path='/admin-signup' element={<AdminSignUp />} />
+
+          <Route
+            element={
+              <ProtectedRouteWrapper isAuthenticated={isAuthenticated}>
+                <Layout />
+              </ProtectedRouteWrapper>
+            }>
+            <Route path='/home' element={<StudentHome />} />
+            <Route path='/activities' element={<MyActivities />} />
+            <Route path='/upload_snap' element={<UploadSnaps />} />
+            <Route path='/resources' element={<Resource />} />
+            <Route path='/profile' element={<Profile />} />
+
+            <Route path='/admin' element={<AdminHome />} />
+            <Route path='/progress' element={<OverallProgress />} />
+
+            <Route path='/department' element={<DepartmentHome />} />
             <Route
-              key={route.path}
-              path={route.path}
-              element={
-                <ProtectedRouteWrapper isAuthenticated={isAuthenticated}>
-                  {route.component}
-                </ProtectedRouteWrapper>
-              }
+              path='/department-progress'
+              element={<DepartmentProgress />}
             />
-          ))}
-          {adminRoutes.map(route => (
-            <Route
-              key={route.path}
-              path={route.path}
-              element={
-                <ProtectedRouteWrapper isAuthenticated={isAuthenticated}>
-                  {route.component}
-                </ProtectedRouteWrapper>
-              }
-            />
-          ))}
-          {departmentRoutes.map(route => (
-            <Route
-              key={route.path}
-              path={route.path}
-              element={
-                <ProtectedRouteWrapper isAuthenticated={isAuthenticated}>
-                  {route.component}
-                </ProtectedRouteWrapper>
-              }
-            />
-          ))}
+            <Route path='/report' element={<Report />} />
+          </Route>
         </Routes>
       </Suspense>
     </Router>

@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react'
 import { BarChart } from '@mui/x-charts/BarChart'
 import axios from 'axios'
-import { Layout } from '../exp_components'
 
 const chartSetting = {
   height: 400,
@@ -78,37 +77,35 @@ export default function AHome() {
   }, [])
 
   return (
-    <Layout>
-      <main className='w-10/12 main_lg flex-col'>
-        <h3 className='head text-center'>Dashboard</h3>
-        <div className='grid grid-cols-1 md:grid-cols-2 items-center justify-items-center gap-x-4'>
-          <div className='admin_detail'>
-            <img src='/user-group-solid.svg' alt='Students Icon' />
-            <h3>Students Onboarded</h3>
-            <h1 className='text-3xl font-bold'>{studentCount}</h1>
-          </div>
-          <div className='admin_detail'>
-            <img src='/seedling-solid.svg' alt='Trees Icon' />
-            <h3>Trees Planted</h3>
-            <h1 className='text-3xl font-bold'>{saplingCount}</h1>
-          </div>
+    <main className='w-10/12 main_lg flex-col'>
+      <h3 className='head text-center'>Dashboard</h3>
+      <div className='grid grid-cols-1 md:grid-cols-2 items-center justify-items-center gap-x-4'>
+        <div className='admin_detail'>
+          <img src='/user-group-solid.svg' alt='Students Icon' />
+          <h3>Students Onboarded</h3>
+          <h1 className='text-3xl font-bold'>{studentCount}</h1>
         </div>
+        <div className='admin_detail'>
+          <img src='/seedling-solid.svg' alt='Trees Icon' />
+          <h3>Trees Planted</h3>
+          <h1 className='text-3xl font-bold'>{saplingCount}</h1>
+        </div>
+      </div>
 
-        <div className='charts-container mt-8 w-1/2'>
-          <BarChart
-            dataset={data}
-            borderRadius={20}
-            xAxis={[
-              { scaleType: 'band', dataKey: 'department', label: 'Department' },
-            ]}
-            series={[
-              { dataKey: 'Students', label: 'Students', color: '#4CAF50' },
-              { dataKey: 'Trees', label: 'Trees', color: '#FFC107' },
-            ]}
-            {...chartSetting}
-          />
-        </div>
-      </main>
-    </Layout>
+      <div className='charts-container mt-8 w-1/2'>
+        <BarChart
+          dataset={data}
+          borderRadius={20}
+          xAxis={[
+            { scaleType: 'band', dataKey: 'department', label: 'Department' },
+          ]}
+          series={[
+            { dataKey: 'Students', label: 'Students', color: '#4CAF50' },
+            { dataKey: 'Trees', label: 'Trees', color: '#FFC107' },
+          ]}
+          {...chartSetting}
+        />
+      </div>
+    </main>
   )
 }

@@ -14,7 +14,7 @@ const DepartmentHome = lazy(() => import('./department/DepartmentHome'))
 const DepartmentProgress = lazy(() => import('./department/DepartmentProgress'))
 const Report = lazy(() => import('./department/Report'))
 const StudentHeader = lazy(() => import('./components/sidebar/StudentHeader'))
-const StudentNavBar = lazy(() => import('./components/sidebar/studentNavBar'))
+const NavBar = lazy(() => import('./components/sidebar/NavBar'))
 const Layout = lazy(() => import('./Layout'))
 const Splash = lazy(() => import('./components/Splashscreen'))
 const LogOut = lazy(() => import('./components/LogOut'))
@@ -37,5 +37,5 @@ export {
   DepartmentProgress,
   Report,
   StudentHeader,
-  StudentNavBar,
+  NavBar,
 }
