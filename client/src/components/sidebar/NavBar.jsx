@@ -12,22 +12,27 @@ const userNavItems = [
 const adminNavItems = [
   {
     path: '/admin',
+    icon: '/at-solid.svg',
     label: 'Dashboard',
   },
   {
     path: '/progress',
+    icon: '/at-solid.svg',
     label: 'Progress',
   },
   {
     path: '/Admin/Activities',
+    icon: '/at-solid.svg',
     label: 'Activities',
   },
   {
     path: '/Admin/Reports',
+    icon: '/at-solid.svg',
     label: 'Reports',
   },
   {
     path: '/Admin/Settings',
+    icon: '/at-solid.svg',
     label: 'Settings',
   },
 ]
@@ -39,7 +44,7 @@ export default function NavBar({ role = 0 }) {
   return (
     <nav className='w-full px-4 py-2 glassy fixed bottom-0 left-1/2 right-0 -translate-x-1/2 round z-10 flex items-center justify-between md:max-w-[60vw] md:bottom-0 md:top-2 h-fit font-medium'>
       <img
-        src='/treegrow.png'
+        src='/5823008.webp'
         alt='App Logo'
         className='w-10 hidden md:block'
       />

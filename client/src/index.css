@@ -92,12 +92,13 @@ button:disabled:hover {
 }
 
 .icon {
-  @apply w-6 h-6 rounded-none shadow-none aspect-square mx-2;
+  @apply w-5 rounded-none shadow-none aspect-square mx-2;
 }
 
-article img {
-  @apply rounded-lg shadow-lg;
+article .banner {
+  @apply round aspect-video object-cover h-56;
 }
+
 .list {
   li {
     @apply flex items-center;
@@ -144,4 +145,7 @@ nav a {
   img {
     @apply w-10 aspect-square;
   }
+}
+.about {
+  @apply grid md:grid-cols-[70%_30%] gap-x-4 items-center justify-center glassy round p-2 relative;
 }

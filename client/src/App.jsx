@@ -4,7 +4,6 @@ import {
   SignIn,
   StudentSignUp,
   AdminSignUp,
-  StudentHome,
   AdminHome,
   MyActivities,
   UploadSnaps,
@@ -17,6 +16,7 @@ import {
   Splash,
   Profile,
   Layout,
+  About,
 } from './exp_components'
 
 const ProtectedRouteWrapper = ({ children, isAuthenticated }) => (
@@ -57,7 +57,7 @@ export default function App() {
                 <Layout />
               </ProtectedRouteWrapper>
             }>
-            <Route path='/home' element={<StudentHome />} />
+            <Route path='/home' element={<About />} />
             <Route path='/activities' element={<MyActivities />} />
             <Route path='/upload_snap' element={<UploadSnaps />} />
             <Route path='/resources' element={<Resource />} />
