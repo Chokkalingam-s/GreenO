@@ -124,7 +124,7 @@ export default function SignIn() {
 
   return (
     <div className='container center relative z-10'>
-      <div className='md:w-2/6 mx-4 aspect-square glassy center round'>
+      <div className='w-full md:w-2/6 mx-4 aspect-square glassy center round'>
         {!showOtpPopup && !showNewPasswordSetup && (
           <form className='p-4' onSubmit={handleLogin}>
             <h2 className='head'>Welcome Back!</h2>
@@ -182,7 +182,7 @@ export default function SignIn() {
         )}
 
         {showOtpPopup && (
-          <div className='w-10/12'>
+          <div className='w-full'>
             <h3 className='head'>Verification</h3>
             <input
               type='text'
@@ -201,7 +201,7 @@ export default function SignIn() {
         )}
 
         {showNewPasswordSetup && (
-          <div>
+          <div className='w-full'>
             <h3 className='head'>Set New Password</h3>
             <input
               type='password'
