@@ -1,19 +1,19 @@
 import React from 'react';
-import { useNavigate, NavLink } from 'react-router-dom'; 
+import { useNavigate, NavLink } from 'react-router-dom';
 import {
-  BsCart3, BsGrid1X2Fill, BsFillArchiveFill, BsFillGrid3X3GapFill, BsPeopleFill, 
+  BsCart3, BsGrid1X2Fill, BsFillArchiveFill, BsFillGrid3X3GapFill, BsPeopleFill,
   BsListCheck, BsMenuButtonWideFill, BsFillGearFill
 } from 'react-icons/bs';
 
 function AdminSideBar({ openSidebarToggle, OpenSidebar }) {
-  const navigate = useNavigate(); 
+  const navigate = useNavigate();
 
   const handleLogout = () => {
-    
-    localStorage.removeItem('token'); 
-    
-    
-    navigate('/signin'); 
+
+    localStorage.removeItem('token');
+
+
+    navigate('/signin');
   };
 
   return (
@@ -57,6 +57,7 @@ function AdminSideBar({ openSidebarToggle, OpenSidebar }) {
           </span>
         </li>
       </ul>
+
     </aside>
   );
 }
