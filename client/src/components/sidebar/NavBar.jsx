@@ -21,11 +21,14 @@ const adminNavItems = [
   },
 ]
 
-export default function NavBar({ role = 0 }) {
+export default function NavBar({ role = 0, type = 0 }) {
   const navItems = role === 1 ? adminNavItems : userNavItems
 
   return (
-    <nav className='glassy round flex items-center justify-evenly font-medium gap-x-4 p-3'>
+    <nav
+      className={`glassy round items-center justify-evenly font-medium gap-x-4 p-3 ${
+        type == 0 ? 'hidden md:flex' : 'md:hidden flex fixed bottom-0 w-full'
+      }`}>
       {role === 0
         ? navItems.map(({ path, icon, label }) => (
             <NavLink key={path} to={path}>
