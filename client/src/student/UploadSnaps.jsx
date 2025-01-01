@@ -145,7 +145,7 @@ export default function UploadSnaps() {
           Upload Image
         </h2>
         {!isCaptchaValid && (
-          <div className='captcha-section flex items-center gap-4 mb-6'>
+          <div className='captcha-section flex flex-col md:flex-row items-center gap-4 mb-6'>
             <input type='text' name='captcha' value={captcha} readOnly />
             <input
               type='text'
@@ -158,7 +158,7 @@ export default function UploadSnaps() {
         )}
         {isCaptchaValid && (
           <>
-            <div className='p-2 w-1/2 border-4 border-dashed border-secondary h-64 glassy round center'>
+            <div className='p-2 w-11/12 md:w-1/2 border-4 border-dashed border-secondary h-64 glassy round center'>
               <label
                 htmlFor='file-input'
                 className='cursor-pointer py-3 px-6 font-semibold text-lg bg-tertiary text-white rounded-lg transition duration-300 hover:bg-green-600'>
