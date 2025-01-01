@@ -1,6 +1,6 @@
 export default function StudentHome() {
   return (
-    <article className='center flex-col gap-y-4 p-4 relative top-10'>
+    <article className='center flex-col gap-y-4 p-4 relative top-10 mt-4 md:mt-0 mb-8'>
       <div className='about'>
         <span className='pl-4'>
           <h2 className='head'>About</h2>
@@ -59,7 +59,7 @@ export default function StudentHome() {
         <img
           src='/homeImg2.png'
           alt='product'
-          className='md:translate-x-5 bg-secondary banner'
+          className='md:translate-x-5 bg-secondary banner mt-4 md:mt-0'
         />
       </div>
     </article>
