@@ -25,7 +25,7 @@ body {
   background-image: url('/michael-benz--IZ2sgQKIhM-unsplash.webp');
   @apply text-black bg-primary bg-cover bg-center font-normal bg-fixed;
   p {
-    @apply text-base max-w-[70ch];
+    @apply text-base md:max-w-[70ch];
   }
 }
 

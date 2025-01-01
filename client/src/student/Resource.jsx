@@ -14,9 +14,9 @@ export default function Resource() {
     setSelectedCard(null)
   }
   return (
-    <div className='grid grid-cols-1 md:w-8/12 relative top-16'>
+    <div className='grid grid-cols-1 md:w-8/12 relative top-16 mb-16 md:mb-0'>
       <main className='container mx-auto p-4'>
-        <section className='p-6 glassy rounded-xl shadow-lg'>
+        <section className='p-6 glassy round'>
           <h2 className='head mb-4'>GreenO Plant Care</h2>
           <ul className='pl-2'>
             <li>
@@ -82,10 +82,10 @@ export default function Resource() {
         {showModal && (
           <div className='fixed inset-0 bg-black/50 flex items-center justify-center z-50 text-primary'>
             <div className='main flex-col'>
-              <h3 className='text-xl font-bold mb-4 underline underline-offset-2'>
+              <h3 className='text-xl font-bold my-4 underline underline-offset-2'>
                 {selectedCard?.title}
               </h3>
-              <p>{selectedCard?.detailedContent}</p>
+              <p className='w-11/12'>{selectedCard?.detailedContent}</p>
               <div className='mt-4 text-right'>
                 <button className='cancel float-end' onClick={handleClose}>
                   Close
