@@ -18,6 +18,8 @@ const NavBar = lazy(() => import('./components/sidebar/NavBar'))
 const Layout = lazy(() => import('./Layout'))
 const Splash = lazy(() => import('./components/Splashscreen'))
 const LogOut = lazy(() => import('./components/LogOut'))
+const Header = lazy(() => import('./components/sidebar/Header'))
+
 export {
   LogOut,
   Splash,
@@ -38,4 +40,5 @@ export {
   Report,
   StudentHeader,
   NavBar,
+  Header,
 }

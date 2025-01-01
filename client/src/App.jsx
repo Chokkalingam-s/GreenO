@@ -57,7 +57,7 @@ export default function App() {
                 <Layout />
               </ProtectedRouteWrapper>
             }>
-            <Route path='/home' element={<About />} />
+            <Route path='/about' element={<About />} />
             <Route path='/activities' element={<MyActivities />} />
             <Route path='/upload_snap' element={<UploadSnaps />} />
             <Route path='/resources' element={<Resource />} />

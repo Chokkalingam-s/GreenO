@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+* {
+  @apply m-0 p-0;
+}
+
 :root {
   --translate-y: 0.2rem;
 }
@@ -34,7 +38,7 @@ strong {
 }
 
 .glassy {
-  @apply backdrop-blur-lg bg-secondary/20 px-2;
+  @apply backdrop-blur-lg bg-secondary/25;
 }
 
 input,
@@ -59,8 +63,8 @@ select:disabled {
   @apply md:w-7/12 c_main;
 }
 
-button:not(.logout, .Toastify__close-button) {
-  @apply -translate-y-[var(--translate-y)] rounded-lg text-base center px-4 py-2 my-2 font-medium transition-shadow shadow-xl;
+button:not(.Toastify__close-button) {
+  @apply text-base center px-4 py-2 my-2 font-medium transition-shadow round;
   touch-action: manipulation;
   will-change: box-shadow, transform;
   &:hover,
@@ -70,8 +74,11 @@ button:not(.logout, .Toastify__close-button) {
     box-shadow: rgba(45, 35, 66, 0.05) 0 4px 4px;
   }
 }
-button:not(.cancel, .logout, .Toastify__close-button) {
-  @apply bg-secondary;
+button:not(.logout) {
+  @apply -translate-y-[var(--translate-y)];
+}
+button:not(.cancel, .Toastify__close-button) {
+  @apply glassy;
   &:hover,
   &:focus,
   &:active {

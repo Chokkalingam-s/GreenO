@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import { useAuth } from './AuthContext'
-import { toast, ToastContainer } from 'react-toastify'
+import { toast } from 'react-toastify'
 
 export default function SignIn() {
   const [email, setEmail] = useState('')
@@ -37,7 +37,7 @@ export default function SignIn() {
             ? '/admin'
             : userRole === 'hod'
             ? '/department'
-            : '/home'
+            : '/about'
         )
         toast.success('Login successful!')
       }
@@ -103,7 +103,7 @@ export default function SignIn() {
       )
       if (response.status === 200) {
         toast.success('Password reset successfully!')
-        setTimeout(() => setShowNewPasswordSetup(false), 3000)
+        setShowNewPasswordSetup(false)
       }
     } catch (error) {
       toast.error(error.response?.data?.message || 'Password reset failed')
@@ -221,7 +221,6 @@ export default function SignIn() {
           </div>
         )}
       </div>
-      <ToastContainer />
     </div>
   )
 }
