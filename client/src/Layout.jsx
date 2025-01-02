@@ -11,7 +11,7 @@ export default function Layout() {
       <main className='container center flex-col mb-16 md:mb-0'>
         <ToastContainer
           className='custom_toastify'
-          autoClose={10000}
+          autoClose={3000}
           newestOnTop={true}
           hideProgressBar
           closeButton={false}
