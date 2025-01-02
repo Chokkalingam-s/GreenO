@@ -38,7 +38,7 @@ export default function SignIn() {
             ? '/admin'
             : userRole === 'hod'
             ? '/department'
-            : '/about'
+            : '/home'
         )
         toast.success('Login successful!')
       }
@@ -123,7 +123,6 @@ export default function SignIn() {
       return newPasswordToggle
     })
   }
-
   return (
     <div className='container center relative z-10'>
       <Toast />
