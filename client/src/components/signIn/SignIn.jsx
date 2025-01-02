@@ -151,7 +151,7 @@ export default function SignIn() {
             </span>
             <span className='flex items-center justify-between'>
               <p
-                className='cursor-pointer text-tertiary font-medium tracking-wider'
+                className='cursor-pointer text-primary font-medium tracking-wider'
                 onClick={handleForgotPassword}>
                 Forgot Password?
               </p>

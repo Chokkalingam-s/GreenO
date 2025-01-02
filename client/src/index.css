@@ -2,10 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-* {
-  @apply m-0 p-0;
-}
-
 :root {
   --translate-y: 0.2rem;
 }
@@ -22,11 +18,32 @@
 
 body {
   font-family: 'Poppins', serif;
-  background-image: url('/michael-benz--IZ2sgQKIhM-unsplash.webp');
-  @apply text-black bg-primary bg-cover bg-center font-normal bg-fixed;
+  background-image: url('/bg.jpg');
+  @apply text-white bg-primary bg-cover bg-center font-normal bg-fixed;
   p {
     @apply text-base md:max-w-[70ch];
   }
+  &::after {
+    content: '';
+    @apply bg-black/30 absolute inset-0;
+  }
+}
+.admin_detail svg {
+  @apply w-12 aspect-square fill-white;
+}
+
+header,.logout {
+  svg {
+    @apply fill-white;
+  }
+}
+
+main {
+  @apply relative z-20;
+}
+
+.custom_toastify {
+  transform: translateY(10vh) !important;
 }
 
 strong {
@@ -127,7 +144,7 @@ nav a {
     @apply text-xl mb-2;
   }
   table {
-    @apply max-w-full table-auto border-collapse round overflow-hidden mb-4;
+    @apply w-full table-auto border-collapse round overflow-hidden mb-4 glassy;
   }
   th {
     @apply glassy;

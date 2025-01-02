@@ -78,16 +78,16 @@ export default function Profile() {
 
   return (
     <>
-      <div className='container center'>
-        <div className='relative md:top-10 gap-4 grid grid-cols-2 md:max-w-[60vw]'>
-          <div className='p-2 glassy round col-span-2'>
+      <div className='container center mt-10 md:mt-0'>
+        <div className='relative top-6 md:gap-4 grid grid-cols-1 md:grid-cols-2 md:max-w-[60vw]'>
+          <div className='p-2 col-span-2'>
             {loading ? (
               <p>Loading...</p>
             ) : error ? (
               <p className='text-red-600'>Error: {error}</p>
             ) : (
-              <div className='grid space-x-4'>
-                <h3 className='text-2xl font-semibold mb-4 col-span-2'>
+              <div className='grid space-x-4 md:grid-cols-2 grid-cols-1'>
+                <h3 className='head md:col-span-2'>
                   {studentDetails.name}&apos;s Profile
                 </h3>
                 <section className='details_table'>
@@ -151,7 +151,7 @@ export default function Profile() {
               </div>
             )}
           </div>
-          <div className='glassy round h-64 relative p-6'>
+          <div className='glassy round h-64 mb-6 w-11/12 mx-auto p-6 col-span-2 md:col-auto center'>
             <Gauge
               value={progressPercentage}
               min={0}
@@ -172,11 +172,14 @@ export default function Profile() {
               }}
               text={() => `${progressPercentage} / ${totalImages}`}
             />
-            <p className='text-xl absolute bottom-4 left-1/2 -translate-x-1/2'>
-              My Progress
-            </p>
+            <p className='text-xl absolute bottom-10'>My Progress</p>
           </div>
-          <div className='center'>
+          <div className='center flex-col w-11/12 h-64 mx-auto glassy round mb-16 md:mb-0'>
+            <img
+              src='/Certificate.png'
+              alt='certificate icon'
+              className='w-1/2 round'
+            />
             <button
               className='btn btn-primary mt-3'
               onClick={() => SetModal(true)}>
@@ -187,8 +190,10 @@ export default function Profile() {
       </div>
 
       {modal && (
-        <div className='glassy h-full w-10/12 top-1/2 -translate-y-1/2 mx-auto py-2 round z-20 fixed'>
-          <div id='certificate' className='w-[297mm] h-[210mm] relative'>
+        <div className='glassy h-full inset-0 md:w-10/12 md:top-1/2 md:-translate-y-1/2 mx-auto py-2 round z-20 fixed'>
+          <div
+            id='certificate'
+            className='md:w-[297mm] md:h-[210mm] relative top-1/2 md:top-0 -translate-y-1/2 md:-translate-y-0'>
             <img
               src='/Certificate.png'
               alt='Certificate Background'
@@ -197,7 +202,7 @@ export default function Profile() {
             <div className='absolute z-20 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center text-black font-medium mt-4'>
               {studentDetails ? (
                 <>
-                  <h2 className='text-5xl mb-2'>{studentDetails.name}</h2>
+                  <h2 className='text-4xl mb-2'>{studentDetails.name}</h2>
                   <p className='text-xl'>
                     Student of Department of
                     <strong> {studentDetails.department}</strong>,
@@ -219,7 +224,7 @@ export default function Profile() {
               )}
             </div>
           </div>
-          <div className='absolute right-0 top-0 bg-gradient-to-r from-transparent to-black/15 h-full center flex-col p-2 rounded-xl'>
+          <div className='md:w-fit absolute md:translate-x-0 md:right-0 bottom-0 md:bg-gradient-to-r from-transparent to-black/15 md:h-full center flex-col p-2'>
             <button onClick={handleGenerateCertificate}>Download PDF</button>
             <button onClick={() => SetModal(!modal)} className='cancel w-full'>
               Cancel

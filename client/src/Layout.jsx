@@ -9,7 +9,14 @@ export default function Layout() {
     <>
       <Header />
       <main className='container center flex-col mb-16 md:mb-0'>
-        <ToastContainer />
+        <ToastContainer
+          className='custom_toastify'
+          autoClose={10000}
+          newestOnTop={true}
+          hideProgressBar
+          closeButton={false}
+          theme='dark'
+        />
         <Outlet />
       </main>
       <NavBar type={1} />
