@@ -123,7 +123,7 @@ export default function StudentSignUp() {
   }
 
   return (
-    <div className='container center'>
+    <div className='container center relative z-20'>
       <div className='main py-2'>
         <img
           src='/treegrow.png'
