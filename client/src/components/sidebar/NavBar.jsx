@@ -61,7 +61,7 @@ export default function NavBar({ role = 0, type = 0 }) {
               xmlns='http://www.w3.org/2000/svg'
               viewBox={viewBox}
               className={`icon`}>
-              <path d={icon}></path>
+              <path d={icon} fill='#fff'></path>
             </svg>
           ) : null}
           <p>{label}</p>
