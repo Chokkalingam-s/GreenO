@@ -48,6 +48,10 @@ export default function App() {
             path='/signin'
             element={<SignIn setIsAuthenticated={setIsAuthenticated} />}
           />
+          <Route
+            path='/'
+            element={<SignIn setIsAuthenticated={setIsAuthenticated} />}
+          />
           <Route path='/signup' element={<StudentSignUp />} />
           <Route path='/admin-signup' element={<AdminSignUp />} />
 
