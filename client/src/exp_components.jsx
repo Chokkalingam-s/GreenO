@@ -19,8 +19,10 @@ const Layout = lazy(() => import('./Layout'))
 const Splash = lazy(() => import('./components/Splashscreen'))
 const LogOut = lazy(() => import('./components/LogOut'))
 const Header = lazy(() => import('./components/sidebar/Header'))
+const Toast = lazy(() => import('./components/Toast'))
 
 export {
+  Toast,
   LogOut,
   Splash,
   Layout,

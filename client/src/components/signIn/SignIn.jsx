@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import { useAuth } from './AuthContext'
 import { toast } from 'react-toastify'
+import { Toast } from '../../exp_components'
 
 export default function SignIn() {
   const [email, setEmail] = useState('')
@@ -87,7 +88,8 @@ export default function SignIn() {
         toast.error('Invalid OTP')
       }
     } catch (error) {
-      toast.error(error.response?.data?.message || 'OTP verification failed')
+      console.error(error.response?.data?.message)
+      toast.error('OTP verification failed')
     }
   }
 
@@ -124,6 +126,7 @@ export default function SignIn() {
 
   return (
     <div className='container center relative z-10'>
+      <Toast />
       <div className='w-full md:w-2/6 mx-4 aspect-square glassy center round'>
         {!showOtpPopup && !showNewPasswordSetup && (
           <form className='p-4' onSubmit={handleLogin}>
@@ -182,7 +185,7 @@ export default function SignIn() {
         )}
 
         {showOtpPopup && (
-          <div className='w-full'>
+          <div className='w-11/12'>
             <h3 className='head'>Verification</h3>
             <input
               type='text'
@@ -201,7 +204,7 @@ export default function SignIn() {
         )}
 
         {showNewPasswordSetup && (
-          <div className='w-full'>
+          <div className='w-11/12'>
             <h3 className='head'>Set New Password</h3>
             <input
               type='password'
