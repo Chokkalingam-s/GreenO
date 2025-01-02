@@ -1,4 +1,9 @@
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
+import {
+  BrowserRouter as Router,
+  Route,
+  Routes,
+  Navigate,
+} from 'react-router-dom'
 import { useState, useEffect, Suspense } from 'react'
 import {
   SignIn,
@@ -48,10 +53,7 @@ export default function App() {
             path='/signin'
             element={<SignIn setIsAuthenticated={setIsAuthenticated} />}
           />
-          <Route
-            path='/'
-            element={<SignIn setIsAuthenticated={setIsAuthenticated} />}
-          />
+          <Route path='/' element={<Navigate to='/signin' replace />} />
           <Route path='/signup' element={<StudentSignUp />} />
           <Route path='/admin-signup' element={<AdminSignUp />} />
 
