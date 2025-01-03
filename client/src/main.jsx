@@ -1,8 +1,8 @@
 import ReactDOM from 'react-dom/client'
 import App from './App'
-import { AuthProvider } from './components/signIn/AuthContext'
 import './index.css'
 import 'react-toastify/dist/ReactToastify.css'
+import { AuthProvider } from './components/auth/signin/AuthContext'
 
 const root = ReactDOM.createRoot(document.getElementById('root'))
 

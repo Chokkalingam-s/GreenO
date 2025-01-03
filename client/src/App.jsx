@@ -21,8 +21,7 @@ import {
   Splash,
   Profile,
   Layout,
-  About,
-  Toast
+  About
 } from './exp_components'
 import { ToastContainer } from 'react-toastify'
 
