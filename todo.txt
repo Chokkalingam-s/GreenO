@@ -8,6 +8,7 @@ Done:
 TODO:
   upload image - previously uploaded image
   Activity - my pregress - only sem number and also add clicking in the image it should give like a zoom up
+     - laptop ( 4 4) 
   dropdown theme
 
 Later: 
