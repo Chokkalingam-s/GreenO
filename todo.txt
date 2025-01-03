@@ -4,14 +4,15 @@ Done:
   genreate certificate mobile ui
   profile changes
   toastify
+  better folder structure
 
 TODO:
   upload image - previously uploaded image
   Activity - my pregress - only sem number and also add clicking in the image it should give like a zoom up
-     - laptop ( 4 4) 
+     - laptop ( 4 4)
   dropdown theme
 
-Later: 
+Later:
   about page changes
   better error handling with user
   background - doodle / image
@@ -20,10 +21,10 @@ Future User Side
  add email to the verify otp reset password
 
  =====================================================
- ===================================================== 
+ =====================================================
 
 Admin ( Principal)
-   
+
 
 Department ( Hod )
    --> Dashboard

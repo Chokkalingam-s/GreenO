@@ -1,0 +1,104 @@
+.grid-container {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    grid-template-rows: auto 1fr;
+    min-height: 100vh;
+    font-family: 'Arial, sans-serif';
+  }
+  
+  .main-content {
+    padding: 2rem;
+    color: #333;
+    background-color: #ffffff;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    margin: 1rem;
+    border-radius: 8px;
+  }
+  
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+  }
+  
+  h2 {
+    font-size: 1.8rem;
+    color: #333;
+  }
+  
+  .export-button {
+    padding: 0.5rem 1rem;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .export-button:hover {
+    background-color: #0056b3;
+  }
+  
+  .responsive-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1rem;
+    font-size: 0.9rem;
+  }
+  
+  .responsive-table th, .responsive-table td {
+    padding: 1rem;
+    border: 1px solid #e0e0e0;
+    text-align: center;
+  }
+  
+  .responsive-table th {
+    background-color: #007bff;
+    color: #ffffff;
+    cursor: pointer;
+  }
+  
+  .sortable-column {
+    position: relative;
+  }
+  
+  .sort-icon {
+    margin-left: 0.5rem;
+    vertical-align: middle;
+  }
+  
+  tbody tr:nth-child(even) {
+    background-color: #f9f9f9;
+  }
+  
+  tbody tr:hover {
+    background-color: #f1f1f1;
+  }
+  
+  .error-message {
+    color: #ff0000;
+    font-weight: bold;
+  }
+  
+  @media (max-width: 768px) {
+    .main-content {
+      padding: 1rem;
+    }
+  
+    .responsive-table th, .responsive-table td {
+      padding: 0.5rem;
+      font-size: 0.8rem;
+    }
+  
+    .header h2 {
+      font-size: 1.5rem;
+    }
+  
+    .export-button {
+      padding: 0.4rem 0.8rem;
+      font-size: 0.9rem;
+    }
+  }
+  

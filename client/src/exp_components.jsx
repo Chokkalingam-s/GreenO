@@ -1,24 +1,26 @@
 import { lazy } from 'react'
-const SignIn = lazy(() => import('./components/signIn/SignIn'))
-const StudentSignUp = lazy(() => import('./components/signUp/StudentSignUp'))
-const AdminSignUp = lazy(() => import('./components/signUp/AdminSignUp'))
+const SignIn = lazy(() => import('./components/auth/signin/SignIn'))
+const StudentSignUp = lazy(() =>
+  import('./components/auth/signup/StudentSignUp')
+)
+const AdminSignUp = lazy(() => import('./components/auth/signup/AdminSignUp'))
 const About = lazy(() => import('./student/About'))
 const AdminHome = lazy(() => import('./admin/AdminHome'))
 const MyActivities = lazy(() => import('./student/MyActivities'))
 const UploadSnaps = lazy(() => import('./student/UploadSnaps'))
 const Resource = lazy(() => import('./student/Resource'))
 const Profile = lazy(() => import('./student/Profile'))
-const ProtectedRoute = lazy(() => import('./components/ProtectedRoute'))
+const ProtectedRoute = lazy(() => import('./components/auth/ProtectedRoute'))
 const OverallProgress = lazy(() => import('./admin/OverallProgress'))
 const DepartmentHome = lazy(() => import('./department/DepartmentHome'))
 const DepartmentProgress = lazy(() => import('./department/DepartmentProgress'))
 const Report = lazy(() => import('./department/Report'))
-const StudentHeader = lazy(() => import('./components/sidebar/StudentHeader'))
-const NavBar = lazy(() => import('./components/sidebar/NavBar'))
+const StudentHeader = lazy(() => import('./components/nav/StudentHeader'))
+const NavBar = lazy(() => import('./components/nav/NavBar'))
 const Layout = lazy(() => import('./Layout'))
 const Splash = lazy(() => import('./components/Splashscreen'))
 const LogOut = lazy(() => import('./components/LogOut'))
-const Header = lazy(() => import('./components/sidebar/Header'))
+const Header = lazy(() => import('./components/nav/Header'))
 const Toast = lazy(() => import('./components/Toast'))
 
 export {
@@ -42,5 +44,5 @@ export {
   Report,
   StudentHeader,
   NavBar,
-  Header,
+  Header
 }

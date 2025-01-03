@@ -51,15 +51,13 @@ strong {
 input,
 select,
 select:disabled {
-  @apply w-full round px-4 py-2 my-2 text-lg hover:shadow-sm border-none -outline-offset-1 outline-2 outline-secondary outline focus:outline-transparent;
+  @apply w-full round px-4 py-2 my-2 text-lg hover:shadow-sm border-none -outline-offset-1 outline-2 outline-secondary outline focus:outline-transparent bg-transparent;
 }
 
-input {
-  @apply bg-transparent;
+option {
+  @apply bg-black;
 }
-select {
-  @apply bg-secondary;
-}
+
 select:disabled {
   opacity: 0.6;
 }
@@ -70,7 +68,7 @@ select:disabled {
   @apply text-3xl font-medium mb-6;
 }
 .c_main {
-  @apply md:px-4 round md:py-6 relative top-6 glassy center w-11/12;
+  @apply md:px-2 round md:py-4 relative top-2 glassy center w-11/12;
 }
 .main {
   @apply md:w-7/12 c_main;
@@ -164,7 +162,7 @@ nav a {
 }
 
 ::-webkit-scrollbar {
-  @apply w-2 bg-black;
+  @apply w-1 bg-black;
 }
 ::-webkit-scrollbar-thumb {
   @apply bg-white round;
