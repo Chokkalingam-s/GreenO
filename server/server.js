@@ -13,6 +13,8 @@ const UploadSnap = require('./models/UploadSnap')
 const app = express()
 const { Op } = require('sequelize')
 const nodemailer = require('nodemailer')
+const sharp = require('sharp');
+
 
 app.use(express.json())
 app.use(cors())
@@ -251,83 +253,98 @@ const authenticateToken = (req, res, next) => {
   })
 }
 
-app.post(
-  '/api/upload-snap',
-  authenticateToken,
-  upload.single('file'),
-  async (req, res) => {
-    const { email } = req.user
-    const { latitude, longitude } = req.body
+const compareImages = async (imgPath1, imgPath2) => {
+  const resizeOptions = { width: 8, height: 8 }; 
 
-    if (!req.file) {
-      return res.status(400).json({ message: 'No file uploaded.' })
-    }
+  const img1 = await sharp(imgPath1).resize(resizeOptions).grayscale().raw().toBuffer();
+  const img2 = await sharp(imgPath2).resize(resizeOptions).grayscale().raw().toBuffer();
 
-    try {
-      const user = await User.findOne({ where: { email } })
-
-      if (!user) {
-        return res.status(404).json({ message: 'User not found' })
-      }
-
-      const lastUpload = await UploadSnap.findOne({
-        where: { email },
-        order: [['createdAt', 'DESC']],
-      })
-
-      const currentTime = new Date()
-      if (lastUpload) {
-        const lastUploadTime = new Date(lastUpload.createdAt)
-        const timeDifference = currentTime - lastUploadTime
-        const fourMonthsInMillis = 4 * 30 * 24 * 60 * 60 * 1000
-
-        if (timeDifference < fourMonthsInMillis) {
-          return res.status(403).json({
-            message:
-              'You can upload a new image only after 4 months from your last upload.',
-          })
-        }
-      }
-
-      await User.update(
-        {
-          uploadCount: user.uploadCount + 1,
-          lastUpload: currentTime,
-        },
-        { where: { email } }
-      )
-
-      const relativeFilePath = `uploads/${req.file.filename}`
-      await UploadSnap.create({
-        email: email,
-        filename: req.file.filename,
-        filePath: relativeFilePath,
-        count: user.uploadCount + 1,
-        lastUpload: currentTime,
-        latitude: latitude,
-        longitude: longitude,
-      })
-
-      const firstUpload = user.uploadCount === 0
-      const adminEntry = await Admin.findOne({
-        where: { collegeName: user.collegeName, department: user.department },
-      })
-      if (adminEntry && firstUpload) {
-        await Admin.update(
-          { uploadCount: adminEntry.uploadCount + 1 },
-          { where: { id: adminEntry.id } }
-        )
-      }
-
-      res.status(200).json({
-        message: 'File uploaded successfully.',
-        filePath: relativeFilePath,
-      })
-    } catch (error) {
-      res.status(500).json({ error: error.message })
-    }
+  let similarityCount = 0;
+  for (let i = 0; i < img1.length; i++) {
+    if (Math.abs(img1[i] - img2[i]) < 20) similarityCount++;
   }
-)
+
+  return (similarityCount / img1.length) * 100; 
+};
+
+
+app.post('/api/upload-snap', authenticateToken, upload.single('file'), async (req, res) => {
+  const { email } = req.user;
+  const { latitude, longitude } = req.body;
+
+  if (!req.file) {
+    return res.status(400).json({ message: 'No file uploaded.' });
+  }
+
+  try {
+    const user = await User.findOne({ where: { email } });
+
+    if (!user) {
+      return res.status(404).json({ message: 'User not found.' });
+    }
+
+    const lastUpload = await UploadSnap.findOne({
+      where: { email },
+      order: [['createdAt', 'DESC']],
+    });
+
+    const currentTime = new Date();
+
+    if (lastUpload) {
+      const lastUploadTime = new Date(lastUpload.createdAt);
+      const timeDifference = currentTime - new Date(lastUpload);
+const fourMonthsInMillis = 4 * 30 * 24 * 60 * 60 * 1000;
+
+      if (timeDifference < fourMonthsInMillis) {
+        return res.status(403).json({
+          message: 'You can upload a new image only after 4 months from your last upload.',
+        });
+      }
+
+      const similarityScore = await compareImages(req.file.path, path.join(uploadDir, lastUpload.filename));
+      if (similarityScore < 70) {
+        return res.status(400).json({
+          message: `The uploaded image is too different from the previous image (Similarity: ${similarityScore.toFixed(2)}%).`,
+        });
+      }
+    }
+
+    await User.update(
+      { uploadCount: user.uploadCount + 1, lastUpload: currentTime },
+      { where: { email } }
+    );
+
+    const relativeFilePath = `uploads/${req.file.filename}`;
+    await UploadSnap.create({
+      email,
+      filename: req.file.filename,
+      filePath: relativeFilePath,
+      count: user.uploadCount + 1,
+      lastUpload: currentTime,
+      latitude,
+      longitude,
+    });
+
+    const firstUpload = user.uploadCount === 0;
+    const adminEntry = await Admin.findOne({
+      where: { collegeName: user.collegeName, department: user.department },
+    });
+
+    if (adminEntry && firstUpload) {
+      await Admin.update(
+        { uploadCount: adminEntry.uploadCount + 1 },
+        { where: { id: adminEntry.id } }
+      );
+    }
+
+    res.status(200).json({
+      message: 'File uploaded successfully.',
+      filePath: relativeFilePath,
+    });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
 
 app.get('/api/get-uploaded-images', authenticateToken, async (req, res) => {
   const { email } = req.user
