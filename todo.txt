@@ -1,0 +1,15 @@
+TODO:
+  dropdown theme
+  profile changes
+  about page changes (last)
+  toastify
+  better error handling with user
+  genreate certificate mobile ui
+  navbar for usertype (hod.it)
+  background user based choice
+  my pregress - only sem number and also add clicking in the image it should give like a zoom up
+  upload image - previously uploaded image
+  add email to the verify otp reset password
+
+  nav
+    hod prefix /depart
