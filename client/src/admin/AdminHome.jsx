@@ -6,9 +6,9 @@ const chartSetting = {
   height: 400,
   grid: {
     verticalLines: true,
-    horizontalLines: true,
+    horizontalLines: true
   },
-  tooltip: true,
+  tooltip: true
 }
 
 const abbreviateDepartmentName = department => {
@@ -52,16 +52,16 @@ export default function AHome() {
           'http://localhost:3000/api/admin-data',
           {
             headers: {
-              Authorization: `Bearer ${token}`,
+              Authorization: `Bearer ${token}`
             },
-            params: { email: userEmail },
+            params: { email: userEmail }
           }
         )
 
         const fetchedData = response.data.map(item => ({
           department: abbreviateDepartmentName(item.department),
           Trees: item.uploadCount,
-          Students: item.studentCount,
+          Students: item.studentCount
         }))
 
         setData(fetchedData)
@@ -104,14 +104,20 @@ export default function AHome() {
             {
               scaleType: 'band',
               dataKey: 'department',
-              label: 'Department',
-            },
+              label: 'Department'
+            }
           ]}
           series={[
             { dataKey: 'Students', label: 'Students', color: '#4CAF50' },
-            { dataKey: 'Trees', label: 'Trees', color: '#FFC107' },
+            { dataKey: 'Trees', label: 'Trees', color: '#FFC107' }
           ]}
           {...chartSetting}
+          sx={{
+            '& .MuiChartsAxis-left .MuiChartsAxis-tickLabel': {
+              strokeWidth: '0.4',
+              fill: '#fff'
+            }
+          }}
         />
       </div>
     </main>

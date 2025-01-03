@@ -2,7 +2,7 @@ import {
   BrowserRouter as Router,
   Route,
   Routes,
-  Navigate,
+  Navigate
 } from 'react-router-dom'
 import { useState, useEffect, Suspense } from 'react'
 import {
@@ -22,7 +22,9 @@ import {
   Profile,
   Layout,
   About,
+  Toast
 } from './exp_components'
+import { ToastContainer } from 'react-toastify'
 
 const ProtectedRouteWrapper = ({ children, isAuthenticated }) => (
   <ProtectedRoute isAuthenticated={isAuthenticated}>{children}</ProtectedRoute>
@@ -47,6 +49,14 @@ export default function App() {
 
   return (
     <Router>
+      <ToastContainer
+        className='custom_toastify'
+        autoClose={3000}
+        newestOnTop={true}
+        hideProgressBar
+        closeButton={false}
+        theme='dark'
+      />
       <Suspense fallback={<Splash />}>
         <Routes>
           <Route

@@ -1,5 +1,5 @@
 import { Outlet } from 'react-router-dom'
-import { Header, NavBar, Toast } from './exp_components'
+import { Header, NavBar } from './exp_components'
 import 'react-toastify/dist/ReactToastify.css'
 
 export default function Layout() {
@@ -8,7 +8,6 @@ export default function Layout() {
     <>
       <Header />
       <main className='container center flex-col mb-16 md:mb-0'>
-        <Toast />
         <Outlet />
       </main>
       <NavBar type={1} />

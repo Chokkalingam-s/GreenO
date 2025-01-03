@@ -5,7 +5,6 @@ import { toast } from 'react-toastify'
 export default function UploadSnaps() {
   const [email] = useState('')
   const [file, setFile] = useState(null)
-  const [message, setMessage] = useState('')
   const [uploadedImage, setUploadedImage] = useState(null)
   const [captcha, setCaptcha] = useState('')
   const [captchaInput, setCaptchaInput] = useState('')
@@ -91,7 +90,7 @@ export default function UploadSnaps() {
 
   const handleUpload = async () => {
     if (!file) {
-      setMessage('Please select a file to upload.')
+      toast.error('Please select a file to upload.')
       return
     }
     if (!isCaptchaValid) {
@@ -121,8 +120,6 @@ export default function UploadSnaps() {
       setUploadedImage(response.data.filePath)
       generateCaptcha()
       setFile(null)
-      setMessage('')
-
       setTimeout(() => {
         window.location.reload()
       }, 1500)
@@ -141,7 +138,7 @@ export default function UploadSnaps() {
   return (
     <>
       <div className='main p-6 flex flex-col items-center glassy rounded-lg shadow-lg'>
-        <h2 className='text-3xl font-semibold text-gray-800 mb-6'>
+        <h2 className='text-3xl font-semibold mb-6'>
           Upload Image
         </h2>
         {!isCaptchaValid && (
@@ -158,7 +155,7 @@ export default function UploadSnaps() {
         )}
         {isCaptchaValid && (
           <>
-            <div className='p-2 w-11/12 md:w-1/2 border-4 border-dashed border-secondary h-64 glassy round center'>
+            <div className='p-2  md:w-1/2 border-4 border-dashed border-secondary h-64 glassy round center'>
               <label
                 htmlFor='file-input'
                 className='cursor-pointer py-3 px-6 font-semibold text-lg bg-tertiary text-white rounded-lg transition duration-300 hover:bg-green-600'>
@@ -182,8 +179,6 @@ export default function UploadSnaps() {
             </button>
           </>
         )}
-
-        {message && <p className='mt-4 text-red-500'>{message}</p>}
 
         <div className='mt-6 w-full center'>
           {uploadedImage ? (

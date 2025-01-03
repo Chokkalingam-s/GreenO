@@ -3,7 +3,6 @@ import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import { useAuth } from './AuthContext'
 import { toast } from 'react-toastify'
-import { Toast } from '../../exp_components'
 
 export default function SignIn() {
   const [email, setEmail] = useState('')
@@ -27,7 +26,7 @@ export default function SignIn() {
     try {
       const response = await axios.post('http://localhost:3000/login', {
         email,
-        password,
+        password
       })
       const { token, userRole } = response.data
       if (token) {
@@ -56,7 +55,7 @@ export default function SignIn() {
     if (email) toast.success('OTP is being sent...')
     try {
       const response = await axios.post('http://localhost:3000/send-otp', {
-        email,
+        email
       })
       if (response.status == 200) {
         setShowOtpPopup(true)
@@ -78,7 +77,7 @@ export default function SignIn() {
     try {
       const response = await axios.post('http://localhost:3000/verify-otp', {
         email: resetEmail,
-        otp,
+        otp
       })
       if (response.data.success) {
         setShowNewPasswordSetup(true)
@@ -125,7 +124,6 @@ export default function SignIn() {
   }
   return (
     <div className='container center relative z-10'>
-      <Toast />
       <div className='w-full md:w-2/6 mx-4 aspect-square glassy center round'>
         {!showOtpPopup && !showNewPasswordSetup && (
           <form className='p-4' onSubmit={handleLogin}>
