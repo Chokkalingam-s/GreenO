@@ -90,21 +90,21 @@ export default function UploadSnaps() {
 
   const handleUpload = async () => {
     if (!file) {
-      toast.error('Please select a file to upload.')
-      return
+      toast.error('Please select a file to upload.');
+      return;
     }
     if (!isCaptchaValid) {
-      toast.error('Captcha is incorrect. Please try again.')
-      return
+      toast.error('Captcha is incorrect. Please try again.');
+      return;
     }
-
-    const formData = new FormData()
-    formData.append('email', email)
-    formData.append('file', file)
-    formData.append('latitude', location.latitude)
-    formData.append('longitude', location.longitude)
-
-    const token = localStorage.getItem('token')
+  
+    const formData = new FormData();
+    formData.append('email', email);
+    formData.append('file', file);
+    formData.append('latitude', location.latitude);
+    formData.append('longitude', location.longitude);
+  
+    const token = localStorage.getItem('token');
     try {
       const response = await axios.post(
         'http://localhost:3000/api/upload-snap',
@@ -115,25 +115,28 @@ export default function UploadSnaps() {
             Authorization: `Bearer ${token}`,
           },
         }
-      )
-      toast.success('File uploaded successfully!')
-      setUploadedImage(response.data.filePath)
-      generateCaptcha()
-      setFile(null)
+      );
+      toast.success('File uploaded successfully!');
+      setUploadedImage(response.data.filePath);
+      generateCaptcha();
+      setFile(null);
       setTimeout(() => {
-        window.location.reload()
-      }, 1500)
+        window.location.reload();
+      }, 1500);
     } catch (error) {
       if (error.response.status === 403) {
         toast.error(
           'You can upload a new image only after 4 months from your last upload.'
-        )
+        );
+      } else if (error.response.status === 400) {
+        toast.error(error.response.data.message);
       } else {
-        console.error('Upload error:', error)
-        toast.error('Error uploading file. Please try again.')
+        console.error('Upload error:', error);
+        toast.error('Error uploading file. Please try again.');
       }
     }
-  }
+  };
+  
 
   return (
     <>
