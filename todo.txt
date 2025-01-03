@@ -9,15 +9,21 @@ TODO:
   upload image - previously uploaded image
   Activity - my pregress - only sem number and also add clicking in the image it should give like a zoom up
   dropdown theme
+
 Later: 
   about page changes
   better error handling with user
   background - doodle / image
+
 Future User Side
  add email to the verify otp reset password
 
  =====================================================
  ===================================================== 
 
-Admin:
-    hod prefix /depart
+Admin ( Principal)
+   
+
+Department ( Hod )
+   --> Dashboard
+   -->
