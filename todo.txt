@@ -1,15 +1,23 @@
-TODO:
-  dropdown theme
-  profile changes
-  about page changes (last)
-  toastify
-  better error handling with user
+User Side:
+----------
+Done:
   genreate certificate mobile ui
-  navbar for usertype (hod.it)
-  background user based choice
-  my pregress - only sem number and also add clicking in the image it should give like a zoom up
-  upload image - previously uploaded image
-  add email to the verify otp reset password
+  profile changes
+  toastify
 
-  nav
+TODO:
+  upload image - previously uploaded image
+  Activity - my pregress - only sem number and also add clicking in the image it should give like a zoom up
+  dropdown theme
+Later: 
+  about page changes
+  better error handling with user
+  background - doodle / image
+Future User Side
+ add email to the verify otp reset password
+
+ =====================================================
+ ===================================================== 
+
+Admin:
     hod prefix /depart
