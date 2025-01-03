@@ -1,7 +1,7 @@
 import { lazy } from 'react'
 const SignIn = lazy(() => import('./components/auth/signin/SignIn'))
 const StudentSignUp = lazy(() =>
-  import('./components/auth/signup/StudentSignUp')
+  import('./components/auth/signup/SignUp')
 )
 const AdminSignUp = lazy(() => import('./components/auth/signup/AdminSignUp'))
 const About = lazy(() => import('./student/About'))
