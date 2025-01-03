@@ -54,7 +54,6 @@ export default function App() {
         autoClose={3000}
         newestOnTop={true}
         hideProgressBar
-        closeButton={false}
         theme='dark'
       />
       <Suspense fallback={<Splash />}>

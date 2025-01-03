@@ -19,7 +19,7 @@ export default function Profile() {
         const response = await axios.get(
           'http://localhost:3000/api/get-uploaded-images-count',
           {
-            headers: { Authorization: `Bearer ${token}` },
+            headers: { Authorization: `Bearer ${token}` }
           }
         )
         setUploadedCount(Number(response.data.uploadedImagesCount) || 0)
@@ -34,7 +34,7 @@ export default function Profile() {
         const response = await axios.get(
           'http://localhost:3000/api/get-user-detailss',
           {
-            headers: { Authorization: `Bearer ${token}` },
+            headers: { Authorization: `Bearer ${token}` }
           }
         )
         setStudentDetails(response.data[0])
@@ -62,7 +62,7 @@ export default function Profile() {
       await new Promise(resolve => setTimeout(resolve, 500))
       const canvas = await html2canvas(certificateElement, {
         scale: 2,
-        useCORS: true,
+        useCORS: true
       })
       const imgData = canvas.toDataURL('image/png')
       const pdf = new jsPDF('landscape', 'mm', 'a4')
@@ -78,18 +78,22 @@ export default function Profile() {
 
   return (
     <>
-      <div className='container center mt-10 md:mt-0'>
-        <div className='relative top-6 md:gap-4 grid grid-cols-1 md:grid-cols-2 md:max-w-[60vw]'>
-          <div className='p-2 col-span-2'>
+      <div className='container center mt-10 md:mt-0 flex-col'>
+        {loading ? (
+          <p>Loading...</p>
+        ) : (
+          <h3 className='head md:col-span-2 relative top-6'>
+            {studentDetails.name}&apos;s Profile
+          </h3>
+        )}
+        <div className='md:gap-4 grid grid-cols-1 md:grid-cols-2 mt-4 md:max-w-[60vw]'>
+          <div className='p-2 col-span-2 order-3 md:order-none'>
             {loading ? (
               <p>Loading...</p>
             ) : error ? (
               <p className='text-red-600'>Error: {error}</p>
             ) : (
-              <div className='grid space-x-4 md:grid-cols-2 grid-cols-1'>
-                <h3 className='head md:col-span-2'>
-                  {studentDetails.name}&apos;s Profile
-                </h3>
+              <div className='grid md:space-x-4 px-2 md:grid-cols-2 grid-cols-1'>
                 <section className='details_table'>
                   <h4>Personal Details</h4>
                   <table>
@@ -164,11 +168,11 @@ export default function Profile() {
                 [`& .${gaugeClasses.valueText}`]: {
                   fontSize: '30px',
                   fontWeight: 'bold',
-                  color: '#e0e0e0',
+                  color: '#fff'
                 },
                 [`& .MuiGauge-bar`]: { fill: '#4caf50' },
-                [`& .${gaugeClasses.valueArc}`]: { fill: '#52b202' },
-                [`& .MuiGauge-background`]: { fill: '#e0e0e0' },
+                [`& .${gaugeClasses.valueArc}`]: { fill: '#fff' },
+                [`& .MuiGauge-background`]: { fill: '#e0e0e0' }
               }}
               text={() => `${progressPercentage} / ${totalImages}`}
             />
@@ -199,18 +203,18 @@ export default function Profile() {
               alt='Certificate Background'
               className='w-full h-full round'
             />
-            <div className='absolute z-20 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center text-black font-medium mt-4'>
+            <div className='absolute z-20 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 mt-2 text-center text-black font-medium w-full md:w-fit'>
               {studentDetails ? (
-                <>
-                  <h2 className='text-4xl mb-2'>{studentDetails.name}</h2>
-                  <p className='text-xl'>
+                <span className='cert'>
+                  <h2>{studentDetails.name}</h2>
+                  <p>
                     Student of Department of
                     <strong> {studentDetails.department}</strong>,
                   </p>
-                  <p className='text-xl'>
+                  <p>
                     from <strong>{studentDetails.collegeName}</strong>
                   </p>
-                  <p className='text-xl'>
+                  <p>
                     Successfully Grown a Tree in academic period of
                     <br />
                     <strong>
@@ -218,13 +222,13 @@ export default function Profile() {
                       {studentDetails.yearOfGraduation}
                     </strong>
                   </p>
-                </>
+                </span>
               ) : (
                 <p>Loading...</p>
               )}
             </div>
           </div>
-          <div className='md:w-fit absolute md:translate-x-0 md:right-0 bottom-0 md:bg-gradient-to-r from-transparent to-black/15 md:h-full center flex-col p-2'>
+          <div className='md:w-fit absolute md:right-0 bottom-0 md:bg-gradient-to-r from-transparent to-black/15 md:h-full center flex-col p-2 right-1/2 translate-x-1/2 md:translate-x-0 top-1/2 md:top-0'>
             <button onClick={handleGenerateCertificate}>Download PDF</button>
             <button onClick={() => SetModal(!modal)} className='cancel w-full'>
               Cancel

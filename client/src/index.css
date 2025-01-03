@@ -1,1 +1,180 @@
-@tailwind base;@tailwind components;@tailwind utilities;:root{--translate-y:.2rem}@media (prefers-reduced-motion:reduce){:root{--translate-y:0}}.container{@apply mx-auto min-h-screen}body{font-family:'Poppins',serif;background-image:url('/bg.jpg');@apply text-white bg-primary bg-cover bg-center font-normal bg-fixed;p{@apply text-base md:max-w-[70ch]}&::after{content:'';@apply bg-black/30 absolute inset-0}}.admin_detail svg{@apply w-12 aspect-square fill-white}header,.logout{svg{@apply fill-white}}main{@apply relative z-20}.custom_toastify{transform:translateY(10vh)!important}strong{@apply text-tertiary}.center{@apply flex items-center justify-center}.glassy{@apply backdrop-blur-lg bg-secondary/25}input,select,select:disabled{@apply w-full round px-4 py-2 my-2 text-lg hover:shadow-sm bg-transparent border-none -outline-offset-1 outline-2 outline-secondary outline focus:outline-transparent}select:disabled{opacity:.6}.line{@apply w-full h-1 bg-primary rounded-full shadow-2xl}.head{@apply text-3xl font-medium mb-6}.c_main{@apply md:px-4 round md:py-6 relative top-6 glassy center w-11/12}.main{@apply md:w-7/12 c_main}button:not(.Toastify__close-button){@apply text-base center px-4 py-2 my-2 font-medium transition-shadow round;touch-action:manipulation;will-change:box-shadow,transform;&:hover,&:focus,&:active{@apply translate-y-0;box-shadow:#2D23420C 0 4px 4px}}button:not(.logout){@apply -translate-y-[var(--translate-y)]}button:not(.cancel,.Toastify__close-button){@apply glassy;&:hover,&:focus,&:active{@apply translate-y-0 outline-2 outline outline-offset-2 outline-secondary;box-shadow:#2D23420C 0 4px 4px}}button:disabled:hover{@apply shadow-none -translate-x-0}.cancel{@apply bg-red-500 text-white;&:hover,&:focus,&:active{@apply outline-red-500 outline outline-2 outline-offset-2}}.icon{@apply w-5 rounded-none shadow-none aspect-square mx-2}article .banner{@apply round aspect-video object-cover h-56}.list{li{@apply flex items-center}}.round{@apply rounded-2xl shadow-lg}nav a{@apply center flex-col md:flex-row}.Toastify{@apply absolute top-4 right-2}.details_table{h4{@apply text-xl mb-2}table{@apply w-full table-auto border-collapse round overflow-hidden mb-4 glassy}th{@apply glassy}td{@apply p-2 text-sm}}.error{@apply text-red-500 font-semibold}.admin_detail{@apply glassy round flex items-center p-4 justify-evenly w-80;h3,h1{@apply font-medium}h3{@apply text-lg}img{@apply w-10 aspect-square}}.about{@apply grid md:grid-cols-[70%_30%] gap-x-4 items-center justify-center glassy round p-2 relative}
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+:root {
+  --translate-y: 0.2rem;
+}
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --translate-y: 0;
+  }
+}
+.container {
+  @apply mx-auto min-h-screen;
+}
+body {
+  font-family: 'Poppins', serif;
+  background-image: url('/bg.jpg');
+  @apply text-white bg-primary bg-cover bg-center font-normal bg-fixed;
+  p {
+    @apply text-base md:max-w-[70ch];
+  }
+  &::after {
+    content: '';
+    @apply bg-black/30 absolute inset-0;
+  }
+}
+.admin_detail svg {
+  @apply w-12 aspect-square fill-white;
+}
+header,
+.logout {
+  svg {
+    @apply fill-white;
+  }
+}
+main {
+  @apply relative z-20;
+}
+.custom_toastify {
+  transform: translateY(10vh) !important;
+}
+strong {
+  @apply text-tertiary;
+}
+.center {
+  @apply flex items-center justify-center;
+}
+.glassy {
+  @apply backdrop-blur-lg bg-secondary/25;
+}
+input,
+select,
+select:disabled {
+  @apply w-full round px-4 py-2 my-2 text-lg hover:shadow-sm border-none -outline-offset-1 outline-2 outline-secondary outline focus:outline-transparent;
+}
+
+input {
+  @apply bg-transparent;
+}
+select {
+  @apply bg-secondary;
+}
+select:disabled {
+  opacity: 0.6;
+}
+.line {
+  @apply w-full h-1 bg-primary rounded-full shadow-2xl;
+}
+.head {
+  @apply text-3xl font-medium mb-6;
+}
+.c_main {
+  @apply md:px-4 round md:py-6 relative top-6 glassy center w-11/12;
+}
+.main {
+  @apply md:w-7/12 c_main;
+}
+button:not(.Toastify__close-button) {
+  @apply text-base center px-4 py-2 my-2 font-medium transition-shadow round;
+  touch-action: manipulation;
+  will-change: box-shadow, transform;
+  &:hover,
+  &:focus,
+  &:active {
+    @apply translate-y-0;
+    box-shadow: #2d23420c 0 4px 4px;
+  }
+}
+button:not(.logout) {
+  @apply -translate-y-[var(--translate-y)];
+}
+button:not(.cancel, .Toastify__close-button) {
+  @apply glassy;
+  &:hover,
+  &:focus,
+  &:active {
+    @apply translate-y-0 outline-2 outline outline-offset-2 outline-secondary;
+    box-shadow: #2d23420c 0 4px 4px;
+  }
+}
+button:disabled:hover {
+  @apply shadow-none -translate-x-0;
+}
+.cancel {
+  @apply bg-red-500 text-white;
+  &:hover,
+  &:focus,
+  &:active {
+    @apply outline-red-500 outline outline-2 outline-offset-2;
+  }
+}
+.icon {
+  @apply w-5 rounded-none shadow-none aspect-square mx-2;
+}
+article .banner {
+  @apply round aspect-video object-cover h-56;
+}
+.list {
+  li {
+    @apply flex items-center;
+  }
+}
+.round {
+  @apply rounded-2xl shadow-lg;
+}
+nav a {
+  @apply center flex-col md:flex-row;
+}
+.Toastify {
+  @apply absolute top-4 right-2;
+}
+.details_table {
+  h4 {
+    @apply text-xl mb-2;
+  }
+  table {
+    @apply w-full border-collapse round overflow-hidden mb-4 glassy;
+  }
+  th {
+    @apply glassy;
+  }
+  td {
+    @apply p-2 text-sm;
+  }
+}
+.error {
+  @apply text-red-500 font-semibold;
+}
+.admin_detail {
+  @apply glassy round flex items-center p-4 justify-evenly w-80;
+  h3,
+  h1 {
+    @apply font-medium;
+  }
+  h3 {
+    @apply text-lg;
+  }
+  img {
+    @apply w-10 aspect-square;
+  }
+}
+.about {
+  @apply grid md:grid-cols-[70%_30%] gap-x-4 items-center justify-center glassy round p-2 relative;
+}
+
+::-webkit-scrollbar {
+  @apply w-2 bg-black;
+}
+::-webkit-scrollbar-thumb {
+  @apply bg-white round;
+}
+.cert {
+  @apply w-full;
+  p {
+    @apply text-xs md:text-xl;
+  }
+  h2 {
+    @apply md:text-4xl text-xl md:mb-2;
+  }
+}
