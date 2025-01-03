@@ -125,7 +125,7 @@ const DepartmentProgress = () => {
               <tr key={index}>
                 <td>{student.name}</td>
                 <td>{student.registerNumber}</td>
-                <td>{student.currentYear}</td>
+                <td>{student.currentYear - 1}</td>
                 <td>{student.uploadCount}</td>
               </tr>
             ))}

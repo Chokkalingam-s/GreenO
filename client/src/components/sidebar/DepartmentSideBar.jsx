@@ -15,11 +15,11 @@ function DepartmentSideBar({ openSidebarToggle, OpenSidebar }) {
   };
   
   const handleDepartmentProgress = () => {
-    navigate('/Hod/department-progress'); 
+    navigate('/department-progress'); 
   };
 
   const handleReports = () => {
-    navigate('/Hod/report'); 
+    navigate('/report'); 
   };
 
   return (
