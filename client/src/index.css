@@ -118,11 +118,19 @@ article .banner {
     @apply flex items-center;
   }
 }
+
 .round {
   @apply rounded-2xl shadow-lg;
 }
+
 nav a {
   @apply center flex-col md:flex-row;
+  &.active {
+    @apply text-secondary;
+    svg {
+      @apply fill-secondary;
+    }
+  }
 }
 .Toastify {
   @apply absolute top-4 right-2;

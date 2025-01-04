@@ -55,7 +55,7 @@ export default function UploadSnaps() {
           position => {
             setLocation({
               latitude: position.coords.latitude,
-              longitude: position.coords.longitude,
+              longitude: position.coords.longitude
             })
           },
           () => {
@@ -76,7 +76,7 @@ export default function UploadSnaps() {
         const response = await axios.get(
           'http://localhost:3000/api/uploaded-snaps',
           {
-            headers: { Authorization: `Bearer ${token}` },
+            headers: { Authorization: `Bearer ${token}` }
           }
         )
         setUploadedImage(response.data)
@@ -90,21 +90,21 @@ export default function UploadSnaps() {
 
   const handleUpload = async () => {
     if (!file) {
-      toast.error('Please select a file to upload.');
-      return;
+      toast.error('Please select a file to upload.')
+      return
     }
     if (!isCaptchaValid) {
-      toast.error('Captcha is incorrect. Please try again.');
-      return;
+      toast.error('Captcha is incorrect. Please try again.')
+      return
     }
-  
-    const formData = new FormData();
-    formData.append('email', email);
-    formData.append('file', file);
-    formData.append('latitude', location.latitude);
-    formData.append('longitude', location.longitude);
-  
-    const token = localStorage.getItem('token');
+
+    const formData = new FormData()
+    formData.append('email', email)
+    formData.append('file', file)
+    formData.append('latitude', location.latitude)
+    formData.append('longitude', location.longitude)
+
+    const token = localStorage.getItem('token')
     try {
       const response = await axios.post(
         'http://localhost:3000/api/upload-snap',
@@ -112,38 +112,35 @@ export default function UploadSnaps() {
         {
           headers: {
             'Content-Type': 'multipart/form-data',
-            Authorization: `Bearer ${token}`,
-          },
+            Authorization: `Bearer ${token}`
+          }
         }
-      );
-      toast.success('File uploaded successfully!');
-      setUploadedImage(response.data.filePath);
-      generateCaptcha();
-      setFile(null);
+      )
+      toast.success('File uploaded successfully!')
+      setUploadedImage(response.data.filePath)
+      generateCaptcha()
+      setFile(null)
       setTimeout(() => {
-        window.location.reload();
-      }, 1500);
+        window.location.reload()
+      }, 1500)
     } catch (error) {
       if (error.response.status === 403) {
         toast.error(
           'You can upload a new image only after 4 months from your last upload.'
-        );
+        )
       } else if (error.response.status === 400) {
-        toast.error(error.response.data.message);
+        toast.error(error.response.data.message)
       } else {
-        console.error('Upload error:', error);
-        toast.error('Error uploading file. Please try again.');
+        console.error('Upload error:', error)
+        toast.error('Error uploading file. Please try again.')
       }
     }
-  };
+  }
   
-
   return (
     <>
       <div className='main p-6 flex flex-col items-center glassy rounded-lg shadow-lg'>
-        <h2 className='text-3xl font-semibold mb-6'>
-          Upload Image
-        </h2>
+        <h2 className='text-3xl font-semibold mb-6'>Upload Image</h2>
         {!isCaptchaValid && (
           <div className='captcha-section flex flex-col md:flex-row items-center gap-4 mb-6'>
             <input type='text' name='captcha' value={captcha} readOnly />
@@ -185,14 +182,14 @@ export default function UploadSnaps() {
 
         <div className='mt-6 w-full center'>
           {uploadedImage ? (
-            <div className='grid md:grid-cols-3 grid-cols-1'>
-              <p className='text-lg font-semibold mb-2'>
+            <div className='grid md:grid-cols-3 grid-cols-1 bg-black items-center justify-items-center'>
+              <p className='text-lg font-semibold mb-2 col-span-3'>
                 Previously Uploaded Image
               </p>
               <img
                 src={`http://localhost:3000/uploads/${uploadedImage.filename}`}
                 alt='Uploaded snap'
-                className='rounded-lg shadow-lg w-full max-w-md'
+                className='round w-1/2 max-w-md'
               />
             </div>
           ) : (
