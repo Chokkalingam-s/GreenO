@@ -49,7 +49,7 @@ export default function Profile() {
     fetchStudentDetails()
   }, [])
 
-  const progressPercentage = (uploadedCount / totalImages) * 100
+  const progressPercentage = (uploadedCount / totalImages) * 100 /12.5
 
   const handleGenerateCertificate = async () => {
     const certificateElement = document.querySelector('#certificate')
