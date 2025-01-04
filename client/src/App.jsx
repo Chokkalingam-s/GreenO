@@ -10,7 +10,6 @@ import {
   StudentSignUp,
   AdminSignUp,
   AdminHome,
-  MyActivities,
   UploadSnaps,
   Resource,
   ProtectedRoute,
@@ -21,7 +20,8 @@ import {
   Splash,
   Profile,
   Layout,
-  About
+  About,
+  Activity
 } from './exp_components'
 import { ToastContainer } from 'react-toastify'
 
@@ -72,7 +72,7 @@ export default function App() {
               </ProtectedRouteWrapper>
             }>
             <Route path='/home' element={<About />} />
-            <Route path='/activities' element={<MyActivities />} />
+            <Route path='/activities' element={<Activity />} />
             <Route path='/upload_snap' element={<UploadSnaps />} />
             <Route path='/resources' element={<Resource />} />
             <Route path='/profile' element={<Profile />} />

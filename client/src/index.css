@@ -27,12 +27,6 @@ body {
 .admin_detail svg {
   @apply w-12 aspect-square fill-white;
 }
-header,
-.logout {
-  svg {
-    @apply fill-white;
-  }
-}
 main {
   @apply relative z-20;
 }
@@ -122,9 +116,16 @@ article .banner {
 .round {
   @apply rounded-2xl shadow-lg;
 }
+.logout,
+nav a {
+  svg {
+    @apply fill-white;
+  }
+}
 
 nav a {
   @apply center flex-col md:flex-row;
+
   &.active {
     @apply text-secondary;
     svg {

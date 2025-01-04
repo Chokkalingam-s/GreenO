@@ -4,7 +4,7 @@ const StudentSignUp = lazy(() => import('./components/auth/signup/SignUp'))
 const AdminSignUp = lazy(() => import('./components/auth/signup/AdminSignUp'))
 const About = lazy(() => import('./student/About'))
 const AdminHome = lazy(() => import('./principal/AdminHome'))
-const MyActivities = lazy(() => import('./student/MyActivities'))
+const Activity = lazy(() => import('./student/Activity'))
 const UploadSnaps = lazy(() => import('./student/UploadSnaps'))
 const Resource = lazy(() => import('./student/Resource'))
 const Profile = lazy(() => import('./student/Profile'))
@@ -19,6 +19,7 @@ const Layout = lazy(() => import('./Layout'))
 const Splash = lazy(() => import('./components/Splashscreen'))
 const LogOut = lazy(() => import('./components/LogOut'))
 const Header = lazy(() => import('./components/nav/Header'))
+const Modal = lazy(() => import('./components/Modal'))
 
 export {
   LogOut,
@@ -29,7 +30,7 @@ export {
   AdminSignUp,
   About,
   AdminHome,
-  MyActivities,
+  Activity,
   UploadSnaps,
   Resource,
   Profile,
@@ -40,5 +41,6 @@ export {
   Report,
   StudentHeader,
   NavBar,
-  Header
+  Header,
+  Modal
 }
