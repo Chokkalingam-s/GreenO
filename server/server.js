@@ -268,6 +268,9 @@ const compareImages = async (imgPath1, imgPath2) => {
 };
 
 
+const MAX_DISTANCE_METERS = 5;
+const FOUR_MONTHS_IN_MILLIS = 4 * 30 * 24 * 60 * 60 * 1000; 
+
 app.post('/api/upload-snap', authenticateToken, upload.single('file'), async (req, res) => {
   const { email } = req.user;
   const { latitude, longitude } = req.body;
@@ -285,69 +288,98 @@ app.post('/api/upload-snap', authenticateToken, upload.single('file'), async (re
 
     const lastUpload = await UploadSnap.findOne({
       where: { email },
-      order: [['createdAt', 'DESC']],
+      order: [['createdAt', 'DESC']]
     });
 
     const currentTime = new Date();
 
     if (lastUpload) {
-      const lastUploadTime = new Date(lastUpload.createdAt); // Ensure lastUpload is treated as a Date object
-      const timeDifference = currentTime - lastUploadTime; // Corrected calculation of time difference
-      const fourMonthsInMillis = 4 * 30 * 24 * 60 * 60 * 1000; // Approx. 4 months in milliseconds
+      const lastUploadTime = new Date(lastUpload.createdAt);
+      const timeDifference = currentTime - lastUploadTime;
 
-      // Check if 4 months have passed since the last upload
-      if (timeDifference < fourMonthsInMillis) {
+      if (timeDifference < FOUR_MONTHS_IN_MILLIS) {
         return res.status(403).json({
-          message: 'You can upload a new image only after 4 months from your last upload.',
+          message: 'You can upload a new image only after 4 months from your last upload.'
+        });
+      }
+
+      const distance = calculateDistance(
+        latitude,
+        longitude,
+        lastUpload.latitude,
+        lastUpload.longitude
+      );
+
+      if (distance > MAX_DISTANCE_METERS) {
+        return res.status(400).json({
+          message: `Location mismatch: Images must be uploaded within ${MAX_DISTANCE_METERS} meters of the original location.`
+        });
+      }
+
+      const similarityScore = await compareImages(
+        req.file.path,
+        path.join(uploadDir, lastUpload.filename)
+      );
+      if (similarityScore < 70) {
+        return res.status(400).json({
+          message: `The uploaded image is too different from the previous image (Similarity: ${similarityScore.toFixed(2)}%).`
         });
       }
     }
-
-    // If the 4-month gap condition is met, check similarity
-    const similarityScore = await compareImages(req.file.path, path.join(uploadDir, lastUpload.filename));
-    if (similarityScore < 70) {
-      return res.status(400).json({
-        message: `The uploaded image is too different from the previous image (Similarity: ${similarityScore.toFixed(2)}%).`,
-      });
-    }
-
-    // Update user's upload count and create new upload record
-    await User.update(
-      { uploadCount: user.uploadCount + 1, lastUpload: currentTime },
-      { where: { email } }
-    );
 
     const relativeFilePath = `uploads/${req.file.filename}`;
     await UploadSnap.create({
       email,
       filename: req.file.filename,
       filePath: relativeFilePath,
-      count: user.uploadCount + 1,
-      lastUpload: currentTime,
       latitude,
       longitude,
+      createdAt: currentTime
     });
 
-    const firstUpload = user.uploadCount === 0;
-    const adminEntry = await Admin.findOne({
-      where: { collegeName: user.collegeName, department: user.department },
-    });
+    user.uploadCount += 1;
+    user.lastUpload = currentTime;
+    await user.save();
 
-    if (adminEntry && firstUpload) {
-      await Admin.update(
-        { uploadCount: adminEntry.uploadCount + 1 },
-        { where: { id: adminEntry.id } }
-      );
+    if (user.uploadCount === 1) {
+      const adminEntry = await Admin.findOne({
+        where: { collegeName: user.collegeName, department: user.department }
+      });
+
+      if (adminEntry) {
+        adminEntry.uploadCount += 1;
+        await adminEntry.save();
+      }
     }
 
     res.status(200).json({
       message: 'File uploaded successfully.',
-      filePath: relativeFilePath,
+      filePath: relativeFilePath
     });
   } catch (error) {
+    console.error('Upload error:', error);
     res.status(500).json({ error: error.message });
   }
 });
+
+
+function calculateDistance(lat1, lon1, lat2, lon2) {
+  const toRadians = degrees => (degrees * Math.PI) / 180;
+  const earthRadiusMeters = 6371000; 
+
+  const dLat = toRadians(lat2 - lat1);
+  const dLon = toRadians(lon2 - lon1);
+
+  const a =
+    Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+    Math.cos(toRadians(lat1)) *
+      Math.cos(toRadians(lat2)) *
+      Math.sin(dLon / 2) *
+      Math.sin(dLon / 2);
+
+  const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+  return earthRadiusMeters * c;
+}
 
 
 

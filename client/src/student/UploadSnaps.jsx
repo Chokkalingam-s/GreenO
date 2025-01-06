@@ -1,202 +1,203 @@
-import { useState, useEffect } from 'react'
-import axios from 'axios'
-import { toast } from 'react-toastify'
+import { useState, useEffect } from 'react';
+import axios from 'axios';
+import { toast } from 'react-toastify';
 
 export default function UploadSnaps() {
-  const [email] = useState('')
-  const [file, setFile] = useState(null)
-  const [uploadedImage, setUploadedImage] = useState(null)
-  const [captcha, setCaptcha] = useState('')
-  const [captchaInput, setCaptchaInput] = useState('')
-  const [isCaptchaValid, setIsCaptchaValid] = useState(false)
-  const [isUploadEnabled, setIsUploadEnabled] = useState(false)
-  const [location, setLocation] = useState({ latitude: '', longitude: '' })
+  const [email] = useState('');
+  const [file, setFile] = useState(null);
+  const [uploadedImage, setUploadedImage] = useState(null);
+  const [captcha, setCaptcha] = useState('');
+  const [captchaInput, setCaptchaInput] = useState('');
+  const [isCaptchaValid, setIsCaptchaValid] = useState(false);
+  const [isUploadEnabled, setIsUploadEnabled] = useState(false);
+  const [location, setLocation] = useState({ latitude: '', longitude: '' });
 
   const generateCaptcha = () => {
-    const chars =
-      '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'
-    let captcha = ''
+    const chars = '012345678&9ABCDEFGH!#JKLMNOPQRSTU$%VWXYZabcdefghijklmnopq@rstuvwxyz';
+    let captcha = '';
     for (let i = 0; i < 6; i++) {
-      captcha += chars[Math.floor(Math.random() * chars.length)]
+      captcha += chars[Math.floor(Math.random() * chars.length)];
     }
-    setCaptcha(captcha)
-    setCaptchaInput('')
-    setIsCaptchaValid(false)
-    setIsUploadEnabled(false)
-  }
+    setCaptcha(captcha);
+    setCaptchaInput('');
+    setIsCaptchaValid(false);
+    setIsUploadEnabled(false);
+  };
 
-  const handleFileChange = e => {
-    setFile(e.target.files[0])
-    validateUpload(e.target.files[0], isCaptchaValid)
-  }
+  const handleFileChange = (e) => {
+    setFile(e.target.files[0]);
+    validateUpload(e.target.files[0], isCaptchaValid);
+  };
 
-  const handleCaptchaInput = e => setCaptchaInput(e.target.value)
+  const handleCaptchaInput = (e) => setCaptchaInput(e.target.value);
 
   const validateUpload = (selectedFile, captchaIsValid) => {
-    if (selectedFile && captchaIsValid) setIsUploadEnabled(true)
-    else setIsUploadEnabled(false)
-  }
+    if (selectedFile && captchaIsValid) setIsUploadEnabled(true);
+    else setIsUploadEnabled(false);
+  };
 
   const handleVerifyCaptcha = () => {
     if (captchaInput === captcha) {
-      toast.success('Captcha verified successfully!')
-      setIsCaptchaValid(true)
-      validateUpload(file, true)
+      toast.success('Captcha verified successfully!');
+      setIsCaptchaValid(true);
+      validateUpload(file, true);
     } else {
-      toast.error('Captcha is incorrect. Please try again.')
-      setIsCaptchaValid(false)
+      toast.error('Captcha is incorrect. Please try again.');
+      setIsCaptchaValid(false);
     }
-  }
+  };
 
   useEffect(() => {
     const fetchLocation = () => {
       if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(
-          position => {
+          (position) => {
             setLocation({
               latitude: position.coords.latitude,
-              longitude: position.coords.longitude
-            })
+              longitude: position.coords.longitude,
+            });
           },
           () => {
-            toast.error('Location access denied')
+            toast.error('Location access denied');
           }
-        )
+        );
       } else {
-        toast.error('Geolocation is not supported by this browser.')
+        toast.error('Geolocation is not supported by this browser.');
       }
-    }
+    };
 
-    fetchLocation()
-    generateCaptcha()
+    fetchLocation();
+    generateCaptcha();
 
     const fetchUploadedSnap = async () => {
-      console.log('fetched')
-
-      const token = localStorage.getItem('token')
+      const token = localStorage.getItem('token');
       try {
-        const response = await axios.get(
-          'http://localhost:3000/api/uploaded-snaps',
-          {
-            headers: { Authorization: `Bearer ${token}` }
-          }
-        )
-        setUploadedImage(response.data)
-        console.log('response', response)
+        const response = await axios.get('http://localhost:3000/api/uploaded-snaps', {
+          headers: { Authorization: `Bearer ${token}` },
+        });
+        setUploadedImage(response.data);
       } catch (error) {
-        console.error('Error fetching uploaded snap:', error)
+        console.error('Error fetching uploaded snap:', error);
       }
-    }
-    fetchUploadedSnap()
-  }, [])
+    };
+
+    fetchUploadedSnap();
+  }, []);
 
   const handleUpload = async () => {
     if (!file) {
-      toast.error('Please select a file to upload.')
-      return
+      toast.error('Please select a file to upload.');
+      return;
     }
     if (!isCaptchaValid) {
-      toast.error('Captcha is incorrect. Please try again.')
-      return
+      toast.error('Captcha is incorrect. Please try again.');
+      return;
     }
 
-    const formData = new FormData()
-    formData.append('email', email)
-    formData.append('file', file)
-    formData.append('latitude', location.latitude)
-    formData.append('longitude', location.longitude)
+    const formData = new FormData();
+    formData.append('email', email);
+    formData.append('file', file);
+    formData.append('latitude', location.latitude);
+    formData.append('longitude', location.longitude);
 
-    const token = localStorage.getItem('token')
+    const token = localStorage.getItem('token');
     try {
-      const response = await axios.post(
-        'http://localhost:3000/api/upload-snap',
-        formData,
-        {
-          headers: {
-            'Content-Type': 'multipart/form-data',
-            Authorization: `Bearer ${token}`
-          }
-        }
-      )
-      toast.success('File uploaded successfully!')
-      setUploadedImage(response.data.filePath)
-      generateCaptcha()
-      setFile(null)
+      const response = await axios.post('http://localhost:3000/api/upload-snap', formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+          Authorization: `Bearer ${token}`,
+        },
+      });
 
+      toast.success('File uploaded successfully!');
+      setUploadedImage(response.data.filePath);
+      generateCaptcha();
+      setFile(null);
     } catch (error) {
       if (error.response.status === 403) {
         toast.error(
           'You can upload a new image only after 4 months from your last upload.'
-        )
+        );
       } else if (error.response.status === 400) {
-        toast.error(error.response.data.message)
+        toast.error(error.response.data.message);
       } else {
-        console.error('Upload error:', error)
-        toast.error('Error uploading file. Please try again.')
+        console.error('Upload error:', error);
+        toast.error('Error uploading file. Please try again.');
       }
     }
-  }
+  };
 
   return (
     <>
-      <div className='main p-6 flex flex-col items-center glassy rounded-lg shadow-lg'>
-        <h2 className='text-3xl font-semibold mb-6'>Upload Image</h2>
+      <div className="main p-6 flex flex-col items-center glassy rounded-lg shadow-lg">
+        <h2 className="text-3xl font-semibold mb-6">Upload Image</h2>
         {!isCaptchaValid && (
-          <div className='captcha-section flex flex-col md:flex-row items-center gap-4 mb-6'>
-            <input type='text' name='captcha' value={captcha} readOnly />
+          <div className="captcha-section flex flex-col md:flex-row items-center gap-4 mb-6">
+            <input type="text" name="captcha" value={captcha} readOnly className="font-bold" />
             <input
-              type='text'
-              placeholder='Enter captcha'
+              type="text"
+              placeholder="Enter captcha"
               value={captchaInput}
               onChange={handleCaptchaInput}
+              className="border p-2 rounded"
             />
-            <button onClick={handleVerifyCaptcha}>Verify</button>
+            <button onClick={handleVerifyCaptcha} className="btn btn-primary">
+              Verify
+            </button>
           </div>
         )}
+
+        {location.latitude && location.longitude && (
+          <div className="location-display text-sm mb-4 text-center">
+            <p><b>Latitude:</b> {location.latitude}</p>
+            <p><b>Longitude:</b> {location.longitude}</p>
+          </div>
+        )}
+
         {isCaptchaValid && (
           <>
-            <div className='p-2  md:w-1/2 border-4 border-dashed border-secondary h-64 glassy round center'>
+            <div className="p-2 md:w-1/2 border-4 border-dashed border-secondary h-64 glassy rounded-md flex justify-center items-center">
               <label
-                htmlFor='file-input'
-                className='cursor-pointer py-3 px-6 font-semibold text-lg bg-tertiary text-white rounded-lg transition duration-300 hover:bg-green-600'>
+                htmlFor="file-input"
+                className="cursor-pointer py-3 px-6 font-semibold text-lg bg-tertiary text-white rounded-lg transition duration-300 hover:bg-green-600"
+              >
                 Choose File
               </label>
               <input
-                id='file-input'
-                type='file'
+                id="file-input"
+                type="file"
                 onChange={handleFileChange}
-                className='opacity-0 absolute inset-0'
+                className="hidden"
               />
-              {file && (
-                <p className='text-gray-600 ml-4 text-sm'>{file.name}</p>
-              )}
+              {file && <p className="text-gray-600 ml-4 text-sm">{file.name}</p>}
             </div>
             <button
               onClick={handleUpload}
               disabled={!isUploadEnabled}
-              className='transition duration-300'>
+              className={`mt-4 px-4 py-2 rounded-lg ${isUploadEnabled ? 'bg-blue-600 hover:bg-blue-700 text-white' : 'bg-gray-400 text-gray-200'}`}
+            >
               Upload
             </button>
           </>
         )}
 
-        <div className='grid gap-2 grid-cols-1'>
-          <p className='text-lg font-semibold w-full mb-2 col-span-4 text-center'>
+        <div className="grid gap-2 grid-cols-1 mt-8">
+          <p className="text-lg font-semibold w-full mb-2 col-span-4 text-center">
             Previously Uploaded Image
           </p>
           {uploadedImage ? (
             <>
               <img
                 src={`http://localhost:3000/uploads/${uploadedImage.filename}`}
-                alt='Uploaded snap'
-                className='w-1/2 mx-auto aspect-square object-contain'
+                alt="Uploaded snap"
+                className="w-1/2 mx-auto aspect-square object-contain"
               />
             </>
           ) : (
-            <p className='col-span-4 text-center'>No image uploaded yet.</p>
+            <p className="col-span-4 text-center">No image uploaded yet.</p>
           )}
         </div>
       </div>
     </>
-  )
+  );
 }
