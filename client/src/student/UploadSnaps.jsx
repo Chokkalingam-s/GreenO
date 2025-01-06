@@ -189,7 +189,7 @@ export default function UploadSnaps() {
           {uploadedImage ? (
             <>
               <img
-                src={`http://localhost:3000/uploads/${uploadedImage.fileName}`}
+                src={`http://localhost:3000/uploads/${uploadedImage.filename}`}
                 alt='Uploaded snap'
                 className='w-full mx-auto object-contain'
               />
