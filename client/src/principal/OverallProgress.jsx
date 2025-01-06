@@ -1,17 +1,13 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import axios from 'axios'
-import AdminHeader from '../components/nav/AdminHeader'
-import AdminSideBar from '../components/nav/AdminSideBar'
-import './OverallProgress.css'
 import { FaSortUp, FaSortDown } from 'react-icons/fa'
 import jsPDF from 'jspdf'
 import html2canvas from 'html2canvas'
 
-const OverallProgress = () => {
+export default function OverallProgress() {
   const [progressData, setProgressData] = useState([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
-  const [openSidebarToggle, setOpenSidebarToggle] = useState(false)
   const [sortConfig, setSortConfig] = useState({ key: '', direction: 'asc' })
 
   useEffect(() => {
@@ -22,9 +18,7 @@ const OverallProgress = () => {
       try {
         console.log('Fetching overall progress data...')
         const token = localStorage.getItem('token')
-        if (!token) {
-          throw new Error('Authentication token is missing.')
-        }
+        if (!token) throw new Error('Authentication token is missing.')
 
         const response = await axios.get(
           'http://localhost:3000/api/overall-progress',
@@ -51,8 +45,6 @@ const OverallProgress = () => {
 
     fetchData()
   }, [])
-
-  const toggleSidebar = () => setOpenSidebarToggle(prev => !prev)
 
   const handleSort = key => {
     let direction = 'asc'
@@ -112,24 +104,17 @@ const OverallProgress = () => {
   }
 
   return (
-    <div className='grid-container'>
-      <AdminHeader OpenSidebar={toggleSidebar} />
-      <AdminSideBar
-        openSidebarToggle={openSidebarToggle}
-        OpenSidebar={toggleSidebar}
-      />
+    <div className='c_main'>
       <div className='main-content'>
-        <div className='header'>
-          <h2>Overall Progress</h2>
-          <button className='export-button' onClick={exportPDF}>
-            Export as PDF
-          </button>
+        <div className='flex justify-between items-center'>
+          <h2 className='text-3xl font-medium'>Overall Progress</h2>
+          <button onClick={exportPDF}>Export as PDF</button>
         </div>
         {error && <p className='error-message'>{error}</p>}
         {loading ? (
           <p>Loading...</p>
         ) : (
-          <div id='progress-table'>
+          <div id='progress-table' className='details_table'>
             <table className='responsive-table'>
               <thead>
                 <tr>
@@ -184,5 +169,3 @@ const OverallProgress = () => {
     </div>
   )
 }
-
-export default OverallProgress

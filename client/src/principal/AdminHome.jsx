@@ -77,7 +77,7 @@ export default function AHome() {
   }, [])
 
   return (
-    <main className='w-10/12 main_lg flex-col'>
+    <main className='c_main flex-col space-y-4'>
       <h3 className='head text-center'>Dashboard</h3>
       <div className='grid grid-cols-1 md:grid-cols-2 items-center justify-items-center gap-x-4'>
         <div className='_detail'>
@@ -96,7 +96,7 @@ export default function AHome() {
         </div>
       </div>
 
-      <div className='mt-8 w-1/2 glassy round mx-auto'>
+      <div className='w-10/12 glassy round mx-auto'>
         <BarChart
           dataset={data}
           borderRadius={20}
