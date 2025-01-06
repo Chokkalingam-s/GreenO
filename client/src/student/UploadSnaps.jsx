@@ -183,11 +183,11 @@ export default function UploadSnaps() {
         )}
 
         <div className='grid gap-2 grid-cols-1 md:grid-cols-4 round'>
+          <p className='text-lg font-semibold w-full mb-2 col-span-4 text-center'>
+            Previously Uploaded Image
+          </p>
           {uploadedImage ? (
             <>
-              <p className='text-lg font-semibold w-full mb-2 col-span-4 text-center'>
-                Previously Uploaded Image
-              </p>
               <img
                 src={`http://localhost:3000/uploads/${uploadedImage.fileName}`}
                 alt='Uploaded snap'
@@ -195,7 +195,7 @@ export default function UploadSnaps() {
               />
             </>
           ) : (
-            <p>No image uploaded yet.</p>
+            <p className='col-span-4 text-center'>No image uploaded yet.</p>
           )}
         </div>
       </div>
