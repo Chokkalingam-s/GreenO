@@ -1,6 +1,6 @@
 import { useState } from 'react'
-import DepartmentHeader from '../components/sidebar/DepartmentHeader'
-import DepartmentSideBar from '../components/sidebar/DepartmentSideBar'
+import DepartmentHeader from '../components/nav/DepartmentHeader'
+import DepartmentSideBar from '../components/nav/DepartmentSideBar'
 import DHome from './DHome'
 
 import './DHome.css'
