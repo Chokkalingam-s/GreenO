@@ -487,6 +487,9 @@ app.get('/api/overall-progress', authenticateToken, async (req, res) => {
 
     const progressData = []
 
+    const currentYear = new Date().getFullYear()
+    const currentMonth = new Date().getMonth() + 1 // January is 0, so we add 1
+
     admins.forEach(admin => {
       const departmentData = {
         department: admin.department,
@@ -502,17 +505,22 @@ app.get('/api/overall-progress', authenticateToken, async (req, res) => {
 
       users.forEach(user => {
         if (user.department === admin.department) {
-          const currentYear = new Date().getFullYear()
           const graduationYear = parseInt(user.yearOfGraduation, 10)
-          const year = graduationYear - currentYear + 1
+          let yearDifference = graduationYear - currentYear
 
-          if (year === 1) {
+          // Adjust the year difference based on the current month
+          if (currentMonth > 6) {
+            yearDifference--;  // If current month is after June, the student is a year ahead
+          }
+
+          // Determine the student's current year based on the year difference
+          if (yearDifference === 3) {
             departmentData.yearCounts.firstYear += 1
-          } else if (year === 2) {
+          } else if (yearDifference === 2) {
             departmentData.yearCounts.secondYear += 1
-          } else if (year === 3) {
+          } else if (yearDifference === 1) {
             departmentData.yearCounts.thirdYear += 1
-          } else if (year === 4) {
+          } else if (yearDifference === 0) {
             departmentData.yearCounts.fourthYear += 1
           }
         }
@@ -527,6 +535,7 @@ app.get('/api/overall-progress', authenticateToken, async (req, res) => {
     res.status(500).json({ message: 'Internal server error' })
   }
 })
+
 app.get('/api/department-student-data', authenticateToken, async (req, res) => {
   const { email } = req.user
 
