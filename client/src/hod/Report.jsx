@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react'
 import axios from 'axios'
 import { Chart } from 'react-google-charts'
-import { Link } from 'react-router-dom'
 
 const Report = () => {
   const [departmentData, setDepartmentData] = useState([])
@@ -60,10 +59,6 @@ const Report = () => {
     }
   }
 
-  const OpenSidebar = () => {
-    setOpenSidebarToggle(!openSidebarToggle)
-  }
-
   const shortenDepartmentName = name => {
     return name
       .split(' ')
@@ -102,6 +97,8 @@ const Report = () => {
     pieHole: 0.4,
     pieStartAngle: 100,
     sliceVisibilityThreshold: 0.02,
+    backgroundColor: { fill: 'transparent' },
+    opacity: 0,
     legend: {
       position: 'bottom',
       alignment: 'center',
