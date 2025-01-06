@@ -49,8 +49,8 @@ export default function Profile() {
     fetchStudentDetails()
   }, [])
 
-  const progressPercentage = (uploadedCount / totalImages) * 100 /12.5
-
+  const progressPercentage = (uploadedCount / totalImages) * 100 
+  const progressPercentage1 = (uploadedCount / totalImages) * 100 /12.5
   const handleGenerateCertificate = async () => {
     const certificateElement = document.querySelector('#certificate')
     if (!certificateElement) return
@@ -174,7 +174,7 @@ export default function Profile() {
                 [`& .${gaugeClasses.valueArc}`]: { fill: '#fff' },
                 [`& .MuiGauge-background`]: { fill: '#e0e0e0' }
               }}
-              text={() => `${progressPercentage} / ${totalImages}`}
+              text={() => `${progressPercentage1} / ${totalImages}`}
             />
             <p className='text-xl absolute bottom-10'>My Progress</p>
           </div>
