@@ -153,7 +153,7 @@ export default function DepartmentHome() {
 
       <h2 className='text-2xl'>Year Distribution</h2>
       <div className='text-lg'>Year-wise Student Distribution</div>
-      <div className='chart-container'>
+      <div className='h-72 aspect-video'>
         <Bar data={chartData} options={chartOptions} />
       </div>
     </div>
