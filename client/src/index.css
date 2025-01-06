@@ -152,7 +152,7 @@ nav a {
 .error {
   @apply text-red-500 font-semibold;
 }
-.admin_detail {
+._detail {
   @apply glassy round flex items-center p-4 justify-evenly w-80;
   h3,
   h1 {
@@ -161,7 +161,7 @@ nav a {
   h3 {
     @apply text-lg;
   }
-  img {
+  svg {
     @apply w-10 aspect-square;
   }
 }
