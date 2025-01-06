@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import { useEffect, useState } from 'react'
 import axios from 'axios'
 import {
@@ -12,12 +11,6 @@ import {
 } from 'chart.js'
 import { Bar } from 'react-chartjs-2'
 // import './DHome.css'
-=======
-import { useState } from 'react'
-import DepartmentHeader from '../components/nav/DepartmentHeader'
-import DepartmentSideBar from '../components/nav/DepartmentSideBar'
-import DHome from './DHome'
->>>>>>> c141bbb25a89e2027e943d0e16329bad390d25f9
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend)
 
