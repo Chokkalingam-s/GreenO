@@ -40,3 +40,13 @@ Later:
 
 Future User Side
  add email to the verify otp reset password
+
+
+ ToDo ( Chokkalingam and Divakar Reference):
+   
+    Landing Website !
+   
+    personal mail id suggested ( Not Confirmed )
+    Student sign up - DOB Backend
+    Student sign up - Based on Dataset given by College's
+    !!!! AICTE Level development ( Backend Central server )
