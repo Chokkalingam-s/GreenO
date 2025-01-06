@@ -122,9 +122,7 @@ export default function UploadSnaps() {
       setUploadedImage(response.data.filePath)
       generateCaptcha()
       setFile(null)
-      setTimeout(() => {
-        window.location.reload()
-      }, 1500)
+
     } catch (error) {
       if (error.response.status === 403) {
         toast.error(
