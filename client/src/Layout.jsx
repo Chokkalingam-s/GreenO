@@ -3,7 +3,6 @@ import { Header, NavBar } from './exp_components'
 import 'react-toastify/dist/ReactToastify.css'
 
 export default function Layout() {
-  console.log('Layout re-rendered')
   return (
     <>
       <Header />

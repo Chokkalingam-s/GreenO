@@ -3,8 +3,10 @@ import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import { useAuth } from './AuthContext'
 import { toast } from 'react-toastify'
+import { useRole } from '../useRole'
 
 export default function SignIn() {
+  const { setRole } = useRole()
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [showOtpPopup, setShowOtpPopup] = useState(false)
@@ -31,6 +33,7 @@ export default function SignIn() {
       const { token, userRole } = response.data
       if (token) {
         localStorage.setItem('token', token)
+        setRole(userRole)
         setIsAuthenticated(true)
         navigate(
           userRole === 'admin'

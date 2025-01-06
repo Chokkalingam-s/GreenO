@@ -1,6 +1,7 @@
 import { NavLink } from 'react-router-dom'
+import { useRole } from '../auth/useRole'
 
-const userNavItems = [
+const studentNavItems = [
   {
     path: '/activities',
     viewBox: '0 0 512 512',
@@ -33,7 +34,7 @@ const userNavItems = [
   }
 ]
 
-const adminNavItems = [
+const principalNavItems = [
   {
     path: '/admin',
     icon: '/at-solid.svg',
@@ -46,13 +47,37 @@ const adminNavItems = [
   }
 ]
 
-export default function NavBar({ role = 0, type = 0 }) {
-  const navItems = role === 1 ? adminNavItems : userNavItems
+const hodNavItems = [
+  {
+    path: '/department',
+    icon: '/at-solid.svg',
+    label: 'Department'
+  },
+  {
+    path: '/department-progress',
+    icon: '/at-solid.svg',
+    label: 'Progress'
+  },
+  {
+    path: '/report',
+    icon: '/at-solid.svg',
+    label: 'Report'
+  }
+]
+
+export default function NavBar({ type = 0 }) {
+  const { role } = useRole()
+  const navItems =
+    role === 'student' || role === 'hod'
+      ? hodNavItems
+      : role === 'principal'
+      ? principalNavItems
+      : studentNavItems
 
   return (
     <nav
       className={`glassy round items-center justify-evenly font-medium gap-x-4 p-3 ${
-        type == 0 ? 'hidden md:flex' : 'md:hidden flex fixed bottom-0 w-full'
+        type === 0 ? 'hidden md:flex' : 'md:hidden flex fixed bottom-0 w-full'
       } z-20`}>
       {navItems.map(({ path, viewBox, icon, label }) => (
         <NavLink key={path} to={path}>
