@@ -16,6 +16,7 @@ TODO:
     Profile:
       Chokkalingam's Profile ( Heading ) Size Reduce
       toastify Alert not working - generate certificate
+      Mobile - Generate certificate - Text is big , reduce it as same as laptop
   Hod Login:
     Progress Table:
       Filter in Year ( Current Year)

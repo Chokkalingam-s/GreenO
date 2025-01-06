@@ -291,24 +291,27 @@ app.post('/api/upload-snap', authenticateToken, upload.single('file'), async (re
     const currentTime = new Date();
 
     if (lastUpload) {
-      const lastUploadTime = new Date(lastUpload.createdAt);
-      const timeDifference = currentTime - new Date(lastUpload);
-const fourMonthsInMillis = 4 * 30 * 24 * 60 * 60 * 1000;
+      const lastUploadTime = new Date(lastUpload.createdAt); // Ensure lastUpload is treated as a Date object
+      const timeDifference = currentTime - lastUploadTime; // Corrected calculation of time difference
+      const fourMonthsInMillis = 4 * 30 * 24 * 60 * 60 * 1000; // Approx. 4 months in milliseconds
 
+      // Check if 4 months have passed since the last upload
       if (timeDifference < fourMonthsInMillis) {
         return res.status(403).json({
           message: 'You can upload a new image only after 4 months from your last upload.',
         });
       }
-
-      const similarityScore = await compareImages(req.file.path, path.join(uploadDir, lastUpload.filename));
-      if (similarityScore < 70) {
-        return res.status(400).json({
-          message: `The uploaded image is too different from the previous image (Similarity: ${similarityScore.toFixed(2)}%).`,
-        });
-      }
     }
 
+    // If the 4-month gap condition is met, check similarity
+    const similarityScore = await compareImages(req.file.path, path.join(uploadDir, lastUpload.filename));
+    if (similarityScore < 70) {
+      return res.status(400).json({
+        message: `The uploaded image is too different from the previous image (Similarity: ${similarityScore.toFixed(2)}%).`,
+      });
+    }
+
+    // Update user's upload count and create new upload record
     await User.update(
       { uploadCount: user.uploadCount + 1, lastUpload: currentTime },
       { where: { email } }
@@ -345,6 +348,8 @@ const fourMonthsInMillis = 4 * 30 * 24 * 60 * 60 * 1000;
     res.status(500).json({ error: error.message });
   }
 });
+
+
 
 app.get('/api/get-uploaded-images', authenticateToken, async (req, res) => {
   const { email } = req.user
