@@ -2,9 +2,6 @@ import { useEffect, useState } from 'react'
 import axios from 'axios'
 import { Chart } from 'react-google-charts'
 import { Link } from 'react-router-dom'
-import './Report.css'
-import DepartmentHeader from '../components/nav/DepartmentHeader'
-import DepartmentSideBar from '../components/nav/DepartmentSideBar'
 
 const Report = () => {
   const [departmentData, setDepartmentData] = useState([])
@@ -117,30 +114,17 @@ const Report = () => {
   }
 
   return (
-    <div className='grid-container'>
-      <DepartmentHeader OpenSidebar={OpenSidebar} />
-      <DepartmentSideBar
-        openSidebarToggle={openSidebarToggle}
-        OpenSidebar={OpenSidebar}
-      />
-
+    <div className='c_main'>
       <div className='report-content'>
-        <div className='breadcrumb-navigation'>
-          <Link to='/HodHome' className='breadcrumb-link'>
-            Home
-          </Link>{' '}
-          &gt;&gt; Reports
-        </div>
-        <h2 className='report-title'>Department Contribution Overview</h2>
-
+        <h2 className='head'>Department Contribution Overview</h2>
         {loading ? (
           <p className='loading-text'>Loading...</p>
         ) : (
           <>
             {departmentData.length > 0 ? (
               <div className='pie-chart-section'>
-                <h3 className='section-title'>Department-wise Upload Count</h3>
-                <div className='pie-chart-container'>
+                <h3 className='text-xl'>Department-wise Upload Count</h3>
+                <div className=''>
                   <Chart
                     chartType='PieChart'
                     data={pieChartData}
@@ -154,9 +138,9 @@ const Report = () => {
               <p className='no-data-text'>No data available for departments.</p>
             )}
 
-            <div className='top-departments-section'>
-              <h3 className='section-title'>Top 3 Departments</h3>
-              <table className='top-departments-table'>
+            <div className='center glassy round flex-col details_table space-y-4 my-4'>
+              <h3 className='text-xl'>Top 3 Departments</h3>
+              <table>
                 <thead>
                   <tr>
                     <th>Rank</th>
@@ -177,12 +161,10 @@ const Report = () => {
             </div>
 
             {userDepartmentRank && (
-              <div className='user-department-rank'>
-                <p className='rank-info'>
-                  Your department is currently ranked:{' '}
-                  <strong>{userDepartmentRank}</strong>
-                </p>
-              </div>
+              <p className='center space-x-2'>
+                <span>Your department is currently ranked:</span>
+                <strong>{userDepartmentRank}</strong>
+              </p>
             )}
           </>
         )}
