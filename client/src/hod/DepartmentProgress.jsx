@@ -115,7 +115,7 @@ const DepartmentProgress = () => {
               <th>Register Number</th>
               <th>Current Year</th>
               <th onClick={toggleSortDirection} style={{ cursor: 'pointer' }}>
-                Upload Count{' '}
+                Upload Count
                 {sortDirection === 'asc' ? <FaSortUp /> : <FaSortDown />}
               </th>
             </tr>

@@ -1,6 +1,15 @@
 import { NavLink } from 'react-router-dom'
 import { useRole } from '../auth/useRole'
 
+function commonObj(path) {
+  return {
+    path: path,
+    viewBox: '0 0 448 512',
+    icon: 'M384 96l0 128-128 0 0-128 128 0zm0 192l0 128-128 0 0-128 128 0zM192 224L64 224 64 96l128 0 0 128zM64 288l128 0 0 128L64 416l0-128zM64 32C28.7 32 0 60.7 0 96L0 416c0 35.3 28.7 64 64 64l320 0c35.3 0 64-28.7 64-64l0-320c0-35.3-28.7-64-64-64L64 32z',
+    label: 'Dashboard'
+  }
+}
+
 const studentNavItems = [
   {
     path: '/activities',
@@ -35,33 +44,28 @@ const studentNavItems = [
 ]
 
 const principalNavItems = [
-  {
-    path: '/admin',
-    icon: '/at-solid.svg',
-    label: 'Dashboard'
-  },
+  commonObj('/admin'),
   {
     path: '/progress',
+    viewBox: '',
     icon: '/at-solid.svg',
     label: 'Progress'
   }
 ]
 
 const hodNavItems = [
-  {
-    path: '/department',
-    icon: '/at-solid.svg',
-    label: 'Department'
-  },
+  commonObj('/department'),
   {
     path: '/department-progress',
-    icon: '/at-solid.svg',
+    viewBox: '0 0 512 512',
+    icon: 'M448 160l-128 0 0-32 128 0 0 32zM48 64C21.5 64 0 85.5 0 112l0 64c0 26.5 21.5 48 48 48l416 0c26.5 0 48-21.5 48-48l0-64c0-26.5-21.5-48-48-48L48 64zM448 352l0 32-256 0 0-32 256 0zM48 288c-26.5 0-48 21.5-48 48l0 64c0 26.5 21.5 48 48 48l416 0c26.5 0 48-21.5 48-48l0-64c0-26.5-21.5-48-48-48L48 288z',
     label: 'Progress'
   },
   {
     path: '/report',
-    icon: '/at-solid.svg',
-    label: 'Report'
+    viewBox: '0 0 512 512',
+    icon: 'M64 64c0-17.7-14.3-32-32-32S0 46.3 0 64L0 400c0 44.2 35.8 80 80 80l400 0c17.7 0 32-14.3 32-32s-14.3-32-32-32L80 416c-8.8 0-16-7.2-16-16L64 64zm406.6 86.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L320 210.7l-57.4-57.4c-12.5-12.5-32.8-12.5-45.3 0l-112 112c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L240 221.3l57.4 57.4c12.5 12.5 32.8 12.5 45.3 0l128-128z',
+    label: 'Overall Status'
   }
 ]
 
