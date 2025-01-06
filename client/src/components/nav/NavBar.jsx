@@ -1,12 +1,20 @@
 import { NavLink } from 'react-router-dom'
 import { useRole } from '../auth/useRole'
 
-function commonObj(path) {
+function commonDashboard(path) {
   return {
     path: path,
     viewBox: '0 0 448 512',
     icon: 'M384 96l0 128-128 0 0-128 128 0zm0 192l0 128-128 0 0-128 128 0zM192 224L64 224 64 96l128 0 0 128zM64 288l128 0 0 128L64 416l0-128zM64 32C28.7 32 0 60.7 0 96L0 416c0 35.3 28.7 64 64 64l320 0c35.3 0 64-28.7 64-64l0-320c0-35.3-28.7-64-64-64L64 32z',
     label: 'Dashboard'
+  }
+}
+function commonProgress(path) {
+  return {
+    path: path,
+    viewBox: '0 0 512 512',
+    icon: 'M448 160l-128 0 0-32 128 0 0 32zM48 64C21.5 64 0 85.5 0 112l0 64c0 26.5 21.5 48 48 48l416 0c26.5 0 48-21.5 48-48l0-64c0-26.5-21.5-48-48-48L48 64zM448 352l0 32-256 0 0-32 256 0zM48 288c-26.5 0-48 21.5-48 48l0 64c0 26.5 21.5 48 48 48l416 0c26.5 0 48-21.5 48-48l0-64c0-26.5-21.5-48-48-48L48 288z',
+    label: 'Progress'
   }
 }
 
@@ -44,23 +52,13 @@ const studentNavItems = [
 ]
 
 const principalNavItems = [
-  commonObj('/admin'),
-  {
-    path: '/progress',
-    viewBox: '',
-    icon: '/at-solid.svg',
-    label: 'Progress'
-  }
+  commonDashboard('/admin'),
+  commonProgress('/progress')
 ]
 
 const hodNavItems = [
-  commonObj('/department'),
-  {
-    path: '/department-progress',
-    viewBox: '0 0 512 512',
-    icon: 'M448 160l-128 0 0-32 128 0 0 32zM48 64C21.5 64 0 85.5 0 112l0 64c0 26.5 21.5 48 48 48l416 0c26.5 0 48-21.5 48-48l0-64c0-26.5-21.5-48-48-48L48 64zM448 352l0 32-256 0 0-32 256 0zM48 288c-26.5 0-48 21.5-48 48l0 64c0 26.5 21.5 48 48 48l416 0c26.5 0 48-21.5 48-48l0-64c0-26.5-21.5-48-48-48L48 288z',
-    label: 'Progress'
-  },
+  commonDashboard('/department'),
+  commonProgress('/department-progress'),
   {
     path: '/report',
     viewBox: '0 0 512 512',
@@ -72,9 +70,9 @@ const hodNavItems = [
 export default function NavBar({ type = 0 }) {
   const { role } = useRole()
   const navItems =
-    role === 'student' || role === 'hod'
+    role === 'hod'
       ? hodNavItems
-      : role === 'principal'
+      : role === 'admin'
       ? principalNavItems
       : studentNavItems
 

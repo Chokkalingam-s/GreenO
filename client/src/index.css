@@ -143,7 +143,7 @@ nav a {
     @apply w-full border-collapse round overflow-hidden mb-4 glassy;
   }
   th {
-    @apply glassy;
+    @apply glassy p-2;
   }
   td {
     @apply p-2 text-sm;

@@ -3,13 +3,9 @@ import axios from 'axios'
 import { FaSortUp, FaSortDown } from 'react-icons/fa'
 import jsPDF from 'jspdf'
 import html2canvas from 'html2canvas'
-import DepartmentHeader from '../components/sidebar/DepartmentHeader'
-import DepartmentSideBar from '../components/sidebar/DepartmentSideBar'
-import './DepartmentProgress.css'
 
-const DepartmentProgress = () => {
+export default function DepartmentProgress() {
   const [data, setData] = useState([])
-  const [openSidebarToggle, setOpenSidebarToggle] = useState(false)
   const [sortDirection, setSortDirection] = useState('desc')
   const token = localStorage.getItem('token')
   const [departmentName, setDepartmentName] = useState('')
@@ -21,8 +17,8 @@ const DepartmentProgress = () => {
           'http://localhost:3000/api/department-progress',
           {
             headers: {
-              Authorization: `Bearer ${token}`,
-            },
+              Authorization: `Bearer ${token}`
+            }
           }
         )
         setData(response.data)
@@ -36,10 +32,6 @@ const DepartmentProgress = () => {
 
     fetchData()
   }, [token])
-
-  const OpenSidebar = () => {
-    setOpenSidebarToggle(!openSidebarToggle)
-  }
 
   const sortedData = [...data].sort((a, b) => {
     if (sortDirection === 'asc') {
@@ -88,52 +80,43 @@ const DepartmentProgress = () => {
     })
   }
 
-  if (!data.length) {
-    return <p>Loading...</p>
-  }
+  if (!data.length) return <p>Loading...</p>
 
   return (
-    <div className='grid-container'>
-      <DepartmentHeader OpenSidebar={OpenSidebar} />
-      <DepartmentSideBar
-        openSidebarToggle={openSidebarToggle}
-        OpenSidebar={OpenSidebar}
-      />
+    <div className='main flex-col max-h-96'>
       <div className='department-progress'>
-        <h2>Department Progress</h2>
-        <div className='export-btn'>
-          <button onClick={exportToPDF} className='btn btn-primary'>
-            Export to PDF
-          </button>
-        </div>
-        <table
-          id='department-table'
-          className='table table-striped table-bordered'>
-          <thead>
-            <tr>
-              <th>Name</th>
-              <th>Register Number</th>
-              <th>Current Year</th>
-              <th onClick={toggleSortDirection} style={{ cursor: 'pointer' }}>
-                Upload Count
-                {sortDirection === 'asc' ? <FaSortUp /> : <FaSortDown />}
-              </th>
-            </tr>
-          </thead>
-          <tbody>
-            {sortedData.map((student, index) => (
-              <tr key={index}>
-                <td>{student.name}</td>
-                <td>{student.registerNumber}</td>
-                <td>{student.currentYear - 1}</td>
-                <td>{student.uploadCount}</td>
+        <h2 className='head'>Department Progress</h2>
+        <span className='details_table'>
+          <table id='department-table'>
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Register Number</th>
+                <th>Current Year</th>
+                <th
+                  onClick={toggleSortDirection}
+                  className='cursor-pointer flex'>
+                  Upload Count
+                  {sortDirection === 'asc' ? <FaSortUp /> : <FaSortDown />}
+                </th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {sortedData.map((student, index) => (
+                <tr key={index}>
+                  <td>{student.name}</td>
+                  <td>{student.registerNumber}</td>
+                  <td>{student.currentYear - 1}</td>
+                  <td>{student.uploadCount}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </span>
       </div>
+      <button onClick={exportToPDF} className='btn btn-primary'>
+        Export to PDF
+      </button>
     </div>
   )
 }
-
-export default DepartmentProgress
