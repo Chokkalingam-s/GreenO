@@ -555,41 +555,51 @@ app.get('/api/department-student-data', authenticateToken, async (req, res) => {
     const totalStudents = adminData.studentCount
     const totalSaplings = adminData.uploadCount || 0
 
-    const currentYear = new Date().getFullYear()
+    const currentYear = new Date().getFullYear();
+    const currentMonth = new Date().getMonth() + 1; // January is 0, so we add 1
     const yearCounts = {
       '1st Year': 0,
       '2nd Year': 0,
       '3rd Year': 0,
       '4th Year': 0,
-    }
-
+    };
+    
     const yearDistribution = await User.findAll({
       where: { department, role: 'student' },
       attributes: ['yearOfGraduation'],
-    })
-
+    });
+    
     yearDistribution.forEach(({ yearOfGraduation }) => {
-      const graduationYear = parseInt(yearOfGraduation, 10)
-      const yearDifference = graduationYear - currentYear + 1
-
-      switch (yearDifference) {
-        case 1:
-          yearCounts['1st Year']++
-          break
-        case 2:
-          yearCounts['2nd Year']++
-          break
-        case 3:
-          yearCounts['3rd Year']++
-          break
-        case 4:
-          yearCounts['4th Year']++
-          break
-        default:
-          break
+      const graduationYear = parseInt(yearOfGraduation, 10);
+      const graduationMonth = 6; // Assuming graduation month is June for simplicity
+      
+      // If current year is before July (Jan to June), the student is in a year behind
+      // If current year is from July onwards (July to Dec), the student is in the current year
+      let yearDifference = graduationYear - currentYear;
+      
+      // Adjust the year difference based on the current month
+      if (currentMonth > 6) {
+        yearDifference--;  // If current month is after June, the student is a year ahead
       }
-    })
-
+      
+      switch (yearDifference) {
+        case 3:
+          yearCounts['1st Year']++;
+          break;
+        case 2:
+          yearCounts['2nd Year']++;
+          break;
+        case 1:
+          yearCounts['3rd Year']++;
+          break;
+        case 0:
+          yearCounts['4th Year']++;
+          break;
+        default:
+          break;
+      }
+    });
+ 
     res.status(200).json({ totalStudents, totalSaplings, yearCounts })
   } catch (error) {
     console.error('Error fetching department data:', error)
@@ -630,29 +640,40 @@ app.get('/api/department-progress', authenticateToken, async (req, res) => {
         .json({ error: 'No students found for this department' })
     }
 
-    const currentYear = new Date().getFullYear()
+    const currentYear = new Date().getFullYear();
+    const currentMonth = new Date().getMonth() + 1; // January is 0, so we add 1
+    
     const responseData = students.map(student => {
-      const graduationYear = parseInt(student.yearOfGraduation, 10)
-      const diff = graduationYear - currentYear
-      let currentYearProgress
-      if (diff === 2) {
-        currentYearProgress = 3
-      } else if (diff === 1) {
-        currentYearProgress = 4
-      } else if (diff === 3) {
-        currentYearProgress = 2
-      } else if (diff === 4) {
-        currentYearProgress = 1
-      } else {
-        currentYearProgress = null
+      const graduationYear = parseInt(student.yearOfGraduation, 10);
+      let currentYearProgress;
+    
+      // Calculate the difference between the current year and graduation year
+      let yearDifference = graduationYear - currentYear;
+    
+      // Adjust the year difference based on the current month
+      if (currentMonth > 6) {
+        yearDifference--;  // If current month is after June, the student is a year ahead
       }
-
+    
+      // Assign current year based on the adjusted year difference
+      if (yearDifference === 3) {
+        currentYearProgress = 1;  // 1st Year
+      } else if (yearDifference === 2) {
+        currentYearProgress = 2;  // 2nd Year
+      } else if (yearDifference === 1) {
+        currentYearProgress = 3;  // 3rd Year
+      } else if (yearDifference === 0) {
+        currentYearProgress = 4;  // 4th Year
+      } else {
+        currentYearProgress = 0;  // For cases where graduation year is earlier than current year
+      }
+    
       return {
         name: student.name,
         registerNumber: student.collegeRegisterNumber,
         currentYear: currentYearProgress,
         uploadCount: student.uploadCount,
-      }
+      };
     })
 
     res.status(200).json(responseData)
