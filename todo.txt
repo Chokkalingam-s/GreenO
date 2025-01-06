@@ -11,8 +11,11 @@ Done:
   upload image - previously uploaded image
 
 TODO:
-  Activity Page : Mobile View : single page 8 images , each row 2
-  Profile - Chokkalingam's Profile ( Heading ) Size Reduce
+  Student Side :
+    Activity Page : Mobile View : single page 8 images , each row 2
+    Profile:
+      Chokkalingam's Profile ( Heading ) Size Reduce
+      toastify Alert not working - generate certificate
   Hod Login:
     Progress Table:
       Filter in Year ( Current Year)
