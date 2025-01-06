@@ -81,11 +81,7 @@ export default function UploadSnaps() {
             headers: { Authorization: `Bearer ${token}` }
           }
         )
-        // setUploadedImage(response.data)
-        setUploadedImage({
-          fileName:
-            'https://images.unsplash.com/photo-1735276680696-f1c5bca7cdef?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
-        })
+        setUploadedImage(response.data)
         console.log('response', response)
       } catch (error) {
         console.error('Error fetching uploaded snap:', error)
@@ -187,30 +183,15 @@ export default function UploadSnaps() {
         )}
 
         <div className='grid gap-2 grid-cols-1 md:grid-cols-4 round outline'>
-          {true ? (
+          {uploadedImage ? (
             <>
               <p className='text-lg font-semibold w-full mb-2 bg-black col-span-4 text-center'>
                 Previously Uploaded Image
               </p>
               <img
-                src={`https://images.unsplash.com/photo-1735276680696-f1c5bca7cdef?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D`}
+                src={`http://localhost:3000/uploads/${uploadedImage.fileName}`}
                 alt='Uploaded snap'
                 className='w-full mx-auto object-contain'
-              />
-              <img
-                src={`https://images.unsplash.com/photo-1735276680696-f1c5bca7cdef?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D`}
-                alt='Uploaded snap'
-                className='w-8/12 mx-auto aspect-square object-contain'
-              />
-              <img
-                src={`https://images.unsplash.com/photo-1735276680696-f1c5bca7cdef?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D`}
-                alt='Uploaded snap'
-                className='w-8/12 mx-auto aspect-square object-contain'
-              />
-              <img
-                src={`https://images.unsplash.com/photo-1735276680696-f1c5bca7cdef?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D`}
-                alt='Uploaded snap'
-                className='w-8/12 mx-auto aspect-square object-contain'
               />
             </>
           ) : (
@@ -221,4 +202,3 @@ export default function UploadSnaps() {
     </>
   )
 }
-// http://localhost:3000/uploads/
