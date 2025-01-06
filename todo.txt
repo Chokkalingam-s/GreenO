@@ -8,10 +8,18 @@ Done:
   dropdown theme
   Activity - my pregress - only sem number and also add clicking in the image it should give like a zoom up
     - laptop ( 4 4)
-
-TODO:
   upload image - previously uploaded image
 
+TODO:
+  Activity Page : Mobile View : single page 8 images , each row 2
+  Profile - Chokkalingam's Profile ( Heading ) Size Reduce
+  Hod Login:
+    Progress Table:
+      Filter in Year ( Current Year)
+      Search bar ( names and regNo)
+    Overall Status: ( report )
+      Height Correction
+      Multiple heading repetition
 
 Later:
   about page changes
