@@ -122,7 +122,6 @@ nav a {
     @apply fill-white;
   }
 }
-
 nav a {
   @apply center flex-col md:flex-row;
 

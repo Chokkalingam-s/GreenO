@@ -71,6 +71,8 @@ export default function UploadSnaps() {
     generateCaptcha()
 
     const fetchUploadedSnap = async () => {
+      console.log('fetched')
+
       const token = localStorage.getItem('token')
       try {
         const response = await axios.get(
@@ -79,7 +81,11 @@ export default function UploadSnaps() {
             headers: { Authorization: `Bearer ${token}` }
           }
         )
-        setUploadedImage(response.data)
+        // setUploadedImage(response.data)
+        setUploadedImage({
+          fileName:
+            'https://images.unsplash.com/photo-1735276680696-f1c5bca7cdef?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
+        })
         console.log('response', response)
       } catch (error) {
         console.error('Error fetching uploaded snap:', error)
@@ -136,7 +142,7 @@ export default function UploadSnaps() {
       }
     }
   }
-  
+
   return (
     <>
       <div className='main p-6 flex flex-col items-center glassy rounded-lg shadow-lg'>
@@ -180,18 +186,33 @@ export default function UploadSnaps() {
           </>
         )}
 
-        <div className='mt-6 w-full center'>
-          {uploadedImage ? (
-            <div className='grid md:grid-cols-3 grid-cols-1 bg-black items-center justify-items-center'>
-              <p className='text-lg font-semibold mb-2 col-span-3'>
+        <div className='grid gap-2 grid-cols-1 md:grid-cols-4 round outline'>
+          {true ? (
+            <>
+              <p className='text-lg font-semibold w-full mb-2 bg-black col-span-4 text-center'>
                 Previously Uploaded Image
               </p>
               <img
-                src={`http://localhost:3000/uploads/${uploadedImage.filename}`}
+                src={`https://images.unsplash.com/photo-1735276680696-f1c5bca7cdef?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D`}
                 alt='Uploaded snap'
-                className='round w-1/2 max-w-md'
+                className='w-full mx-auto object-contain'
               />
-            </div>
+              <img
+                src={`https://images.unsplash.com/photo-1735276680696-f1c5bca7cdef?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D`}
+                alt='Uploaded snap'
+                className='w-8/12 mx-auto aspect-square object-contain'
+              />
+              <img
+                src={`https://images.unsplash.com/photo-1735276680696-f1c5bca7cdef?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D`}
+                alt='Uploaded snap'
+                className='w-8/12 mx-auto aspect-square object-contain'
+              />
+              <img
+                src={`https://images.unsplash.com/photo-1735276680696-f1c5bca7cdef?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D`}
+                alt='Uploaded snap'
+                className='w-8/12 mx-auto aspect-square object-contain'
+              />
+            </>
           ) : (
             <p>No image uploaded yet.</p>
           )}
@@ -200,3 +221,4 @@ export default function UploadSnaps() {
     </>
   )
 }
+// http://localhost:3000/uploads/
