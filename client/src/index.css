@@ -16,14 +16,17 @@ body {
   font-family: 'Poppins', serif;
   background-image: url('/bg.jpg');
   @apply text-white bg-primary bg-cover bg-center font-normal bg-fixed;
+
   p {
     @apply text-base md:max-w-[70ch];
   }
+
   &::after {
     content: '';
     @apply bg-black/30 absolute inset-0;
   }
 }
+
 .admin_detail svg {
   @apply w-12 aspect-square fill-white;
 }
@@ -82,11 +85,11 @@ button:not(.logout) {
   @apply -translate-y-[var(--translate-y)];
 }
 button:not(.cancel, .Toastify__close-button) {
-  @apply glassy;
+  @apply glassy outline-2 outline outline-offset-2 outline-transparent transition-all duration-200;
   &:hover,
   &:focus,
   &:active {
-    @apply translate-y-0 outline-2 outline outline-offset-2 outline-secondary;
+    @apply translate-y-0 outline-secondary;
     box-shadow: #2d23420c 0 4px 4px;
   }
 }
