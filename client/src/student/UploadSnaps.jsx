@@ -182,10 +182,10 @@ export default function UploadSnaps() {
           </>
         )}
 
-        <div className='grid gap-2 grid-cols-1 md:grid-cols-4 round outline'>
+        <div className='grid gap-2 grid-cols-1 md:grid-cols-4 round'>
           {uploadedImage ? (
             <>
-              <p className='text-lg font-semibold w-full mb-2 bg-black col-span-4 text-center'>
+              <p className='text-lg font-semibold w-full mb-2 col-span-4 text-center'>
                 Previously Uploaded Image
               </p>
               <img
