@@ -6,7 +6,7 @@ export default function Layout() {
   return (
     <>
       <Header />
-      <main className='container center flex-col mb-16 md:mb-0'>
+      <main className='container center flex-col relative z-20'>
         <Outlet />
       </main>
       <NavBar type={1} />
