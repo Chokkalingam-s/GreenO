@@ -23,11 +23,19 @@ export default function OverallStatus() {
 
       if (response.status === 200 && Array.isArray(response.data)) {
         const data = response.data
-        setDepartmentData(data)
 
-        const sortedDepartments = [...data].sort(
-          (a, b) => b.uploadCount - a.uploadCount
-        )
+      const processedData = data.map((dept) => ({
+        ...dept,
+        percentage: ((dept.uploadCount / dept.studentCount) * 100).toFixed(2), 
+      }));
+
+      const sortedDepartments = processedData.sort((a, b) => {
+        if (b.percentage !== a.percentage) {
+          return b.percentage - a.percentage; 
+        }
+        return b.studentCount - a.studentCount; 
+      });
+      setDepartmentData(sortedDepartments);
         setTopDepartments(sortedDepartments.slice(0, 3))
 
         const userResponse = await axios.get(
@@ -111,14 +119,14 @@ export default function OverallStatus() {
   return (
     <div className='c_main'>
       <div className='report-content'>
-        <h2 className='head'>Department Contribution Overview</h2>
+        <h2 className='head'>Overall Department Contribution</h2>
         {loading ? (
           <p className='loading-text'>Loading...</p>
         ) : (
           <>
             {departmentData.length > 0 ? (
               <div className='pie-chart-section'>
-                <h3 className='text-xl'>Department-wise Upload Count</h3>
+                <h3 className='text-xl'>Department-wise Sapling Count</h3>
                 <div className=''>
                   <Chart
                     chartType='PieChart'
@@ -140,7 +148,7 @@ export default function OverallStatus() {
                   <tr>
                     <th>Rank</th>
                     <th>Department</th>
-                    <th>Upload Count</th>
+                    <th>Progress</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -148,7 +156,7 @@ export default function OverallStatus() {
                     <tr key={dept.department}>
                       <td>{index === 0 ? '🥇' : index === 1 ? '🥈' : '🥉'}</td>
                       <td>{shortenDepartmentName(dept.department)}</td>
-                      <td>{dept.uploadCount}</td>
+                      <td>{dept.percentage}%</td>
                     </tr>
                   ))}
                 </tbody>
