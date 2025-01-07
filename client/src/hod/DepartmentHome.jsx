@@ -151,9 +151,8 @@ export default function DepartmentHome() {
         </div>
       </div>
 
-      <h2 className='text-2xl'>Year Distribution</h2>
-      <div className='text-lg'>Year-wise Student Distribution</div>
-      <div className='h-72 aspect-video'>
+      <div className='h-72 aspect-video main flex-col'>
+        <h2 className='text-lg'>Year-wise Student Distribution</h2>
         <Bar data={chartData} options={chartOptions} />
       </div>
     </div>

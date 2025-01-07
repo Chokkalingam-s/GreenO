@@ -27,7 +27,7 @@ body {
   }
 }
 
-.admin_detail svg {
+._detail svg {
   @apply w-12 aspect-square fill-white;
 }
 main {
@@ -150,6 +150,9 @@ nav a {
   }
   td {
     @apply p-2 text-sm;
+  }
+  svg {
+    @apply w-10 fill-white;
   }
 }
 .error {

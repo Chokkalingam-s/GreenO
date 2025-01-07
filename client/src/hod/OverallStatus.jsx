@@ -2,12 +2,11 @@ import { useEffect, useState } from 'react'
 import axios from 'axios'
 import { Chart } from 'react-google-charts'
 
-const Report = () => {
+export default function OverallStatus() {
   const [departmentData, setDepartmentData] = useState([])
   const [topDepartments, setTopDepartments] = useState([])
   const [userDepartmentRank, setUserDepartmentRank] = useState(null)
   const [loading, setLoading] = useState(true)
-  const [openSidebarToggle, setOpenSidebarToggle] = useState(false)
 
   useEffect(() => {
     fetchDepartmentData()
@@ -169,5 +168,3 @@ const Report = () => {
     </div>
   )
 }
-
-export default Report

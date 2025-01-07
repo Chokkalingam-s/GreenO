@@ -12,7 +12,6 @@ const ProtectedRoute = lazy(() => import('./components/auth/ProtectedRoute'))
 const OverallProgress = lazy(() => import('./principal/OverallProgress'))
 const DepartmentHome = lazy(() => import('./hod/DepartmentHome'))
 const DepartmentProgress = lazy(() => import('./hod/DepartmentProgress'))
-const Report = lazy(() => import('./hod/Report'))
 const StudentHeader = lazy(() => import('./components/nav/StudentHeader'))
 const NavBar = lazy(() => import('./components/nav/NavBar'))
 const Layout = lazy(() => import('./Layout'))
@@ -20,8 +19,10 @@ const Splash = lazy(() => import('./components/Splashscreen'))
 const LogOut = lazy(() => import('./components/LogOut'))
 const Header = lazy(() => import('./components/nav/Header'))
 const Modal = lazy(() => import('./components/Modal'))
+const OverallStatus = lazy(() => import('./hod/OverallStatus'))
 
 export {
+  OverallStatus,
   LogOut,
   Splash,
   Layout,
@@ -38,7 +39,6 @@ export {
   OverallProgress,
   DepartmentHome,
   DepartmentProgress,
-  Report,
   StudentHeader,
   NavBar,
   Header,

@@ -1,14 +1,15 @@
 import { useEffect, useState } from 'react'
 import axios from 'axios'
-import { FaSortUp, FaSortDown } from 'react-icons/fa'
 import jsPDF from 'jspdf'
 import html2canvas from 'html2canvas'
+import SearchComponent from './SearchComponent'
 
 export default function DepartmentProgress() {
   const [data, setData] = useState([])
+  const [filteredData, setFilteredData] = useState([])
+  const [sortField, setSortField] = useState('uploadCount')
   const [sortDirection, setSortDirection] = useState('desc')
   const token = localStorage.getItem('token')
-  const [departmentName, setDepartmentName] = useState('')
 
   useEffect(() => {
     const fetchData = async () => {
@@ -22,9 +23,7 @@ export default function DepartmentProgress() {
           }
         )
         setData(response.data)
-        if (response.data.length > 0) {
-          setDepartmentName(response.data[0].department)
-        }
+        setFilteredData(response.data)
       } catch (error) {
         console.error('Error fetching department progress:', error)
       }
@@ -33,16 +32,33 @@ export default function DepartmentProgress() {
     fetchData()
   }, [token])
 
-  const sortedData = [...data].sort((a, b) => {
-    if (sortDirection === 'asc') {
-      return a.uploadCount - b.uploadCount
-    }
-    return b.uploadCount - a.uploadCount
-  })
-
-  const toggleSortDirection = () => {
-    setSortDirection(prev => (prev === 'asc' ? 'desc' : 'asc'))
+  const sortData = field => {
+    const sorted = [...filteredData].sort((a, b) => {
+      if (sortDirection === 'asc') {
+        return a[field] > b[field] ? 1 : -1
+      }
+      return a[field] < b[field] ? 1 : -1
+    })
+    setFilteredData(sorted)
   }
+
+  const toggleSortDirection = field => {
+    setSortDirection(prev => (prev === 'asc' ? 'desc' : 'asc'))
+    setSortField(field)
+    sortData(field)
+  }
+
+  const renderSortIcon = field =>
+    sortField === field &&
+    (sortDirection === 'asc' ? (
+      <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 320 512'>
+        <path d='M182.6 137.4c-12.5-12.5-32.8-12.5-45.3 0l-128 128c-9.2 9.2-11.9 22.9-6.9 34.9s16.6 19.8 29.6 19.8l256 0c12.9 0 24.6-7.8 29.6-19.8s2.2-25.7-6.9-34.9l-128-128z' />
+      </svg>
+    ) : (
+      <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 320 512'>
+        <path d='M137.4 374.6c12.5 12.5 32.8 12.5 45.3 0l128-128c9.2-9.2 11.9-22.9 6.9-34.9s-16.6-19.8-29.6-19.8L32 192c-12.9 0-24.6 7.8-29.6 19.8s-2.2 25.7 6.9 34.9l128 128z' />
+      </svg>
+    ))
 
   const exportToPDF = () => {
     const input = document.getElementById('department-table')
@@ -85,6 +101,7 @@ export default function DepartmentProgress() {
   return (
     <div className='main flex-col max-h-96'>
       <div className='department-progress'>
+        <SearchComponent data={data} onFilter={setFilteredData} />
         <h2 className='head'>Department Progress</h2>
         <span className='details_table'>
           <table id='department-table'>
@@ -92,21 +109,24 @@ export default function DepartmentProgress() {
               <tr>
                 <th>Name</th>
                 <th>Register Number</th>
-                <th>Current Year</th>
                 <th
-                  onClick={toggleSortDirection}
-                  className='cursor-pointer flex'>
-                  Upload Count
-                  {sortDirection === 'asc' ? <FaSortUp /> : <FaSortDown />}
+                  onClick={() => toggleSortDirection('currentYear')}
+                  className='cursor-pointer'>
+                  Current Year {renderSortIcon('currentYear')}
+                </th>
+                <th
+                  onClick={() => toggleSortDirection('uploadCount')}
+                  className='cursor-pointer'>
+                  Upload Count {renderSortIcon('uploadCount')}
                 </th>
               </tr>
             </thead>
             <tbody>
-              {sortedData.map((student, index) => (
+              {filteredData.map((student, index) => (
                 <tr key={index}>
                   <td>{student.name}</td>
                   <td>{student.registerNumber}</td>
-                  <td>{student.currentYear}</td>
+                  <td>{student.currentYear - 1}</td>
                   <td>{student.uploadCount}</td>
                 </tr>
               ))}
@@ -114,9 +134,7 @@ export default function DepartmentProgress() {
           </table>
         </span>
       </div>
-      <button onClick={exportToPDF} className='btn btn-primary'>
-        Export to PDF
-      </button>
+      <button onClick={exportToPDF}>Export to PDF</button>
     </div>
   )
 }
