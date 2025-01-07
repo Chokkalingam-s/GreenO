@@ -268,8 +268,8 @@ const compareImages = async (imgPath1, imgPath2) => {
 };
 
 
-const MAX_DISTANCE_METERS = 5;
-const FOUR_MONTHS_IN_MILLIS = 4 * 30 * 24 * 60 * 60 * 1000; 
+const MAX_DISTANCE_METERS = 10;
+const FOUR_MONTHS_IN_MILLIS = 4 * 30 * 24 * 60 * 60 * 1000;
 
 app.post('/api/upload-snap', authenticateToken, upload.single('file'), async (req, res) => {
   const { email } = req.user;
@@ -288,7 +288,7 @@ app.post('/api/upload-snap', authenticateToken, upload.single('file'), async (re
 
     const lastUpload = await UploadSnap.findOne({
       where: { email },
-      order: [['createdAt', 'DESC']]
+      order: [['createdAt', 'DESC']],
     });
 
     const currentTime = new Date();
@@ -299,34 +299,36 @@ app.post('/api/upload-snap', authenticateToken, upload.single('file'), async (re
 
       if (timeDifference < FOUR_MONTHS_IN_MILLIS) {
         return res.status(403).json({
-          message: 'You can upload a new image only after 4 months from your last upload.'
+          message: 'You can upload a new image only after 4 months from your last upload.',
         });
       }
 
       const lastLatitude = parseFloat(lastUpload.latitude);
-  const lastLongitude = parseFloat(lastUpload.longitude);
+      const lastLongitude = parseFloat(lastUpload.longitude);
+      
 
-  const distance = calculateDistance(
-    parseFloat(latitude),
-    parseFloat(longitude),
-    lastLatitude,
-    lastLongitude
-  );
+      // Adjusting calculateDistance to ensure precision
+      const distance = calculateDistance(
+        parseFloat(latitude),
+        parseFloat(longitude),
+        lastLatitude,
+        lastLongitude
+      );
 
-  if (distance > MAX_DISTANCE_METERS) {
-    return res.status(400).json({
-      message: `Location mismatch: Images must be uploaded within ${MAX_DISTANCE_METERS} meters of the original location.`
-    });
-
+      if (distance > MAX_DISTANCE_METERS) {
+        return res.status(400).json({
+          message: `Location mismatch: Images must be uploaded within ${MAX_DISTANCE_METERS} meters of the original location.`,
+        });
       }
 
       const similarityScore = await compareImages(
         req.file.path,
         path.join(uploadDir, lastUpload.filename)
       );
+
       if (similarityScore < 70) {
         return res.status(400).json({
-          message: `The uploaded image is too different from the previous image (Similarity: ${similarityScore.toFixed(2)}%).`
+          message: `The uploaded image is too different from the previous image (Similarity: ${similarityScore.toFixed(2)}%).`,
         });
       }
     }
@@ -336,10 +338,14 @@ app.post('/api/upload-snap', authenticateToken, upload.single('file'), async (re
       email,
       filename: req.file.filename,
       filePath: relativeFilePath,
+      count: user.uploadCount + 1,
+      lastUpload: currentTime,
       latitude,
       longitude,
-      createdAt: currentTime
+      createdAt: currentTime,
+      
     });
+  
 
     user.uploadCount += 1;
     user.lastUpload = currentTime;
@@ -347,7 +353,7 @@ app.post('/api/upload-snap', authenticateToken, upload.single('file'), async (re
 
     if (user.uploadCount === 1) {
       const adminEntry = await Admin.findOne({
-        where: { collegeName: user.collegeName, department: user.department }
+        where: { collegeName: user.collegeName, department: user.department },
       });
 
       if (adminEntry) {
@@ -358,7 +364,7 @@ app.post('/api/upload-snap', authenticateToken, upload.single('file'), async (re
 
     res.status(200).json({
       message: 'File uploaded successfully.',
-      filePath: relativeFilePath
+      filePath: relativeFilePath,
     });
   } catch (error) {
     console.error('Upload error:', error);
@@ -366,24 +372,28 @@ app.post('/api/upload-snap', authenticateToken, upload.single('file'), async (re
   }
 });
 
-
+// Function to calculate distance with high precision
 function calculateDistance(lat1, lon1, lat2, lon2) {
-  const toRadians = degrees => (degrees * Math.PI) / 180;
-  const earthRadiusMeters = 6371000; 
+  const toRadians = (degrees) => (degrees * Math.PI) / 180;
+  const earthRadiusMeters = 6371000; // Radius of the earth in meters
 
   const dLat = toRadians(lat2 - lat1);
   const dLon = toRadians(lon2 - lon1);
 
   const a =
     Math.sin(dLat / 2) * Math.sin(dLat / 2) +
-    Math.cos(toRadians(lat1)) *
-      Math.cos(toRadians(lat2)) *
-      Math.sin(dLon / 2) *
-      Math.sin(dLon / 2);
+    Math.cos(toRadians(lat1)) * Math.cos(toRadians(lat2)) *
+    Math.sin(dLon / 2) * Math.sin(dLon / 2);
 
   const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-  return earthRadiusMeters * c;
+  const distance = earthRadiusMeters * c;
+
+  // Add a console.log statement to debug the distance value
+  console.log(`Calculated distance: ${distance} meters`);
+
+  return distance;
 }
+
 
 
 
