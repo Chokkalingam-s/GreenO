@@ -333,6 +333,10 @@ app.post('/api/upload-snap', authenticateToken, upload.single('file'), async (re
       }
     }
 
+    const lastCount = lastUpload ? lastUpload.count : 0;
+
+    const newCount = lastCount + 1;
+    
     const relativeFilePath = `uploads/${req.file.filename}`;
     await UploadSnap.create({
       email,
@@ -342,12 +346,13 @@ app.post('/api/upload-snap', authenticateToken, upload.single('file'), async (re
       lastUpload: currentTime,
       latitude,
       longitude,
-      createdAt: currentTime,
-      
+      count: newCount,
+      createdAt: currentTime
     });
   
 
     user.uploadCount += 1;
+   
     user.lastUpload = currentTime;
     await user.save();
 

@@ -28,12 +28,12 @@ export default function Activity() {
   }, [token])
 
   return (
-    <div className='center flex-col relative mt-12 mb-4 md:m-0'>
-      <h2 className='head mt-4 round glassy p-2'>Activity</h2>
+    <div className='center flex-col'>
+      <h2 className='head mb-4 round glassy p-2'>Activity</h2>
       {images.length === 0 ? (
-        <p className='glassy round p-2'>No images uploaded yet.</p>
+        <p className='glassy round p-1'>No images uploaded yet.</p>
       ) : (
-        <div className='grid gap-4 grid-cols-1 md:grid-cols-4 round'>
+        <div className='grid gap-2 grid-cols-2 md:grid-cols-4 round'>
           {images.map((image, index) => (
             <div
               key={image.id}
@@ -42,7 +42,7 @@ export default function Activity() {
                 setModalSrc(`http://localhost:3000/${image.filePath}`)
               }>
               <img
-                className='w-8/12 mx-auto aspect-square object-contain'
+                className='w-full mx-auto aspect-video mt-1 object-contain'
                 src={`http://localhost:3000/${image.filePath}`}
                 alt={`Semester ${index + 1}`}
               />

@@ -3,7 +3,7 @@ import axios from 'axios'
 import { Gauge, gaugeClasses } from '@mui/x-charts/Gauge'
 import html2canvas from 'html2canvas'
 import jsPDF from 'jspdf'
-import { toast } from 'react-toastify' 
+import { toast } from 'react-toastify'
 
 export default function Profile() {
   const [studentDetails, setStudentDetails] = useState(null)
@@ -51,11 +51,13 @@ export default function Profile() {
   }, [])
 
   const progressPercentage = (uploadedCount / totalImages) * 100
-  const progressPercentage1 = (uploadedCount / totalImages) * 100 / 12.5
+  const progressPercentage1 = ((uploadedCount / totalImages) * 100) / 12.5
 
   const handleGenerateCertificate = async () => {
     if (progressPercentage < 100) {
-      toast.error("Progress Incomplete! Please upload all 8 images to generate the certificate.")
+      toast.error(
+        'Progress Incomplete! Please upload all 8 images to generate the certificate.'
+      )
       return
     }
 
@@ -85,11 +87,11 @@ export default function Profile() {
 
   return (
     <>
-      <div className='container center mt-10 md:mt-0 flex-col'>
+      <div className='container center my-12 md:mt-0 flex-col'>
         {loading ? (
           <p>Loading...</p>
         ) : (
-          <h3 className='head md:col-span-2 relative top-6'>
+          <h3 className='md:col-span-2 relative top-6 mb-6 ml-6 w-full text-2xl md:text-center'>
             {studentDetails.name}&apos;s Profile
           </h3>
         )}
@@ -227,7 +229,7 @@ export default function Profile() {
                     Successfully Grown a Tree in academic period of
                     <br />
                     <strong>
-                      {studentDetails.yearOfGraduation - 4} - 
+                      {studentDetails.yearOfGraduation - 4} -
                       {studentDetails.yearOfGraduation}
                     </strong>
                   </p>
