@@ -78,7 +78,7 @@ button:not(.Toastify__close-button) {
     box-shadow: #2d23420c 0 4px 4px;
   }
 }
-button:not(.logout) {
+button:not(.logout, .search-list) {
   @apply -translate-y-[var(--translate-y)];
 }
 button:not(.cancel, .Toastify__close-button) {
@@ -173,10 +173,10 @@ nav a {
 }
 
 ::-webkit-scrollbar {
-  @apply w-1 bg-black;
+  @apply w-1 bg-primary;
 }
 ::-webkit-scrollbar-thumb {
-  @apply bg-white round;
+  @apply bg-black round;
 }
 .cert {
   @apply w-full;
@@ -187,9 +187,12 @@ nav a {
     @apply md:text-4xl text-xl md:mb-2;
   }
 }
-.search-ejbrjhbgrg {
+.search-list {
   svg {
     @apply fill-white icon;
+  }
+  button {
+    @apply absolute right-0 top-0 -translate-y-1/2;
   }
 }
 ::-webkit-calendar-picker-indicator {

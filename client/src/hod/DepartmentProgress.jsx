@@ -700,13 +700,15 @@ export default function DepartmentProgress() {
   // if (data.length == 0) return <p>Loading...</p>
 
   return (
-    <div className='c_main flex-col max-h-[90vh]'>
-      <div className='w-11/12 overflow-y-scroll'>
-        <span className='flex justify-between items-center'>
-          <h2 className='head'>Department Progress</h2>
-          <button onClick={exportToPDF}>Export to PDF</button>
-        </span>
+    <div className='c_main flex-col max-h-[90vh] mt-8'>
+      <div className='flex justify-between items-center w-11/12'>
+        <h2 className='head'>Department Progress</h2>
+        <button onClick={exportToPDF}>Export to PDF</button>
+      </div>
+      <div className='w-1/2'>
         <SearchComponent data={data} onFilter={setFilteredData} />
+      </div>
+      <div className='w-11/12 mx-auto overflow-y-scroll h-full round'>
         <span className='details_table'>
           <table id='department-table'>
             <thead>
