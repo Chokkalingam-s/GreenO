@@ -62,7 +62,7 @@ select:disabled {
   @apply w-full h-1 bg-primary rounded-full shadow-2xl;
 }
 .head {
-  @apply text-3xl font-medium mb-6;
+  @apply text-3xl font-medium;
 }
 .c_main {
   @apply md:px-2 round md:py-4 relative top-2 glassy center w-11/12;
@@ -152,7 +152,7 @@ nav a {
     @apply p-2 text-sm;
   }
   svg {
-    @apply w-10 fill-white;
+    @apply icon fill-white;
   }
 }
 .error {
@@ -188,5 +188,10 @@ nav a {
   }
   h2 {
     @apply md:text-4xl text-xl md:mb-2;
+  }
+}
+.search-ejbrjhbgrg {
+  svg {
+    @apply fill-white icon;
   }
 }

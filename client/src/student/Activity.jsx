@@ -17,7 +17,29 @@ export default function Activity() {
             headers: { Authorization: `Bearer ${token}` }
           }
         )
-        setImages(response.data)
+        // setImages(response.data)
+        setImages([
+          {
+            filePath:
+              'https://images.unsplash.com/photo-1736168432643-2d5882e17aeb?q=80&w=1770&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
+          },
+          {
+            filePath:
+              'https://images.unsplash.com/photo-1736168432643-2d5882e17aeb?q=80&w=1770&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
+          },
+          {
+            filePath:
+              'https://images.unsplash.com/photo-1736168432643-2d5882e17aeb?q=80&w=1770&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
+          },
+          {
+            filePath:
+              'https://images.unsplash.com/photo-1736168432643-2d5882e17aeb?q=80&w=1770&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
+          },
+          {
+            filePath:
+              'https://images.unsplash.com/photo-1736168432643-2d5882e17aeb?q=80&w=1770&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
+          }
+        ])
       } catch (error) {
         console.error('Error fetching images:', error)
         toast.error('Error fetching images. Please try again later.')
@@ -43,7 +65,7 @@ export default function Activity() {
               }>
               <img
                 className='w-8/12 mx-auto aspect-square object-contain'
-                src={`http://localhost:3000/${image.filePath}`}
+                src={`${image.filePath}`}
                 alt={`Semester ${index + 1}`}
               />
               <h3 className='font-medium tracking-wider text-center text-xl my-2'>
@@ -57,3 +79,4 @@ export default function Activity() {
     </div>
   )
 }
+//http://localhost:3000/
