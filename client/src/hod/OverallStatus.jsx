@@ -92,7 +92,6 @@ export default function OverallStatus() {
   ]
 
   const pieChartOptions = {
-    title: 'Department-wise Upload Count',
     pieHole: 0.4,
     pieStartAngle: 100,
     sliceVisibilityThreshold: 0.02,
@@ -102,7 +101,7 @@ export default function OverallStatus() {
       position: 'bottom',
       alignment: 'center',
       textStyle: {
-        color: '#233238',
+        color: '#FFFFFF',
         fontSize: 14
       }
     },
