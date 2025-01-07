@@ -91,7 +91,7 @@ export default function Profile() {
         {loading ? (
           <p>Loading...</p>
         ) : (
-          <h3 className='head md:col-span-2 relative top-6 mb-6 ml-2 w-full text-start'>
+          <h3 className='md:col-span-2 relative top-6 mb-6 ml-6 w-full text-2xl md:text-center'>
             {studentDetails.name}&apos;s Profile
           </h3>
         )}
