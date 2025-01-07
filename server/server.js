@@ -501,13 +501,11 @@ app.get('/api/admin-data', authenticateToken, async (req, res) => {
 
     const collegeName = user.collegeName
 
-    // Fetch rows from Admin table where collegeName matches the logged-in user's collegeName
     const adminData = await Admin.findAll({
       where: { collegeName: collegeName },
       attributes: ['department', 'uploadCount', 'studentCount'],
     })
 
-    // Send the fetched data as a JSON response
     res.status(200).json(adminData)
   } catch (error) {
     console.error('Error fetching admin data:', error)
