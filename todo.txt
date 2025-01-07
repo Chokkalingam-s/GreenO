@@ -33,7 +33,7 @@ TODO:
 
   Student SignUp:
      Add DOB
-  
+     Secondary Mail
 
 Later:
   about page changes Ui Improvisation
