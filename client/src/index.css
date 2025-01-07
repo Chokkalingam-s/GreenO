@@ -74,11 +74,10 @@ button:not(.Toastify__close-button) {
   &:hover,
   &:focus,
   &:active {
-    @apply translate-y-0;
     box-shadow: #2d23420c 0 4px 4px;
   }
 }
-button:not(.logout, .search-list) {
+button:not(.logout, .search-list, .disabled) {
   @apply -translate-y-[var(--translate-y)];
 }
 button:not(.cancel, .Toastify__close-button) {
@@ -90,9 +89,18 @@ button:not(.cancel, .Toastify__close-button) {
     box-shadow: #2d23420c 0 4px 4px;
   }
 }
-button:disabled:hover {
-  @apply shadow-none -translate-x-0;
+button:disabled,
+.disabled {
+  @apply opacity-60 cursor-not-allowed outline-none;
 }
+
+button:disabled:hover,
+button:disabled:focus,
+button:disabled:active,
+.disabled:hover {
+  @apply shadow-none translate-y-0 transition-none outline-none transform-none;
+}
+
 .cancel {
   @apply bg-red-500 text-white;
   &:hover,

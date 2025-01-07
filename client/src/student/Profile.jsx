@@ -11,8 +11,14 @@ export default function Profile() {
   const [error, setError] = useState(null)
   const [uploadedCount, setUploadedCount] = useState(null)
   const totalImages = 8
-  const [modal, SetModal] = useState(false)
+  const [modal, setModal] = useState(false)
+  const [progressPercentage, setProgressPercentage] = useState(0)
+  const [progressPercentage1, setProgressPercentage1] = useState(0)
 
+  useEffect(() => {
+    setProgressPercentage((uploadedCount / totalImages) * 100)
+    setProgressPercentage1(progressPercentage / 12.5)
+  }, [progressPercentage, uploadedCount])
   useEffect(() => {
     const token = localStorage.getItem('token')
     const fetchUploadedImagesCount = async () => {
@@ -50,17 +56,22 @@ export default function Profile() {
     fetchStudentDetails()
   }, [])
 
-  const progressPercentage = (uploadedCount / totalImages) * 100
-  const progressPercentage1 = ((uploadedCount / totalImages) * 100) / 12.5
-
-  const handleGenerateCertificate = async () => {
+  function handleClick() {
+    console.log('clicked')
     if (progressPercentage < 100) {
+      console.log('toast 🥂')
       toast.error(
         'Progress Incomplete! Please upload all 8 images to generate the certificate.'
       )
       return
     }
+    if (progressPercentage <= 100) {
+      toast.success('you can download the certificate')
+      setModal(!modal)
+    }
+  }
 
+  const handleGenerateCertificate = async () => {
     const certificateElement = document.querySelector('#certificate')
     if (!certificateElement) return
 
@@ -81,7 +92,7 @@ export default function Profile() {
       console.error('Error generating certificate:', error)
     } finally {
       certificateElement.classList.add('hidden')
-      SetModal(!modal)
+      setModal(!modal)
     }
   }
 
@@ -194,10 +205,8 @@ export default function Profile() {
               className='w-1/2 round'
             />
             <button
-              className='btn btn-primary mt-3'
-              onClick={() => SetModal(true)}
-              disabled={progressPercentage < 100} // Disable button if progress is less than 100%
-            >
+              onClick={handleClick}
+              className={`${progressPercentage < 100 ? 'disabled' : ''}`}>
               Generate Certificate
             </button>
           </div>
@@ -241,7 +250,7 @@ export default function Profile() {
           </div>
           <div className='md:w-fit absolute md:right-0 bottom-0 md:bg-gradient-to-r from-transparent to-black/15 md:h-full center flex-col p-2 right-1/2 translate-x-1/2 md:translate-x-0 top-1/2 md:top-0'>
             <button onClick={handleGenerateCertificate}>Download PDF</button>
-            <button onClick={() => SetModal(!modal)} className='cancel w-full'>
+            <button onClick={() => setModal(!modal)} className='cancel w-full'>
               Cancel
             </button>
           </div>
