@@ -15,25 +15,27 @@ TODO:
   Student Side :
     Profile:
       toastify Alert not working - generate certificate
-      Mobile - Generate certificate - Text is big , reduce it as same as laptop
   Hod Login:
     Progress Table:
       Filter in Year ( Current Year)
-      Search bar ( names and regNo)
       Export PDF
     Overall Status: ( report )
       Height Correction
-      Multiple heading repetition
+      Ranking Legible ( bottom last line)
   Admin Login:
     Progress Table:
       Icon for Filter ( Asc Desc )
-      Include filter in First-Last year 
+      Include filter in First-Last year
+      add column at last "Progress" with filter 
       Export PDF
+  Final : Refresh load bug.
+   
 
 Later:
   about page changes Ui Improvisation
   better error handling with user
   Try - background - doodle / image
+  Mobile - Generate certificate - Text is big , reduce it as same as laptop
 
 Future User Side
  add email to the verify otp reset password
@@ -42,8 +44,6 @@ Future User Side
  ToDo ( Chokkalingam and Divakar Reference):
    
     Landing Website !
-   
-    personal mail id suggested ( Not Confirmed )
-    Student sign up - DOB Backend and Email Backend
+
     Student sign up - Based on Dataset given by College's
     !!!! AICTE Level development ( Backend Central server )
