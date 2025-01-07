@@ -62,7 +62,7 @@ select:disabled {
   @apply text-3xl font-medium;
 }
 .c_main {
-  @apply md:px-2 round md:py-2 relative top-2 glassy center w-11/12;
+  @apply md:px-2 round md:py-4 relative top-2 glassy center w-11/12;
 }
 .main {
   @apply md:w-7/12 c_main;
@@ -98,7 +98,7 @@ button:disabled:hover,
 button:disabled:focus,
 button:disabled:active,
 .disabled:hover {
-  @apply shadow-none translate-y-0 transition-none outline-none transform-none;
+@apply shadow-none translate-y-0 transition-none outline-none transform-none;
 }
 
 .cancel {
@@ -197,7 +197,7 @@ nav a {
 }
 .search-list {
   svg {
-    @apply fill-white icon absolute left-2 top-0;
+    @apply fill-white icon absolute left-2 top-1/2 -translate-y-1/2;
   }
 }
 ::-webkit-calendar-picker-indicator {

@@ -10,7 +10,32 @@ export default function DepartmentProgress() {
   const [sortField, setSortField] = useState('uploadCount')
   const [sortDirection, setSortDirection] = useState('desc')
   const token = localStorage.getItem('token')
+  const [currentPage, setCurrentPage] = useState(1)
+  const [yearFilter, setYearFilter] = useState(0)
+  const [itemPerPage, setItemPerPage] = useState(25)
 
+  const totalPages = Math.ceil(filteredData.length / itemPerPage)
+  const paginatedData = filteredData.slice(
+    (currentPage - 1) * itemPerPage,
+    currentPage * itemPerPage
+  )
+
+  const handleYearFilter = year => {
+    setYearFilter(year)
+    setCurrentPage(1)
+    if (year === 0) setFilteredData(data)
+    else setFilteredData(data.filter(item => item.currentYear === year))
+  }
+
+  const handleItemPerPage = pages => {
+    setItemPerPage(pages)
+  }
+
+  const handlePageChange = direction => {
+    if (direction === 'next' && currentPage < totalPages)
+      setCurrentPage(currentPage + 1)
+    if (direction === 'prev' && currentPage > 1) setCurrentPage(currentPage - 1)
+  }
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -705,8 +730,38 @@ export default function DepartmentProgress() {
         <h2 className='head'>Department Progress</h2>
         <button onClick={exportToPDF}>Export to PDF</button>
       </div>
-      <div className='w-1/2'>
+      <div className='w-11/12 grid grid-cols-1 md:grid-cols-[34%_15%_15%_30%] items-center justify-center gap-x-2'>
         <SearchComponent data={data} onFilter={setFilteredData} />
+        <select
+          onChange={e => handleYearFilter(Number(e.target.value))}
+          value={yearFilter}>
+          <option value={0}>All Years</option>
+          <option value={1}>1st Year</option>
+          <option value={2}>2nd Year</option>
+          <option value={3}>3rd Year</option>
+          <option value={4}>4th Year</option>
+        </select>
+        <select
+          onChange={e => handleItemPerPage(Number(e.target.value))}
+          value={itemPerPage}>
+          <option value={25}>25</option>
+          <option value={50}>50</option>
+          <option value={75}>75</option>
+          <option value={100}>100</option>
+        </select>
+        <div className='center space-x-4'>
+          <button
+            onClick={() => handlePageChange('prev')}
+            disabled={currentPage === 1}>
+            Previous
+          </button>
+          <span>{`Page ${currentPage} of ${totalPages}`}</span>
+          <button
+            onClick={() => handlePageChange('next')}
+            disabled={currentPage === totalPages}>
+            Next
+          </button>
+        </div>
       </div>
       <div className='w-11/12 mx-auto overflow-y-scroll h-full round'>
         <span className='details_table'>
@@ -724,11 +779,11 @@ export default function DepartmentProgress() {
               </tr>
             </thead>
             <tbody>
-              {filteredData.map((student, index) => (
+              {paginatedData.map((student, index) => (
                 <tr key={index}>
                   <td>{student.name}</td>
                   <td>{student.registerNumber}</td>
-                  <td>{student.currentYear - 1}</td>
+                  <td>{student.currentYear}</td>
                   <td>{student.uploadCount}</td>
                 </tr>
               ))}
