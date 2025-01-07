@@ -5,6 +5,9 @@ const UploadSnap = sequelize.define('UploadSnap', {
   email: {
     type: DataTypes.STRING,
     allowNull: false,
+    validate: {
+      isEmail: true, 
+    },
   },
   filename: {
     type: DataTypes.STRING,
@@ -21,17 +24,26 @@ const UploadSnap = sequelize.define('UploadSnap', {
   lastUpload: {
     type: DataTypes.DATE,
     allowNull: true,
+    defaultValue: null, 
   },
   latitude: {
-    type: DataTypes.FLOAT,
+    type: DataTypes.DECIMAL(9, 6), 
     allowNull: false,
+    validate: {
+      min: -90, 
+      max: 90,
+    },
   },
   longitude: {
-    type: DataTypes.FLOAT,
+    type: DataTypes.DECIMAL(9, 6), 
     allowNull: false,
+    validate: {
+      min: -180, 
+      max: 180,
+    },
   },
 }, {
-  timestamps: true,
+  timestamps: true, 
 });
 
 module.exports = UploadSnap;
