@@ -137,68 +137,70 @@ export default function UploadSnaps() {
 
   return (
     <>
-      <div className='main p-6 flex flex-col items-center glassy rounded-lg shadow-lg'>
-        <h2 className='text-3xl font-semibold mb-6'>Upload Image</h2>
-        {!isCaptchaValid && (
-          <div className='captcha-section flex flex-col md:flex-row items-center gap-4 mb-6'>
-            <input
-              type='text'
-              name='captcha'
-              value={captcha}
-              readOnly
-              className='font-bold'
-            />
-            <input
-              type='text'
-              placeholder='Enter captcha'
-              value={captchaInput}
-              onChange={handleCaptchaInput}
-            />
-            <button onClick={handleVerifyCaptcha}>Verify</button>
-          </div>
-        )}
-
-        {location.latitude && location.longitude && (
-          <div className='location-display text-sm mb-4 text-center'>
-            <p>
-              <b>Latitude:</b> {location.latitude}
-            </p>
-            <p>
-              <b>Longitude:</b> {location.longitude}
-            </p>
-          </div>
-        )}
-
-        {isCaptchaValid && (
-          <>
-            <div className='p-2 md:w-1/2 border-4 border-dashed border-secondary h-64 glassy rounded-md flex justify-center items-center'>
-              <label
-                htmlFor='file-input'
-                className='cursor-pointer py-3 px-6 font-semibold text-lg bg-tertiary text-white rounded-lg transition duration-300 hover:bg-green-600'>
-                Choose File
-              </label>
+      <div className='w-10/12 p-6 grid md:grid-cols-2 grid-cols-1 items-center justify-center glassy round'>
+        <h2 className='head col-span-2 text-center mb-4'>Upload Image</h2>
+        <span className='center'>
+          {!isCaptchaValid && (
+            <div className='w-1/2'>
               <input
-                id='file-input'
-                type='file'
-                onChange={handleFileChange}
-                className='hidden'
+                type='text'
+                name='captcha'
+                value={captcha}
+                readOnly
+                className='font-bold'
               />
-              {file && (
-                <p className='text-gray-600 ml-4 text-sm'>{file.name}</p>
-              )}
+              <input
+                type='text'
+                placeholder='Enter captcha'
+                value={captchaInput}
+                onChange={handleCaptchaInput}
+              />
+              <button onClick={handleVerifyCaptcha} className='float-end'>
+                Verify
+              </button>
             </div>
-            <button
-              onClick={handleUpload}
-              disabled={!isUploadEnabled}
-              className={`mt-4 px-4 py-2 rounded-lg ${
-                isUploadEnabled
-                  ? 'bg-blue-600 hover:bg-blue-700 text-white'
-                  : 'bg-gray-400 text-gray-200'
-              }`}>
-              Upload
-            </button>
-          </>
-        )}
+          )}
+          {location.latitude && location.longitude && (
+            <div className='location-display text-sm mb-4 text-center'>
+              <p>
+                <b>Latitude:</b> {location.latitude}
+              </p>
+              <p>
+                <b>Longitude:</b> {location.longitude}
+              </p>
+            </div>
+          )}
+          {isCaptchaValid && (
+            <span className='w-full'>
+              <div className='p-2 border-4 border-dashed border-secondary h-64 glassy rounded-md flex justify-center items-center'>
+                <label
+                  htmlFor='file-input'
+                  className='cursor-pointer py-3 px-6 font-semibold text-lg bg-tertiary text-white rounded-lg transition duration-300 hover:bg-green-600'>
+                  Choose File
+                </label>
+                <input
+                  id='file-input'
+                  type='file'
+                  onChange={handleFileChange}
+                  className='hidden'
+                />
+                {file && (
+                  <p className='text-gray-600 ml-4 text-sm'>{file.name}</p>
+                )}
+              </div>
+              <button
+                onClick={handleUpload}
+                disabled={!isUploadEnabled}
+                className={`float-end ${
+                  isUploadEnabled
+                    ? 'bg-blue-600 hover:bg-blue-700 text-white'
+                    : 'bg-gray-400 text-gray-200'
+                }`}>
+                Upload
+              </button>
+            </span>
+          )}
+        </span>
 
         <div className='grid gap-2 grid-cols-1 mt-8'>
           <p className='text-lg font-semibold w-full mb-2 col-span-4 text-center'>
