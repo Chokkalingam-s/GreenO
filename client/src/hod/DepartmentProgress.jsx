@@ -128,7 +128,7 @@ export default function DepartmentProgress() {
         <h2 className='head'>Department Progress</h2>
         <button onClick={exportToPDF}>Export to PDF</button>
       </div>
-      <div className='w-11/12 mx-auto overflow-y-scroll h-full round'>
+      <div className='w-11/12 mx-auto overflow-y-auto h-full'>
         <span className='details_table'>
           <table id='department-table'>
             <thead>
