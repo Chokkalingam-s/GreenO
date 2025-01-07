@@ -16,7 +16,6 @@ body {
   font-family: 'Poppins', serif;
   background-image: url('/bg.jpg');
   @apply text-white bg-primary bg-cover bg-center font-normal bg-fixed;
-
   p {
     @apply text-base md:max-w-[70ch];
   }
