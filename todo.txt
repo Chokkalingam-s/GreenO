@@ -21,6 +21,7 @@ TODO:
     Progress Table:
       Filter in Year ( Current Year)
       Search bar ( names and regNo)
+      Export PDF
     Overall Status: ( report )
       Height Correction
       Multiple heading repetition
@@ -28,6 +29,7 @@ TODO:
     Progress Table:
       Icon for Filter ( Asc Desc )
       Include filter in First-Last year 
+      Export PDF
 
   Student SignUp:
      Add DOB
