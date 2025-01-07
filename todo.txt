@@ -9,12 +9,11 @@ Done:
   Activity - my pregress - only sem number and also add clicking in the image it should give like a zoom up
     - laptop ( 4 4)
   upload image - previously uploaded image
+  Activity Page : Mobile View : single page 8 images , each row 2
 
 TODO:
   Student Side :
-    Activity Page : Mobile View : single page 8 images , each row 2
     Profile:
-      Chokkalingam's Profile ( Heading ) Size Reduce
       toastify Alert not working - generate certificate
       Mobile - Generate certificate - Text is big , reduce it as same as laptop
   Hod Login:
@@ -31,10 +30,6 @@ TODO:
       Include filter in First-Last year 
       Export PDF
 
-  Student SignUp:
-     Add DOB
-     Secondary Mail
-
 Later:
   about page changes Ui Improvisation
   better error handling with user
@@ -49,6 +44,6 @@ Future User Side
     Landing Website !
    
     personal mail id suggested ( Not Confirmed )
-    Student sign up - DOB Backend
+    Student sign up - DOB Backend and Email Backend
     Student sign up - Based on Dataset given by College's
     !!!! AICTE Level development ( Backend Central server )

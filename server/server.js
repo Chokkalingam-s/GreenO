@@ -742,7 +742,21 @@ app.get('/api/department-progress', authenticateToken, async (req, res) => {
 })
 app.get('/api/new-department-data', authenticateToken, async (req, res) => {
   try {
+    
+    const { email } = req.user;
+    const user = await User.findOne({
+      where: { email },
+      attributes: ['collegeName'],
+    });
+
+    if (!user) {
+      return res.status(404).json({ error: 'User not found' });
+    }
+
+    const { collegeName } = user;
+
     const departments = await Admin.findAll({
+      where: { collegeName },
       attributes: ['department', 'studentCount', 'uploadCount'],
     })
 
