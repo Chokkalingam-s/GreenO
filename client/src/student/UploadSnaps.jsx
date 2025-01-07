@@ -13,9 +13,8 @@ export default function UploadSnaps() {
   const [location, setLocation] = useState({ latitude: '', longitude: '' })
 
   const generateCaptcha = () => {
-    const chars =
-      '012345678&9ABCDEFGH!#JKLMNOPQRSTU$%VWXYZabcdefghijklmnopq@rstuvwxyz'
-    let captcha = ''
+    const chars = '0123456789@ABCDEFGHJKLMNOPQRSTUVWXYZ';
+    let captcha = '';
     for (let i = 0; i < 6; i++) {
       captcha += chars[Math.floor(Math.random() * chars.length)]
     }
