@@ -303,17 +303,21 @@ app.post('/api/upload-snap', authenticateToken, upload.single('file'), async (re
         });
       }
 
-      const distance = calculateDistance(
-        latitude,
-        longitude,
-        lastUpload.latitude,
-        lastUpload.longitude
-      );
+      const lastLatitude = parseFloat(lastUpload.latitude);
+  const lastLongitude = parseFloat(lastUpload.longitude);
 
-      if (distance > MAX_DISTANCE_METERS) {
-        return res.status(400).json({
-          message: `Location mismatch: Images must be uploaded within ${MAX_DISTANCE_METERS} meters of the original location.`
-        });
+  const distance = calculateDistance(
+    parseFloat(latitude),
+    parseFloat(longitude),
+    lastLatitude,
+    lastLongitude
+  );
+
+  if (distance > MAX_DISTANCE_METERS) {
+    return res.status(400).json({
+      message: `Location mismatch: Images must be uploaded within ${MAX_DISTANCE_METERS} meters of the original location.`
+    });
+
       }
 
       const similarityScore = await compareImages(
