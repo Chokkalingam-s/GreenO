@@ -42,7 +42,7 @@ export default function Activity() {
                 setModalSrc(`http://localhost:3000/${image.filePath}`)
               }>
               <img
-                className='w-full mx-auto round aspect-video mt-1 object-cover'
+                className='w-full mx-auto aspect-video mt-1 object-contain'
                 src={`http://localhost:3000/${image.filePath}`}
                 alt={`Semester ${index + 1}`}
               />

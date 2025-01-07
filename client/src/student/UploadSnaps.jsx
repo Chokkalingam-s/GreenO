@@ -13,8 +13,9 @@ export default function UploadSnaps() {
   const [location, setLocation] = useState({ latitude: '', longitude: '' })
 
   const generateCaptcha = () => {
-    const chars = '0123456789@ABCDEFGHJKLMNOPQRSTUVWXYZ';
-    let captcha = '';
+    const chars =
+      '012345678&9ABCDEFGH!#JKLMNOPQRSTU$%VWXYZabcdefghijklmnopq@rstuvwxyz'
+    let captcha = ''
     for (let i = 0; i < 6; i++) {
       captcha += chars[Math.floor(Math.random() * chars.length)]
     }
@@ -136,70 +137,68 @@ export default function UploadSnaps() {
 
   return (
     <>
-      <div className='w-10/12 p-6 grid md:grid-cols-2 grid-cols-1 items-center justify-center glassy round'>
-        <h2 className='head col-span-2 text-center mb-4'>Upload Image</h2>
-        <span className='center'>
-          {!isCaptchaValid && (
-            <div className='w-1/2'>
+      <div className='main p-6 flex flex-col items-center glassy rounded-lg shadow-lg'>
+        <h2 className='text-3xl font-semibold mb-6'>Upload Image</h2>
+        {!isCaptchaValid && (
+          <div className='captcha-section flex flex-col md:flex-row items-center gap-4 mb-6'>
+            <input
+              type='text'
+              name='captcha'
+              value={captcha}
+              readOnly
+              className='font-bold'
+            />
+            <input
+              type='text'
+              placeholder='Enter captcha'
+              value={captchaInput}
+              onChange={handleCaptchaInput}
+            />
+            <button onClick={handleVerifyCaptcha}>Verify</button>
+          </div>
+        )}
+
+        {location.latitude && location.longitude && (
+          <div className='location-display text-sm mb-4 text-center'>
+            <p>
+              <b>Latitude:</b> {location.latitude}
+            </p>
+            <p>
+              <b>Longitude:</b> {location.longitude}
+            </p>
+          </div>
+        )}
+
+        {isCaptchaValid && (
+          <>
+            <div className='p-2 w-10/12 md:w-1/2 border-4 border-dashed border-secondary h-64 glassy rounded-md flex justify-center items-center'>
+              <label
+                htmlFor='file-input'
+                className='cursor-pointer py-3 px-6 font-semibold text-lg bg-secondary text-white round transition duration-300 hover:bg-tertiary'>
+                Choose File
+              </label>
               <input
-                type='text'
-                name='captcha'
-                value={captcha}
-                readOnly
-                className='font-bold'
+                id='file-input'
+                type='file'
+                onChange={handleFileChange}
+                className='hidden'
               />
-              <input
-                type='text'
-                placeholder='Enter captcha'
-                value={captchaInput}
-                onChange={handleCaptchaInput}
-              />
-              <button onClick={handleVerifyCaptcha} className='float-end'>
-                Verify
-              </button>
+              {file && (
+                <p className='text-gray-600 ml-4 text-sm'>{file.name}</p>
+              )}
             </div>
-          )}
-          {location.latitude && location.longitude && (
-            <div className='location-display text-sm mb-4 text-center'>
-              <p>
-                <b>Latitude:</b> {location.latitude}
-              </p>
-              <p>
-                <b>Longitude:</b> {location.longitude}
-              </p>
-            </div>
-          )}
-          {isCaptchaValid && (
-            <span className='w-full'>
-              <div className='p-2 border-4 border-dashed border-secondary h-64 glassy rounded-md flex justify-center items-center'>
-                <label
-                  htmlFor='file-input'
-                  className='cursor-pointer py-3 px-6 font-semibold text-lg bg-tertiary text-white rounded-lg transition duration-300 hover:bg-green-600'>
-                  Choose File
-                </label>
-                <input
-                  id='file-input'
-                  type='file'
-                  onChange={handleFileChange}
-                  className='hidden'
-                />
-                {file && (
-                  <p className='text-gray-600 ml-4 text-sm'>{file.name}</p>
-                )}
-              </div>
-              <button
-                onClick={handleUpload}
-                disabled={!isUploadEnabled}
-                className={`float-end ${
-                  isUploadEnabled
-                    ? 'bg-blue-600 hover:bg-blue-700 text-white'
-                    : 'bg-gray-400 text-gray-200'
-                }`}>
-                Upload
-              </button>
-            </span>
-          )}
-        </span>
+            <button
+              onClick={handleUpload}
+              disabled={!isUploadEnabled}
+              className={`${
+                isUploadEnabled
+                  ? 'bg-blue-600 hover:bg-blue-700 text-white'
+                  : 'bg-gray-400 text-gray-200'
+              }`}>
+              Upload
+            </button>
+          </>
+        )}
 
         <div className='grid gap-2 grid-cols-1 mt-8'>
           <p className='text-lg font-semibold w-full mb-2 col-span-4 text-center'>
