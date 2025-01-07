@@ -70,6 +70,12 @@ export default function StudentSignUp() {
       newErrors.collegeRegisterNumber =
         'College register number must be exactly 12 digits.'
 
+    if (!formData.dob)
+      newErrors.dob = 'Date of birth is required.'
+
+    if (formData.secEmail && !/\S+@\S+\.\S+/.test(formData.secEmail))
+      newErrors.secEmail = 'Please enter a valid secondary email.'
+
     setErrors(newErrors)
     return Object.keys(newErrors).length === 0
   }
@@ -226,13 +232,13 @@ export default function StudentSignUp() {
 
             <input
               type='email'
-              id='email'
-              name='email'
+              id='secEmail'
+              name='secEmail'
               value={formData.secEmail}
               onChange={handleChange}
-              placeholder='Email (Secondary)'
-              required
+              placeholder='Secondary Email'
             />
+            {errors.secEmail && <small className='error'>{errors.secEmail}</small>}
 
             <select
               id='collegeName'
@@ -318,11 +324,6 @@ export default function StudentSignUp() {
                 ) : (
                   <>
                     <p>Finish</p>
-                    {/* <img
-                      src='/arrow-right-to-bracket-solid.svg'
-                      alt='sign in icon'
-                      className='w-6'
-                    /> */}
                   </>
                 )}
               </button>
