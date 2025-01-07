@@ -189,10 +189,7 @@ nav a {
 }
 .search-list {
   svg {
-    @apply fill-white icon;
-  }
-  button {
-    @apply absolute right-0 top-0 -translate-y-1/2;
+    @apply fill-white icon absolute left-2 top-0;
   }
 }
 ::-webkit-calendar-picker-indicator {
