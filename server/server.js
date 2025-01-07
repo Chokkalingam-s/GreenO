@@ -478,11 +478,22 @@ app.get('/api/uploaded-snaps', authenticateToken, async (req, res) => {
   }
 })
 
-app.get('/api/student-count', async (req, res) => {
+app.get('/api/student-count',authenticateToken, async (req, res) => {
   try {
-    const studentCount = await User.count({ where: { role: 'student' } })
+    const { email } = req.user
+    const user = await User.findOne({
+      where: { email },
+      attributes: ['collegeName'],
+    });
+
+    if (!user) {
+      return res.status(404).json({ error: 'User not found' });
+    }
+
+    const { collegeName } = user;
+    const studentCount = await User.count({ where: { role: 'student', collegeName } })
     const saplingCount = await User.count({
-      where: { uploadCount: { [Op.gt]: 0 } },
+      where: { uploadCount: { [Op.gt]: 0 } , collegeName },
     })
     res.status(200).json({ studentCount, saplingCount })
   } catch (error) {

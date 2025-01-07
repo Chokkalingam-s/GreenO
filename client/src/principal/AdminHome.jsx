@@ -31,8 +31,12 @@ export default function AHome() {
   useEffect(() => {
     const fetchStudentCount = async () => {
       try {
+        const token = localStorage.getItem('token')
         const response = await axios.get(
-          'http://localhost:3000/api/student-count'
+          'http://localhost:3000/api/student-count',
+          {
+            headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
+          }
         )
         setStudentCount(response.data.studentCount)
         setSaplingCount(response.data.saplingCount)
