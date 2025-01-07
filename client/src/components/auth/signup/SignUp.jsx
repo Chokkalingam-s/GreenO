@@ -132,7 +132,7 @@ export default function StudentSignUp() {
         />
         {!otpSent ? (
           <form onSubmit={handleSubmit} className='md:w-1/2 px-4'>
-            <h2 className='head'>Student Sign Up</h2>
+            <h2 className='head text-center my-2 md:my-0'>Student Sign Up</h2>
             <input
               type='text'
               id='name'
@@ -148,7 +148,7 @@ export default function StudentSignUp() {
               name='email'
               value={formData.email}
               onChange={handleChange}
-              placeholder='Email'
+              placeholder='Email (Primary)'
               required
             />
             {errors.email && <small className='error'>{errors.email}</small>}
@@ -208,6 +208,30 @@ export default function StudentSignUp() {
               </select>
             </span>
 
+            <input
+              type='number'
+              id='mobileNumber'
+              name='mobileNumber'
+              value={formData.mobileNumber}
+              onChange={handleChange}
+              maxLength='10'
+              placeholder='Mobile Number'
+              required
+            />
+            {errors.mobileNumber && (
+              <small className='error'>{errors.mobileNumber}</small>
+            )}
+
+            <input
+              type='email'
+              id='email'
+              name='email'
+              value={formData.email}
+              onChange={handleChange}
+              placeholder='Email (Secondary)'
+              required
+            />
+
             <select
               id='collegeName'
               name='collegeName'
@@ -219,79 +243,71 @@ export default function StudentSignUp() {
                 R.M.K. Engineering College
               </option>
             </select>
-            {formData.role === 'student' && (
-              <>
-                <input
-                  type='number'
-                  id='mobileNumber'
-                  name='mobileNumber'
-                  value={formData.mobileNumber}
-                  onChange={handleChange}
-                  maxLength='10'
-                  placeholder='Mobile Number'
-                  required
-                />
-                {errors.mobileNumber && (
-                  <small className='error'>{errors.mobileNumber}</small>
-                )}
-                <span className='center gap-x-2'>
-                  <select
-                    id='department'
-                    name='department'
-                    value={formData.department}
-                    onChange={handleChange}
-                    required>
-                    <option value=''>Department ?</option>
-                    {departments.map(dept => (
-                      <option key={dept} value={dept}>
-                        {dept}
-                      </option>
-                    ))}
-                  </select>
-                  <select
-                    id='yearOfGraduation'
-                    name='yearOfGraduation'
-                    value={formData.yearOfGraduation}
-                    onChange={handleChange}
-                    required>
-                    <option value=''>Graduation Year</option>
-                    {years.map(year => (
-                      <option key={year} value={year}>
-                        {year}
-                      </option>
-                    ))}
-                  </select>
-                </span>
-                <input
-                  type='text'
-                  id='collegeRegisterNumber'
-                  name='collegeRegisterNumber'
-                  value={formData.collegeRegisterNumber}
-                  onChange={handleChange}
-                  maxLength='12'
-                  placeholder='College Register Number'
-                  required
-                />
-                {errors.collegeRegisterNumber && (
-                  <small className='error'>
-                    {errors.collegeRegisterNumber}
-                  </small>
-                )}
 
-                <input
-                  type='text'
-                  id='aadharNumber'
-                  name='aadharNumber'
-                  value={formData.aadharNumber}
-                  onChange={handleChange}
-                  maxLength='12'
-                  placeholder='Aadhar Number'
-                  required
-                />
-                {errors.aadharNumber && (
-                  <small className='error'>{errors.aadharNumber}</small>
-                )}
-              </>
+            <span className='center gap-x-2'>
+              <select
+                id='department'
+                name='department'
+                value={formData.department}
+                onChange={handleChange}
+                required>
+                <option value=''>Department ?</option>
+                {departments.map(dept => (
+                  <option key={dept} value={dept}>
+                    {dept}
+                  </option>
+                ))}
+              </select>
+              <select
+                id='yearOfGraduation'
+                name='yearOfGraduation'
+                value={formData.yearOfGraduation}
+                onChange={handleChange}
+                required>
+                <option value=''>Graduation Year</option>
+                {years.map(year => (
+                  <option key={year} value={year}>
+                    {year}
+                  </option>
+                ))}
+              </select>
+            </span>
+            <input
+              type='text'
+              id='collegeRegisterNumber'
+              name='collegeRegisterNumber'
+              value={formData.collegeRegisterNumber}
+              onChange={handleChange}
+              maxLength='12'
+              placeholder='College Register Number'
+              required
+            />
+            {errors.collegeRegisterNumber && (
+              <small className='error'>{errors.collegeRegisterNumber}</small>
+            )}
+
+            <input
+              type='date'
+              id='dob'
+              name='dob'
+              value={formData.dob}
+              onChange={handleChange}
+              required
+            />
+            {errors.dob && <small className='error'>{errors.dob}</small>}
+
+            <input
+              type='text'
+              id='aadharNumber'
+              name='aadharNumber'
+              value={formData.aadharNumber}
+              onChange={handleChange}
+              maxLength='12'
+              placeholder='Aadhar Number'
+              required
+            />
+            {errors.aadharNumber && (
+              <small className='error'>{errors.aadharNumber}</small>
             )}
             <span className='flex items-center justify-end gap-x-4'>
               <button type='submit' className='center' disabled={loading}>

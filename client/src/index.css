@@ -45,7 +45,7 @@ strong {
 input,
 select,
 select:disabled {
-  @apply w-full round px-4 py-2 my-2 text-lg hover:shadow-sm border-none -outline-offset-1 outline-2 outline-secondary outline focus:outline-transparent bg-transparent;
+  @apply w-full round px-4 py-2 my-2 text-base hover:shadow-sm border-none -outline-offset-1 outline-2 outline-secondary outline focus:outline-transparent bg-transparent;
 }
 
 option {
@@ -191,4 +191,7 @@ nav a {
   svg {
     @apply fill-white icon;
   }
+}
+::-webkit-calendar-picker-indicator {
+  filter: invert(1);
 }
