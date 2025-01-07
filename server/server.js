@@ -159,6 +159,8 @@ app.post('/signup', async (req, res) => {
     aadharNumber,
     principalName,
     pocNumber,
+    dob,  // New field: Date of Birth
+    secEmail  // New field: Secondary Email
   } = req.body
 
   try {
@@ -183,6 +185,8 @@ app.post('/signup', async (req, res) => {
       aadharNumber: role === 'student' ? aadharNumber : null,
       principalName: role === 'admin' ? principalName : null,
       pocNumber: role === 'admin' ? pocNumber : null,
+      dob,  
+      secEmail  
     })
 
     let adminEntry
@@ -212,6 +216,7 @@ app.post('/signup', async (req, res) => {
     res.status(500).json({ error: error.message })
   }
 })
+
 
 app.post('/login', async (req, res) => {
   const { email, password } = req.body
