@@ -34,9 +34,9 @@ TODO:
   
 
 Later:
-  about page changes
+  about page changes Ui Improvisation
   better error handling with user
-  background - doodle / image
+  Try - background - doodle / image
 
 Future User Side
  add email to the verify otp reset password
