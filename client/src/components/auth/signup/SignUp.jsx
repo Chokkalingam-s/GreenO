@@ -22,7 +22,9 @@ export default function StudentSignUp() {
     yearOfGraduation: '',
     aadharNumber: '',
     principalName: '',
-    pocNumber: ''
+    pocNumber: '',
+    secEmail: '',
+    dob: '',
   })
   const [errors, setErrors] = useState({})
   const [otp, setOtp] = useState('')
@@ -226,7 +228,7 @@ export default function StudentSignUp() {
               type='email'
               id='email'
               name='email'
-              value={formData.email}
+              value={formData.secEmail}
               onChange={handleChange}
               placeholder='Email (Secondary)'
               required
