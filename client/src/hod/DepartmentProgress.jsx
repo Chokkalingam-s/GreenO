@@ -127,7 +127,7 @@ export default function DepartmentProgress() {
       </svg>
     ))
 
-  if (data.length == 0) return <p>Loading...</p>
+  // if (data.length == 0) return <p>Loading...</p>
 
   return (
     <div className='c_main flex-col max-h-[90vh] mt-8'>

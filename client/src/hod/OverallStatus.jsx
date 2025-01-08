@@ -35,8 +35,35 @@ export default function OverallStatus() {
           }
           return b.studentCount - a.studentCount
         })
-        setDepartmentData(sortedDepartments)
-        setTopDepartments(sortedDepartments.slice(0, 3))
+        const topDepartments = [
+          { department: 'Marketing', percentage: 95 },
+          { department: 'Engineering', percentage: 93 },
+          { department: 'Finance', percentage: 91 },
+          { department: 'Human Resources', percentage: 89 },
+          { department: 'Sales', percentage: 87 },
+          { department: 'Legal', percentage: 85 },
+          { department: 'Customer Support', percentage: 83 },
+          { department: 'IT', percentage: 81 },
+          { department: 'Operations', percentage: 79 },
+          { department: 'R&D', percentage: 77 },
+          { department: 'Quality Assurance', percentage: 75 },
+          { department: 'Product Management', percentage: 74 },
+          { department: 'Business Development', percentage: 72 },
+          { department: 'Public Relations', percentage: 71 },
+          { department: 'Data Analytics', percentage: 70 },
+          { department: 'Procurement', percentage: 68 },
+          { department: 'Training', percentage: 67 },
+          { department: 'Administration', percentage: 66 },
+          { department: 'Security', percentage: 65 },
+          { department: 'Strategy', percentage: 64 },
+          { department: 'Corporate Affairs', percentage: 63 },
+          { department: 'Communications', percentage: 62 },
+          { department: 'Facilities', percentage: 61 },
+          { department: 'Legal Compliance', percentage: 60 },
+          { department: 'Research', percentage: 59 }
+        ]
+        setDepartmentData(topDepartments)
+        setTopDepartments(topDepartments.slice(0, 3))
 
         const userResponse = await axios.get(
           'http://localhost:3000/api/new-user-details',
@@ -118,15 +145,17 @@ export default function OverallStatus() {
 
   return (
     <div className='c_main'>
-      <div className='flex'>
-        <h2 className='head'>Overall Department Contribution</h2>
+      <div className='grid grid-cols-2 items-center justify-center space-x-4 w-10/12'>
+        <h2 className='head col-span-2 text-center mb-4'>
+          Overall Department Contribution
+        </h2>
         {loading ? (
           <p className='text-xl'>Loading...</p>
         ) : (
           <>
             {departmentData.length > 0 ? (
-              <div className=''>
-                <h3 className='text-xl text-center'>
+              <div>
+                <h3 className='text-xl text-center col-span-2'>
                   Department-wise Sapling Count
                 </h3>
                 <div className=''>
@@ -144,34 +173,37 @@ export default function OverallStatus() {
                 No data available for departments.
               </p>
             )}
-            <div className='center glassy round flex-col details_table space-y-4 my-4'>
-              <h3 className='text-xl'>Top 3 Departments</h3>
-              <table>
-                <thead>
-                  <tr>
-                    <th>Rank</th>
-                    <th>Department</th>
-                    <th>Progress</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {topDepartments.map((dept, index) => (
-                    <tr key={dept.department}>
-                      <td>{index === 0 ? '🥇' : index === 1 ? '🥈' : '🥉'}</td>
-                      <td>{shortenDepartmentName(dept.department)}</td>
-                      <td>{dept.percentage}%</td>
+            <span>
+              <div className='center flex-col details_table space-y-4 my-4'>
+                <h3 className='text-xl'>Top 3 Departments</h3>
+                <table>
+                  <thead>
+                    <tr>
+                      <th>Rank</th>
+                      <th>Department</th>
+                      <th>Progress</th>
                     </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-
-            {userDepartmentRank && (
-              <p className='center space-x-2'>
-                <span>Your department is currently ranked:</span>
-                <strong>{userDepartmentRank}</strong>
-              </p>
-            )}
+                  </thead>
+                  <tbody>
+                    {topDepartments.map((dept, index) => (
+                      <tr key={dept.department}>
+                        <td>
+                          {index === 0 ? '🥇' : index === 1 ? '🥈' : '🥉'}
+                        </td>
+                        <td>{shortenDepartmentName(dept.department)}</td>
+                        <td>{dept.percentage}%</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+              {userDepartmentRank && (
+                <p className='center space-x-2'>
+                  <span>Your department is currently ranked:</span>
+                  <strong>{userDepartmentRank}</strong>
+                </p>
+              )}
+            </span>
           </>
         )}
       </div>
