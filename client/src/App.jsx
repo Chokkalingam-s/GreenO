@@ -22,7 +22,8 @@ import {
   About,
   Activity,
   OverallStatus,
-  SplashWithDelay
+  SplashWithDelay,
+  ContactUs
 } from './exp_components'
 import { ToastContainer } from 'react-toastify'
 
@@ -78,6 +79,7 @@ export default function App() {
               <Route path='/upload_snap' element={<UploadSnaps />} />
               <Route path='/resources' element={<Resource />} />
               <Route path='/profile' element={<Profile />} />
+              <Route path='/contact_us' element={<ContactUs />} />
 
               <Route path='/admin' element={<AdminHome />} />
               <Route path='/progress' element={<OverallProgress />} />

@@ -22,8 +22,10 @@ const Modal = lazy(() => import('./components/Modal'))
 const OverallStatus = lazy(() => import('./hod/OverallStatus'))
 const Splashscreen = lazy(() => import('./components/Splashscreen'))
 const SplashWithDelay = lazy(() => import('./components/SplashWithDelay'))
+const ContactUs = lazy(() => import('./student/ContactUs'))
 
 export {
+  ContactUs,
   SplashWithDelay,
   Splashscreen,
   OverallStatus,

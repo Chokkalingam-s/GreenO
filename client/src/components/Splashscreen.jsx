@@ -15,7 +15,7 @@ export default function SplashScreen() {
       <img
         src='/GreenO_Logo.png'
         alt='Splash'
-        className='w-44 aspect-square mb-5 glassy p-2 rounded-full shadow-lg'
+        className='w-44 aspect-square mb-5 glassy p-4 rounded-full shadow-lg object-cover'
       />
       <p className='head text-white'>{loadingText}</p>
     </div>
