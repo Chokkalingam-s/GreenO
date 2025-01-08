@@ -76,14 +76,14 @@ button:not(.Toastify__close-button) {
   }
 }
 button:not(.logout, .search-list, .disabled) {
-  @apply -translate-y-[var(--translate-y)];
+  @apply translate-y-0;
 }
 button:not(.cancel, .Toastify__close-button) {
   @apply glassy outline-2 outline outline-offset-2 outline-transparent transition-all duration-200;
   &:hover,
   &:focus,
   &:active {
-    @apply translate-y-0 outline-secondary;
+    @apply -translate-y-[var(--translate-y)] outline-secondary;
     box-shadow: #2d23420c 0 4px 4px;
   }
 }

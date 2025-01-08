@@ -131,8 +131,28 @@ export default function DepartmentProgress() {
 
   return (
     <div className='c_main flex-col max-h-[90vh] mt-8'>
-      <div className='flex justify-between items-center w-11/12'>
-        <h2 className='head'>Department Progress</h2>
+      <h2 className='head mt-2'>Department Progress</h2>
+      <div className='w-10/12 grid grid-cols-1 md:grid-cols-[40%_15%_25%_20%] items-center md:translate-x-6 gap-x-2'>
+        <SearchComponent data={data} onFilter={setFilteredData} />
+        <select
+          onChange={e => handleYearFilter(Number(e.target.value))}
+          value={yearFilter}>
+          <option value={0}>All Years</option>
+          <option value={1}>1st Year</option>
+          <option value={2}>2nd Year</option>
+          <option value={3}>3rd Year</option>
+          <option value={4}>4th Year</option>
+        </select>
+        <select
+          onChange={e => handleItemPerPage(Number(e.target.value))}
+          value={itemPerPage}>
+          <option value={25}>No of items per page</option>
+          <option value={25}>25</option>
+          <option value={50}>50</option>
+          <option value={75}>75</option>
+          <option value={100}>100</option>
+        </select>
+
         <button onClick={exportToPDF}>Export to PDF</button>
       </div>
       <div className='w-11/12 mx-auto overflow-y-auto h-full'>
@@ -162,27 +182,7 @@ export default function DepartmentProgress() {
             </tbody>
           </table>
         </span>
-      </div>
-      <div className='w-11/12 grid grid-cols-1 md:grid-cols-[34%_15%_15%_30%] items-center justify-center gap-x-2'>
-        <SearchComponent data={data} onFilter={setFilteredData} />
-        <select
-          onChange={e => handleYearFilter(Number(e.target.value))}
-          value={yearFilter}>
-          <option value={0}>All Years</option>
-          <option value={1}>1st Year</option>
-          <option value={2}>2nd Year</option>
-          <option value={3}>3rd Year</option>
-          <option value={4}>4th Year</option>
-        </select>
-        <select
-          onChange={e => handleItemPerPage(Number(e.target.value))}
-          value={itemPerPage}>
-          <option value={25}>25</option>
-          <option value={50}>50</option>
-          <option value={75}>75</option>
-          <option value={100}>100</option>
-        </select>
-        <div className='center space-x-4'>
+        <div className='center space-x-4 float-end pr-2'>
           <button
             onClick={() => handlePageChange('prev')}
             disabled={currentPage === 1}>
