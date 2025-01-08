@@ -30,67 +30,7 @@ export default function OverallProgress() {
           }
         )
 
-        console.log('Progress Data:', response.data)
-
-        const progressData = [
-          {
-            department: 'Computer Science',
-            studentCount: 120,
-            uploadCount: 85,
-            yearCounts: {
-              firstYear: 30,
-              secondYear: 25,
-              thirdYear: 20,
-              fourthYear: 10
-            }
-          },
-          {
-            department: 'Electrical Engineering',
-            studentCount: 100,
-            uploadCount: 75,
-            yearCounts: {
-              firstYear: 25,
-              secondYear: 20,
-              thirdYear: 15,
-              fourthYear: 15
-            }
-          },
-          {
-            department: 'Mechanical Engineering',
-            studentCount: 110,
-            uploadCount: 65,
-            yearCounts: {
-              firstYear: 20,
-              secondYear: 30,
-              thirdYear: 25,
-              fourthYear: 10
-            }
-          },
-          {
-            department: 'Civil Engineering',
-            studentCount: 90,
-            uploadCount: 60,
-            yearCounts: {
-              firstYear: 15,
-              secondYear: 25,
-              thirdYear: 20,
-              fourthYear: 10
-            }
-          },
-          {
-            department: 'Electronics & Communication',
-            studentCount: 130,
-            uploadCount: 95,
-            yearCounts: {
-              firstYear: 35,
-              secondYear: 30,
-              thirdYear: 20,
-              fourthYear: 10
-            }
-          }
-        ]
-
-        setProgressData(progressData)
+        setProgressData(response.data)
       } catch (err) {
         console.error('Error fetching data:', err)
         setError('Error fetching data: ' + err.message)
