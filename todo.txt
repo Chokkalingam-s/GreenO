@@ -1,13 +1,17 @@
 TODO:
-  Admin Login:
-    Progress Table: ( ui )
-      add column at last "Progress" with filter 
-      Export PDF
+  Splash Screen
+  Mobile - Generate certificate - Text is big , reduce it as same as laptop
+    Text Content Reorder - Refer Whatsapp
+  GreenO Logo Tap - Home Page
+  Contact Us Page - Students Reporting Bug - Problem , description , image.
+  Department Progress -  layout update refer Whatsapp
+  Overall progress icon for all - Department name left aligned - check with 30 data
+
   Final : Refresh load bug.
    
 
 Later:
-  Mobile - Generate certificate - Text is big , reduce it as same as laptop
+  Refresg bug - go to splash and with token go to the page
   about page changes Ui Improvisation
   Profile Page Ui Update
   better error handling with user
@@ -15,7 +19,6 @@ Later:
   Try - background - doodle / image
 
 Future User Side
-  Contact Us Page - Students Reporting Bug - Problem , description , image.
   add email to the verify otp reset password
 
 
@@ -23,6 +26,5 @@ Future User Side
    
     Landing Website !
     Backend URL handling
-    GreenO Logo Tap - Home Page
     Student sign up - Based on Dataset given by College's
     !!!! AICTE Level development ( Backend Central server )
