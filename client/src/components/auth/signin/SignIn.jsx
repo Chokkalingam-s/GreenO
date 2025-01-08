@@ -26,7 +26,7 @@ export default function SignIn() {
   const handleLogin = async e => {
     e.preventDefault()
     try {
-      const response = await axios.post('http://localhost:3000/login', {
+      const response = await axios.post('http://localhost:3000/student-signin', {
         email,
         password
       })
@@ -57,7 +57,7 @@ export default function SignIn() {
     }
     if (email) toast.success('OTP is being sent...')
     try {
-      const response = await axios.post('http://localhost:3000/send-otp', {
+      const response = await axios.post('http://localhost:3000/send-otp-process', {
         email
       })
       if (response.status == 200) {
@@ -78,7 +78,7 @@ export default function SignIn() {
       return
     }
     try {
-      const response = await axios.post('http://localhost:3000/verify-otp', {
+      const response = await axios.post('http://localhost:3000/verify-otp-process', {
         email: resetEmail,
         otp
       })

@@ -22,7 +22,7 @@ export default function OverallProgress() {
         if (!token) throw new Error('Authentication token is missing.')
 
         const response = await axios.get(
-          'http://localhost:3000/api/overall-progress',
+          'http://localhost:3000/college-overall-progress',
           {
             headers: {
               Authorization: `Bearer ${token}`

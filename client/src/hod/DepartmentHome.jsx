@@ -22,7 +22,7 @@ export default function DepartmentHome() {
     const fetchDepartmentData = async () => {
       try {
         const response = await axios.get(
-          'http://localhost:3000/api/department-student-data',
+          'http://localhost:3000/departmentwise-student-data',
           {
             headers: {
               Authorization: `Bearer ${localStorage.getItem('token')}`

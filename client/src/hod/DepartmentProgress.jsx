@@ -41,7 +41,7 @@ export default function DepartmentProgress() {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          'http://localhost:3000/api/department-progress',
+          'http://localhost:3000/departmentwise-progress-data',
           {
             headers: {
               Authorization: `Bearer ${token}`

@@ -50,7 +50,7 @@ const transporter = nodemailer.createTransport({
   },
 })
 
-app.post('/send-otp', (req, res) => {
+app.post('/send-otp-process', (req, res) => {
   const { email } = req.body
 
   const otp = Math.floor(100000 + Math.random() * 900000).toString()
@@ -96,7 +96,7 @@ app.post('/forgot-password', (req, res) => {
   })
 })
 
-app.post('/verify-otp', (req, res) => {
+app.post('/verify-otp-process', (req, res) => {
   const { email, otp } = req.body
 
   const storedOtp = otps[email]
@@ -143,7 +143,7 @@ app.post('/reset-password', async (req, res) => {
   }
 })
 
-app.post('/signup', async (req, res) => {
+app.post('/student-signup', async (req, res) => {
   const {
     role,
     name,
@@ -218,7 +218,7 @@ app.post('/signup', async (req, res) => {
 })
 
 
-app.post('/login', async (req, res) => {
+app.post('/student-signin', async (req, res) => {
   const { email, password } = req.body
 
   try {
@@ -276,7 +276,7 @@ const compareImages = async (imgPath1, imgPath2) => {
 const MAX_DISTANCE_METERS = 10;
 const FOUR_MONTHS_IN_MILLIS = 4 * 30 * 24 * 60 * 60 * 1000;
 
-app.post('/api/upload-snap', authenticateToken, upload.single('file'), async (req, res) => {
+app.post('/student-upload-snap-page', authenticateToken, upload.single('file'), async (req, res) => {
   const { email } = req.user;
   const { latitude, longitude } = req.body;
 
@@ -407,7 +407,7 @@ function calculateDistance(lat1, lon1, lat2, lon2) {
 
 
 
-app.get('/api/get-uploaded-images', authenticateToken, async (req, res) => {
+app.get('/student-get-uploaded-images', authenticateToken, async (req, res) => {
   const { email } = req.user
 
   try {
@@ -444,7 +444,7 @@ app.get(
   }
 )
 
-app.get('/api/get-user-detailss', authenticateToken, async (req, res) => {
+app.get('/student-get-user-details', authenticateToken, async (req, res) => {
   const { email } = req.user
 
   try {
@@ -458,7 +458,7 @@ app.get('/api/get-user-detailss', authenticateToken, async (req, res) => {
   }
 })
 
-app.get('/api/uploaded-snaps', authenticateToken, async (req, res) => {
+app.get('/student-uploaded-snaps', authenticateToken, async (req, res) => {
   const { email } = req.user
 
   try {
@@ -478,7 +478,7 @@ app.get('/api/uploaded-snaps', authenticateToken, async (req, res) => {
   }
 })
 
-app.get('/api/student-count',authenticateToken, async (req, res) => {
+app.get('/college-overall-student-count',authenticateToken, async (req, res) => {
   try {
     const { email } = req.user
     const user = await User.findOne({
@@ -502,7 +502,7 @@ app.get('/api/student-count',authenticateToken, async (req, res) => {
   }
 })
 
-app.get('/api/admin-data', authenticateToken, async (req, res) => {
+app.get('/college-admin-data', authenticateToken, async (req, res) => {
   const { email } = req.user
 
   try {
@@ -528,7 +528,7 @@ app.get('/api/admin-data', authenticateToken, async (req, res) => {
     res.status(500).json({ error: error.message })
   }
 })
-app.get('/api/overall-progress', authenticateToken, async (req, res) => {
+app.get('/college-overall-progress', authenticateToken, async (req, res) => {
   const { email } = req.user
   console.log('User Email:', email)
 
@@ -601,7 +601,7 @@ app.get('/api/overall-progress', authenticateToken, async (req, res) => {
   }
 })
 
-app.get('/api/department-student-data', authenticateToken, async (req, res) => {
+app.get('/departmentwise-student-data', authenticateToken, async (req, res) => {
   const { email } = req.user
 
   try {
@@ -682,7 +682,7 @@ app.get('/api/department-student-data', authenticateToken, async (req, res) => {
       .json({ error: 'An error occurred while fetching department data.' })
   }
 })
-app.get('/api/department-progress', authenticateToken, async (req, res) => {
+app.get('/departmentwise-progress-data', authenticateToken, async (req, res) => {
   const { email } = req.user
 
   try {
@@ -756,7 +756,7 @@ app.get('/api/department-progress', authenticateToken, async (req, res) => {
     res.status(500).json({ error: 'Internal server error' })
   }
 })
-app.get('/api/new-department-data', authenticateToken, async (req, res) => {
+app.get('/new-department-data', authenticateToken, async (req, res) => {
   try {
     
     const { email } = req.user;
@@ -782,7 +782,7 @@ app.get('/api/new-department-data', authenticateToken, async (req, res) => {
     res.status(500).json({ error: error.message })
   }
 })
-app.get('/api/new-user-details', authenticateToken, async (req, res) => {
+app.get('/new-user-details', authenticateToken, async (req, res) => {
   const { email } = req.user
 
   try {

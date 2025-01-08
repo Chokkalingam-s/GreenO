@@ -88,13 +88,13 @@ export default function StudentSignUp() {
     try {
       setLoading(true)
       const response = await axios.post(
-        'http://localhost:3000/signup',
+        'http://localhost:3000/student-signup',
         formData
       )
       const { token } = response.data
 
       if (token) {
-        await axios.post('http://localhost:3000/send-otp', {
+        await axios.post('http://localhost:3000/send-otp-process', {
           email: formData.email
         })
         setOtpSent(true)
@@ -113,7 +113,7 @@ export default function StudentSignUp() {
   const verifyOtp = async e => {
     e.preventDefault()
     try {
-      const response = await axios.post('http://localhost:3000/verify-otp', {
+      const response = await axios.post('http://localhost:3000/verify-otp-process', {
         email: formData.email,
         otp
       })
