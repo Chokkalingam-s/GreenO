@@ -33,9 +33,7 @@ body {
 .custom_toastify {
   transform: translateY(10vh) !important;
 }
-strong {
-  @apply text-tertiary;
-}
+
 .center {
   @apply flex items-center justify-center;
 }

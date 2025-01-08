@@ -24,18 +24,18 @@ export default function OverallStatus() {
       if (response.status === 200 && Array.isArray(response.data)) {
         const data = response.data
 
-      const processedData = data.map((dept) => ({
-        ...dept,
-        percentage: ((dept.uploadCount / dept.studentCount) * 100).toFixed(2), 
-      }));
+        const processedData = data.map(dept => ({
+          ...dept,
+          percentage: ((dept.uploadCount / dept.studentCount) * 100).toFixed(2)
+        }))
 
-      const sortedDepartments = processedData.sort((a, b) => {
-        if (b.percentage !== a.percentage) {
-          return b.percentage - a.percentage; 
-        }
-        return b.studentCount - a.studentCount; 
-      });
-      setDepartmentData(sortedDepartments);
+        const sortedDepartments = processedData.sort((a, b) => {
+          if (b.percentage !== a.percentage) {
+            return b.percentage - a.percentage
+          }
+          return b.studentCount - a.studentCount
+        })
+        setDepartmentData(sortedDepartments)
         setTopDepartments(sortedDepartments.slice(0, 3))
 
         const userResponse = await axios.get(
@@ -118,15 +118,17 @@ export default function OverallStatus() {
 
   return (
     <div className='c_main'>
-      <div className='report-content'>
+      <div className='flex'>
         <h2 className='head'>Overall Department Contribution</h2>
         {loading ? (
-          <p className='loading-text'>Loading...</p>
+          <p className='text-xl'>Loading...</p>
         ) : (
           <>
             {departmentData.length > 0 ? (
-              <div className='pie-chart-section'>
-                <h3 className='text-xl'>Department-wise Sapling Count</h3>
+              <div className=''>
+                <h3 className='text-xl text-center'>
+                  Department-wise Sapling Count
+                </h3>
                 <div className=''>
                   <Chart
                     chartType='PieChart'
@@ -138,9 +140,10 @@ export default function OverallStatus() {
                 </div>
               </div>
             ) : (
-              <p className='no-data-text'>No data available for departments.</p>
+              <p className='text-red-600 text-xl'>
+                No data available for departments.
+              </p>
             )}
-
             <div className='center glassy round flex-col details_table space-y-4 my-4'>
               <h3 className='text-xl'>Top 3 Departments</h3>
               <table>
