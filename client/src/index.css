@@ -98,7 +98,7 @@ button:disabled:hover,
 button:disabled:focus,
 button:disabled:active,
 .disabled:hover {
-@apply shadow-none translate-y-0 transition-none outline-none transform-none;
+  @apply shadow-none translate-y-0 transition-none outline-none transform-none;
 }
 
 .cancel {
@@ -143,12 +143,17 @@ nav a {
 .Toastify {
   @apply absolute top-4 right-2;
 }
+
+.table_common {
+  @apply w-full border-collapse round overflow-hidden mb-4 text-center;
+}
+
 .details_table {
   h4 {
     @apply text-xl mb-2;
   }
   table {
-    @apply w-full border-collapse round overflow-hidden mb-4 glassy text-center;
+    @apply table_common glassy;
   }
   th {
     @apply glassy p-2;
@@ -202,4 +207,22 @@ nav a {
 }
 ::-webkit-calendar-picker-indicator {
   filter: invert(1);
+}
+.tableRef {
+  table {
+    @apply w-full;
+  }
+  thead {
+    @apply bg-black text-white;
+  }
+  tbody {
+    @apply text-black;
+  }
+  td {
+    @apply border border-black pl-4;
+  }
+  th,
+  td {
+    @apply py-2;
+  }
 }

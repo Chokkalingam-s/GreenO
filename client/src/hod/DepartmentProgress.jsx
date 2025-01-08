@@ -1,8 +1,8 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import axios from 'axios'
-import jsPDF from 'jspdf'
-import html2canvas from 'html2canvas'
 import SearchComponent from './SearchComponent'
+import html2canvas from 'html2canvas'
+import jsPDF from 'jspdf'
 
 export default function DepartmentProgress() {
   const [data, setData] = useState([])
@@ -13,6 +13,7 @@ export default function DepartmentProgress() {
   const [currentPage, setCurrentPage] = useState(1)
   const [yearFilter, setYearFilter] = useState(0)
   const [itemPerPage, setItemPerPage] = useState(25)
+  const tableRef = useRef(null)
 
   const totalPages = Math.ceil(filteredData.length / itemPerPage)
   const paginatedData = filteredData.slice(
@@ -72,6 +73,48 @@ export default function DepartmentProgress() {
     sortData(field)
   }
 
+  const exportToPDF = () => {
+    const table = tableRef.current
+    if (!table) return
+    table.parentElement.classList.remove('hidden')
+    html2canvas(table, { backgroundColor: '#fff', scale: 2 })
+      .then(canvas => {
+        const imgData = canvas.toDataURL('image/png')
+        const pdf = new jsPDF('portrait', 'mm', 'a4')
+
+        pdf.setFont('helvetica', 'bold')
+        pdf.setFontSize(18)
+        pdf.setTextColor(0, 0, 0)
+        pdf.text(
+          'R.M.K. ENGINEERING COLLEGE',
+          pdf.internal.pageSize.getWidth() / 2,
+          20,
+          { align: 'center' }
+        )
+
+        pdf.setFont('helvetica', 'normal')
+        pdf.setFontSize(12)
+        pdf.text(
+          '(An Autonomous Institution)',
+          pdf.internal.pageSize.getWidth() / 2,
+          28,
+          { align: 'center' }
+        )
+        pdf.text(
+          'R.S.M NAGAR, KAVARAIPETTAI - 601 206',
+          pdf.internal.pageSize.getWidth() / 2,
+          36,
+          { align: 'center' }
+        )
+
+        pdf.addImage(imgData, 'PNG', 10, 45, 190, 0)
+        pdf.save('One student one plant - Overall Progress.pdf')
+      })
+      .finally(() => {
+        table.parentElement.classList.add('hidden')
+      })
+  }
+
   const renderSortIcon = field =>
     sortField === field &&
     (sortDirection === 'asc' ? (
@@ -84,42 +127,6 @@ export default function DepartmentProgress() {
       </svg>
     ))
 
-  const exportToPDF = () => {
-    const input = document.getElementById('department-table')
-    html2canvas(input).then(canvas => {
-      const imgData = canvas.toDataURL('image/png')
-      const pdf = new jsPDF('portrait', 'mm', 'a4')
-
-      pdf.setFont('helvetica', 'bold')
-      pdf.setFontSize(18)
-      pdf.setTextColor(0, 0, 0)
-      pdf.text(
-        'R.M.K. ENGINEERING COLLEGE',
-        pdf.internal.pageSize.getWidth() / 2,
-        20,
-        { align: 'center' }
-      )
-
-      pdf.setFont('helvetica', 'normal')
-      pdf.setFontSize(12)
-      pdf.text(
-        '(An Autonomous Institution)',
-        pdf.internal.pageSize.getWidth() / 2,
-        28,
-        { align: 'center' }
-      )
-      pdf.text(
-        'R.S.M NAGAR, KAVARAIPETTAI - 601 206',
-        pdf.internal.pageSize.getWidth() / 2,
-        36,
-        { align: 'center' }
-      )
-
-      pdf.addImage(imgData, 'PNG', 10, 45, 190, 0)
-      pdf.save('One student one plant - Overall Progress.pdf')
-    })
-  }
-
   if (data.length == 0) return <p>Loading...</p>
 
   return (
@@ -130,7 +137,7 @@ export default function DepartmentProgress() {
       </div>
       <div className='w-11/12 mx-auto overflow-y-auto h-full'>
         <span className='details_table'>
-          <table id='department-table'>
+          <table>
             <thead>
               <tr>
                 <th>Name</th>
@@ -189,6 +196,28 @@ export default function DepartmentProgress() {
           </button>
         </div>
       </div>
+      <span className='w-11/12 absolute -z-40 tableRef hidden opacity-0 text-center'>
+        <table ref={tableRef}>
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Register Number</th>
+              <th>Current Year</th>
+              <th>Upload Count</th>
+            </tr>
+          </thead>
+          <tbody>
+            {data.map((student, index) => (
+              <tr key={index}>
+                <td>{student.name}</td>
+                <td>{student.registerNumber}</td>
+                <td>{student.currentYear}</td>
+                <td>{student.uploadCount}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </span>
     </div>
   )
 }
