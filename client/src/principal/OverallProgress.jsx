@@ -22,15 +22,19 @@ export default function OverallProgress() {
         if (!token) throw new Error('Authentication token is missing.')
 
         const response = await axios.get(
-          'http://localhost:3000/api/overall-progress',
+          'http://localhost:3000/college-overall-progress',
           {
             headers: {
               Authorization: `Bearer ${token}`
             }
           }
         )
+        const updatedData = response.data.map((item) => ({
+          ...item,
+          progress: ((item.uploadCount / item.studentCount) * 100).toFixed(2),
+        }));
 
-        setProgressData(response.data)
+        setProgressData(updatedData);
       } catch (err) {
         console.error('Error fetching data:', err)
         setError('Error fetching data: ' + err.message)
@@ -193,6 +197,7 @@ export default function OverallProgress() {
                       <td>{data.yearCounts.secondYear}</td>
                       <td>{data.yearCounts.thirdYear}</td>
                       <td>{data.yearCounts.fourthYear}</td>
+                      <td>{data.progress}%</td>
                     </tr>
                   ))}
                 </tbody>
@@ -210,6 +215,7 @@ export default function OverallProgress() {
                     <th>2nd Year</th>
                     <th>3rd Year</th>
                     <th>4th Year</th>
+                    <th>Progress</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -223,6 +229,7 @@ export default function OverallProgress() {
                       <td>{data.yearCounts.secondYear}</td>
                       <td>{data.yearCounts.thirdYear}</td>
                       <td>{data.yearCounts.fourthYear}</td>
+                      <td>{data.progress}%</td>
                     </tr>
                   ))}
                 </tbody>

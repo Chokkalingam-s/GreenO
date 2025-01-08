@@ -15,7 +15,7 @@ export default function OverallStatus() {
   const fetchDepartmentData = async () => {
     try {
       const response = await axios.get(
-        'http://localhost:3000/api/new-department-data',
+        'http://localhost:3000/new-department-data',
         {
           headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
         }
@@ -39,7 +39,7 @@ export default function OverallStatus() {
         setTopDepartments(sortedDepartments.slice(0, 3))
 
         const userResponse = await axios.get(
-          'http://localhost:3000/api/new-user-details',
+          'http://localhost:3000/new-user-details',
           {
             headers: {
               Authorization: `Bearer ${localStorage.getItem('token')}`

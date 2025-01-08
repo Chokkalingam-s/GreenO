@@ -33,7 +33,7 @@ export default function AHome() {
       try {
         const token = localStorage.getItem('token')
         const response = await axios.get(
-          'http://localhost:3000/api/student-count',
+          'http://localhost:3000/college-overall-student-count',
           {
             headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
           }
@@ -53,7 +53,7 @@ export default function AHome() {
         const token = localStorage.getItem('token')
         const userEmail = localStorage.getItem('userEmail')
         const response = await axios.get(
-          'http://localhost:3000/api/admin-data',
+          'http://localhost:3000/college-admin-data',
           {
             headers: {
               Authorization: `Bearer ${token}`

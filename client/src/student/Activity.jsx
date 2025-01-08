@@ -12,7 +12,7 @@ export default function Activity() {
     const fetchImages = async () => {
       try {
         const response = await axios.get(
-          'http://localhost:3000/api/get-uploaded-images',
+          'http://localhost:3000/student-get-uploaded-images',
           {
             headers: { Authorization: `Bearer ${token}` }
           }

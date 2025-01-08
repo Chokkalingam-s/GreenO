@@ -73,7 +73,7 @@ export default function UploadSnaps() {
       const token = localStorage.getItem('token')
       try {
         const response = await axios.get(
-          'http://localhost:3000/api/uploaded-snaps',
+          'http://localhost:3000/student-uploaded-snaps',
           {
             headers: { Authorization: `Bearer ${token}` }
           }
@@ -106,7 +106,7 @@ export default function UploadSnaps() {
     const token = localStorage.getItem('token')
     try {
       const response = await axios.post(
-        'http://localhost:3000/api/upload-snap',
+        'http://localhost:3000/student-upload-snap-page',
         formData,
         {
           headers: {

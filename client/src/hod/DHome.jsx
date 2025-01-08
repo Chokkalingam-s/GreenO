@@ -21,7 +21,7 @@ const DHome = () => {
   useEffect(() => {
     const fetchDepartmentData = async () => {
       try {
-        const response = await axios.get('http://localhost:3000/api/department-student-data', {
+        const response = await axios.get('http://localhost:3000/departmentwise-student-data', {
           headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
         });
         setStudentData(response.data);
