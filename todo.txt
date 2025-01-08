@@ -1,31 +1,6 @@
-User Side:
-----------
-Done:
-  genreate certificate mobile ui
-  profile changes
-  toastify
-  better folder structure
-  dropdown theme
-  Activity - my pregress - only sem number and also add clicking in the image it should give like a zoom up
-    - laptop ( 4 4)
-  upload image - previously uploaded image
-  Activity Page : Mobile View : single page 8 images , each row 2
-
 TODO:
-  Student Side :
-    Profile:
-      toastify Alert not working - generate certificate
-  Hod Login:
-    Progress Table:
-      Filter in Year ( Current Year)
-      Export PDF
-    Overall Status: ( report )
-      Height Correction
-      Ranking Legible ( bottom last line)
   Admin Login:
-    Progress Table:
-      Icon for Filter ( Asc Desc )
-      Include filter in First-Last year
+    Progress Table: ( ui )
       add column at last "Progress" with filter 
       Export PDF
   Final : Refresh load bug.
