@@ -35,35 +35,8 @@ export default function OverallStatus() {
           }
           return b.studentCount - a.studentCount
         })
-        const topDepartments = [
-          { department: 'Marketing', percentage: 95 },
-          { department: 'Engineering', percentage: 93 },
-          { department: 'Finance', percentage: 91 },
-          { department: 'Human Resources', percentage: 89 },
-          { department: 'Sales', percentage: 87 },
-          { department: 'Legal', percentage: 85 },
-          { department: 'Customer Support', percentage: 83 },
-          { department: 'IT', percentage: 81 },
-          { department: 'Operations', percentage: 79 },
-          { department: 'R&D', percentage: 77 },
-          { department: 'Quality Assurance', percentage: 75 },
-          { department: 'Product Management', percentage: 74 },
-          { department: 'Business Development', percentage: 72 },
-          { department: 'Public Relations', percentage: 71 },
-          { department: 'Data Analytics', percentage: 70 },
-          { department: 'Procurement', percentage: 68 },
-          { department: 'Training', percentage: 67 },
-          { department: 'Administration', percentage: 66 },
-          { department: 'Security', percentage: 65 },
-          { department: 'Strategy', percentage: 64 },
-          { department: 'Corporate Affairs', percentage: 63 },
-          { department: 'Communications', percentage: 62 },
-          { department: 'Facilities', percentage: 61 },
-          { department: 'Legal Compliance', percentage: 60 },
-          { department: 'Research', percentage: 59 }
-        ]
-        setDepartmentData(topDepartments)
-        setTopDepartments(topDepartments.slice(0, 3))
+        setDepartmentData(sortedDepartments)
+        setTopDepartments(sortedDepartments.slice(0, 3))
 
         const userResponse = await axios.get(
           'http://localhost:3000/api/new-user-details',
