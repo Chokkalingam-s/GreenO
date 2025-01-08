@@ -128,7 +128,6 @@ export default function DepartmentProgress() {
     ))
 
   // if (data.length == 0) return <p>Loading...</p>
-
   return (
     <div className='c_main flex-col max-h-[90vh] mt-8'>
       <h2 className='head mt-2'>Department Progress</h2>

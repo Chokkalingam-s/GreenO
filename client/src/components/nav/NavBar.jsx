@@ -1,5 +1,4 @@
 import { NavLink } from 'react-router-dom'
-import { useRole } from '../auth/useRole'
 
 function commonDashboard(path) {
   return {
@@ -67,8 +66,7 @@ const hodNavItems = [
   }
 ]
 
-export default function NavBar({ type = 0 }) {
-  const { role } = useRole()
+export default function NavBar({ type = 0, role }) {
   const navItems =
     role === 'hod'
       ? hodNavItems
@@ -87,7 +85,7 @@ export default function NavBar({ type = 0 }) {
             <svg
               xmlns='http://www.w3.org/2000/svg'
               viewBox={viewBox}
-              className={`icon`}>
+              className='icon'>
               <path d={icon}></path>
             </svg>
           ) : null}
