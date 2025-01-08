@@ -21,7 +21,8 @@ import {
   Layout,
   About,
   Activity,
-  OverallStatus
+  OverallStatus,
+  SplashWithDelay
 } from './exp_components'
 import { ToastContainer } from 'react-toastify'
 
@@ -55,40 +56,42 @@ export default function App() {
         hideProgressBar
         theme='dark'
       />
-      <Suspense fallback={<Splash />}>
-        <Routes>
-          <Route
-            path='/signin'
-            element={<SignIn setIsAuthenticated={setIsAuthenticated} />}
-          />
-          <Route path='/' element={<Navigate to='/signin' replace />} />
-          <Route path='/signup' element={<StudentSignUp />} />
-          <Route path='/admin-signup' element={<AdminSignUp />} />
-
-          <Route
-            element={
-              <ProtectedRouteWrapper isAuthenticated={isAuthenticated}>
-                <Layout />
-              </ProtectedRouteWrapper>
-            }>
-            <Route path='/home' element={<About />} />
-            <Route path='/activities' element={<Activity />} />
-            <Route path='/upload_snap' element={<UploadSnaps />} />
-            <Route path='/resources' element={<Resource />} />
-            <Route path='/profile' element={<Profile />} />
-
-            <Route path='/admin' element={<AdminHome />} />
-            <Route path='/progress' element={<OverallProgress />} />
-
-            <Route path='/department' element={<DepartmentHome />} />
+      <SplashWithDelay>
+        <Suspense fallback={<Splash />}>
+          <Routes>
             <Route
-              path='/department-progress'
-              element={<DepartmentProgress />}
+              path='/signin'
+              element={<SignIn setIsAuthenticated={setIsAuthenticated} />}
             />
-            <Route path='/report' element={<OverallStatus />} />
-          </Route>
-        </Routes>
-      </Suspense>
+            <Route path='/' element={<Navigate to='/signin' replace />} />
+            <Route path='/signup' element={<StudentSignUp />} />
+            <Route path='/admin-signup' element={<AdminSignUp />} />
+
+            <Route
+              element={
+                <ProtectedRouteWrapper isAuthenticated={isAuthenticated}>
+                  <Layout />
+                </ProtectedRouteWrapper>
+              }>
+              <Route path='/home' element={<About />} />
+              <Route path='/activities' element={<Activity />} />
+              <Route path='/upload_snap' element={<UploadSnaps />} />
+              <Route path='/resources' element={<Resource />} />
+              <Route path='/profile' element={<Profile />} />
+
+              <Route path='/admin' element={<AdminHome />} />
+              <Route path='/progress' element={<OverallProgress />} />
+
+              <Route path='/department' element={<DepartmentHome />} />
+              <Route
+                path='/department-progress'
+                element={<DepartmentProgress />}
+              />
+              <Route path='/report' element={<OverallStatus />} />
+            </Route>
+          </Routes>
+        </Suspense>
+      </SplashWithDelay>
     </Router>
   )
 }

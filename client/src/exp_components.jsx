@@ -20,8 +20,12 @@ const LogOut = lazy(() => import('./components/LogOut'))
 const Header = lazy(() => import('./components/nav/Header'))
 const Modal = lazy(() => import('./components/Modal'))
 const OverallStatus = lazy(() => import('./hod/OverallStatus'))
+const Splashscreen = lazy(() => import('./components/Splashscreen'))
+const SplashWithDelay = lazy(() => import('./components/SplashWithDelay'))
 
 export {
+  SplashWithDelay,
+  Splashscreen,
   OverallStatus,
   LogOut,
   Splash,
