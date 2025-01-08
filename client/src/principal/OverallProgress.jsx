@@ -1,6 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
 import axios from 'axios'
-import { FaSortUp, FaSortDown } from 'react-icons/fa'
 import jsPDF from 'jspdf'
 import html2canvas from 'html2canvas'
 
@@ -8,8 +7,9 @@ export default function OverallProgress() {
   const [progressData, setProgressData] = useState([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
-  const [sortConfig, setSortConfig] = useState({ key: '', direction: 'asc' })
   const tableRef = useRef(null)
+  const [sortField, setSortField] = useState('uploadCount')
+  const [sortDirection, setSortDirection] = useState('desc')
 
   useEffect(() => {
     const fetchData = async () => {
@@ -32,10 +32,65 @@ export default function OverallProgress() {
 
         console.log('Progress Data:', response.data)
 
-        const sortedData = response.data.sort((a, b) =>
-          a.department.localeCompare(b.department)
-        )
-        setProgressData(sortedData)
+        const progressData = [
+          {
+            department: 'Computer Science',
+            studentCount: 120,
+            uploadCount: 85,
+            yearCounts: {
+              firstYear: 30,
+              secondYear: 25,
+              thirdYear: 20,
+              fourthYear: 10
+            }
+          },
+          {
+            department: 'Electrical Engineering',
+            studentCount: 100,
+            uploadCount: 75,
+            yearCounts: {
+              firstYear: 25,
+              secondYear: 20,
+              thirdYear: 15,
+              fourthYear: 15
+            }
+          },
+          {
+            department: 'Mechanical Engineering',
+            studentCount: 110,
+            uploadCount: 65,
+            yearCounts: {
+              firstYear: 20,
+              secondYear: 30,
+              thirdYear: 25,
+              fourthYear: 10
+            }
+          },
+          {
+            department: 'Civil Engineering',
+            studentCount: 90,
+            uploadCount: 60,
+            yearCounts: {
+              firstYear: 15,
+              secondYear: 25,
+              thirdYear: 20,
+              fourthYear: 10
+            }
+          },
+          {
+            department: 'Electronics & Communication',
+            studentCount: 130,
+            uploadCount: 95,
+            yearCounts: {
+              firstYear: 35,
+              secondYear: 30,
+              thirdYear: 20,
+              fourthYear: 10
+            }
+          }
+        ]
+
+        setProgressData(progressData)
       } catch (err) {
         console.error('Error fetching data:', err)
         setError('Error fetching data: ' + err.message)
@@ -46,27 +101,6 @@ export default function OverallProgress() {
 
     fetchData()
   }, [])
-
-  const handleSort = key => {
-    let direction = 'asc'
-    if (sortConfig.key === key && sortConfig.direction === 'asc') {
-      direction = 'desc'
-    }
-
-    setSortConfig({ key, direction })
-
-    const sortedData = [...progressData].sort((a, b) => {
-      if (a[key] < b[key]) {
-        return direction === 'asc' ? -1 : 1
-      }
-      if (a[key] > b[key]) {
-        return direction === 'asc' ? 1 : -1
-      }
-      return 0
-    })
-
-    setProgressData(sortedData)
-  }
 
   const exportToPDF = () => {
     const table = tableRef.current
@@ -110,6 +144,42 @@ export default function OverallProgress() {
       })
   }
 
+  const toggleSortDirection = field => {
+    setSortDirection(prev => (prev === 'asc' ? 'desc' : 'asc'))
+    setSortField(field)
+    const sorted = [...progressData].sort((a, b) => {
+      if (sortDirection === 'asc') {
+        return a[field] - b[field]
+      }
+      return b[field] - a[field]
+    })
+    setProgressData(sorted)
+  }
+
+  const renderSortIcon = field =>
+    sortField === field &&
+    (sortDirection === 'asc' ? (
+      <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 320 512'>
+        <path d='M182.6 137.4c-12.5-12.5-32.8-12.5-45.3 0l-128 128c-9.2 9.2-11.9 22.9-6.9 34.9s16.6 19.8 29.6 19.8l256 0c12.9 0 24.6-7.8 29.6-19.8s2.2-25.7-6.9-34.9l-128-128z' />
+      </svg>
+    ) : (
+      <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 320 512'>
+        <path d='M137.4 374.6c12.5 12.5 32.8 12.5 45.3 0l128-128c9.2-9.2 11.9-22.9 6.9-34.9s-16.6-19.8-29.6-19.8L32 192c-12.9 0-24.6 7.8-29.6 19.8s-2.2 25.7 6.9 34.9l128 128z' />
+      </svg>
+    ))
+
+  const toggleYearSort = year => {
+    setSortDirection(prev => (prev === 'asc' ? 'desc' : 'asc'))
+    setSortField(year)
+    const sorted = [...progressData].sort((a, b) => {
+      if (sortDirection === 'asc') {
+        return a.yearCounts[year] - b.yearCounts[year]
+      }
+      return b.yearCounts[year] - a.yearCounts[year]
+    })
+    setProgressData(sorted)
+  }
+
   return (
     <div className='c_main'>
       <div className='main-content'>
@@ -122,38 +192,30 @@ export default function OverallProgress() {
           <p>Loading...</p>
         ) : (
           <>
-            <div id='progress-table' className='details_table'>
-              <table className='responsive-table'>
+            <div className='details_table'>
+              <table>
                 <thead>
                   <tr>
                     <th>Sno</th>
                     <th>Department Name</th>
-                    <th
-                      onClick={() => handleSort('studentCount')}
-                      className='sortable-column'>
-                      Total Students
-                      {sortConfig.key === 'studentCount' &&
-                        (sortConfig.direction === 'asc' ? (
-                          <FaSortUp className='sort-icon' />
-                        ) : (
-                          <FaSortDown className='sort-icon' />
-                        ))}
+                    <th onClick={() => toggleSortDirection('studentCount')}>
+                      Total Students {renderSortIcon('studentCount')}
                     </th>
-                    <th
-                      onClick={() => handleSort('uploadCount')}
-                      className='sortable-column'>
-                      No. of Plants in Process
-                      {sortConfig.key === 'uploadCount' &&
-                        (sortConfig.direction === 'asc' ? (
-                          <FaSortUp className='sort-icon' />
-                        ) : (
-                          <FaSortDown className='sort-icon' />
-                        ))}
+                    <th onClick={() => toggleSortDirection('uploadCount')}>
+                      No. of Plants in Process {renderSortIcon('uploadCount')}
                     </th>
-                    <th>1st Year</th>
-                    <th>2nd Year</th>
-                    <th>3rd Year</th>
-                    <th>4th Year</th>
+                    <th onClick={() => toggleYearSort('firstYear')}>
+                      1st Year {renderSortIcon('firstYear')}
+                    </th>
+                    <th onClick={() => toggleYearSort('secondYear')}>
+                      2nd Year {renderSortIcon('secondYear')}
+                    </th>
+                    <th onClick={() => toggleYearSort('thirdYear')}>
+                      3rd Year {renderSortIcon('thirdYear')}
+                    </th>
+                    <th onClick={() => toggleYearSort('fourthYear')}>
+                      4th Year {renderSortIcon('fourthYear')}
+                    </th>
                   </tr>
                 </thead>
                 <tbody>
