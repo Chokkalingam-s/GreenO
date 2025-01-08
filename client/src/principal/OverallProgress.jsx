@@ -139,22 +139,46 @@ export default function OverallProgress() {
                     <th>Sno</th>
                     <th>Department Name</th>
                     <th onClick={() => toggleSortDirection('studentCount')}>
-                      Total Students {renderSortIcon('studentCount')}
+                      <div>
+                        <span>Total Students</span>
+                        {renderSortIcon('studentCount')}
+                      </div>
                     </th>
                     <th onClick={() => toggleSortDirection('uploadCount')}>
-                      No. of Plants in Process {renderSortIcon('uploadCount')}
+                      <div>
+                        <span>No. of Plants in Process</span>
+                        {renderSortIcon('uploadCount')}
+                      </div>
                     </th>
                     <th onClick={() => toggleYearSort('firstYear')}>
-                      1st Year {renderSortIcon('firstYear')}
+                      <div>
+                        <span>1st Year</span>
+                        {renderSortIcon('firstYear')}
+                      </div>
                     </th>
                     <th onClick={() => toggleYearSort('secondYear')}>
-                      2nd Year {renderSortIcon('secondYear')}
+                      <div>
+                        <span>2nd Year</span>
+                        {renderSortIcon('secondYear')}
+                      </div>
                     </th>
                     <th onClick={() => toggleYearSort('thirdYear')}>
-                      3rd Year {renderSortIcon('thirdYear')}
+                      <div>
+                        <span>3rd Year</span>
+                        {renderSortIcon('thirdYear')}
+                      </div>
                     </th>
                     <th onClick={() => toggleYearSort('fourthYear')}>
-                      4th Year {renderSortIcon('fourthYear')}
+                      <div>
+                        <span>4th Year</span>
+                        {renderSortIcon('fourthYear')}
+                      </div>
+                    </th>
+                    <th onClick={() => toggleSortDirection('progress')}>
+                      <div>
+                        <span>Progress</span>
+                        {renderSortIcon('progress')}
+                      </div>
                     </th>
                   </tr>
                 </thead>

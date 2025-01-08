@@ -154,7 +154,10 @@ nav a {
     @apply table_common glassy;
   }
   th {
-    @apply glassy p-2;
+    @apply glassy p-2 cursor-pointer;
+    div {
+      @apply center;
+    }
   }
   td {
     @apply p-2 text-sm;
