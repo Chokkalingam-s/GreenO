@@ -8,7 +8,6 @@ TODO:
    
 
 Later:
-  Refresg bug - go to splash and with token go to the page
   about page changes Ui Improvisation
   Profile Page Ui Update
   better error handling with user
@@ -20,8 +19,7 @@ Future User Side
 
 
  ToDo ( Chokkalingam and Divakar Reference):
-   
     Landing Website !
-    Backend URL handling
+    Contact Us Backend and Email
     Student sign up - Based on Dataset given by College's
-    !!!! AICTE Level development ( Backend Central server )
+    AICTE Level development ( Backend Central server )
