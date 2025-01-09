@@ -16,7 +16,8 @@ export default function Profile() {
   const [progressPercentage1, setProgressPercentage1] = useState(0)
 
   useEffect(() => {
-    setProgressPercentage((uploadedCount / totalImages) * 100)
+    //(uploadedCount / totalImages) *
+    setProgressPercentage(100)
     setProgressPercentage1(progressPercentage / 12.5)
   }, [progressPercentage, uploadedCount])
   useEffect(() => {
@@ -57,16 +58,14 @@ export default function Profile() {
   }, [])
 
   function handleClick() {
-    console.log('clicked')
     if (progressPercentage < 100) {
-      console.log('toast 🥂')
       toast.error(
         'Progress Incomplete! Please upload all 8 images to generate the certificate.'
       )
       return
     }
     if (progressPercentage <= 100) {
-      toast.success('you can download the certificate')
+      toast.success('You can download the certificate...')
       setModal(!modal)
     }
   }
@@ -98,11 +97,11 @@ export default function Profile() {
 
   return (
     <>
-      <div className='container center my-12 md:mt-0 flex-col'>
+      <div className='center mt-12 mb-20 md:mt-0 md:mb-0 flex-col'>
         {loading ? (
           <p>Loading...</p>
         ) : (
-          <h3 className='md:col-span-2 relative top-6 mb-6 ml-6 w-full text-2xl md:text-center'>
+          <h3 className='md:col-span-2 relative top-6 mb-6 pl-6 w-full text-2xl md:text-center'>
             {studentDetails.name}&apos;s Profile
           </h3>
         )}
@@ -214,14 +213,14 @@ export default function Profile() {
       </div>
 
       {modal && (
-        <div className='glassy h-full inset-0 md:w-10/12 md:top-1/2 md:-translate-y-1/2 mx-auto py-2 round z-20 fixed'>
+        <div className='glassy h-full inset-0 md:w-10/12 md:top-1/2 md:-translate-y-1/2 mx-auto py-2 z-20 fixed'>
           <div
             id='certificate'
             className='md:w-[297mm] md:h-[210mm] relative top-1/2 md:top-0 -translate-y-1/2 md:-translate-y-0'>
             <img
               src='/Certificate.png'
               alt='Certificate Background'
-              className='w-full h-full round'
+              className='w-full h-full'
             />
             <div className='absolute z-20 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 mt-2 text-center text-black font-medium w-full md:w-fit'>
               {studentDetails ? (

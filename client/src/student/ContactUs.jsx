@@ -13,9 +13,9 @@ export default function ContactUs() {
   }
 
   return (
-    <div className='main flex-col p-8'>
+    <div className='main flex-col relative top-2'>
       <h2 className='head'>Contact Us</h2>
-      <div className='md:p-6 md:w-10/12'>
+      <div>
         <input
           type='text'
           id='problem'
@@ -30,17 +30,15 @@ export default function ContactUs() {
           placeholder='Enter the problem description'
           rows='5'
         />
-        <label htmlFor='images' className='text-lg font-medium mb-2'>
+        <label className='text-lg font-medium mb-2'>
           Images <span className='text-base'>(Optional)</span>
         </label>
         <div
           className='p-2 border-2 border-dashed border-secondary glassy round center'
           onClick={() => document.getElementById('file-input').click()}>
-          <label
-            htmlFor='file-input'
-            className='cursor-pointer p-2 font-medium text-lg bg-secondary round transition duration-300 hover:outline-2 hover:outline outline-offset-2 outline-secondary'>
+          <span className='cursor-pointer p-2 font-medium text-lg bg-secondary round transition duration-300 hover:outline-2 hover:outline outline-offset-2 outline-secondary'>
             Choose File
-          </label>
+          </span>
           <input
             id='file-input'
             type='file'

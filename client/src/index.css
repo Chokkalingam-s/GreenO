@@ -1,6 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
 :root {
   --translate-y: 0.2rem;
 }
@@ -15,14 +16,14 @@
 body {
   font-family: 'Poppins', serif;
   background-image: url('/bg.jpg');
-  @apply text-white bg-primary bg-cover bg-center font-normal bg-fixed;
+  @apply text-white bg-primary bg-cover bg-center font-normal bg-fixed w-full;
   p {
     @apply text-base md:max-w-[70ch];
   }
 
   &::after {
     content: '';
-    @apply bg-black/30 absolute inset-0;
+    @apply bg-black/30 inset-0 fixed top-0;
   }
 }
 
@@ -65,10 +66,10 @@ select:disabled {
   @apply text-3xl font-medium;
 }
 .c_main {
-  @apply md:px-2 round md:py-2 relative glassy center w-11/12 max-h-[90vh];
+  @apply md:px-2 round md:py-2 relative glassy center w-fit max-h-[90vh];
 }
 .main {
-  @apply md:w-7/12 c_main;
+  @apply c_main max-w-2xl;
 }
 button:not(.Toastify__close-button) {
   @apply text-base center px-4 py-2 my-2 font-medium transition-shadow round;
@@ -199,12 +200,12 @@ nav a {
   @apply bg-black round;
 }
 .cert {
-  @apply w-full;
+  @apply w-1/2;
   p {
     @apply text-xs md:text-xl;
   }
   h2 {
-    @apply md:text-4xl text-xl md:mb-2;
+    @apply md:text-4xl text-lg md:mb-2;
   }
 }
 .search-list {

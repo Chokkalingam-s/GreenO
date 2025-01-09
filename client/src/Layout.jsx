@@ -6,6 +6,8 @@ import { useRole } from './components/auth/useRole'
 export default function Layout() {
   const navi = useNavigate()
   const { role } = useRole()
+  console.log(role)
+
   return (
     <>
       <Header />
@@ -25,7 +27,7 @@ export default function Layout() {
           Contact Us
         </button>
       )}
-      <NavBar type={1} />
+      <NavBar type={1} role={role} />
     </>
   )
 }
