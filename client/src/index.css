@@ -202,7 +202,11 @@ nav a {
   @apply -translate-y-4;
   p {
     @apply text-[.4rem] md:text-xl;
-    line-height: 0.6rem;
+    @media (min-width: 768px) {
+      p {
+        line-height: 0.6rem;
+      }
+    }
   }
   h2 {
     @apply md:text-4xl text-base md:mb-2;
