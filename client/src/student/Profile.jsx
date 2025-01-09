@@ -16,8 +16,7 @@ export default function Profile() {
   const [progressPercentage1, setProgressPercentage1] = useState(0)
 
   useEffect(() => {
-    //(uploadedCount / totalImages) *
-    setProgressPercentage(100)
+    setProgressPercentage((uploadedCount / totalImages) * 100)
     setProgressPercentage1(progressPercentage / 12.5)
   }, [progressPercentage, uploadedCount])
   useEffect(() => {
