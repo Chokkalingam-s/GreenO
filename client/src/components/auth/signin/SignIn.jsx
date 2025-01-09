@@ -37,6 +37,7 @@ export default function SignIn() {
       const { token, userRole } = response.data
       if (token) {
         localStorage.setItem('token', token)
+        localStorage.setItem('role', userRole)
         setRole(userRole)
         setIsAuthenticated(true)
         navigate(

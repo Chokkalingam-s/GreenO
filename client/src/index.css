@@ -65,11 +65,10 @@ select:disabled {
 .head {
   @apply text-3xl font-medium;
 }
+
+.main,
 .c_main {
   @apply md:px-2 round md:py-2 relative glassy center max-h-[90vh] w-10/12;
-}
-.main {
-  @apply c_main max-w-3xl;
 }
 button:not(.Toastify__close-button) {
   @apply text-base center px-4 py-2 my-2 font-medium transition-shadow round;
@@ -200,12 +199,13 @@ nav a {
   @apply bg-black round;
 }
 .cert {
-  @apply w-1/2;
+  @apply -translate-y-4;
   p {
-    @apply text-xs md:text-xl;
+    @apply text-[.4rem] md:text-xl;
+    line-height: 0.6rem;
   }
   h2 {
-    @apply md:text-4xl text-lg md:mb-2;
+    @apply md:text-4xl text-base md:mb-2;
   }
 }
 .search-list {

@@ -132,7 +132,7 @@ export default function DepartmentHome() {
   }
 
   return (
-    <div className='c_main flex-col space-y-4'>
+    <div className='main flex-col space-y-4'>
       <h1 className='text-3xl font-medium'>Department Overview</h1>
       <div className='space-x-4 w-8/12 center'>
         <div className='_detail'>

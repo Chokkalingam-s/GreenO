@@ -129,9 +129,9 @@ export default function DepartmentProgress() {
 
   // if (data.length == 0) return <p>Loading...</p>
   return (
-    <div className='c_main flex-col max-h-[90vh] mt-8'>
-      <h2 className='head mt-2'>Department Progress</h2>
-      <div className='w-10/12 grid grid-cols-1 md:grid-cols-[40%_15%_25%_20%] items-center md:translate-x-5 gap-x-2'>
+    <div className='main flex-col max-h-[90vh] mt-8'>
+      <h2 className='head my-2'>Department Progress</h2>
+      <div className='w-full grid grid-cols-1 md:grid-cols-[38%_15%_25%_18%] items-center justify-end gap-x-2 float-end'>
         <SearchComponent data={data} onFilter={setFilteredData} />
         <select
           onChange={e => handleYearFilter(Number(e.target.value))}
@@ -154,7 +154,7 @@ export default function DepartmentProgress() {
 
         <button onClick={exportToPDF}>Export to PDF</button>
       </div>
-      <div className='w-11/12 mx-auto overflow-y-auto h-full'>
+      <div className='w-full overflow-y-auto h-full'>
         <span className='details_table'>
           <table>
             <thead>

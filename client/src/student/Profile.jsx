@@ -221,7 +221,7 @@ export default function Profile() {
               alt='Certificate Background'
               className='w-full h-full'
             />
-            <div className='absolute z-20 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 mt-2 text-center text-black font-medium w-full md:w-fit'>
+            <div className='absolute z-20 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 mt-2 text-center text-black font-medium md:w-fit w-full'>
               {studentDetails ? (
                 <span className='cert'>
                   <h2>{studentDetails.name}</h2>

@@ -135,7 +135,7 @@ export default function OverallProgress() {
   }
 
   return (
-    <div className='c_main relative top-6'>
+    <div className='c_main relative top-6 w-full'>
       <div className='main-content'>
         <div className='flex justify-between items-center'>
           <h2 className='text-3xl font-medium'>Overall Progress</h2>
