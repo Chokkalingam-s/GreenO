@@ -5,7 +5,7 @@ export default function SplashWithDelay({ children }) {
   const [showChildren, setShowChildren] = useState(false)
 
   useEffect(() => {
-    const timeout = setTimeout(() => setShowChildren(true), 2000)
+    const timeout = setTimeout(() => setShowChildren(true), 1200)
     return () => clearTimeout(timeout)
   }, [])
 

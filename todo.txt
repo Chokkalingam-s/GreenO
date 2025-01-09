@@ -1,11 +1,8 @@
 TODO:
-  Splash Screen
   Mobile - Generate certificate - Text is big , reduce it as same as laptop
     Text Content Reorder - Refer Whatsapp
-  GreenO Logo Tap - Home Page
-  Contact Us Page - Students Reporting Bug - Problem , description , image.
-  Department Progress -  layout update refer Whatsapp
   Overall progress icon for all - Department name left aligned - check with 30 data
+  Refresh - Hod , Admin wrong navigation
 
   Final : Refresh load bug.
    
