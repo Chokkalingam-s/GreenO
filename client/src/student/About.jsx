@@ -1,6 +1,6 @@
 export default function StudentHome() {
   return (
-    <article className='center flex-col gap-y-4 p-4 relative top-10 mt-4 md:mt-0 mb-8'>
+    <article className='center flex-col gap-y-4 p-4 relative top-10 mt-2 md:mt-0 pb-20'>
       <div className='about'>
         <span className='pl-4'>
           <h2 className='head'>About</h2>

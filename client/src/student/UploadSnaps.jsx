@@ -13,8 +13,9 @@ export default function UploadSnaps() {
   const [location, setLocation] = useState({ latitude: '', longitude: '' })
 
   const generateCaptcha = () => {
-    const chars = '0123456789ABCDEFGHJKLMNOPQRSTUVWXYZabcdefghijkmnopq@rstuvwxyz';
-    let captcha = '';
+    const chars =
+      '0123456789ABCDEFGHJKLMNOPQRSTUVWXYZabcdefghijkmnopq@rstuvwxyz'
+    let captcha = ''
     for (let i = 0; i < 6; i++) {
       captcha += chars[Math.floor(Math.random() * chars.length)]
     }
@@ -158,7 +159,7 @@ export default function UploadSnaps() {
         )}
 
         {location.latitude && location.longitude && (
-          <div className='location-display text-sm mb-4 text-center'>
+          <div className='location-display text-sm mb-4 text-center flex space-x-2'>
             <p>
               <b>Latitude:</b> {location.latitude}
             </p>
@@ -189,11 +190,7 @@ export default function UploadSnaps() {
             <button
               onClick={handleUpload}
               disabled={!isUploadEnabled}
-              className={`${
-                isUploadEnabled
-                  ? 'bg-blue-600 hover:bg-blue-700 text-white'
-                  : 'bg-gray-400 text-gray-200'
-              }`}>
+              className={`${isUploadEnabled ? 'text-white' : 'text-gray-200'}`}>
               Upload
             </button>
           </>

@@ -15,7 +15,7 @@ export default function Layout() {
       {role == 'student' && (
         <button
           onClick={() => navi('/contact_us')}
-          className='contact_us fixed bottom-6 right-10 z-20'>
+          className='contact_us fixed bottom-16 md:bottom-6 md:right-10 right-4 z-50'>
           <svg
             xmlns='http://www.w3.org/2000/svg'
             viewBox='0 0 512 512'

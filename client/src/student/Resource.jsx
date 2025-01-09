@@ -14,7 +14,7 @@ export default function Resource() {
     setSelectedCard(null)
   }
   return (
-    <div className='grid grid-cols-1 md:w-8/12 relative top-16 mb-16 md:mb-0'>
+    <div className='grid grid-cols-1 md:w-8/12 relative top-12 pb-14 md:pb-0'>
       <main className='container mx-auto p-4'>
         <section className='p-6 glassy round'>
           <h2 className='head mb-4'>GreenO Plant Care</h2>
