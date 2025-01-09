@@ -131,7 +131,7 @@ export default function DepartmentProgress() {
   return (
     <div className='c_main flex-col max-h-[90vh] mt-8'>
       <h2 className='head mt-2'>Department Progress</h2>
-      <div className='w-10/12 grid grid-cols-1 md:grid-cols-[40%_15%_25%_20%] items-center md:translate-x-6 gap-x-2'>
+      <div className='w-10/12 grid grid-cols-1 md:grid-cols-[40%_15%_25%_20%] items-center md:translate-x-5 gap-x-2'>
         <SearchComponent data={data} onFilter={setFilteredData} />
         <select
           onChange={e => handleYearFilter(Number(e.target.value))}

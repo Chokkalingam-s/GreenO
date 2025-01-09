@@ -66,10 +66,10 @@ select:disabled {
   @apply text-3xl font-medium;
 }
 .c_main {
-  @apply md:px-2 round md:py-2 relative glassy center w-fit max-h-[90vh];
+  @apply md:px-2 round md:py-2 relative glassy center max-h-[90vh] w-10/12;
 }
 .main {
-  @apply c_main max-w-2xl;
+  @apply c_main max-w-3xl;
 }
 button:not(.Toastify__close-button) {
   @apply text-base center px-4 py-2 my-2 font-medium transition-shadow round;
