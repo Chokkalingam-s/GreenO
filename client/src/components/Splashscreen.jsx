@@ -1,11 +1,11 @@
 import { useState, useEffect } from 'react'
 
 export default function SplashScreen() {
-  const [loadingText, setLoadingText] = useState('Loading')
+  const [loadingText, setLoadingText] = useState('GreenO')
   useEffect(() => {
     const interval = setInterval(() => {
       setLoadingText(prev =>
-        prev === 'Loading...' ? 'Please wait' : 'Loading...'
+        prev === 'GreenO!' ? 'Please wait' : 'GreenO...'
       )
     }, 1000)
     return () => clearInterval(interval)
