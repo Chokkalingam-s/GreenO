@@ -273,7 +273,7 @@ const compareImages = async (imgPath1, imgPath2) => {
 };
 
 
-const MAX_DISTANCE_METERS = 10;
+const MAX_DISTANCE_METERS = 50;
 const FOUR_MONTHS_IN_MILLIS = 4 * 30 * 24 * 60 * 60 * 1000;
 
 app.post('/student-upload-snap-page', authenticateToken, upload.single('file'), async (req, res) => {

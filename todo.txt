@@ -1,11 +1,9 @@
 TODO:
+  Refresh - Hod , Admin wrong navigation
   Mobile - Generate certificate - Text is big , reduce it as same as laptop
     Text Content Reorder - Refer Whatsapp
-  Overall progress icon for all - Department name left aligned - check with 30 data
-  Refresh - Hod , Admin wrong navigation
-
-  Final : Refresh load bug.
-   
+  Home Page About content justify
+  Landing Website !
 
 Later:
   about page changes Ui Improvisation
@@ -13,9 +11,9 @@ Later:
   better error handling with user
   Console Error Eradicate completely
   Try - background - doodle / image
-
-Future User Side
   add email to the verify otp reset password
+
+Final : Refresh load bug.
 
 
  ToDo ( Chokkalingam and Divakar Reference):
@@ -23,3 +21,17 @@ Future User Side
     Contact Us Backend and Email
     Student sign up - Based on Dataset given by College's
     AICTE Level development ( Backend Central server )
+    FRONT END: 
+          1> Student About page:
+              SDG CONTENT - NO - TITLE - RE GENERATE CONTENT
+          2> CERTIFICATE : SDG - IMPROVISE
+          3> REMOVE RMKEC CONSTRAINT IN MAIL
+    BACK END:
+          4> PHOTO UPLOAD - SEM WISE 
+                JULY TO SEPT - ODD
+                DEC - FEB - EVEN
+          5> UN-COMPLETED - REMAINDER MAIL
+                  STUDENT REMAINDER
+                  COLLEGE ADMIN REPORT - DEPARTMENT REPORT ( WHICH STUDENTS YET SUBMITTED )
+          6> Department certificate
+          7> Lateral Entry - Onboard
