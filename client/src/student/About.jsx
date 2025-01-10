@@ -6,7 +6,7 @@ export default function StudentHome() {
   useEffect(() => {
     const interval = setInterval(() => {
       setActiveSDG((prev) => (prev === 15 ? 13 : 15));
-    }, 3000);
+    }, 10000);
     return () => clearInterval(interval);
   }, []);
 
