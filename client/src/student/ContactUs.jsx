@@ -13,7 +13,7 @@ export default function ContactUs() {
   }
 
   return (
-    <div className='main flex-col relative top-2'>
+    <div className='main flex-col relative top-2 p-4'>
       <h2 className='head'>Contact Us</h2>
       <div>
         <input
