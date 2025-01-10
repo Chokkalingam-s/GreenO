@@ -10,10 +10,14 @@ export const AuthProvider = ({ children }) => {
 
   useEffect(() => {
     const token = localStorage.getItem('token');
+    const savedRole = localStorage.getItem('role');
+
     if (token) {
       setIsAuthenticated(true);
+      setRole(savedRole || ''); 
     } else {
       setIsAuthenticated(false);
+      setRole('');
     }
   }, []);
 
