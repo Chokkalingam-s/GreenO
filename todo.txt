@@ -1,5 +1,5 @@
 TODO:
-  Refresh - Hod , Admin wrong navigation
+  About Page UI Enhancement
   Mobile - Generate certificate - Text is big , reduce it as same as laptop
     Text Content Reorder - Refer Whatsapp
   Home Page About content justify
