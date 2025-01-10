@@ -21,7 +21,7 @@ export default function HomePage() {
         <img
           src='/home1.svg'
           alt='foundation background'
-          className='w-10/12 h-full absolute -bottom-16 -right-60 object-cover'
+          className='w-9/12 h-4/5 absolute -bottom-6 -right-60 object-cover'
         />
       </section>
       <section>
