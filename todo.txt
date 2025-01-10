@@ -35,3 +35,6 @@ Final : Refresh load bug.
                   COLLEGE ADMIN REPORT - DEPARTMENT REPORT ( WHICH STUDENTS YET SUBMITTED )
           6> Department certificate
           7> Lateral Entry - Onboard
+
+    Own Idea : Aicte Post 
+        Student and Hod , Principal having common view alone page
