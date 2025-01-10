@@ -8,7 +8,9 @@ const chartSetting = {
     verticalLines: true,
     horizontalLines: true
   },
-  tooltip: true
+  tooltip: {
+    enabled: true, 
+  }
 }
 
 const abbreviateDepartmentName = department => {

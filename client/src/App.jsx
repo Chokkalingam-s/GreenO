@@ -27,18 +27,20 @@ import {
 } from './exp_components'
 import { ToastContainer } from 'react-toastify'
 
-const ProtectedRouteWrapper = ({ children, isAuthenticated }) => (
-  <ProtectedRoute isAuthenticated={isAuthenticated}>{children}</ProtectedRoute>
+const ProtectedRouteWrapper = ({ children, isAuthenticated, role, allowedRoles }) => (
+  <ProtectedRoute isAuthenticated={isAuthenticated}>
+    {allowedRoles.includes(role) ? children : <Navigate to="/" replace />}
+  </ProtectedRoute>
 )
 
 export default function App() {
-  const [isAuthenticated, setIsAuthenticated] = useState(
-    localStorage.getItem('token') !== null
-  )
+  const [isAuthenticated, setIsAuthenticated] = useState(localStorage.getItem('token') !== null)
+  const [role, setRole] = useState(localStorage.getItem('role') || 'student') 
 
   useEffect(() => {
     const handleStorageChange = () => {
       setIsAuthenticated(localStorage.getItem('token') !== null)
+      setRole(localStorage.getItem('role') || 'student')
     }
 
     window.addEventListener('storage', handleStorageChange)
@@ -62,7 +64,7 @@ export default function App() {
           <Routes>
             <Route
               path='/signin'
-              element={<SignIn setIsAuthenticated={setIsAuthenticated} />}
+              element={<SignIn setIsAuthenticated={setIsAuthenticated} setRole={setRole} />}
             />
             <Route path='/' element={<Navigate to='/signin' replace />} />
             <Route path='/signup' element={<StudentSignUp />} />
@@ -70,7 +72,7 @@ export default function App() {
 
             <Route
               element={
-                <ProtectedRouteWrapper isAuthenticated={isAuthenticated}>
+                <ProtectedRouteWrapper isAuthenticated={isAuthenticated} role={role} allowedRoles={['student']}>
                   <Layout />
                 </ProtectedRouteWrapper>
               }>
@@ -80,15 +82,26 @@ export default function App() {
               <Route path='/resources' element={<Resource />} />
               <Route path='/profile' element={<Profile />} />
               <Route path='/contact_us' element={<ContactUs />} />
+            </Route>
 
+            <Route
+              element={
+                <ProtectedRouteWrapper isAuthenticated={isAuthenticated} role={role} allowedRoles={['admin']}>
+                  <Layout />
+                </ProtectedRouteWrapper>
+              }>
               <Route path='/admin' element={<AdminHome />} />
               <Route path='/progress' element={<OverallProgress />} />
+            </Route>
 
+            <Route
+              element={
+                <ProtectedRouteWrapper isAuthenticated={isAuthenticated} role={role} allowedRoles={['hod']}>
+                  <Layout />
+                </ProtectedRouteWrapper>
+              }>
               <Route path='/department' element={<DepartmentHome />} />
-              <Route
-                path='/department-progress'
-                element={<DepartmentProgress />}
-              />
+              <Route path='/department-progress' element={<DepartmentProgress />} />
               <Route path='/report' element={<OverallStatus />} />
             </Route>
           </Routes>
