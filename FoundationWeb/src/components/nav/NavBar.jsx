@@ -3,22 +3,20 @@ import { Link } from 'react-router-dom'
 
 export default function NavBar() {
   return (
-    <nav className='bg-blue-500 py-4 rounded'>
-      <div className='container mx-auto flex justify-between items-center'>
-        <div className='text-white font-bold text-xl'>CG Foundation</div>
-        <ul className='flex space-x-6 text-white'>
-          <li>
-            <Link to='/' className='hover:text-gray-300 cursor-pointer'>
-              Home
-            </Link>
-          </li>
-          <li>
-            <Link to='/greenO' className='hover:text-gray-300 cursor-pointer'>
-              GreenO
-            </Link>
-          </li>
-        </ul>
-      </div>
+    <nav className='fixed top-0 glassy py-4 round flex items-center justify-between w-full px-10 z-50'>
+      <h2 className='font-bold text-xl'>CG Foundation</h2>
+      <ul className='flex space-x-6  font-medium tracking-wider'>
+        <li>
+          <Link to='/' className='hover:text-gray-300 cursor-pointer'>
+            Home
+          </Link>
+        </li>
+        <li>
+          <Link to='/greenO' className='hover:text-gray-300 cursor-pointer'>
+            GreenO
+          </Link>
+        </li>
+      </ul>
     </nav>
   )
 }

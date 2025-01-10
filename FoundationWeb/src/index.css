@@ -2,6 +2,48 @@
 @tailwind components;
 @tailwind utilities;
 
-.round{
-  @apply shadow-lg rounded-xl;
+.round {
+  @apply shadow-xl rounded-xl;
+}
+
+body {
+  @apply bg-primary/80 overflow-x-hidden;
+}
+
+.center {
+  @apply flex items-center justify-center;
+}
+
+.glassy {
+  @apply bg-secondary/40 backdrop-blur-lg;
+}
+
+.content {
+  @apply max-w-[60ch] pr-4;
+}
+
+.icon {
+  @apply w-5 aspect-square;
+}
+
+button {
+  @apply w-fit glassy px-4 py-2 round font-medium my-4;
+  &:disabled {
+    @apply cursor-not-allowed opacity-50;
+  }
+}
+
+section {
+  @apply container mx-auto border-b-2 border-tertiary py-16;
+  button {
+    @apply float-end;
+  }
+  .sect {
+    h2 {
+      @apply text-3xl font-bold mb-8;
+    }
+  }
+}
+.section {
+  @apply grid grid-cols-2 items-center justify-center;
 }

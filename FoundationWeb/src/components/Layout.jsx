@@ -4,10 +4,10 @@ import HomePage from './pages/HomePage'
 export default function Layout() {
   return (
     <>
-      <header>
+      <header className='text-white'>
         <NavBar />
       </header>
-      <main>
+      <main className='relative top-14'>
         <HomePage />
       </main>
     </>
