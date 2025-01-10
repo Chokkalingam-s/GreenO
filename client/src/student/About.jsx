@@ -30,7 +30,7 @@ export default function StudentHome() {
       </section>
       <section className='flex flex-col items-center text-center py-8 backdrop-blur-lg bg-black/40 round'>
         <h1 className='text-2xl font-bold mb-4'>🌱 Green O Initiative</h1>
-        <p className='text-md leading-relaxed'>
+        <p className='text-md leading-relaxed text-justify px-4 '>
           Empowering students to nurture and grow trees as part of their
           academic journey. Together, let&apos;s make the planet greener,
           cleaner, and healthier—one student, one tree at a time.
@@ -82,7 +82,7 @@ export default function StudentHome() {
           </ol>
         </span>
         <img
-          src='/home.svg'
+          src='/homeLast.svg'
           alt='Green O Initiative'
           className='round hover:scale-105 transition-transform duration-500'
         />

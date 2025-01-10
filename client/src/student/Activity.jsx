@@ -28,7 +28,7 @@ export default function Activity() {
   }, [token])
 
   return (
-    <div className='center flex-col'>
+    <div className='center flex-col p-4'>
       <h2 className='head mb-4 round glassy p-2'>Activity</h2>
       {images.length === 0 ? (
         <p className='glassy round p-1'>No images uploaded yet.</p>
