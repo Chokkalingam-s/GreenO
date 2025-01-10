@@ -16,7 +16,6 @@ export default function Profile() {
   const [progressPercentage1, setProgressPercentage1] = useState(0)
 
   useEffect(() => {
-    //(uploadedCount / totalImages) *
     setProgressPercentage(100)
     setProgressPercentage1(progressPercentage / 12.5)
   }, [progressPercentage, uploadedCount])
@@ -222,19 +221,15 @@ export default function Profile() {
               alt='Certificate Background'
               className='w-full h-full'
             />
-            <div className='absolute z-20 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 mt-2 text-center text-black font-medium md:w-fit w-full'>
+            <div className='absolute z-20 top-1/2 left-1/2 transform -translate-x-[30vw] -translate-y-1/2 mt-2 text-center text-black font-medium  w-full'>
               {studentDetails ? (
                 <span className='cert'>
-                  <h2>{studentDetails.name}</h2>
+                  <h2 className='transform -translate-x-[7vw]'>{studentDetails.name}</h2>
                   <p>
-                    Student of Department of
-                    <strong> {studentDetails.department}</strong>,
+                    Student from Department of <strong> {studentDetails.department}</strong>, <strong>{studentDetails.collegeName}</strong>
                   </p>
                   <p>
-                    from <strong>{studentDetails.collegeName}</strong>
-                  </p>
-                  <p>
-                    Successfully Grown a Tree in academic period of
+                    Successfully Grown a Tree in academic period 
                     <br />
                     <strong>
                       {studentDetails.yearOfGraduation - 4} -
