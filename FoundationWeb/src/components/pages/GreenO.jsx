@@ -1,22 +1,6 @@
 export default function GreenOPage() {
   return (
     <div className="main-container">
-      <div className="top-bar flex justify-between items-center px-6 py-2 bg-gray-900 text-sm text-gray-300">
-        <div className="flex items-center gap-3">
-          <i className="fas fa-envelope-open-text"></i>
-          <a href="mailto:info@gmail.com" className="hover:underline">
-            info@gmail.com
-          </a>
-        </div>
-        <div className="logo text-xl font-bold text-white">GreenO</div>
-        <div className="flex items-center gap-3">
-          <i className="fas fa-phone-alt"></i>
-          <a href="tel:+91984784937" className="hover:underline">
-            +91984784937
-          </a>
-        </div>
-      </div>
-
       <div className="banner relative text-center text-white h-[400px] bg-green-300">
         <div className="banner-overlay absolute inset-0 bg-black opacity-40"></div>
         <div className="banner-content relative z-10 p-10 flex flex-col justify-center items-center h-full">

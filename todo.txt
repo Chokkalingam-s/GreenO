@@ -1,31 +1,21 @@
 TODO:
   About Page UI Enhancement
-  Mobile - Generate certificate - Text is big , reduce it as same as laptop
-    Text Content Reorder - Refer Whatsapp
-  Home Page About content justify
-  Landing Website !
+  Mobile - Generate certificate issue
+-->>  Role based Route - student shouldn't get into admin
+  Landing Website - GreenO!
 
 Later:
-  Role based Route - student shouldn't get into admin
-
-  about page changes Ui Improvisation
   Profile Page Ui Update
-  better error handling with user
   Console Error Eradicate completely
   Try - background - doodle / image
   add email to the verify otp reset password
 
-Final : Refresh load bug.
-
 
  ToDo ( Chokkalingam and Divakar Reference):
-    Landing Website !
     Contact Us Backend and Email
     Student sign up - Based on Dataset given by College's
     AICTE Level development ( Backend Central server )
     FRONT END: 
-          1> Student About page:
-              SDG CONTENT - NO - TITLE - RE GENERATE CONTENT
           2> CERTIFICATE : SDG - IMPROVISE
           3> REMOVE RMKEC CONSTRAINT IN MAIL
     BACK END:
