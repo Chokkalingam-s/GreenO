@@ -1,7 +1,8 @@
 import { Card, Footer } from '../../exp_comp'
 import { focusAreas } from './data'
-
+import { useNavigate } from 'react-router-dom';
 export default function HomePage() {
+  const navigate = useNavigate();
   return (
     <>
       <section className='h-screen flex'>
@@ -36,6 +37,7 @@ export default function HomePage() {
               title={area.title}
               content={area.content}
               disabled={index < 1 ? false : true}
+              onClick={() => { navigate(area.url); window.scrollTo(0, 0); }}
             />
           ))}
         </div>

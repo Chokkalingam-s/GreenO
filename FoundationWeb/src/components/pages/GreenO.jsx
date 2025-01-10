@@ -17,7 +17,7 @@ export default function GreenOPage() {
         </div>
       </div>
 
-      <div className="banner relative text-center text-white h-[400px] bg-green-700">
+      <div className="banner relative text-center text-white h-[400px] bg-green-300">
         <div className="banner-overlay absolute inset-0 bg-black opacity-40"></div>
         <div className="banner-content relative z-10 p-10 flex flex-col justify-center items-center h-full">
           <h1 className="text-4xl font-bold mb-4 animate-bounce">
