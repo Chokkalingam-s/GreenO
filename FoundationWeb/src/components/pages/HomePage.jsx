@@ -19,7 +19,7 @@ export default function HomePage() {
           </p>
         </span>
         <img
-          src='/9176829_6660.svg'
+          src='/home1.svg'
           alt='foundation background'
           className='w-10/12 h-full absolute -bottom-16 -right-60 object-cover'
         />
@@ -55,7 +55,7 @@ export default function HomePage() {
             <button>Be a Part</button>
           </div>
         </div>
-        <img src='/9176829_6660.svg' alt='placeholder' />
+        <img src='/mission&vision.svg' alt='placeholder' />
       </section>
 
       <section className='section'>
@@ -72,7 +72,7 @@ export default function HomePage() {
             <button>Volunteer With Us</button>
           </div>
         </div>
-        <img src='/9176829_6660.svg' alt='placeholder' />
+        <img src='/osot.svg' alt='placeholder' />
       </section>
       <Footer />
     </>
