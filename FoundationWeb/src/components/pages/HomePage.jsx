@@ -70,7 +70,6 @@ export default function HomePage() {
             hands to leave an indelible mark of hope and positivity.
           </p>
           <div className='flex justify-end gap-x-6'>
-            <button>Contribute Now</button>
             <button>Volunteer With Us</button>
           </div>
         </div>

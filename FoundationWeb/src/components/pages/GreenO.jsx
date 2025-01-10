@@ -24,7 +24,7 @@ export default function GreenOPage() {
             Plant a tree today for a better tomorrow!
           </h1>
           <a
-            href="http://localhost:5173/"
+            href="/"
             target="_blank"
             rel="noopener noreferrer"
             className="mt-4 px-8 py-3 bg-green-600 text-white text-lg rounded hover:bg-green-500 transition duration-300"
@@ -209,7 +209,7 @@ export default function GreenOPage() {
         </p>
         <br/>
         <a
-          href="http://localhost:5173/"
+          href="/"
           target="_blank"
           rel="noopener noreferrer"
           className="mt-6 px-8 py-3 bg-green-600 text-white text-lg rounded hover:bg-green-500 transition duration-300"
