@@ -3,6 +3,7 @@ export default function Logout() {
   const navigate = useNavigate()
   function handleClick() {
     localStorage.removeItem('token')
+    localStorage.removeItem('role')
     navigate('/signin')
   }
   return (
