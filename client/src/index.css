@@ -238,3 +238,12 @@ nav a {
     @apply py-2;
   }
 }
+.homePage {
+  @apply flex-col min-h-screen relative top-16 md:w-10/12 w-11/12 mb-32;
+  section {
+    @apply my-4;
+    strong {
+      @apply text-secondary;
+    }
+  }
+}
