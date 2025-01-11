@@ -1,9 +1,12 @@
-export default function Card({ title, content, disabled, onClick  }) {
+export default function Card({ title, content, disabled, onClick }) {
   return (
-    <div className='border round p-6 glassy relative card'>
+    <div className='border round p-6 glassy relative h-44'>
       <h3 className='text-xl font-semibold mb-4'>{title}</h3>
-      <p className='text-gray-700 mb-4'>{content}</p>
-      <button className='absolute right-4 bottom-0  ' disabled={disabled}  onClick={onClick}>
+      <p>{content}</p>
+      <button
+        className='absolute right-4 bottom-0'
+        disabled={disabled}
+        onClick={onClick}>
         <svg
           xmlns='http://www.w3.org/2000/svg'
           viewBox='0 0 448 512'

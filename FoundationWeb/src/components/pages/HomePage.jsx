@@ -1,14 +1,14 @@
 import { Card, Footer } from '../../exp_comp'
 import { focusAreas } from './data'
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom'
 export default function HomePage() {
-  const navigate = useNavigate();
+  const navigate = useNavigate()
   return (
     <>
       <section className='h-screen flex'>
-        <span className='absolute top-1/2 -translate-y-1/2 left-20 space-y-4 z-20'>
+        <span className='absolute top-1/2 -translate-y-1/2 md:left-20 space-y-4 z-20'>
           <h1 className='text-5xl font-bold mb-10'>CG Foundation</h1>
-          <h1 className='text-4xl font-semibold w-2/6 border-b-2 pb-2 border-tertiary'>
+          <h1 className='text-4xl font-semibold md:w-2/6 w-1/2 border-b-2 pb-2 border-tertiary'>
             About Us
           </h1>
           <p className='content'>
@@ -22,7 +22,7 @@ export default function HomePage() {
         <img
           src='/home1.svg'
           alt='foundation background'
-          className='w-9/12 h-4/5 absolute -bottom-6 -right-60 object-cover'
+          className='md:w-9/12 md:h-4/5 absolute bottom-0 md:-bottom-6 md:-right-60 object-cover'
         />
       </section>
       <section>
@@ -37,13 +37,16 @@ export default function HomePage() {
               title={area.title}
               content={area.content}
               disabled={index < 1 ? false : true}
-              onClick={() => { navigate(area.url); window.scrollTo(0, 0); }}
+              onClick={() => {
+                navigate(area.url)
+                window.scrollTo(0, 0)
+              }}
             />
           ))}
         </div>
       </section>
 
-      <section className='section'>
+      <section className='section grid-cols-1'>
         <div className='sect'>
           <h2>Mission and Vision</h2>
           <p className='content'>

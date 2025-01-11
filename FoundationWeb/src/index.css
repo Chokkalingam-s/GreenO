@@ -7,7 +7,7 @@
 }
 
 body {
-  @apply bg-primary/80 overflow-x-hidden;
+  @apply bg-primary overflow-x-hidden;
 }
 
 .center {
@@ -34,16 +34,21 @@ button {
 }
 
 section {
-  @apply container mx-auto border-b-2 border-tertiary py-16;
+  @apply w-11/12 mx-auto border-b-2 border-tertiary py-16;
   button {
     @apply float-end;
   }
   .sect {
+    @apply w-11/12 order-1 md:order-none;
     h2 {
       @apply text-3xl font-bold mb-8;
     }
   }
 }
 .section {
-  @apply grid grid-cols-2 items-center justify-center;
+  @apply grid md:grid-cols-2 items-center justify-center;
+}
+
+a {
+  @apply hover:text-tertiary cursor-pointer;
 }

@@ -8,4 +8,4 @@ const Card = lazy(() => import('./components/Card'))
 const Home = lazy(() => import('./components/pages/HomePage'))
 const GreenO = lazy(() => import('./components/pages/GreenO'))
 
-export { NavBar, Layout, Home, Footer, Card,GreenO }
+export { NavBar, Layout, Home, Footer, Card, GreenO }
