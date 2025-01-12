@@ -1,6 +1,6 @@
 export default function Card({ title, content, disabled, onClick }) {
   return (
-    <div className='border round p-6 glassy relative h-44'>
+    <div className='border round p-6 glassy relative h-44 hover:shadow-xl transition-shadow duration-200'>
       <h3 className='text-xl font-semibold mb-4'>{title}</h3>
       <p>{content}</p>
       <button

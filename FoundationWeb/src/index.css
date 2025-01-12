@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 .round {
-  @apply shadow-xl rounded-xl;
+  @apply shadow-lg rounded-xl;
 }
 
 body {
@@ -28,12 +28,17 @@ body {
 
 button {
   @apply w-fit glassy px-4 py-2 round font-medium my-4;
+  &:hover,
+  &:focus,
+  &:active {
+    @apply scale-105 shadow-2xl transition-transform duration-150;
+  }
   &:disabled {
     @apply cursor-not-allowed opacity-50;
   }
 }
 
-section {
+section:not(.grd_cont) {
   @apply w-11/12 mx-auto border-b-2 border-tertiary py-16;
   button {
     @apply float-end;
@@ -51,4 +56,42 @@ section {
 
 a {
   @apply hover:text-tertiary cursor-pointer;
+}
+.main {
+  @apply w-10/12 mx-auto py-10;
+}
+.bg_sect {
+  background-image: url('/public/phoneSapling.png');
+  h2 {
+    @apply text-2xl font-bold;
+  }
+  h3 {
+    @apply font-semibold text-lg italic;
+  }
+  .grd_cont {
+    @apply w-full md:w-1/2 py-4 lg:py-0;
+    div {
+      @apply center gap-x-2;
+    }
+  }
+}
+
+.cont_1,
+.cont_2 {
+  @apply col-span-2 lg:col-auto space-y-4 lg:space-y-0;
+  div {
+    @apply my-6 md:my-0;
+  }
+}
+
+.cont_1 {
+  @apply md:mt-10;
+  div {
+    @apply lg:last:-translate-x-1/2 lg:first:translate-x-1/2;
+  }
+}
+.cont_2 {
+  div {
+    @apply lg:last:translate-x-1/2 lg:first:-translate-x-1/2;
+  }
 }
