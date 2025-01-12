@@ -39,7 +39,7 @@ button {
 }
 
 section:not(.grd_cont) {
-  @apply w-11/12 mx-auto border-b-2 border-tertiary py-16;
+  @apply w-11/12 mx-auto border-b-2 border-tertiary;
   button {
     @apply float-end;
   }

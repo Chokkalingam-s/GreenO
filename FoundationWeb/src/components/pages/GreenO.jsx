@@ -16,7 +16,7 @@ export default function GreenOPage() {
         <div class='absolute inset-0 bg-black opacity-50 -z-10'></div>
       </div>
 
-      <div className='grid grid-cols-1 md:grid-cols-2 gap-10 items-center justify-center main'>
+      <div className='grid grid-cols-1 md:grid-cols-2 gap-10 items-center justify-center main relative top-14'>
         <div className='content'>
           <h2 className='text-3xl font-bold text-tertiary italic'>
             An Initiative...
