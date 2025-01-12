@@ -16,7 +16,7 @@ export default function GreenOPage() {
         <div class='absolute inset-0 bg-black opacity-50 -z-10'></div>
       </div>
 
-      <div className='grid grid-cols-1 md:grid-cols-2 gap-10 items-center justify-center main relative top-14'>
+      <section className='grid grid-cols-1 md:grid-cols-2 gap-10 items-center justify-center main relative top-14'>
         <div className='content'>
           <h2 className='text-3xl font-bold text-tertiary italic'>
             An Initiative...
@@ -44,9 +44,9 @@ export default function GreenOPage() {
           </p>
         </div>
         <img src='/public/osot.svg' className='w-10/12' />
-      </div>
+      </section>
 
-      <div className='relative top-0 bg_sect bg-cover bg-center min-h-[80vh]'>
+      <section className='relative top-0 bg_sect bg-cover bg-center min-h-[80vh]'>
         <div className='grid lg:grid-cols-2 lg:gap-y-14 pt-4 items-center justify-items-center md:gap-x-48 w-11/12 mx-auto'>
           <div className='col-span-2 text-center'>
             <h2>One Student One Tree</h2>
@@ -116,13 +116,11 @@ export default function GreenOPage() {
             </div>
           </section>
         </div>
-      </div>
+      </section>
 
-      <div className='py-16'>
-        <div className='text-center mb-10'>
-          <h2 className='text-3xl font-bold'>Progress and Evolution</h2>
-        </div>
-        <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 px-4 md:px-16'>
+      <section className='text-center'>
+        <h2 className='mb-10'>Progress and Evolution</h2>
+        <div className='grid grid-cols-1 md:grid-cols-4 gap-8 px-4 md:px-16'>
           {[
             {
               img: '/img/student.jpg',
@@ -145,29 +143,23 @@ export default function GreenOPage() {
               desc: 'Ends up with the Green Nation.'
             }
           ].map((item, index) => (
-            <div
-              key={index}
-              className='text-center bg-white shadow-md rounded-lg p-6'>
-              <div className='w-24 h-24 mx-auto overflow-hidden rounded-full border-4 border-gray-200'>
+            <div key={index} className='card text-center'>
+              <div className='w-24 h-24 mx-auto round out'>
                 <img
                   src={item.img}
                   alt={item.title}
                   className='w-full h-full object-cover'
                 />
               </div>
-              <h3 className='text-lg font-bold mt-4 text-gray-700'>
-                {item.title}
-              </h3>
-              <p className='mt-2'>{item.desc}</p>
+              <h3>{item.title}</h3>
+              <p>{item.desc}</p>
             </div>
           ))}
         </div>
-      </div>
-      <div className='py-16'>
-        <div className='text-center mb-10'>
-          <h2 className='text-3xl font-extrabold text-tertiary'>
-            The Art of Planting
-          </h2>
+      </section>
+      <section className='center text-center flex-col'>
+        <div className='mb-16'>
+          <h2>The Art of Planting</h2>
           <p>
             Plant a seed of kindness, water it with love, and watch it grow!
           </p>
@@ -190,24 +182,20 @@ export default function GreenOPage() {
               desc: 'Finally ends up with a beautiful tree and contributes to this world!'
             }
           ].map((item, index) => (
-            <div
-              key={index}
-              className='p-6 shadow-md rounded-lg hover:shadow-lg transition-shadow duration-300 text-center'>
+            <div key={index} className='card'>
               <div className='text-6xl'>{item.icon}</div>
-              <h3 className='text-xl font-semibold mt-4 text-green-700'>
-                {item.title}
-              </h3>
+              <h3>{item.title}</h3>
               <p className='mt-2'>{item.desc}</p>
             </div>
           ))}
         </div>
-      </div>
-      <div className='join-us-section py-16 text-center bg-green-50'>
-        <h2 className='text-3xl font-bold text-green-700'>Start from Today!</h2>
+      </section>
+      <section className='center flex-col last'>
+        <h2>Start from Today!</h2>
         <p className='mt-4'>Don't wait until tomorrow. Plant the seed today.</p>
         <br />
         <button>Join us now</button>
-      </div>
+      </section>
       <Footer />
     </div>
   )

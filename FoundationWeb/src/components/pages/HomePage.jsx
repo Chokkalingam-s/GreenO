@@ -63,7 +63,7 @@ export default function HomePage() {
         <img src='/mission&vision.svg' alt='placeholder' />
       </section>
 
-      <section className='section'>
+      <section className='section last'>
         <div className='sect'>
           <h2>One Student, One Tree.</h2>
           <p className='content'>

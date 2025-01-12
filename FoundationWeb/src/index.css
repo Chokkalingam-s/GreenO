@@ -2,12 +2,16 @@
 @tailwind components;
 @tailwind utilities;
 
-.round {
-  @apply shadow-lg rounded-xl;
-}
-
 body {
   @apply bg-primary overflow-x-hidden;
+}
+
+.round {
+  @apply shadow-xl rounded-xl hover:shadow-lg transition-shadow duration-200;
+}
+
+.card {
+  @apply center flex-col gap-y-2 px-2 py-4 glassy out round;
 }
 
 .center {
@@ -39,7 +43,7 @@ button {
 }
 
 section:not(.grd_cont) {
-  @apply w-11/12 mx-auto border-b-2 border-tertiary;
+  @apply w-11/12 mx-auto border-b-2 border-tertiary py-16;
   button {
     @apply float-end;
   }
@@ -50,6 +54,10 @@ section:not(.grd_cont) {
     }
   }
 }
+.last {
+  @apply border-none;
+}
+
 .section {
   @apply grid md:grid-cols-2 items-center justify-center;
 }
@@ -57,6 +65,7 @@ section:not(.grd_cont) {
 a {
   @apply hover:text-tertiary cursor-pointer;
 }
+
 .main {
   @apply w-10/12 mx-auto py-10;
 }
@@ -65,14 +74,24 @@ a {
   h2 {
     @apply text-2xl font-bold;
   }
-  h3 {
-    @apply font-semibold text-lg italic;
-  }
   .grd_cont {
     @apply w-full md:w-1/2 py-4 lg:py-0;
     div {
       @apply center gap-x-2;
     }
+  }
+}
+
+.out {
+  @apply outline-2 outline outline-offset-2 outline-secondary;
+}
+
+div {
+  h2 {
+    @apply text-3xl font-semibold text-tertiary;
+  }
+  h3 {
+    @apply font-semibold text-lg italic;
   }
 }
 
