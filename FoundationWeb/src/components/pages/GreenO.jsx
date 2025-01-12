@@ -16,11 +16,9 @@ export default function GreenOPage() {
         <div class='absolute inset-0 bg-black opacity-50 -z-10'></div>
       </div>
 
-      <section className='grid grid-cols-1 md:grid-cols-2 gap-10 items-center justify-center main relative top-14'>
+      <section className='grid grid-cols-1 md:grid-cols-2 justify-items-center items-center justify-center text-center md:text-start'>
         <div className='content'>
-          <h2 className='text-3xl font-bold text-tertiary italic'>
-            An Initiative...
-          </h2>
+          <h2 className='italic'>An Initiative...</h2>
           <br />
           <p>
             The{' '}
@@ -32,7 +30,7 @@ export default function GreenOPage() {
             help restore forests.
             <br />
             <br />
-            <ul className='list-disc pl-10'>
+            <ul className='list-disc pl-10 text-start'>
               <li>Helps to restore forests</li>
               <li>Teaches students about the importance of trees</li>
               <li>Fun and rewarding experience</li>
@@ -46,8 +44,8 @@ export default function GreenOPage() {
         <img src='/public/osot.svg' className='w-10/12' />
       </section>
 
-      <section className='relative top-0 bg_sect bg-cover bg-center min-h-[80vh]'>
-        <div className='grid lg:grid-cols-2 lg:gap-y-14 pt-4 items-center justify-items-center md:gap-x-48 w-11/12 mx-auto'>
+      <section className='bg_sect bg-cover bg-center min-h-[80vh]'>
+        <div className='grid lg:grid-cols-2 lg:gap-y-6 items-center justify-items-center md:gap-x-48'>
           <div className='col-span-2 text-center'>
             <h2>One Student One Tree</h2>
             <p className='text-lg'>
@@ -88,7 +86,6 @@ export default function GreenOPage() {
           </section>
           <section className='grd_cont cont_2'>
             <div>
-              <h2>🍀</h2>
               <span>
                 <h3>Civic responsibility</h3>
                 <p>
@@ -96,9 +93,9 @@ export default function GreenOPage() {
                   students to develop a sense of civic responsibility.
                 </p>
               </span>
+              <h2>🍀</h2>
             </div>
             <div>
-              <h2>🍀</h2>
               <span>
                 <h3>Community engagement</h3>
                 <p>
@@ -106,13 +103,14 @@ export default function GreenOPage() {
                   students together to plant trees and care for them.
                 </p>
               </span>
+              <h2>🍀</h2>
             </div>
             <div>
-              <h2>🍀</h2>
               <span>
                 <h3>Green environment</h3>
                 <p>Makes the way for clean and green environment.</p>
               </span>
+              <h2>🍀</h2>
             </div>
           </section>
         </div>
@@ -185,7 +183,7 @@ export default function GreenOPage() {
             <div key={index} className='card'>
               <div className='text-6xl'>{item.icon}</div>
               <h3>{item.title}</h3>
-              <p className='mt-2'>{item.desc}</p>
+              <p>{item.desc}</p>
             </div>
           ))}
         </div>
