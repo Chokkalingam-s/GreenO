@@ -4,7 +4,7 @@ import {
   Routes,
   Navigate
 } from 'react-router-dom'
-import { useState, useEffect, Suspense } from 'react'
+import { Suspense } from 'react'
 import {
   SignIn,
   StudentSignUp,
@@ -26,29 +26,21 @@ import {
   ContactUs
 } from './exp_components'
 import { ToastContainer } from 'react-toastify'
+import { useAuth } from './components/auth/signin/AuthContext'
 
-const ProtectedRouteWrapper = ({ children, isAuthenticated, role, allowedRoles }) => (
+const ProtectedRouteWrapper = ({
+  children,
+  isAuthenticated,
+  role,
+  allowedRoles
+}) => (
   <ProtectedRoute isAuthenticated={isAuthenticated}>
-    {allowedRoles.includes(role) ? children : <Navigate to="/" replace />}
+    {allowedRoles === role ? children : <Navigate to='/' replace />}
   </ProtectedRoute>
 )
 
 export default function App() {
-  const [isAuthenticated, setIsAuthenticated] = useState(localStorage.getItem('token') !== null)
-  const [role, setRole] = useState(localStorage.getItem('role') || 'student') 
-
-  useEffect(() => {
-    const handleStorageChange = () => {
-      setIsAuthenticated(localStorage.getItem('token') !== null)
-      setRole(localStorage.getItem('role') || 'student')
-    }
-
-    window.addEventListener('storage', handleStorageChange)
-
-    return () => {
-      window.removeEventListener('storage', handleStorageChange)
-    }
-  }, [])
+  const { isAuthenticated, role } = useAuth()
 
   return (
     <Router>
@@ -62,17 +54,17 @@ export default function App() {
       <SplashWithDelay>
         <Suspense fallback={<Splash />}>
           <Routes>
-            <Route
-              path='/signin'
-              element={<SignIn setIsAuthenticated={setIsAuthenticated} setRole={setRole} />}
-            />
+            <Route path='/signin' element={<SignIn />} />
             <Route path='/' element={<Navigate to='/signin' replace />} />
             <Route path='/signup' element={<StudentSignUp />} />
             <Route path='/admin-signup' element={<AdminSignUp />} />
 
             <Route
               element={
-                <ProtectedRouteWrapper isAuthenticated={isAuthenticated} role={role} allowedRoles={['student']}>
+                <ProtectedRouteWrapper
+                  isAuthenticated={isAuthenticated}
+                  role={role}
+                  allowedRoles='student'>
                   <Layout />
                 </ProtectedRouteWrapper>
               }>
@@ -86,7 +78,10 @@ export default function App() {
 
             <Route
               element={
-                <ProtectedRouteWrapper isAuthenticated={isAuthenticated} role={role} allowedRoles={['admin']}>
+                <ProtectedRouteWrapper
+                  isAuthenticated={isAuthenticated}
+                  role={role}
+                  allowedRoles='admin'>
                   <Layout />
                 </ProtectedRouteWrapper>
               }>
@@ -96,12 +91,18 @@ export default function App() {
 
             <Route
               element={
-                <ProtectedRouteWrapper isAuthenticated={isAuthenticated} role={role} allowedRoles={['hod']}>
+                <ProtectedRouteWrapper
+                  isAuthenticated={isAuthenticated}
+                  role={role}
+                  allowedRoles='hod'>
                   <Layout />
                 </ProtectedRouteWrapper>
               }>
               <Route path='/department' element={<DepartmentHome />} />
-              <Route path='/department-progress' element={<DepartmentProgress />} />
+              <Route
+                path='/department-progress'
+                element={<DepartmentProgress />}
+              />
               <Route path='/report' element={<OverallStatus />} />
             </Route>
           </Routes>

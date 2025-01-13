@@ -1,9 +1,9 @@
 import { NavLink } from 'react-router-dom'
 import { LogOut, NavBar } from '../../exp_components'
-import { useRole } from '../auth/useRole'
+import { useAuth } from '../auth/signin/AuthContext'
 
 export default function Header() {
-  const { role } = useRole()
+  const { role } = useAuth()
   const homeLink =
     role === 'hod' ? '/department' : role === 'admin' ? '/admin' : '/home'
 

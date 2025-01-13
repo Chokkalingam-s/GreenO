@@ -1,12 +1,11 @@
 import { Outlet, useNavigate } from 'react-router-dom'
 import { Header, NavBar } from './exp_components'
 import 'react-toastify/dist/ReactToastify.css'
-import { useRole } from './components/auth/useRole'
+import { useAuth } from './components/auth/signin/AuthContext'
 
 export default function Layout() {
-  const navi = useNavigate()
-  const { role } = useRole()
-  console.log(role)
+  const navigate = useNavigate()
+  const { role } = useAuth()
 
   return (
     <>
@@ -14,9 +13,9 @@ export default function Layout() {
       <main className='container center flex-col relative z-20'>
         <Outlet />
       </main>
-      {role == 'student' && (
+      {role === 'student' && (
         <button
-          onClick={() => navi('/contact_us')}
+          onClick={() => navigate('/contact_us')}
           className='contact_us fixed bottom-16 md:bottom-6 md:right-10 right-4 z-50'>
           <svg
             xmlns='http://www.w3.org/2000/svg'

@@ -1,12 +1,12 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import { useAuth } from './AuthContext'
 import { toast } from 'react-toastify'
-import { useRole } from '../useRole'
 
 export default function SignIn() {
-  const { setRole } = useRole()
+  const navigate = useNavigate()
+  const { setIsAuthenticated, setRole } = useAuth()
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [showOtpPopup, setShowOtpPopup] = useState(false)
@@ -14,15 +14,7 @@ export default function SignIn() {
   const [newPassword, setNewPassword] = useState('')
   const [resetEmail, setResetEmail] = useState('')
   const [showNewPasswordSetup, setShowNewPasswordSetup] = useState(false)
-  const navigate = useNavigate()
-  const { setIsAuthenticated } = useAuth()
   const [passwordToggle, setPasswordToggle] = useState(false)
-
-  useEffect(() => {
-    const token = localStorage.getItem('token')
-    if (token) setIsAuthenticated(true)
-    if (!setIsAuthenticated) navigate('/signin')
-  }, [setIsAuthenticated, navigate])
 
   const handleLogin = async e => {
     e.preventDefault()
@@ -38,8 +30,8 @@ export default function SignIn() {
       if (token) {
         localStorage.setItem('token', token)
         localStorage.setItem('role', userRole)
-        setRole(userRole)
         setIsAuthenticated(true)
+        setRole(userRole)
         navigate(
           userRole === 'admin'
             ? '/admin'
@@ -60,7 +52,7 @@ export default function SignIn() {
       toast.error('Please enter your email address')
       return
     }
-    if (email) toast.success('OTP is being sent...')
+    toast.success('OTP is being sent...')
     try {
       const response = await axios.post(
         'http://localhost:3000/send-otp-process',
@@ -68,7 +60,7 @@ export default function SignIn() {
           email
         }
       )
-      if (response.status == 200) {
+      if (response.status === 200) {
         setShowOtpPopup(true)
         setResetEmail(email)
         toast.success('OTP sent to email!')
@@ -114,7 +106,11 @@ export default function SignIn() {
     try {
       const response = await axios.post(
         'http://localhost:3000/reset-password',
-        { email: resetEmail, otp, newPassword }
+        {
+          email: resetEmail,
+          otp,
+          newPassword
+        }
       )
       if (response.status === 200) {
         toast.success('Password reset successfully!')
@@ -136,6 +132,7 @@ export default function SignIn() {
       return newPasswordToggle
     })
   }
+
   return (
     <div className='container center relative z-10'>
       <div className='w-full md:w-2/6 mx-4 aspect-square glassy center round'>
