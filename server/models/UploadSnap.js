@@ -27,20 +27,12 @@ const UploadSnap = sequelize.define('UploadSnap', {
     defaultValue: null, 
   },
   latitude: {
-    type: DataTypes.DECIMAL(9, 6), 
+    type: DataTypes.STRING, // Encrypted string
     allowNull: false,
-    validate: {
-      min: -90, 
-      max: 90,
-    },
   },
   longitude: {
-    type: DataTypes.DECIMAL(9, 6), 
+    type: DataTypes.STRING, // Encrypted string
     allowNull: false,
-    validate: {
-      min: -180, 
-      max: 180,
-    },
   },
 }, {
   timestamps: true, 

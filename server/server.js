@@ -302,13 +302,11 @@ const compareImages = async (imgPath1, imgPath2) => {
 };
 
 
-const MAX_DISTANCE_METERS = 50;
+const MAX_DISTANCE_METERS = 25;
 const FOUR_MONTHS_IN_MILLIS = 4 * 30 * 24 * 60 * 60 * 1000;
-
 app.post('/student-upload-snap-page', authenticateToken, upload.single('file'), async (req, res) => {
   const { email } = req.user;
   const { latitude, longitude } = req.body;
-  
   
   if (!req.file) {
     return res.status(400).json({ message: 'No file uploaded.' });
@@ -338,14 +336,14 @@ app.post('/student-upload-snap-page', authenticateToken, upload.single('file'), 
         });
       }
 
-      const lastLatitude = parseFloat(lastUpload.latitude);
-      const lastLongitude = parseFloat(lastUpload.longitude);
-      
+      const lastLatitude = decrypt(lastUpload.latitude); 
+      const lastLongitude = decrypt(lastUpload.longitude); 
+
       const distance = calculateDistance(
         parseFloat(latitude),
         parseFloat(longitude),
-        lastLatitude,
-        lastLongitude
+        parseFloat(lastLatitude),
+        parseFloat(lastLongitude)
       );
 
       if (distance > MAX_DISTANCE_METERS) {
@@ -366,10 +364,13 @@ app.post('/student-upload-snap-page', authenticateToken, upload.single('file'), 
       }
     }
 
+    const encryptedLatitude = encrypt(latitude);
+    const encryptedLongitude = encrypt(longitude);
+
     const lastCount = lastUpload ? lastUpload.count : 0;
 
     const newCount = lastCount + 1;
-    
+
     const relativeFilePath = `uploads/${req.file.filename}`;
     await UploadSnap.create({
       email,
@@ -377,15 +378,13 @@ app.post('/student-upload-snap-page', authenticateToken, upload.single('file'), 
       filePath: relativeFilePath,
       count: user.uploadCount + 1,
       lastUpload: currentTime,
-      latitude,
-      longitude,
+      latitude: encryptedLatitude,
+      longitude: encryptedLongitude,
       count: newCount,
       createdAt: currentTime
     });
-  
 
     user.uploadCount += 1;
-   
     user.lastUpload = currentTime;
     await user.save();
 
@@ -409,6 +408,7 @@ app.post('/student-upload-snap-page', authenticateToken, upload.single('file'), 
     res.status(500).json({ error: error.message });
   }
 });
+
 
 function calculateDistance(lat1, lon1, lat2, lon2) {
   const toRadians = (degrees) => (degrees * Math.PI) / 180;
