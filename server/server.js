@@ -492,7 +492,19 @@ app.get('/student-get-user-details', authenticateToken, async (req, res) => {
     if (!studentDetails) {
       return res.status(404).json({ message: 'User not found' });
     }
+    // old data na these lines
+    //     let decryptedMobile;
+// let decryptedAadhar;
 
+// if (studentDetails.id > 15) {
+//   decryptedMobile = decrypt(studentDetails.mobileNumber);
+//   decryptedAadhar = decrypt(studentDetails.aadharNumber);
+// } else {
+//   decryptedMobile = studentDetails.mobileNumber;
+//   decryptedAadhar = studentDetails.aadharNumber;
+// }
+   
+//new data - below twq line daa
     const decryptedMobile = decrypt(studentDetails.mobileNumber);
     const decryptedAadhar = decrypt(studentDetails.aadharNumber);
 
@@ -501,8 +513,6 @@ app.get('/student-get-user-details', authenticateToken, async (req, res) => {
       mobileNumber: decryptedMobile,
       aadharNumber: decryptedAadhar,
     };
-
-    console.log('Response Data:', userData); // Debug
     res.status(200).json(userData);
   } catch (error) {
     console.error('Error fetching user details:', error.message);
@@ -582,7 +592,6 @@ app.get('/college-admin-data', authenticateToken, async (req, res) => {
 })
 app.get('/college-overall-progress', authenticateToken, async (req, res) => {
   const { email } = req.user
-  console.log('User Email:', email)
 
   try {
     const user = await User.findOne({
