@@ -14,6 +14,41 @@ const app = express()
 const { Op } = require('sequelize')
 const nodemailer = require('nodemailer')
 const sharp = require('sharp');
+const crypto = require('crypto');
+
+// Define your encryption algorithm and secret key
+const algorithm = 'aes-256-cbc';
+const secretKey = process.env.ENCRYPTION_SECRET_KEY; // Store in environment variables
+const iv = crypto.randomBytes(16); // Initialization vector
+function encrypt(text) {
+  const cipher = crypto.createCipheriv(algorithm, Buffer.from(secretKey, 'hex'), iv);
+  let encrypted = cipher.update(text, 'utf8', 'hex');
+  encrypted += cipher.final('hex');
+  const result = `${iv.toString('hex')}:${encrypted}`;
+  return result;
+}
+
+
+function decrypt(text) {
+  try {
+    const [ivText, encryptedText] = text.split(':');
+    if (!ivText || !encryptedText) {
+      throw new Error('Invalid encrypted data format');
+    }
+    const decipher = crypto.createDecipheriv(
+      algorithm,
+      Buffer.from(secretKey, 'hex'),
+      Buffer.from(ivText, 'hex')
+    );
+    let decrypted = decipher.update(encryptedText, 'hex', 'utf8');
+    decrypted += decipher.final('utf8');
+    return decrypted;
+  } catch (error) {
+    console.error('Decryption Error:', error.message); // Log the error
+    throw error;
+  }
+}
+
 
 
 app.use(express.json())
@@ -159,8 +194,8 @@ app.post('/student-signup', async (req, res) => {
     aadharNumber,
     principalName,
     pocNumber,
-    dob,  // New field: Date of Birth
-    secEmail  // New field: Secondary Email
+    dob,  
+    secEmail  
   } = req.body
 
   try {
@@ -170,19 +205,21 @@ app.post('/student-signup', async (req, res) => {
     }
 
     const hashedPassword = await bcrypt.hash(password, 10)
+    const encryptedMobile = encrypt(mobileNumber);
+    const encryptedAadhar = encrypt(aadharNumber);
     const newUser = await User.create({
       role,
       name,
       email,
       password: hashedPassword,
-      mobileNumber,
+      mobileNumber: encryptedMobile,
       state,
       district,
       collegeName,
       department: role === 'student' ? department : 'Default Admin Department',
       collegeRegisterNumber: role === 'student' ? collegeRegisterNumber : null,
       yearOfGraduation: role === 'student' ? yearOfGraduation : null,
-      aadharNumber: role === 'student' ? aadharNumber : null,
+      aadharNumber: role === 'student' ? encryptedAadhar : null,
       principalName: role === 'admin' ? principalName : null,
       pocNumber: role === 'admin' ? pocNumber : null,
       dob,  
@@ -445,18 +482,33 @@ app.get(
 )
 
 app.get('/student-get-user-details', authenticateToken, async (req, res) => {
-  const { email } = req.user
+  const { email } = req.user;
 
   try {
-    const studentDetails = await User.findAll({
-      where: { email: email },
-    })
+    const studentDetails = await User.findOne({
+      where: { email },
+    });
 
-    res.status(200).json(studentDetails)
+    if (!studentDetails) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+
+    const decryptedMobile = decrypt(studentDetails.mobileNumber);
+    const decryptedAadhar = decrypt(studentDetails.aadharNumber);
+
+    const userData = {
+      ...studentDetails.toJSON(),
+      mobileNumber: decryptedMobile,
+      aadharNumber: decryptedAadhar,
+    };
+
+    console.log('Response Data:', userData); // Debug
+    res.status(200).json(userData);
   } catch (error) {
-    res.status(500).json({ error: error.message })
+    console.error('Error fetching user details:', error.message);
+    res.status(500).json({ error: error.message });
   }
-})
+});
 
 app.get('/student-uploaded-snaps', authenticateToken, async (req, res) => {
   const { email } = req.user

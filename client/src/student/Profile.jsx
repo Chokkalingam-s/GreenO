@@ -44,7 +44,8 @@ export default function Profile() {
             headers: { Authorization: `Bearer ${token}` }
           }
         )
-        setStudentDetails(response.data[0])
+        console.log('Fetched Data:', response.data);
+        setStudentDetails(response.data)
         setLoading(false)
       } catch (err) {
         setError(err.message)
