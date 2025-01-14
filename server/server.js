@@ -16,10 +16,9 @@ const nodemailer = require('nodemailer')
 const sharp = require('sharp');
 const crypto = require('crypto');
 
-// Define your encryption algorithm and secret key
 const algorithm = 'aes-256-cbc';
-const secretKey = process.env.ENCRYPTION_SECRET_KEY; // Store in environment variables
-const iv = crypto.randomBytes(16); // Initialization vector
+const secretKey = process.env.ENCRYPTION_SECRET_KEY; 
+const iv = crypto.randomBytes(16); 
 function encrypt(text) {
   const cipher = crypto.createCipheriv(algorithm, Buffer.from(secretKey, 'hex'), iv);
   let encrypted = cipher.update(text, 'utf8', 'hex');
@@ -27,8 +26,6 @@ function encrypt(text) {
   const result = `${iv.toString('hex')}:${encrypted}`;
   return result;
 }
-
-
 function decrypt(text) {
   try {
     const [ivText, encryptedText] = text.split(':');
@@ -44,19 +41,14 @@ function decrypt(text) {
     decrypted += decipher.final('utf8');
     return decrypted;
   } catch (error) {
-    console.error('Decryption Error:', error.message); // Log the error
+    console.error('Decryption Error:', error.message);
     throw error;
   }
 }
-
-
-
 app.use(express.json())
 app.use(cors())
 const OTP_EXPIRATION = 5 * 60 * 1000
-
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')))
-
 const JWT_SECRET = process.env.JWT_SECRET || 'your_jwt_secret'
 const uploadDir = path.join(__dirname, 'uploads')
 
@@ -316,7 +308,8 @@ const FOUR_MONTHS_IN_MILLIS = 4 * 30 * 24 * 60 * 60 * 1000;
 app.post('/student-upload-snap-page', authenticateToken, upload.single('file'), async (req, res) => {
   const { email } = req.user;
   const { latitude, longitude } = req.body;
-
+  
+  
   if (!req.file) {
     return res.status(400).json({ message: 'No file uploaded.' });
   }
@@ -348,8 +341,6 @@ app.post('/student-upload-snap-page', authenticateToken, upload.single('file'), 
       const lastLatitude = parseFloat(lastUpload.latitude);
       const lastLongitude = parseFloat(lastUpload.longitude);
       
-
-      // Adjusting calculateDistance to ensure precision
       const distance = calculateDistance(
         parseFloat(latitude),
         parseFloat(longitude),
@@ -419,11 +410,9 @@ app.post('/student-upload-snap-page', authenticateToken, upload.single('file'), 
   }
 });
 
-// Function to calculate distance with high precision
 function calculateDistance(lat1, lon1, lat2, lon2) {
   const toRadians = (degrees) => (degrees * Math.PI) / 180;
-  const earthRadiusMeters = 6371000; // Radius of the earth in meters
-
+  const earthRadiusMeters = 6371000; 
   const dLat = toRadians(lat2 - lat1);
   const dLon = toRadians(lon2 - lon1);
 
@@ -440,9 +429,6 @@ function calculateDistance(lat1, lon1, lat2, lon2) {
 
   return distance;
 }
-
-
-
 
 app.get('/student-get-uploaded-images', authenticateToken, async (req, res) => {
   const { email } = req.user
