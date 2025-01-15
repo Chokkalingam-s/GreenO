@@ -244,6 +244,7 @@ nav a {
   }
 }
 .profile_tab {
+  @apply h-full;
   tbody {
     @apply text-left;
   }
@@ -253,4 +254,7 @@ nav a {
 }
 .out {
   @apply outline outline-2 outline-offset-1 outline-secondary/50;
+}
+.bdr {
+  @apply text-xl font-bold mb-4 border-b-2 border-secondary/50 pb-2;
 }

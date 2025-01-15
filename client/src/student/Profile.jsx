@@ -46,6 +46,7 @@ export default function Profile() {
         )
         console.log('Fetched Data:', response.data)
         setStudentDetails(response.data)
+        console.log('data', response.data)
         setLoading(false)
       } catch (err) {
         setError(err.message)
@@ -133,10 +134,8 @@ export default function Profile() {
 
   const DetailItem = ({ label, value, icon }) => {
     const { viewBox, path } = icons[icon]
-    console.log(viewBox, path)
-
     return (
-      <li className='flex items-center gap-4'>
+      <li className='flex items-center gap-2'>
         <svg viewBox={viewBox}>
           <path d={path}></path>
         </svg>
@@ -150,115 +149,115 @@ export default function Profile() {
 
   return (
     <>
-      <div className='center mt-12 mb-20 md:mt-0 md:mb-0 flex-col'>
-        <h3 className='md:col-span-2 relative top-6 mb-6 pl-6 w-full text-2xl md:text-center'>
-          {studentDetails.name}&apos;s Profile
-        </h3>
-        <div className='md:max-w-[65vw] gap-x-2 center'>
-          <div className='outline-dotted'>
-            <div className='center flex-col gap-y-4 profile_tab'>
-              <div>
-                <h4 className='text-xl font-bold mb-4 border-b-2 border-secondary/50 pb-2'>
-                  Personal Details
-                </h4>
-                <ul className='space-y-4'>
-                  <DetailItem
-                    label='Name'
-                    value={studentDetails.name}
-                    icon='person'
-                  />
-                  <DetailItem
-                    label='Email'
-                    value={studentDetails.email}
-                    icon='email'
-                  />
-                  <DetailItem
-                    label='Mobile Number'
-                    value={studentDetails.mobileNumber}
-                    icon='phone'
-                  />
-                  <DetailItem
-                    label='Aadhar Number'
-                    value={studentDetails.aadharNumber}
-                    icon='aad_card'
-                  />
-                </ul>
-              </div>
+      {loading ? (
+        <p>Loading...</p>
+      ) : (
+        <div className='center mt-12 mb-20 md:mt-0 md:mb-0 flex-col'>
+          <h3 className='md:col-span-2 pl-6 w-full text-2xl md:text-center'>
+            {studentDetails.name}&apos;s Profile
+          </h3>
+          <div className='md:max-w-[65vw] gap-x-2 center h-[40vw]'>
+            <div>
+              <div className='center flex-col gap-y-2 profile_tab'>
+                <div>
+                  <h4 className='bdr'>Personal Details</h4>
+                  <ul className='space-y-2'>
+                    <DetailItem
+                      label='Name'
+                      value={studentDetails.name}
+                      icon='person'
+                    />
+                    <DetailItem
+                      label='Email'
+                      value={studentDetails.email}
+                      icon='email'
+                    />
+                    <DetailItem
+                      label='Mobile Number'
+                      value={studentDetails.mobileNumber}
+                      icon='phone'
+                    />
+                    <DetailItem
+                      label='Aadhar Number'
+                      value={studentDetails.aadharNumber}
+                      icon='aad_card'
+                    />
+                  </ul>
+                </div>
 
-              <div>
-                <h4 className='text-xl font-bold mb-4 border-b border-white/50 pb-2'>
-                  Educational Details
-                </h4>
-                <ul className='space-y-4'>
-                  <DetailItem
-                    label='College Name'
-                    value={studentDetails.collegeName}
-                    icon='school'
-                  />
-                  <DetailItem
-                    label='Department'
-                    value={studentDetails.department}
-                    icon='domain'
-                  />
-                  <DetailItem
-                    label='College Register Number'
-                    value={studentDetails.collegeRegisterNumber}
-                    icon='badge'
-                  />
-                  <DetailItem
-                    label='Year of Graduation'
-                    value={studentDetails.yearOfGraduation}
-                    icon='calendar'
-                  />
-                </ul>
+                <div>
+                  <h4 className='bdr'>Educational Details</h4>
+                  <ul className='space-y-4'>
+                    <DetailItem
+                      label='College Name'
+                      value={studentDetails.collegeName}
+                      icon='school'
+                    />
+                    <DetailItem
+                      label='Department'
+                      value={studentDetails.department}
+                      icon='domain'
+                    />
+                    <DetailItem
+                      label='College Register Number'
+                      value={studentDetails.collegeRegisterNumber}
+                      icon='badge'
+                    />
+                    <DetailItem
+                      label='Year of Graduation'
+                      value={studentDetails.yearOfGraduation}
+                      icon='calendar'
+                    />
+                  </ul>
+                </div>
               </div>
             </div>
+            <span className='mx-auto grid md:grid-cols-2 grid-cols-1 md:col-span-2 grid-rows-3 gap-x-2 h-full gap-y-14'>
+              <div className='glassy round out h-52'>
+                <Gauge
+                  value={progressPercentage}
+                  min={0}
+                  max={100}
+                  startAngle={-120}
+                  endAngle={120}
+                  thickness={4}
+                  cornerRadius='50%'
+                  sx={{
+                    [`& .${gaugeClasses.valueText}`]: {
+                      fontSize: '1.6rem',
+                      fontWeight: 'bold'
+                    },
+                    [`& .MuiGauge-bar`]: { fill: '#4caf50' },
+                    [`& .${gaugeClasses.valueArc}`]: { fill: '#aad8b0' },
+                    [`& .MuiGauge-background`]: { fill: '#e0e0e0' }
+                  }}
+                  text={() => `${progressPercentage1} / ${totalImages}`}
+                />
+                <p className='text-lg absolute bottom-1.5 w-full text-center'>
+                  My Progress
+                </p>
+              </div>
+              <div className='center flex-col glassy round out h-52'>
+                <img
+                  src='/Certificate.png'
+                  alt='certificate icon'
+                  className='w-1/2 round'
+                />
+                <button
+                  onClick={handleClick}
+                  className={`${
+                    progressPercentage < 100 ? 'disabled' : ''
+                  } w-11/12`}>
+                  Certificate
+                </button>
+              </div>
+              <div className='col-span-2 p-2 row-span-2 glassy round out'>
+                <h2>Settings</h2>
+              </div>
+            </span>
           </div>
-          <span className='mx-auto grid grid-cols-2 md:col-span-2 gap-4 grid-rows-3'>
-            <div className='glassy round h-52 out'>
-              <Gauge
-                value={progressPercentage}
-                min={0}
-                max={100}
-                startAngle={-120}
-                endAngle={120}
-                thickness={4}
-                cornerRadius='50%'
-                sx={{
-                  [`& .${gaugeClasses.valueText}`]: {
-                    fontSize: '1.6rem',
-                    fontWeight: 'bold'
-                  },
-                  [`& .MuiGauge-bar`]: { fill: '#4caf50' },
-                  [`& .${gaugeClasses.valueArc}`]: { fill: '#aad8b0' },
-                  [`& .MuiGauge-background`]: { fill: '#e0e0e0' }
-                }}
-                text={() => `${progressPercentage1} / ${totalImages}`}
-              />
-              <p className='text-lg absolute bottom-1.5 w-full text-center'>
-                My Progress
-              </p>
-            </div>
-            <div className='center flex-col h-52 glassy round out'>
-              <img
-                src='/Certificate.png'
-                alt='certificate icon'
-                className='w-8/12 round'
-              />
-              <button
-                onClick={handleClick}
-                className={`${
-                  progressPercentage < 100 ? 'disabled' : ''
-                } w-11/12`}>
-                Certificate
-              </button>
-            </div>
-            <div className='col-span-2 row-span-3 mt-2 p-2 glassy round out'>
-              <h2>Settings</h2>
-            </div>
-          </span>
         </div>
-      </div>
+      )}
 
       {modal && (
         <div className='glassy h-full inset-0 md:w-10/12 md:top-1/2 md:-translate-y-1/2 mx-auto py-2 z-20 fixed'>
