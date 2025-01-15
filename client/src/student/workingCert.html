@@ -1,0 +1,35 @@
+<div className='glassy h-full inset-0 md:w-10/12 md:top-1/2 md:-translate-y-1/2 mx-auto py-2 z-20 fixed'>
+  <div id='certificate'
+    className='md:w-[297mm] md:h-[210mm] relative top-1/2 md:top-0 -translate-y-1/2 md:-translate-y-0 center'>
+    <img src='/Certificate.png' alt='Certificate Background' className='w-full h-full' />
+    <div className='absolute text-black text-center'>
+      {studentDetails ? (
+      <span className='cert'>
+        <h2>{studentDetails.name}</h2>
+        <p>
+          From Department of
+          <strong> {studentDetails.department}</strong>,
+          <strong>{studentDetails.collegeName}</strong>
+        </p>
+        <p>
+          Successfully Grown a Tree in academic period
+          <br />
+          <strong>
+            {studentDetails.yearOfGraduation - 4} -
+            {studentDetails.yearOfGraduation}
+          </strong>
+        </p>
+      </span>
+      ) : (
+      <p>Loading...</p>
+      )}
+    </div>
+  </div>
+  <div
+    className='absolute grid grid-cols-2 gap-x-10 w-10/12 left-1/2 -translate-x-1/2 bottom-1/4 md:bottom-20 md:w-fit md:grid-cols-1 glassy md:px-2 round out'>
+    <button onClick={handleGenerateCertificate}>Download PDF</button>
+    <button onClick={()=> setModal(!modal)} className='cancel'>
+      Cancel
+    </button>
+  </div>
+</div>

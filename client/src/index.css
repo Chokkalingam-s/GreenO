@@ -16,7 +16,7 @@
 body {
   font-family: 'Poppins', serif;
   background-image: url('/bg.jpg');
-  @apply text-white bg-primary bg-cover bg-center font-normal bg-fixed w-full;
+  @apply text-primary bg-primary bg-cover bg-center font-normal bg-fixed w-full;
   p {
     @apply text-base md:max-w-[70ch];
   }
@@ -27,10 +27,6 @@ body {
   }
 }
 
-._detail svg {
-  @apply w-12 aspect-square fill-white;
-}
-
 .custom_toastify {
   transform: translateY(10vh) !important;
 }
@@ -39,8 +35,9 @@ body {
   @apply flex items-center justify-center;
 }
 .glassy {
-  @apply backdrop-blur-lg bg-secondary/25;
+  @apply backdrop-blur-lg bg-gradient-to-tr from-primary/30 via-secondary/30 to-primary/30;
 }
+
 input,
 textarea,
 select,
@@ -71,7 +68,7 @@ select:disabled {
   @apply md:px-2 round md:py-2 relative glassy center max-h-[90vh] w-11/12;
 }
 button:not(.Toastify__close-button) {
-  @apply text-base center px-4 py-2 my-2 font-medium transition-shadow round;
+  @apply text-base center px-4 py-2 my-2 font-medium transition-shadow round text-primary;
   touch-action: manipulation;
   will-change: box-shadow, transform;
   &:hover,
@@ -105,7 +102,7 @@ button:disabled:active,
 }
 
 .cancel {
-  @apply bg-red-500 text-white;
+  @apply bg-red-500;
   &:hover,
   &:focus,
   &:active {
@@ -129,16 +126,19 @@ article .banner {
 }
 .logout,
 nav a,
-.contact_us {
+.contact_us,
+.profile_tab,
+.details_table,
+.search-list {
   svg {
-    @apply fill-white;
+    @apply fill-primary icon;
   }
 }
 nav a {
   @apply center flex-col md:flex-row;
 
   &.active {
-    @apply text-secondary;
+    @apply text-secondary scale-90;
     svg {
       @apply fill-secondary;
     }
@@ -168,9 +168,6 @@ nav a {
   td {
     @apply p-2 text-sm;
   }
-  svg {
-    @apply icon fill-white;
-  }
 }
 .error {
   @apply text-red-500 font-semibold;
@@ -199,22 +196,21 @@ nav a {
   @apply bg-black round;
 }
 .cert {
-  @apply -translate-y-4;
   p {
-    @apply text-[.4rem] md:text-xl;
-    @media (min-width: 768px) {
-      p {
-        line-height: 0.6rem;
-      }
-    }
+    @apply text-[.6rem] md:text-xl;
   }
   h2 {
-    @apply md:text-4xl text-base md:mb-2;
+    @apply md:text-4xl text-base md:mb-2 font-semibold;
+  }
+  @media (max-width: 768px) {
+    p {
+      line-height: 0.8rem;
+    }
   }
 }
 .search-list {
   svg {
-    @apply fill-white icon absolute left-2 top-1/2 -translate-y-1/2;
+    @apply absolute left-2 top-1/2 -translate-y-1/2;
   }
 }
 ::-webkit-calendar-picker-indicator {
@@ -225,7 +221,7 @@ nav a {
     @apply w-full;
   }
   thead {
-    @apply bg-black text-white;
+    @apply bg-black;
   }
   tbody {
     @apply text-black;
@@ -246,4 +242,15 @@ nav a {
       @apply text-secondary;
     }
   }
+}
+.profile_tab {
+  tbody {
+    @apply text-left;
+  }
+  > div {
+    @apply p-2 glassy out round;
+  }
+}
+.out {
+  @apply outline outline-2 outline-offset-1 outline-secondary/50;
 }
