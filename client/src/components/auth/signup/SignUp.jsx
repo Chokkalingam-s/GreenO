@@ -63,8 +63,8 @@ export default function StudentSignUp() {
     if (formData.aadharNumber.length !== 12)
       newErrors.aadharNumber = 'Aadhar number must be 12 digits.'
 
-    if (!formData.email.endsWith('@rmkec.ac.in'))
-      newErrors.email = 'Email must end with "@rmkec.ac.in".'
+    if (!formData.email && !/\S+@\S+\.\S+/.test(formData.email))
+      newErrors.email = 'Please enter a valid Primary email.'
 
     if (formData.collegeRegisterNumber.length !== 12)
       newErrors.collegeRegisterNumber =

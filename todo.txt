@@ -1,11 +1,8 @@
 TODO:
-  About Page UI Enhancement
   Mobile - Generate certificate issue
--->>  Role based Route - student shouldn't get into admin
-  Landing Website - GreenO!
+  Profile Page Ui Update
 
 Later:
-  Profile Page Ui Update
   Console Error Eradicate completely
   Try - background - doodle / image
   add email to the verify otp reset password
@@ -17,7 +14,6 @@ Later:
     AICTE Level development ( Backend Central server )
     FRONT END: 
           2> CERTIFICATE : SDG - IMPROVISE
-          3> REMOVE RMKEC CONSTRAINT IN MAIL
     BACK END:
           4> PHOTO UPLOAD - SEM WISE 
                 JULY TO SEPT - ODD

@@ -302,7 +302,7 @@ const compareImages = async (imgPath1, imgPath2) => {
 };
 
 
-const MAX_DISTANCE_METERS = 25;
+const MAX_DISTANCE_METERS = 50;
 const FOUR_MONTHS_IN_MILLIS = 4 * 30 * 24 * 60 * 60 * 1000;
 app.post('/student-upload-snap-page', authenticateToken, upload.single('file'), async (req, res) => {
   const { email } = req.user;
@@ -424,7 +424,6 @@ function calculateDistance(lat1, lon1, lat2, lon2) {
   const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
   const distance = earthRadiusMeters * c;
 
-  // Add a console.log statement to debug the distance value
   console.log(`Calculated distance: ${distance} meters`);
 
   return distance;
