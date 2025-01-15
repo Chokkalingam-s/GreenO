@@ -10,7 +10,7 @@ export default function Layout() {
   return (
     <>
       <Header />
-      <main className='container center flex-col relative z-20'>
+      <main className='container center flex-col relative z-20 min-h-screen'>
         <Outlet />
       </main>
       {role === 'student' && (

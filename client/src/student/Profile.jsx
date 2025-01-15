@@ -16,7 +16,7 @@ export default function Profile() {
   const [progressPercentage1, setProgressPercentage1] = useState(0)
 
   useEffect(() => {
-    setProgressPercentage(100)
+    setProgressPercentage((uploadedCount / totalImages) * 100)
     setProgressPercentage1(progressPercentage / 12.5)
   }, [progressPercentage, uploadedCount])
   useEffect(() => {
@@ -44,9 +44,7 @@ export default function Profile() {
             headers: { Authorization: `Bearer ${token}` }
           }
         )
-        console.log('Fetched Data:', response.data)
         setStudentDetails(response.data)
-        console.log('data', response.data)
         setLoading(false)
       } catch (err) {
         setError(err.message)
@@ -152,12 +150,13 @@ export default function Profile() {
       {loading ? (
         <p>Loading...</p>
       ) : (
-        <div className='center mt-12 mb-20 md:mt-0 md:mb-0 flex-col'>
-          <h3 className='md:col-span-2 pl-6 w-full text-2xl md:text-center'>
+        <div className='center flex-col relative top-16 md:top-0 mb-36 md:mb-0'>
+          <h3 className='pl-6 w-full text-2xl md:col-span-2 md:text-center mb-2'>
             {studentDetails.name}&apos;s Profile
           </h3>
-          <div className='md:max-w-[65vw] gap-x-2 center h-[40vw]'>
-            <div>
+
+          <div className='w-full gap-y-6 md:max-w-[65vw] grid grid-cols-1 md:grid-cols-[40%_60%] md:gap-x-2'>
+            <div className='order-2 md:order-none '>
               <div className='center flex-col gap-y-2 profile_tab'>
                 <div>
                   <h4 className='bdr'>Personal Details</h4>
@@ -184,7 +183,6 @@ export default function Profile() {
                     />
                   </ul>
                 </div>
-
                 <div>
                   <h4 className='bdr'>Educational Details</h4>
                   <ul className='space-y-4'>
@@ -212,7 +210,8 @@ export default function Profile() {
                 </div>
               </div>
             </div>
-            <span className='mx-auto grid md:grid-cols-2 grid-cols-1 md:col-span-2 grid-rows-3 gap-x-2 h-full gap-y-14'>
+
+            <span className='grid gap-y-6 grid-cols-2 grid-rows-[auto_1fr_1fr] gap-x-2 h-full w-11/12 md:w-full mx-auto md:gap-y-2'>
               <div className='glassy round out h-52'>
                 <Gauge
                   value={progressPercentage}
@@ -237,11 +236,12 @@ export default function Profile() {
                   My Progress
                 </p>
               </div>
+
               <div className='center flex-col glassy round out h-52'>
                 <img
                   src='/Certificate.png'
                   alt='certificate icon'
-                  className='w-1/2 round'
+                  className='w-11/12 round md:w-8/12'
                 />
                 <button
                   onClick={handleClick}
@@ -251,7 +251,8 @@ export default function Profile() {
                   Certificate
                 </button>
               </div>
-              <div className='col-span-2 p-2 row-span-2 glassy round out'>
+
+              <div className='p-2 glassy round out col-span-2 row-span-2'>
                 <h2>Settings</h2>
               </div>
             </span>

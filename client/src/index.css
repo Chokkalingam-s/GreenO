@@ -244,12 +244,12 @@ nav a {
   }
 }
 .profile_tab {
-  @apply h-full;
+  @apply w-11/12 mx-auto md:w-full;
   tbody {
     @apply text-left;
   }
   > div {
-    @apply p-2 glassy out round;
+    @apply p-2 glassy out round w-full  ;
   }
 }
 .out {
