@@ -307,7 +307,7 @@ const FOUR_MONTHS_IN_MILLIS = 4 * 30 * 24 * 60 * 60 * 1000;
 app.post('/student-upload-snap-page', authenticateToken, upload.single('file'), async (req, res) => {
   const { email } = req.user;
   const { latitude, longitude } = req.body;
-  
+
   if (!req.file) {
     return res.status(400).json({ message: 'No file uploaded.' });
   }
@@ -317,6 +317,24 @@ app.post('/student-upload-snap-page', authenticateToken, upload.single('file'), 
 
     if (!user) {
       return res.status(404).json({ message: 'User not found.' });
+    }
+
+    const originalFilePath = req.file.path;
+    const fileSizeInBytes = fs.statSync(originalFilePath).size;
+
+    let relativeFilePath = `uploads/${req.file.filename}`;
+
+    if (fileSizeInBytes > 500 * 1024) {
+      const compressedFilePath = `uploads/compressed_${req.file.filename}`;
+
+      await sharp(originalFilePath)
+        .resize({ width: 1024, withoutEnlargement: true }) 
+        .jpeg({ quality: 80 })
+        .toFile(compressedFilePath);
+
+      fs.unlinkSync(originalFilePath);
+
+      relativeFilePath = compressedFilePath;
     }
 
     const lastUpload = await UploadSnap.findOne({
@@ -336,8 +354,8 @@ app.post('/student-upload-snap-page', authenticateToken, upload.single('file'), 
         });
       }
 
-      const lastLatitude = decrypt(lastUpload.latitude); 
-      const lastLongitude = decrypt(lastUpload.longitude); 
+      const lastLatitude = decrypt(lastUpload.latitude);
+      const lastLongitude = decrypt(lastUpload.longitude);
 
       const distance = calculateDistance(
         parseFloat(latitude),
@@ -353,7 +371,7 @@ app.post('/student-upload-snap-page', authenticateToken, upload.single('file'), 
       }
 
       const similarityScore = await compareImages(
-        req.file.path,
+        relativeFilePath,
         path.join(uploadDir, lastUpload.filename)
       );
 
@@ -371,17 +389,16 @@ app.post('/student-upload-snap-page', authenticateToken, upload.single('file'), 
 
     const newCount = lastCount + 1;
 
-    const relativeFilePath = `uploads/${req.file.filename}`;
     await UploadSnap.create({
       email,
-      filename: req.file.filename,
+      filename: relativeFilePath.split('/').pop(),
       filePath: relativeFilePath,
       count: user.uploadCount + 1,
       lastUpload: currentTime,
       latitude: encryptedLatitude,
       longitude: encryptedLongitude,
       count: newCount,
-      createdAt: currentTime
+      createdAt: currentTime,
     });
 
     user.uploadCount += 1;
@@ -408,6 +425,7 @@ app.post('/student-upload-snap-page', authenticateToken, upload.single('file'), 
     res.status(500).json({ error: error.message });
   }
 });
+
 
 
 function calculateDistance(lat1, lon1, lat2, lon2) {
