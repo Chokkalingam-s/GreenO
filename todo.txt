@@ -1,5 +1,4 @@
 TODO:
-  Mobile - Generate certificate issue
   Profile Page Ui Update
 
 Later:
@@ -9,20 +8,21 @@ Later:
 
 
  ToDo ( Chokkalingam and Divakar Reference):
-    Contact Us Backend and Email
+
     Student sign up - Based on Dataset given by College's
-    AICTE Level development ( Backend Central server )
+
     FRONT END: 
           2> CERTIFICATE : SDG - IMPROVISE
     BACK END:
           4> PHOTO UPLOAD - SEM WISE 
                 JULY TO SEPT - ODD
                 DEC - FEB - EVEN
-          5> UN-COMPLETED - REMAINDER MAIL
+          5> IN-COMPLETED - REMAINDER MAIL
                   STUDENT REMAINDER
                   COLLEGE ADMIN REPORT - DEPARTMENT REPORT ( WHICH STUDENTS YET SUBMITTED )
           6> Department certificate
-          7> Lateral Entry - Onboard
+          7> Contact Us
+          8> Lateral Entry - Onboard
 
     Own Idea : Aicte Post 
         Student and Hod , Principal having common view alone page
