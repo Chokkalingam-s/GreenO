@@ -155,9 +155,9 @@ export default function Profile() {
             {studentDetails.name}&apos;s Profile
           </h3>
 
-          <div className='w-full gap-y-6 md:max-w-[65vw] grid grid-cols-1 md:grid-cols-[40%_60%] md:gap-x-2'>
+          <div className='w-full md:max-w-[65vw] grid grid-cols-1 md:grid-cols-[40%_60%] md:gap-x-4'>
             <div className='order-2 md:order-none '>
-              <div className='center flex-col gap-y-2 profile_tab'>
+              <div className='center flex-col gap-y-4 profile_tab'>
                 <div>
                   <h4 className='bdr'>Personal Details</h4>
                   <ul className='space-y-2'>
@@ -211,7 +211,7 @@ export default function Profile() {
               </div>
             </div>
 
-            <span className='grid gap-y-6 grid-cols-2 grid-rows-[auto_1fr_1fr] gap-x-2 h-full w-11/12 md:w-full mx-auto md:gap-y-2'>
+            <span className='grid gap-y-6 grid-cols-2 grid-rows-[auto_1fr_1fr] gap-x-4 h-full w-11/12 md:w-full mx-auto md:gap-y-4'>
               <div className='glassy round out h-52'>
                 <Gauge
                   value={progressPercentage}

@@ -1,2 +1,0 @@
-todo:
-  bug: when the token is no longer valid and the data is not getting loaded properly not navgates back to signin

@@ -67,6 +67,7 @@ select:disabled {
 .c_main {
   @apply md:px-2 round md:py-2 relative glassy center max-h-[90vh] w-11/12;
 }
+
 button:not(.Toastify__close-button) {
   @apply text-base center px-4 py-2 my-2 font-medium transition-shadow round text-primary;
   touch-action: manipulation;
@@ -249,11 +250,11 @@ nav a {
     @apply text-left;
   }
   > div {
-    @apply p-2 glassy out round w-full  ;
+    @apply p-2 glassy out round w-full;
   }
 }
 .out {
-  @apply outline outline-2 outline-offset-1 outline-secondary/50;
+  @apply outline outline-2 outline-offset-2 outline-secondary/50;
 }
 .bdr {
   @apply text-xl font-bold mb-4 border-b-2 border-secondary/50 pb-2;
