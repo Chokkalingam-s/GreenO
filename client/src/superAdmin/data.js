@@ -450,3 +450,96 @@ export const data = [
     progress: 58
   }
 ]
+
+export const studentData = [
+  {
+    sNo: 1,
+    regNo: '100001',
+    name: 'John Wick',
+    department: 'Computer Science',
+    currentSemester: 6,
+    currentYear: '3rd',
+    uploadCount: 12
+  },
+  {
+    sNo: 2,
+    regNo: '100002',
+    name: 'Alice Wonderland',
+    department: 'Electronics',
+    currentSemester: 4,
+    currentYear: '2nd',
+    uploadCount: 9
+  },
+  {
+    sNo: 3,
+    regNo: '100003',
+    name: 'Peter Parker',
+    department: 'Mechanical',
+    currentSemester: 8,
+    currentYear: '4th',
+    uploadCount: 15
+  },
+  {
+    sNo: 4,
+    regNo: '100004',
+    name: 'Bruce Wayne',
+    department: 'Civil',
+    currentSemester: 2,
+    currentYear: '1st',
+    uploadCount: 5
+  },
+  {
+    sNo: 5,
+    regNo: '100005',
+    name: 'Diana Prince',
+    department: 'Information Technology',
+    currentSemester: 6,
+    currentYear: '3rd',
+    uploadCount: 20
+  },
+  {
+    sNo: 6,
+    regNo: '100006',
+    name: 'Clark Kent',
+    department: 'Architecture',
+    currentSemester: 5,
+    currentYear: '3rd',
+    uploadCount: 18
+  },
+  {
+    sNo: 7,
+    regNo: '100007',
+    name: 'Tony Stark',
+    department: 'Biotechnology',
+    currentSemester: 3,
+    currentYear: '2nd',
+    uploadCount: 7
+  },
+  {
+    sNo: 8,
+    regNo: '100008',
+    name: 'Natasha Romanoff',
+    department: 'Chemical Engineering',
+    currentSemester: 7,
+    currentYear: '4th',
+    uploadCount: 23
+  },
+  {
+    sNo: 9,
+    regNo: '100009',
+    name: 'Steve Rogers',
+    department: 'Physics',
+    currentSemester: 4,
+    currentYear: '2nd',
+    uploadCount: 8
+  },
+  {
+    sNo: 10,
+    regNo: '100010',
+    name: 'Barry Allen',
+    department: 'Mathematics',
+    currentSemester: 1,
+    currentYear: '1st',
+    uploadCount: 3
+  }
+]

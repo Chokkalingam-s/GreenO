@@ -46,9 +46,9 @@ export default function SuperProgress() {
   }
 
   return (
-    <div className='c_main flex-col max-h-[90vh] mt-8'>
+    <div className='c_main flex-col max-h-[80vh] relative md:top-6'>
       <h2 className='head text-center'>Progress</h2>
-      <div className='w-full grid grid-cols-1 md:grid-cols-[38%_15%_25%_18%] items-center justify-end gap-x-2 float-end'>
+      <div className='w-full grid grid-cols-1 md:grid-cols-[40%_25%_20%] items-center justify-end gap-x-2 float-end'>
         <SearchComponent data={data} onFilter={setFilteredData} />
         <select
           onChange={e => handleItemPerPage(Number(e.target.value))}
@@ -72,9 +72,35 @@ export default function SuperProgress() {
           <option value={data.length}>Entire</option>
         </select>
       </div>
-      <div className='w-full overflow-y-auto relative'>
+      <div className='w-full overflow-y-auto h-full'>
         <span className='details_table'>
-          <CommonTable data={paginatedData} />
+          <table>
+            <thead>
+              <tr>
+                <th>Sno</th>
+                <th className='text-left'>College Name</th>
+                <th className='text-left'>State</th>
+                <th className='text-left'>District</th>
+                <th>Student Onboard</th>
+                <th>Sapling</th>
+                <th>Progress %</th>
+                <th>Rank</th>
+              </tr>
+            </thead>
+            <tbody>
+              {data.map((college, index) => (
+                <tr key={index}>
+                  <td>{college.sno}</td>
+                  <td className='text-left'>{college.collegeName}</td>
+                  <td className='text-left'>{college.state}</td>
+                  <td className='text-left'>{college.district}</td>
+                  <td>{college.studentOnboard}</td>
+                  <td>{college.sapling}</td>
+                  <td>{college.progress}%</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
         </span>
         <div className='center space-x-4 float-end pr-2 absolute'>
           <button

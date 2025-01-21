@@ -16,13 +16,17 @@ export default function SearchComponent({data, onFilter}) {
     }
 
     const lowerCaseQuery = searchQuery.toLowerCase()
-    const filteredData = data.filter(
-      data =>
-        data.name?.toLowerCase().includes(lowerCaseQuery) ||
-        data.registerNumber?.toLowerCase().includes(lowerCaseQuery) ||
-        data.collegeName?.toLowerCase().includes(lowerCaseQuery) ||
-        data.state?.toLowerCase().includes(lowerCaseQuery) ||
-        data.district?.toLowerCase().includes(lowerCaseQuery)
+    const filteredData = data.filter(student =>
+      [
+        'name',
+        'regNo',
+        'department',
+        'currentSemester',
+        'currentYear',
+        'uploadCount'
+      ].some(key =>
+        student[key]?.toString().toLowerCase().includes(lowerCaseQuery)
+      )
     )
     onFilter(filteredData)
   }

@@ -60,7 +60,7 @@ select:disabled {
   @apply w-full h-1 bg-primary rounded-full shadow-2xl;
 }
 .head {
-  @apply text-3xl font-medium;
+  @apply text-3xl font-medium w-full pl-2 mb-4;
 }
 
 .main,
@@ -260,7 +260,7 @@ nav a {
   }
 }
 .out {
-  @apply outline outline-2 outline-offset-2 outline-secondary/50;
+  @apply border-2 border-spacing-2 outline-secondary/50;
 }
 .bdr {
   @apply text-xl font-bold mb-4 border-b-2 border-secondary/50 pb-2;
