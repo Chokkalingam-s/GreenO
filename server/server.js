@@ -913,6 +913,13 @@ app.get('/incomplete', authenticateToken, async (req, res) => {
       currentSemester: student.currentSemester,
       uploadCount: student.uploadCount,
     }));
+    responseData.sort((a, b) => {
+      if (a.department < b.department) return -1;
+      if (a.department > b.department) return 1;
+      if (a.regNo < b.regNo) return -1;
+      if (a.regNo > b.regNo) return 1;
+      return 0;
+    });
 
     res.status(200).json(responseData);
   } catch (error) {
