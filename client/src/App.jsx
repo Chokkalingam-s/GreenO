@@ -23,7 +23,9 @@ import {
   Activity,
   OverallStatus,
   SplashWithDelay,
-  ContactUs
+  ContactUs,
+  SuperDashBoard,
+  SuperProgress
 } from './exp_components'
 import { ToastContainer } from 'react-toastify'
 import { useAuth } from './components/auth/signin/AuthContext'
@@ -104,6 +106,19 @@ export default function App() {
                 element={<DepartmentProgress />}
               />
               <Route path='/report' element={<OverallStatus />} />
+            </Route>
+
+            <Route
+              element={
+                <ProtectedRouteWrapper
+                  isAuthenticated={isAuthenticated}
+                  role={role}
+                  allowedRoles='superAdmin'>
+                  <Layout />
+                </ProtectedRouteWrapper>
+              }>
+              <Route path='/dashboard' element={<SuperDashBoard />} />
+              <Route path='/overall-progress' element={<SuperProgress />} />
             </Route>
           </Routes>
         </Suspense>

@@ -18,7 +18,7 @@ body {
   background-image: url('/bg.jpg');
   @apply text-primary bg-primary bg-cover bg-center font-normal bg-fixed w-full;
   p {
-    @apply text-base md:max-w-[70ch];
+    @apply text-base  md:max-w-[70ch];
   }
 
   &::after {
@@ -35,7 +35,7 @@ body {
   @apply flex items-center justify-center;
 }
 .glassy {
-  @apply backdrop-blur-lg bg-gradient-to-tr from-primary/30 via-secondary/30 to-primary/30;
+  @apply backdrop-blur-md bg-gradient-to-tr from-primary/20 via-secondary/20 to-primary/20;
 }
 
 input,
@@ -65,9 +65,15 @@ select:disabled {
 
 .main,
 .c_main {
-  @apply md:px-2 round md:py-2 relative glassy center max-h-[90vh] w-11/12;
+  @apply md:px-2 round md:py-2 relative glassy center max-h-[90vh];
 }
 
+.main {
+  @apply w-fit;
+}
+.c_main {
+  @apply w-11/12;
+}
 button:not(.Toastify__close-button) {
   @apply text-base center px-4 py-2 my-2 font-medium transition-shadow round text-primary;
   touch-action: manipulation;
@@ -174,7 +180,7 @@ nav a {
   @apply text-red-500 font-semibold;
 }
 ._detail {
-  @apply glassy round flex items-center p-4 justify-evenly w-80;
+  @apply glassy round flex items-center p-4 justify-evenly max-w-96 gap-x-4 min-w-80;
   h3,
   h1 {
     @apply font-medium;
@@ -183,7 +189,7 @@ nav a {
     @apply text-lg;
   }
   svg {
-    @apply w-10 aspect-square;
+    @apply w-10 aspect-square fill-primary;
   }
 }
 .about {

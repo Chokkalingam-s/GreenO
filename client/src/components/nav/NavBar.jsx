@@ -66,12 +66,19 @@ const hodNavItems = [
   }
 ]
 
+const superAdminNavItems = [
+  commonDashboard('/dashboard'),
+  commonProgress('/overall-progress')
+]
+
 export default function NavBar({ type = 0, role }) {
   const navItems =
     role === 'hod'
       ? hodNavItems
       : role === 'admin'
       ? principalNavItems
+      : role === 'superAdmin'
+      ? superAdminNavItems
       : studentNavItems
 
   return (

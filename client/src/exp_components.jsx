@@ -23,8 +23,16 @@ const OverallStatus = lazy(() => import('./hod/OverallStatus'))
 const Splashscreen = lazy(() => import('./components/Splashscreen'))
 const SplashWithDelay = lazy(() => import('./components/SplashWithDelay'))
 const ContactUs = lazy(() => import('./student/ContactUs'))
+const CountUi = lazy(() => import('./components/CountUI'))
+const SuperDashBoard = lazy(() => import('./superAdmin/superDashBoard'))
+const SuperProgress = lazy(() => import('./superAdmin/superProgress'))
+const SearchComponent = lazy(() => import('./components/SearchComponent'))
 
 export {
+  SearchComponent,
+  SuperDashBoard,
+  SuperProgress,
+  CountUi,
   ContactUs,
   SplashWithDelay,
   Splashscreen,

@@ -37,13 +37,14 @@ export default function SignIn() {
             ? '/admin'
             : userRole === 'hod'
             ? '/department'
+            : userRole === 'superAdmin'
+            ? '/dashboard'
             : '/home'
         )
         toast.success('Login successful!')
       }
     } catch (error) {
-      const errorMsg = error.response?.data?.message || 'Login failed'
-      toast.error(errorMsg)
+      toast.error(error.response?.data?.message || 'Login failed')
     }
   }
 
