@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
+import { Splashscreen } from '../exp_components'
 
 export default function InComplete() {
   const [students, setStudents] = useState([]);
@@ -23,7 +24,7 @@ export default function InComplete() {
     fetchIncompleteStudents();
   }, []);
 
-  if (loading) return <div>Loading...</div>;
+  if (loading) return <Splashscreen />;
   if (error) return <div>{error}</div>;
 
   return (
