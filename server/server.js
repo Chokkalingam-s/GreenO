@@ -493,10 +493,7 @@ app.get('/student-get-uploaded-images', authenticateToken, async (req, res) => {
   }
 })
 
-app.get(
-  '/api/get-uploaded-images-count',
-  authenticateToken,
-  async (req, res) => {
+app.get( '/get-uploaded-images-count', authenticateToken, async (req, res) => {
     const { email } = req.user
 
     try {
@@ -886,6 +883,82 @@ app.get('/new-user-details', authenticateToken, async (req, res) => {
     res.status(500).json({ error: error.message })
   }
 })
+
+
+app.get('/incomplete', authenticateToken, async (req, res) => {
+  const { email } = req.user;
+
+  try {
+    const principal = await User.findOne({
+      where: { email: email },
+      attributes: ['collegeName'],
+    });
+    if (!principal) {
+      return res.status(404).json({ error: 'Principal not found' });
+    }
+    const collegeName = principal.collegeName;
+    const students = await User.findAll({
+      where: { collegeName, role: 'student' },
+      attributes: ['collegeRegisterNumber', 'name', 'department', 'yearOfGraduation', 'uploadCount'],
+    });
+
+    const currentDate = new Date();
+    const currentYear = currentDate.getFullYear();
+    const currentMonth = currentDate.getMonth() + 1;
+
+    const isOddSemester = currentMonth >= 7 && currentMonth <= 12;
+
+    const incompleteStudents = students.filter((student) => {
+      const graduationYear = parseInt(student.yearOfGraduation, 10);
+      const yearDifference = graduationYear - currentYear - (currentMonth > 6 ? 1 : 0);
+
+      let currentYearOfStudy = 4 - yearDifference;
+      let requiredUploads;
+      if (isOddSemester) {
+        if (yearDifference === 3) requiredUploads = 1; 
+        else if (yearDifference === 2) requiredUploads = 3; 
+        else if (yearDifference === 1) requiredUploads = 5; 
+        else if (yearDifference === 0) requiredUploads = 7; 
+      } else {
+        if (yearDifference === 3) requiredUploads = 2; 
+        else if (yearDifference === 2) requiredUploads = 4; 
+        else if (yearDifference === 1) requiredUploads = 6; 
+        else if (yearDifference === 0) requiredUploads = 8; 
+      }
+
+      const incomplete = student.uploadCount < requiredUploads;
+      student.currentYearOfStudy = currentYearOfStudy;
+      student.currentSemester = isOddSemester
+        ? currentYearOfStudy * 2 - 1
+        : currentYearOfStudy * 2;
+
+      return incomplete;
+    });
+
+    const responseData = incompleteStudents.map((student, index) => ({
+      regNo: student.collegeRegisterNumber,
+      name: student.name,
+      department: student.department,
+      currentYear: student.currentYearOfStudy,
+      currentSemester: student.currentSemester,
+      uploadCount: student.uploadCount,
+    }));
+    responseData.sort((a, b) => {
+      if (a.department < b.department) return -1;
+      if (a.department > b.department) return 1;
+      if (a.regNo < b.regNo) return -1;
+      if (a.regNo > b.regNo) return 1;
+      return 0;
+    });
+
+    res.status(200).json(responseData);
+  } catch (error) {
+    console.error('Error fetching incomplete students:', error);
+    res.status(500).json({ message: 'Internal server error' });
+  }
+});
+
+
 
 const PORT = process.env.PORT || 3000
 

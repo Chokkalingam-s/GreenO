@@ -3,9 +3,9 @@ import { useEffect, useState } from 'react'
 export default function SearchComponent({ data, onFilter }) {
   const [query, setQuery] = useState('')
   useEffect(() => {
-    console.log('updated')
     if (data.length > 0) onFilter(data)
   }, [data, onFilter])
+
   const handleSearch = e => {
     const searchQuery = e.target.value
     setQuery(searchQuery)

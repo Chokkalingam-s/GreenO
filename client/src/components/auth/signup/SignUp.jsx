@@ -24,7 +24,7 @@ export default function StudentSignUp() {
     principalName: '',
     pocNumber: '',
     secEmail: '',
-    dob: '',
+    dob: ''
   })
   const [errors, setErrors] = useState({})
   const [otp, setOtp] = useState('')
@@ -70,8 +70,7 @@ export default function StudentSignUp() {
       newErrors.collegeRegisterNumber =
         'College register number must be exactly 12 digits.'
 
-    if (!formData.dob)
-      newErrors.dob = 'Date of birth is required.'
+    if (!formData.dob) newErrors.dob = 'Date of birth is required.'
 
     if (formData.secEmail && !/\S+@\S+\.\S+/.test(formData.secEmail))
       newErrors.secEmail = 'Please enter a valid secondary email.'
@@ -113,10 +112,13 @@ export default function StudentSignUp() {
   const verifyOtp = async e => {
     e.preventDefault()
     try {
-      const response = await axios.post('http://localhost:3000/verify-otp-process', {
-        email: formData.email,
-        otp
-      })
+      const response = await axios.post(
+        'http://localhost:3000/verify-otp-process',
+        {
+          email: formData.email,
+          otp
+        }
+      )
       if (response.data.success) {
         localStorage.setItem('token', response.data.token)
         toast.success('OTP verified successfully!')
@@ -132,7 +134,7 @@ export default function StudentSignUp() {
 
   return (
     <div className='container center relative z-20'>
-      <div className='main'>
+      <span className='main'>
         <img
           src='/treegrow.png'
           alt='Tree Grow'
@@ -169,7 +171,6 @@ export default function StudentSignUp() {
               placeholder='Password'
               required
             />
-
             <span className='center gap-x-2'>
               <select
                 type='text'
@@ -179,7 +180,6 @@ export default function StudentSignUp() {
                 onChange={e => {
                   const selectedState = e.target.value
                   const stateIndex = statesRef.current.indexOf(selectedState)
-
                   setFormData({
                     ...formData,
                     state: selectedState,
@@ -193,7 +193,6 @@ export default function StudentSignUp() {
                   </option>
                 ))}
               </select>
-
               <select
                 type='text'
                 id='district'
@@ -215,7 +214,6 @@ export default function StudentSignUp() {
                 ))}
               </select>
             </span>
-
             <input
               type='number'
               id='mobileNumber'
@@ -229,7 +227,6 @@ export default function StudentSignUp() {
             {errors.mobileNumber && (
               <small className='error'>{errors.mobileNumber}</small>
             )}
-
             <input
               type='email'
               id='secEmail'
@@ -305,7 +302,6 @@ export default function StudentSignUp() {
             {errors.collegeRegisterNumber && (
               <small className='error'>{errors.collegeRegisterNumber}</small>
             )}
-
             <input
               type='date'
               id='dob'
@@ -315,7 +311,6 @@ export default function StudentSignUp() {
               required
             />
             {errors.dob && <small className='error'>{errors.dob}</small>}
-
             <input
               type='text'
               id='aadharNumber'
@@ -360,7 +355,7 @@ export default function StudentSignUp() {
             </button>
           </form>
         )}
-      </div>
+      </span>
     </div>
   )
 }

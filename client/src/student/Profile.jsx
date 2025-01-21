@@ -8,7 +8,6 @@ import { toast } from 'react-toastify'
 export default function Profile() {
   const [studentDetails, setStudentDetails] = useState(null)
   const [loading, setLoading] = useState(true)
-  const [error, setError] = useState(null)
   const [uploadedCount, setUploadedCount] = useState(null)
   const totalImages = 8
   const [modal, setModal] = useState(false)
@@ -24,7 +23,7 @@ export default function Profile() {
     const fetchUploadedImagesCount = async () => {
       try {
         const response = await axios.get(
-          'http://localhost:3000/api/get-uploaded-images-count',
+          'http://localhost:3000/get-uploaded-images-count',
           {
             headers: { Authorization: `Bearer ${token}` }
           }
@@ -47,7 +46,7 @@ export default function Profile() {
         setStudentDetails(response.data)
         setLoading(false)
       } catch (err) {
-        setError(err.message)
+        toast.error(err.message)
         setLoading(false)
       }
     }
