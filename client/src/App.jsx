@@ -25,7 +25,8 @@ import {
   SplashWithDelay,
   ContactUs,
   SuperDashBoard,
-  SuperProgress
+  SuperProgress,
+  InComplete
 } from './exp_components'
 import { ToastContainer } from 'react-toastify'
 import { useAuth } from './components/auth/signin/AuthContext'
@@ -89,6 +90,7 @@ export default function App() {
               }>
               <Route path='/admin' element={<AdminHome />} />
               <Route path='/progress' element={<OverallProgress />} />
+              <Route path='/inComplete' element={<InComplete />} />
             </Route>
 
             <Route

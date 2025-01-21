@@ -27,6 +27,7 @@ const CountUi = lazy(() => import('./components/CountUI'))
 const SuperDashBoard = lazy(() => import('./superAdmin/superDashBoard'))
 const SuperProgress = lazy(() => import('./superAdmin/superProgress'))
 const SearchComponent = lazy(() => import('./components/SearchComponent'))
+const InComplete = lazy(() => import('./principal/InComplete'))
 
 export {
   SearchComponent,
@@ -56,5 +57,6 @@ export {
   StudentHeader,
   NavBar,
   Header,
-  Modal
+  Modal,
+  InComplete
 }
