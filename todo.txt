@@ -1,28 +1,32 @@
-TODO:
-  Mobile - Generate certificate issue
+ Shanker ToDo:
   Profile Page Ui Update
+  superAdmin FrontEnd
 
-Later:
-  Console Error Eradicate completely
-  Try - background - doodle / image
-  add email to the verify otp reset password
-
+Queries to ask :
+    -->>AICTE CREATING PRINCIPAL CREDENTIAL ( how they will generate and how they will send to college )
+          --> PRINCIPAL CREATING DEPARTMENT CREDENTIAL ( create page fot this and database backend)
 
  ToDo ( Chokkalingam and Divakar Reference):
-    Contact Us Backend and Email
-    Student sign up - Based on Dataset given by College's
-    AICTE Level development ( Backend Central server )
     FRONT END: 
           2> CERTIFICATE : SDG - IMPROVISE
     BACK END:
           4> PHOTO UPLOAD - SEM WISE 
                 JULY TO SEPT - ODD
                 DEC - FEB - EVEN
-          5> UN-COMPLETED - REMAINDER MAIL
+          5> IN-COMPLETED - REMAINDER MAIL
                   STUDENT REMAINDER
                   COLLEGE ADMIN REPORT - DEPARTMENT REPORT ( WHICH STUDENTS YET SUBMITTED )
           6> Department certificate
-          7> Lateral Entry - Onboard
+          7> Contact Us
+          8> Lateral Entry - Onboard
 
-    Own Idea : Aicte Post 
-        Student and Hod , Principal having common view alone page
+          9> superAdmin - admin table add new coloumn and manage data adding ( user creation , upload logic)
+    
+    Student sign up - Based on Dataset given by College's
+    Own Idea : Aicte Post - Student and Hod , Principal having common view alone page
+
+Later:
+  Console Error Eradicate completely
+  Try - background - doodle / image
+  add email to the verify otp reset password
+

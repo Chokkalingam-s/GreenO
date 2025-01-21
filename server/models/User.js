@@ -3,12 +3,8 @@ const sequelize = require('../db');
 
 const User = sequelize.define('User', {
   role: {
-    type: DataTypes.ENUM('student', 'admin','hod'),
+    type: DataTypes.ENUM('student', 'admin','hod','superAdmin'),
     allowNull: false
-  },
-  adminType: {
-    type: DataTypes.ENUM('principal', 'hod'), 
-    allowNull: true 
   },
   name: {
     type: DataTypes.STRING,
