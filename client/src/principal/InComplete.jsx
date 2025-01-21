@@ -43,9 +43,9 @@ export default function InComplete() {
           </tr>
         </thead>
         <tbody>
-          {students.map((student) => (
-            <tr key={student.sno}>
-              <td>{student.sno}</td>
+          {students.map((student, index) => (
+            <tr key={student.regNo}>
+              <td>{index + 1}</td>
               <td>{student.regNo}</td>
               <td>{student.name}</td>
               <td>{student.department}</td>

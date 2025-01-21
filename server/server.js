@@ -905,7 +905,6 @@ app.get('/incomplete', authenticateToken, async (req, res) => {
     });
 
     const responseData = incompleteStudents.map((student, index) => ({
-      sno: index + 1,
       regNo: student.collegeRegisterNumber,
       name: student.name,
       department: student.department,
