@@ -11,6 +11,7 @@ import {
 } from 'chart.js'
 import { Bar } from 'react-chartjs-2'
 import { toast } from 'react-toastify'
+import SplashScreen from '../exp_components/Splashscreen'
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend)
 
@@ -43,6 +44,9 @@ export default function DepartmentHome() {
   }, [])
 
   if (error) toast.error(error)
+    if (!studentData || !studentData.yearCounts) {
+      return <SplashScreen />;
+    }
 
   const chartData = {
     labels: Object.keys(studentData.yearCounts),
