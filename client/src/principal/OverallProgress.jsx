@@ -1,7 +1,8 @@
-import { useEffect, useRef, useState } from 'react'
+import {useEffect, useRef, useState} from 'react'
 import axios from 'axios'
-import jsPDF from 'jspdf'
-import html2canvas from 'html2canvas'
+import {toast} from 'react-toastify'
+import {exportToPDF} from '../functions/export'
+import {renderSortIcon} from '../functions/renderIcon'
 
 export default function OverallProgress() {
   const [progressData, setProgressData] = useState([])
@@ -31,13 +32,14 @@ export default function OverallProgress() {
         )
         const updatedData = response.data.map(item => ({
           ...item,
-          progress: ((item.uploadCount / item.studentCount) * 100).toFixed(2)
+          progress: ((item.uploadCount / item.studentCount) * 100).toFixed(
+            2
+          )
         }))
 
         setProgressData(updatedData)
       } catch (err) {
-        console.error('Error fetching data:', err)
-        setError('Error fetching data: ' + err.message)
+        toast.error('Error fetching data: ' + err.message)
       } finally {
         setLoading(false)
       }
@@ -45,48 +47,6 @@ export default function OverallProgress() {
 
     fetchData()
   }, [])
-
-  const exportToPDF = () => {
-    const table = tableRef.current
-    if (!table) return
-    table.parentElement.classList.remove('hidden')
-    html2canvas(table, { backgroundColor: '#fff', scale: 2 })
-      .then(canvas => {
-        const imgData = canvas.toDataURL('image/png')
-        const pdf = new jsPDF('portrait', 'mm', 'a4')
-
-        pdf.setFont('helvetica', 'bold')
-        pdf.setFontSize(18)
-        pdf.setTextColor(0, 0, 0)
-        pdf.text(
-          'R.M.K. ENGINEERING COLLEGE',
-          pdf.internal.pageSize.getWidth() / 2,
-          20,
-          { align: 'center' }
-        )
-
-        pdf.setFont('helvetica', 'normal')
-        pdf.setFontSize(12)
-        pdf.text(
-          '(An Autonomous Institution)',
-          pdf.internal.pageSize.getWidth() / 2,
-          28,
-          { align: 'center' }
-        )
-        pdf.text(
-          'R.S.M NAGAR, KAVARAIPETTAI - 601 206',
-          pdf.internal.pageSize.getWidth() / 2,
-          36,
-          { align: 'center' }
-        )
-
-        pdf.addImage(imgData, 'PNG', 10, 45, 190, 0)
-        pdf.save('One student one plant - Overall Progress.pdf')
-      })
-      .finally(() => {
-        table.parentElement.classList.add('hidden')
-      })
-  }
 
   const toggleSortDirection = field => {
     setSortDirection(prev => (prev === 'asc' ? 'desc' : 'asc'))
@@ -98,28 +58,6 @@ export default function OverallProgress() {
       return b[field] - a[field]
     })
     setProgressData(sorted)
-  }
-
-  const renderSortIcon = field => {
-    if (sortField === field) {
-      return sortDirection === 'asc' ? (
-        <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 320 512'>
-          <path d='M182.6 137.4c-12.5-12.5-32.8-12.5-45.3 0l-128 128c-9.2 9.2-11.9 22.9-6.9 34.9s16.6 19.8 29.6 19.8l256 0c12.9 0 24.6-7.8 29.6-19.8s2.2-25.7-6.9-34.9l-128-128z' />
-        </svg>
-      ) : (
-        <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 320 512'>
-          <path d='M137.4 374.6c12.5 12.5 32.8 12.5 45.3 0l128-128c9.2-9.2 11.9-22.9 6.9-34.9s-16.6-19.8-29.6-19.8L32 192c-12.9 0-24.6 7.8-29.6 19.8s-2.2 25.7 6.9 34.9l128 128z' />
-        </svg>
-      )
-    }
-    return (
-      <svg
-        xmlns='http://www.w3.org/2000/svg'
-        viewBox='0 0 320 512'
-        className='opacity-40'>
-        <path d='M182.6 137.4c-12.5-12.5-32.8-12.5-45.3 0l-128 128c-9.2 9.2-11.9 22.9-6.9 34.9s16.6 19.8 29.6 19.8l256 0c12.9 0 24.6-7.8 29.6-19.8s2.2-25.7-6.9-34.9l-128-128z' />
-      </svg>
-    )
   }
 
   const toggleYearSort = year => {
@@ -139,7 +77,9 @@ export default function OverallProgress() {
       <div className='main-content'>
         <div className='flex justify-between items-center'>
           <h2 className='text-3xl font-medium'>Overall Progress</h2>
-          <button onClick={exportToPDF}>Export as PDF</button>
+          <button onClick={() => exportToPDF(tableRef.current)}>
+            Export as PDF
+          </button>
         </div>
         {error && <p className='error-message'>{error}</p>}
         {loading ? (
@@ -152,46 +92,75 @@ export default function OverallProgress() {
                   <tr>
                     <th>Sno</th>
                     <th>Department Name</th>
-                    <th onClick={() => toggleSortDirection('studentCount')}>
+                    <th
+                      onClick={() => toggleSortDirection('studentCount')}>
                       <div>
                         <span>Total Students</span>
-                        {renderSortIcon('studentCount')}
+                        {renderSortIcon(
+                          'studentCount',
+                          sortField,
+                          sortDirection
+                        )}
                       </div>
                     </th>
                     <th onClick={() => toggleSortDirection('uploadCount')}>
                       <div>
                         <span>No. of Plants in Process</span>
-                        {renderSortIcon('uploadCount')}
+                        {renderSortIcon(
+                          'uploadCount',
+                          sortField,
+                          sortDirection
+                        )}
                       </div>
                     </th>
                     <th onClick={() => toggleYearSort('firstYear')}>
                       <div>
                         <span>1st Year</span>
-                        {renderSortIcon('firstYear')}
+                        {renderSortIcon(
+                          'firstYear',
+                          sortField,
+                          sortDirection
+                        )}
                       </div>
                     </th>
                     <th onClick={() => toggleYearSort('secondYear')}>
                       <div>
                         <span>2nd Year</span>
-                        {renderSortIcon('secondYear')}
+                        {renderSortIcon(
+                          'secondYear',
+                          sortField,
+                          sortDirection
+                        )}
                       </div>
                     </th>
                     <th onClick={() => toggleYearSort('thirdYear')}>
                       <div>
                         <span>3rd Year</span>
-                        {renderSortIcon('thirdYear')}
+                        {renderSortIcon(
+                          'thirdYear',
+                          sortField,
+                          sortDirection
+                        )}
                       </div>
                     </th>
                     <th onClick={() => toggleYearSort('fourthYear')}>
                       <div>
                         <span>4th Year</span>
-                        {renderSortIcon('fourthYear')}
+                        {renderSortIcon(
+                          'fourthYear',
+                          sortField,
+                          sortDirection
+                        )}
                       </div>
                     </th>
                     <th onClick={() => toggleSortDirection('progress')}>
                       <div>
                         <span>Progress</span>
-                        {renderSortIcon('progress')}
+                        {renderSortIcon(
+                          'progress',
+                          sortField,
+                          sortDirection
+                        )}
                       </div>
                     </th>
                   </tr>

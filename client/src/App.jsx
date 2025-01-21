@@ -49,7 +49,7 @@ export default function App() {
     <Router>
       <ToastContainer
         className='custom_toastify'
-        autoClose={3000}
+        autoClose={4000}
         newestOnTop={true}
         hideProgressBar
         theme='dark'

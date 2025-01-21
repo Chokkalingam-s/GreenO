@@ -167,7 +167,7 @@ nav a {
     @apply table_common glassy;
   }
   th {
-    @apply glassy p-2 cursor-pointer;
+    @apply glassy p-2 cursor-pointer font-medium;
     div {
       @apply center;
     }

@@ -4,7 +4,7 @@ export default function Pagination({
   onPageChange
 }) {
   return (
-    <div className='center space-x-4'>
+    <div className='center space-x-4 float-end'>
       <button
         onClick={() => onPageChange('prev')}
         disabled={currentPage === 1}>
