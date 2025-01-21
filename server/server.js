@@ -441,8 +441,8 @@ app.post('/student-upload-snap-page', authenticateToken, upload.single('file'), 
       if (superAdminEntry) {
         superAdminEntry.saplingCount += 1;
         superAdminEntry.progress = (superAdminEntry.studentOnboard > 0)
-          ? ((superAdminEntry.saplingCount / superAdminEntry.studentOnboard) * 100).toFixed(2)
-          : 0;
+          ((superAdminEntry.saplingCount / superAdminEntry.studentOnboard) * 100)
+          ;
         await superAdminEntry.save();
       }
     }
