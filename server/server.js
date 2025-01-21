@@ -495,19 +495,7 @@ app.get('/student-get-user-details', authenticateToken, async (req, res) => {
     if (!studentDetails) {
       return res.status(404).json({ message: 'User not found' });
     }
-    // old data na these lines
-    //     let decryptedMobile;
-// let decryptedAadhar;
-
-// if (studentDetails.id > 15) {
-//   decryptedMobile = decrypt(studentDetails.mobileNumber);
-//   decryptedAadhar = decrypt(studentDetails.aadharNumber);
-// } else {
-//   decryptedMobile = studentDetails.mobileNumber;
-//   decryptedAadhar = studentDetails.aadharNumber;
-// }
-   
-//new data - below twq line daa
+    
     const decryptedMobile = decrypt(studentDetails.mobileNumber);
     const decryptedAadhar = decrypt(studentDetails.aadharNumber);
 
@@ -617,7 +605,7 @@ app.get('/college-overall-progress', authenticateToken, async (req, res) => {
     const progressData = []
 
     const currentYear = new Date().getFullYear()
-    const currentMonth = new Date().getMonth() + 1 // January is 0, so we add 1
+    const currentMonth = new Date().getMonth() + 1 
 
     admins.forEach(admin => {
       const departmentData = {
@@ -637,12 +625,10 @@ app.get('/college-overall-progress', authenticateToken, async (req, res) => {
           const graduationYear = parseInt(user.yearOfGraduation, 10)
           let yearDifference = graduationYear - currentYear
 
-          // Adjust the year difference based on the current month
           if (currentMonth > 6) {
-            yearDifference--;  // If current month is after June, the student is a year ahead
+            yearDifference--;  
           }
 
-          // Determine the student's current year based on the year difference
           if (yearDifference === 3) {
             departmentData.yearCounts.firstYear += 1
           } else if (yearDifference === 2) {
@@ -694,7 +680,7 @@ app.get('/departmentwise-student-data', authenticateToken, async (req, res) => {
     const totalSaplings = adminData.uploadCount || 0
 
     const currentYear = new Date().getFullYear();
-    const currentMonth = new Date().getMonth() + 1; // January is 0, so we add 1
+    const currentMonth = new Date().getMonth() + 1; 
     const yearCounts = {
       '1st Year': 0,
       '2nd Year': 0,
@@ -709,15 +695,12 @@ app.get('/departmentwise-student-data', authenticateToken, async (req, res) => {
     
     yearDistribution.forEach(({ yearOfGraduation }) => {
       const graduationYear = parseInt(yearOfGraduation, 10);
-      const graduationMonth = 6; // Assuming graduation month is June for simplicity
-      
-      // If current year is before July (Jan to June), the student is in a year behind
-      // If current year is from July onwards (July to Dec), the student is in the current year
+      const graduationMonth = 6;
+
       let yearDifference = graduationYear - currentYear;
-      
-      // Adjust the year difference based on the current month
+
       if (currentMonth > 6) {
-        yearDifference--;  // If current month is after June, the student is a year ahead
+        yearDifference--;  
       }
       
       switch (yearDifference) {
