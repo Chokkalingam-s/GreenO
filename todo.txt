@@ -5,28 +5,32 @@
 Queries to ask :
     -->>AICTE CREATING PRINCIPAL CREDENTIAL ( how they will generate and how they will send to college )
           --> PRINCIPAL CREATING DEPARTMENT CREDENTIAL ( create page fot this and database backend)
+               -->Student sign up - Based on Dataset given by College's
+                  Lateral Entry - Onboard  == Based on Dataset given by College
 
  ToDo ( Chokkalingam and Divakar Reference):
     FRONT END: 
-          2> CERTIFICATE : SDG - IMPROVISE
+       ?   2> CERTIFICATE : SDG - IMPROVISE
+          3> Instructions while upload snap.
+       !  4> Contact Us - Dev Page
     BACK END:
-          4> PHOTO UPLOAD - SEM WISE 
-                JULY TO SEPT - ODD
-                DEC - FEB - EVEN
-          5> IN-COMPLETED - REMAINDER MAIL
-                  STUDENT REMAINDER
-                  COLLEGE ADMIN REPORT - DEPARTMENT REPORT ( WHICH STUDENTS YET SUBMITTED )
-          6> Department certificate
-          7> Contact Us
-          8> Lateral Entry - Onboard
+       ?   5> Department certificate   
+       !   6> Contact Us
+       ?  7> Lateral Entry - Onboard  == Based on Dataset given by College
+             New launch - new  2nd 3rd 4th year
 
-          9> superAdmin - admin table add new coloumn and manage data adding ( user creation , upload logic)
-    
-    Student sign up - Based on Dataset given by College's
-    Own Idea : Aicte Post - Student and Hod , Principal having common view alone page
+    Own Idea : Overall Admin Post - Student and Hod , Principal having common view alone page
 
 Later:
-  Console Error Eradicate completely
   Try - background - doodle / image
   add email to the verify otp reset password
+  Initial Image Blur
+
+
+  Done :
+   1> Data Encryption and Decryption 
+   2> Image Compression
+   3> Incomplete Student - Report Generation on Principal side
+   4> SDG Content in About Page
+   5> Overall Admin Work Started
 
