@@ -16,7 +16,7 @@ export default function StudentSignUp() {
     mobileNumber: '',
     state: '',
     district: '',
-    collegeName: 'R.M.K. Engineering College',
+    collegeName: '',
     department: '',
     collegeRegisterNumber: '',
     yearOfGraduation: '',
@@ -240,17 +240,29 @@ export default function StudentSignUp() {
             />
             {errors.secEmail && <small className='error'>{errors.secEmail}</small>}
 
-            <select
+           
+            <input
+            type='text'
+            id='collegeName'
+            name='collegeName'
+            value={formData.collegeName}
+            onChange={handleChange}
+            placeholder='College Name'
+            required></input>
+
+            {/* <select
               id='collegeName'
               name='collegeName'
               value={formData.collegeName}
               onChange={handleChange}
               required
               disabled>
-              <option value='R.M.K. Engineering College'>
+              {<option value='R.M.K. Engineering College'>
                 R.M.K. Engineering College
-              </option>
-            </select>
+              </option> }
+            </select> */}
+            
+            
 
             <span className='center gap-x-2'>
               <select

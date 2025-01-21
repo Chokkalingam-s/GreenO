@@ -10,6 +10,7 @@ const sequelize = require('./db')
 const User = require('./models/User')
 const Admin = require('./models/Admin')
 const UploadSnap = require('./models/UploadSnap')
+const SuperAdmin= require('./models/SuperAdmin')
 const app = express()
 const { Op } = require('sequelize')
 const nodemailer = require('nodemailer')
@@ -232,6 +233,25 @@ app.post('/student-signup', async (req, res) => {
         await Admin.create({ collegeName, department, studentCount: 1 })
       }
     }
+    
+    const adminData = await Admin.findAll({ where: { collegeName } });
+
+    const studentsOnboard = adminData.reduce((sum, admin) => sum + admin.studentCount, 0);
+    
+
+    const superAdminEntry = await SuperAdmin.findOne({ where: { collegeName } });
+
+    if (superAdminEntry) {
+      await SuperAdmin.update(
+        { studentsOnboard },
+        { where: { id: superAdminEntry.id } }
+      );
+    } else {
+      const saplingCount =0;
+      const progress = 0;
+      await SuperAdmin.create({ collegeName, state, district, studentsOnboard, saplingCount, progress });
+    }
+  
 
     const token = jwt.sign(
       { userId: newUser.id, email: newUser.email, role: newUser.role },
@@ -413,6 +433,17 @@ app.post('/student-upload-snap-page', authenticateToken, upload.single('file'), 
       if (adminEntry) {
         adminEntry.uploadCount += 1;
         await adminEntry.save();
+      }
+      const superAdminEntry = await SuperAdmin.findOne({
+        where: { collegeName: user.collegeName},
+      });
+  
+      if (superAdminEntry) {
+        superAdminEntry.saplingCount += 1;
+        superAdminEntry.progress = (superAdminEntry.studentOnboard > 0)
+          ? ((superAdminEntry.saplingCount / superAdminEntry.studentOnboard) * 100).toFixed(2)
+          : 0;
+        await superAdminEntry.save();
       }
     }
 
