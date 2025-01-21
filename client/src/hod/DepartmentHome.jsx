@@ -11,7 +11,7 @@ import {
 } from 'chart.js'
 import { Bar } from 'react-chartjs-2'
 import { toast } from 'react-toastify'
-import SplashScreen from '../exp_components/Splashscreen'
+import { Splashscreen } from '../exp_components'
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend)
 
@@ -31,7 +31,7 @@ export default function DepartmentHome() {
           }
         )
         setStudentData(response.data)
-        console.log(response.data);
+        console.log(response.data)
       } catch (error) {
         setError(
           error.response ? error.response.data.message : 'Error fetching data'
@@ -40,13 +40,12 @@ export default function DepartmentHome() {
     }
 
     fetchDepartmentData()
-    
   }, [])
 
   if (error) toast.error(error)
-    if (!studentData || !studentData.yearCounts) {
-      return <SplashScreen />;
-    }
+  if (!studentData || !studentData.yearCounts) {
+    return <Splashscreen />
+  }
 
   const chartData = {
     labels: Object.keys(studentData.yearCounts),
