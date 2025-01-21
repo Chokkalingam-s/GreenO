@@ -23,7 +23,7 @@ export default function Profile() {
     const fetchUploadedImagesCount = async () => {
       try {
         const response = await axios.get(
-          'http://localhost:3000/api/get-uploaded-images-count',
+          'http://localhost:3000/get-uploaded-images-count',
           {
             headers: { Authorization: `Bearer ${token}` }
           }

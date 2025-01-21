@@ -462,10 +462,7 @@ app.get('/student-get-uploaded-images', authenticateToken, async (req, res) => {
   }
 })
 
-app.get(
-  '/api/get-uploaded-images-count',
-  authenticateToken,
-  async (req, res) => {
+app.get( '/get-uploaded-images-count', authenticateToken, async (req, res) => {
     const { email } = req.user
 
     try {
