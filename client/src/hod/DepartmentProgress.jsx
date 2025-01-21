@@ -1,10 +1,9 @@
-import { useEffect, useRef, useState } from 'react'
+import {useEffect, useRef, useState} from 'react'
 import axios from 'axios'
 import SearchComponent from '../components/SearchComponent'
-import html2canvas from 'html2canvas'
-import jsPDF from 'jspdf'
-import { toggleSortDirection } from '../functions/sort'
-import { renderSortIcon } from '../functions/renderIcon'
+import {toggleSortDirection} from '../functions/sort'
+import {renderSortIcon} from '../functions/renderIcon'
+import {exportToPDF} from '../functions/export'
 
 export default function DepartmentProgress() {
   const [data, setData] = useState([])
@@ -37,7 +36,8 @@ export default function DepartmentProgress() {
   const handlePageChange = direction => {
     if (direction === 'next' && currentPage < totalPages)
       setCurrentPage(currentPage + 1)
-    if (direction === 'prev' && currentPage > 1) setCurrentPage(currentPage - 1)
+    if (direction === 'prev' && currentPage > 1)
+      setCurrentPage(currentPage - 1)
   }
   useEffect(() => {
     const fetchData = async () => {
@@ -69,48 +69,6 @@ export default function DepartmentProgress() {
     setFilteredData(sorted)
   }
 
-  const exportToPDF = () => {
-    const table = tableRef.current
-    if (!table) return
-    table.parentElement.classList.remove('hidden')
-    html2canvas(table, { backgroundColor: '#fff', scale: 2 })
-      .then(canvas => {
-        const imgData = canvas.toDataURL('image/png')
-        const pdf = new jsPDF('portrait', 'mm', 'a4')
-
-        pdf.setFont('helvetica', 'bold')
-        pdf.setFontSize(18)
-        pdf.setTextColor(0, 0, 0)
-        pdf.text(
-          'R.M.K. ENGINEERING COLLEGE',
-          pdf.internal.pageSize.getWidth() / 2,
-          20,
-          { align: 'center' }
-        )
-
-        pdf.setFont('helvetica', 'normal')
-        pdf.setFontSize(12)
-        pdf.text(
-          '(An Autonomous Institution)',
-          pdf.internal.pageSize.getWidth() / 2,
-          28,
-          { align: 'center' }
-        )
-        pdf.text(
-          'R.S.M NAGAR, KAVARAIPETTAI - 601 206',
-          pdf.internal.pageSize.getWidth() / 2,
-          36,
-          { align: 'center' }
-        )
-
-        pdf.addImage(imgData, 'PNG', 10, 45, 190, 0)
-        pdf.save('One student one plant - Overall Progress.pdf')
-      })
-      .finally(() => {
-        table.parentElement.classList.add('hidden')
-      })
-  }
-
   return (
     <div className='c_main flex-col max-h-[90vh] mt-8'>
       <div className='w-full grid grid-cols-1 md:grid-cols-[38%_15%_25%_18%] items-center justify-end gap-x-2 float-end'>
@@ -134,7 +92,9 @@ export default function DepartmentProgress() {
           <option value={100}>100</option>
         </select>
 
-        <button onClick={exportToPDF}>Export to PDF</button>
+        <button onClick={() => exportToPDF(tableRef.current)}>
+          Export to PDF
+        </button>
       </div>
       <div className='w-full overflow-y-auto h-full'>
         <span className='details_table'>
@@ -154,7 +114,7 @@ export default function DepartmentProgress() {
                     )
                   }
                   className='cursor-pointer center'>
-                  Upload Count{' '}
+                  Upload Count
                   {renderSortIcon('uploadCount', sortField, sortDirection)}
                 </th>
               </tr>

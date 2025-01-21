@@ -1,6 +1,6 @@
-import { useEffect, useState } from 'react'
+import {useEffect, useState} from 'react'
 
-export default function SearchComponent({ data, onFilter }) {
+export default function SearchComponent({data, onFilter}) {
   const [query, setQuery] = useState('')
   useEffect(() => {
     if (data.length > 0) onFilter(data)
@@ -17,11 +17,13 @@ export default function SearchComponent({ data, onFilter }) {
 
     const lowerCaseQuery = searchQuery.toLowerCase()
     const filteredData = data.filter(
-      student =>
-        student.name.toLowerCase().includes(lowerCaseQuery) ||
-        student.registerNumber.toLowerCase().includes(lowerCaseQuery)
+      data =>
+        data.name?.toLowerCase().includes(lowerCaseQuery) ||
+        data.registerNumber?.toLowerCase().includes(lowerCaseQuery) ||
+        data.collegeName?.toLowerCase().includes(lowerCaseQuery) ||
+        data.state?.toLowerCase().includes(lowerCaseQuery) ||
+        data.district?.toLowerCase().includes(lowerCaseQuery)
     )
-
     onFilter(filteredData)
   }
 

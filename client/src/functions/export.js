@@ -1,10 +1,12 @@
 import html2canvas from 'html2canvas'
 import jsPDF from 'jspdf'
+import {toast} from 'react-toastify'
 
 export const exportToPDF = table => {
   if (!table) return
+  toast.info('PDF is being generated...')
   table.parentElement.classList.remove('hidden')
-  html2canvas(table, { backgroundColor: '#fff', scale: 2 })
+  html2canvas(table, {backgroundColor: '#fff', scale: 2})
     .then(canvas => {
       const imgData = canvas.toDataURL('image/png')
       const pdf = new jsPDF('portrait', 'mm', 'a4')
@@ -16,7 +18,7 @@ export const exportToPDF = table => {
         'R.M.K. ENGINEERING COLLEGE',
         pdf.internal.pageSize.getWidth() / 2,
         20,
-        { align: 'center' }
+        {align: 'center'}
       )
 
       pdf.setFont('helvetica', 'normal')
@@ -25,19 +27,20 @@ export const exportToPDF = table => {
         '(An Autonomous Institution)',
         pdf.internal.pageSize.getWidth() / 2,
         28,
-        { align: 'center' }
+        {align: 'center'}
       )
       pdf.text(
         'R.S.M NAGAR, KAVARAIPETTAI - 601 206',
         pdf.internal.pageSize.getWidth() / 2,
         36,
-        { align: 'center' }
+        {align: 'center'}
       )
 
       pdf.addImage(imgData, 'PNG', 10, 45, 190, 0)
       pdf.save('One student one plant - Overall Progress.pdf')
     })
     .finally(() => {
+      toast.success('PDF generated successfully...')
       table.parentElement.classList.add('hidden')
     })
 }
