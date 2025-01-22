@@ -155,27 +155,38 @@ nav a {
   @apply absolute top-4 right-2;
 }
 
-.table_common {
-  @apply w-full border-collapse round overflow-hidden mb-4 text-center;
-}
-
 .details_table {
-  h4 {
-    @apply text-xl mb-2;
-  }
   table {
-    @apply table_common glassy;
+    @apply w-full table-fixed border-collapse text-center;
   }
+
+  thead {
+    @apply bg-tertiary sticky top-0 z-20;
+  }
+
+  th,
+  td {
+    @apply p-2;
+  }
+
   th {
-    @apply glassy p-2 cursor-pointer font-medium;
-    div {
-      @apply center;
+    @apply bg-tertiary font-medium text-left;
+    &:nth-child(5),
+    &:nth-child(6),
+    &:nth-child(7) {
+      @apply text-center;
     }
   }
+
+  tbody {
+    @apply max-h-[60vh] overflow-y-auto;
+  }
+
   td {
-    @apply p-2 text-sm;
+    @apply text-sm;
   }
 }
+
 .error {
   @apply text-red-500 font-semibold;
 }

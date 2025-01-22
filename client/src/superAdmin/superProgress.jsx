@@ -1,36 +1,38 @@
-import { useState, useEffect, useRef } from 'react'
-import {SearchComponent} from '../exp_components'
+import {useState, useEffect, useRef} from 'react'
+import {Pagination, SearchComponent} from '../exp_components'
 import {exportToPDF} from '../functions/export'
 import {toast} from 'react-toastify'
 import CommonTable from './CommonTable'
-import axios from 'axios';
+import axios from 'axios'
 
 export default function SuperProgress() {
-  const [currentPage, setCurrentPage] = useState(1);
-  const [itemPerPage, setItemPerPage] = useState(25);
-  const tableRef = useRef(null);
-  const [filteredData, setFilteredData] = useState([]);
-  const [data, setData] = useState([]);
-  const totalPages = Math.ceil(filteredData.length / itemPerPage);
-  const [download, setDownload] = useState(0);
+  const [currentPage, setCurrentPage] = useState(1)
+  const [itemPerPage, setItemPerPage] = useState(25)
+  const tableRef = useRef(null)
+  const [filteredData, setFilteredData] = useState([])
+  const [data, setData] = useState([])
+  const totalPages = Math.ceil(filteredData.length / itemPerPage)
+  const [download, setDownload] = useState(0)
 
   useEffect(() => {
     async function fetchData() {
       try {
-        const response = await axios.get('http://localhost:3000/superadmin-progress');
-        setData(response.data);
-        setFilteredData(response.data);
+        const response = await axios.get(
+          'http://localhost:3000/superadmin-progress'
+        )
+        setData(response.data)
+        setFilteredData(response.data)
       } catch (error) {
-        console.error(error);
-        toast.error('Failed to fetch progress data.');
+        console.error(error)
+        toast.error('Failed to fetch progress data.')
       }
     }
-    fetchData();
-  }, []);
+    fetchData()
+  }, [])
 
   useEffect(() => {
-    setCurrentPage(1);
-  }, [filteredData]);
+    setCurrentPage(1)
+  }, [filteredData])
   const handleItemPerPage = pages => {
     setItemPerPage(pages)
   }
@@ -84,55 +86,21 @@ export default function SuperProgress() {
           <option value={data.length}>Entire</option>
         </select>
       </div>
-      <div className='w-full overflow-y-auto h-full'>
+      <div className='w-full overflow-y-auto round glassy max-h-[60vh]'>
         <span className='details_table'>
-          <table>
-            <thead>
-              <tr>
-                <th>Sno</th>
-                <th className='text-left'>College Name</th>
-                <th className='text-left'>State</th>
-                <th className='text-left'>District</th>
-                <th>Student Onboard</th>
-                <th>Sapling</th>
-                <th>Progress %</th>
-                <th>Rank</th>
-              </tr>
-            </thead>
-            <tbody>
-              {data.map((college, index) => (
-                <tr key={index}>
-                  <td>{index+1}</td>
-                  <td className='text-left'>{college.collegeName}</td>
-                  <td className='text-left'>{college.state}</td>
-                  <td className='text-left'>{college.district}</td>
-                  <td>{college.studentsOnboard}</td>
-                  <td>{college.saplingCount}</td>
-                  <td>{college.progress}%</td>
-                  <td>{college.rank}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+          <CommonTable data={paginatedData} />
         </span>
-        <div className='center space-x-4 float-end pr-2 absolute'>
-          <button
-            onClick={() => handlePageChange('prev')}
-            disabled={currentPage === 1}>
-            Previous
-          </button>
-          <span>{`Page ${currentPage} of ${totalPages}`}</span>
-          <button
-            onClick={() => handlePageChange('next')}
-            disabled={currentPage === totalPages}>
-            Next
-          </button>
-        </div>
       </div>
+      <div className='w-full mt-2'>
+        <Pagination
+          currentPage={currentPage}
+          totalPages={totalPages}
+          onPageChange={handlePageChange}
+        />
+      </div>
+
       <span className='w-11/12 absolute -z-40 tableRef hidden opacity-0 text-center'>
-        <span ref={tableRef}>
-          <CommonTable data={data.slice(0, download)} />
-        </span>
+        <CommonTable data={data.slice(0, download)} tableRef={tableRef} />
       </span>
     </div>
   )

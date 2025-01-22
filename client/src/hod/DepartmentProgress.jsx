@@ -96,7 +96,7 @@ export default function DepartmentProgress() {
           Export to PDF
         </button>
       </div>
-      <div className='w-full overflow-y-auto h-full'>
+      <div className='w-full overflow-y-auto round glassy max-h-[60vh]'>
         <span className='details_table'>
           <table>
             <thead>
@@ -113,7 +113,7 @@ export default function DepartmentProgress() {
                       sortData
                     )
                   }
-                  className='cursor-pointer center'>
+                  className='center'>
                   Upload Count
                   {renderSortIcon('uploadCount', sortField, sortDirection)}
                 </th>

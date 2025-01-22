@@ -1,9 +1,8 @@
-export default function CommonTable({data}) {
+export default function CommonTable({data, tableRef}) {
   return (
-    <table>
+    <table ref={tableRef}>
       <thead>
         <tr>
-          <th>Sno</th>
           <th className='text-left'>College Name</th>
           <th className='text-left'>State</th>
           <th className='text-left'>District</th>
@@ -16,13 +15,13 @@ export default function CommonTable({data}) {
       <tbody>
         {data.map((college, index) => (
           <tr key={index}>
-            <td>{college.sno}</td>
             <td className='text-left'>{college.collegeName}</td>
             <td className='text-left'>{college.state}</td>
             <td className='text-left'>{college.district}</td>
-            <td>{college.studentOnboard}</td>
-            <td>{college.sapling}</td>
+            <td>{college.studentsOnboard}</td>
+            <td>{college.saplingCount}</td>
             <td>{college.progress}%</td>
+            <td className='font-bold'>{college.rank}</td>
           </tr>
         ))}
       </tbody>

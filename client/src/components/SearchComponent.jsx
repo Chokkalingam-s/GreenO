@@ -5,6 +5,7 @@ export default function SearchComponent({data, onFilter}) {
   useEffect(() => {
     if (data.length > 0) onFilter(data)
   }, [data, onFilter])
+  console.log(data)
 
   const handleSearch = e => {
     const searchQuery = e.target.value
@@ -23,7 +24,10 @@ export default function SearchComponent({data, onFilter}) {
         'department',
         'currentSemester',
         'currentYear',
-        'uploadCount'
+        'uploadCount',
+        'collegeName',
+        'district',
+        'state'
       ].some(key =>
         student[key]?.toString().toLowerCase().includes(lowerCaseQuery)
       )
