@@ -98,7 +98,7 @@ export default function SuperProgress() {
         />
       </div>
 
-      <span className='w-11/12 absolute -z-40 tableRef hidden opacity-0 text-center'>
+      <span className='tableRef'>
         <CommonTable data={data.slice(0, download)} tableRef={tableRef} />
       </span>
     </div>

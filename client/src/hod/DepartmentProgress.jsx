@@ -4,6 +4,7 @@ import SearchComponent from '../components/SearchComponent'
 import {toggleSortDirection} from '../functions/sort'
 import {renderSortIcon} from '../functions/renderIcon'
 import {exportToPDF} from '../functions/export'
+import {Pagination} from '../exp_components'
 
 export default function DepartmentProgress() {
   const [data, setData] = useState([])
@@ -131,21 +132,15 @@ export default function DepartmentProgress() {
             </tbody>
           </table>
         </span>
-        <div className='center space-x-4 float-end pr-2'>
-          <button
-            onClick={() => handlePageChange('prev')}
-            disabled={currentPage === 1}>
-            Previous
-          </button>
-          <span>{`Page ${currentPage} of ${totalPages}`}</span>
-          <button
-            onClick={() => handlePageChange('next')}
-            disabled={currentPage === totalPages}>
-            Next
-          </button>
-        </div>
       </div>
-      <span className='w-11/12 absolute -z-40 tableRef hidden opacity-0 text-center'>
+      <div className='w-full mt-2'>
+        <Pagination
+          currentPage={currentPage}
+          totalPages={totalPages}
+          onPageChange={handlePageChange}
+        />
+      </div>
+      <span className='tableRef'>
         <table ref={tableRef}>
           <thead>
             <tr>
