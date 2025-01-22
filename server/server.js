@@ -961,27 +961,67 @@ app.get('/incomplete', authenticateToken, async (req, res) => {
 app.get('/superadmin-progress', async (req, res) => {
   try {
     const data = await SuperAdmin.findAll();
-    const processedData = data
-      .map((item) => ({
-        sno: item.id,
-        collegeName: item.collegeName,
-        state: item.state,
-        district: item.district,
-        studentsOnboard: item.studentsOnboard,
-        saplingCount: item.saplingCount,
-        progress: item.studentsOnboard > 0 ? ((item.saplingCount / item.studentsOnboard) * 100).toFixed(2) : 0,
-      }))
-      .sort((a, b) => b.progress - a.progress)
-      .map((item, index) => ({
-        ...item,
-        rank: index + 1,
-      }));
+    let processedData = data.map((item) => ({
+      collegeName: item.collegeName,
+      state: item.state,
+      district: item.district,
+      studentsOnboard: item.studentsOnboard,
+      saplingCount: item.saplingCount,
+      progress: item.studentsOnboard > 0
+        ? ((item.saplingCount / item.studentsOnboard) * 100).toFixed(2)
+        : 0,
+    }));
+
+    processedData = processedData.sort((a, b) => {
+      if (b.progress - a.progress !== 0) return b.progress - a.progress; 
+      return b.studentsOnboard - a.studentsOnboard; 
+    });
+
+    processedData = processedData.map((item, index) => ({
+      ...item,
+      rank: index + 1,
+    }));
+
     res.json(processedData);
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: 'Internal Server Error' });
   }
 });
+
+
+async function generateData() {
+  try {
+    // Check if the table already has data
+    const count = await SuperAdmin.count();
+    if (count >= 200) {
+      console.log('200 or more rows already exist in the database. Skipping data generation.');
+      return;
+    }
+
+    // Array to store bulk data
+    const data = [];
+
+    // Generate 200 rows of data
+    for (let i = 1; i <= 200; i++) {
+      const collegeName = `College ${i}`;
+      const state = `State ${i % 30 + 1}`; // Cycle through 30 states
+      const district = `District ${i % 50 + 1}`; // Cycle through 50 districts
+      const studentsOnboard = i * 5; // Example incrementing students
+      const saplingCount = Math.max(0, studentsOnboard - (i % 10)); // Example progress
+      data.push({ collegeName, state, district, studentsOnboard, saplingCount });
+    }
+
+    // Bulk insert into the database
+    await SuperAdmin.bulkCreate(data);
+    console.log('200 rows of data generated and inserted successfully!');
+  } catch (error) {
+    console.error('Error generating or inserting data:', error);
+  }
+}
+
+// Call the function during server initialization
+generateData();
 
 
 

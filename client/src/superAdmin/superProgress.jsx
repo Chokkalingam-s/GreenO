@@ -102,13 +102,14 @@ export default function SuperProgress() {
             <tbody>
               {data.map((college, index) => (
                 <tr key={index}>
-                  <td>{college.sno}</td>
+                  <td>{index+1}</td>
                   <td className='text-left'>{college.collegeName}</td>
                   <td className='text-left'>{college.state}</td>
                   <td className='text-left'>{college.district}</td>
                   <td>{college.studentsOnboard}</td>
                   <td>{college.saplingCount}</td>
                   <td>{college.progress}%</td>
+                  <td>{college.rank}</td>
                 </tr>
               ))}
             </tbody>
