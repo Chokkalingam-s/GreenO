@@ -5,7 +5,6 @@ export default function SearchComponent({data, onFilter}) {
   useEffect(() => {
     if (data.length > 0) onFilter(data)
   }, [data, onFilter])
-  console.log(data)
 
   const handleSearch = e => {
     const searchQuery = e.target.value

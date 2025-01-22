@@ -51,7 +51,6 @@ export default function SuperProgress() {
   )
 
   function handleClick(val) {
-    console.log(val)
     setDownload(val)
     toast.info(`Top ${val} download is in proccess!`)
     setTimeout(() => {
