@@ -958,6 +958,31 @@ app.get('/incomplete', authenticateToken, async (req, res) => {
   }
 });
 
+app.get('/superadmin-progress', async (req, res) => {
+  try {
+    const data = await SuperAdmin.findAll();
+    const processedData = data
+      .map((item) => ({
+        sno: item.id,
+        collegeName: item.collegeName,
+        state: item.state,
+        district: item.district,
+        studentsOnboard: item.studentsOnboard,
+        saplingCount: item.saplingCount,
+        progress: item.studentsOnboard > 0 ? ((item.saplingCount / item.studentsOnboard) * 100).toFixed(2) : 0,
+      }))
+      .sort((a, b) => b.progress - a.progress)
+      .map((item, index) => ({
+        ...item,
+        rank: index + 1,
+      }));
+    res.json(processedData);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
+
 
 
 const PORT = process.env.PORT || 3000

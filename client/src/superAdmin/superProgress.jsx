@@ -1,24 +1,36 @@
-import {useState} from 'react'
+import { useState, useEffect, useRef } from 'react'
 import {SearchComponent} from '../exp_components'
-import {useRef} from 'react'
 import {exportToPDF} from '../functions/export'
 import {toast} from 'react-toastify'
 import CommonTable from './CommonTable'
-import {data} from './data'
-import {useEffect} from 'react'
+import axios from 'axios';
 
 export default function SuperProgress() {
-  const [currentPage, setCurrentPage] = useState(1)
-  const [itemPerPage, setItemPerPage] = useState(25)
-  const tableRef = useRef(null)
-  const [filteredData, setFilteredData] = useState(data)
-  const totalPages = Math.ceil(filteredData.length / itemPerPage)
-  const [download, setDownload] = useState(0)
+  const [currentPage, setCurrentPage] = useState(1);
+  const [itemPerPage, setItemPerPage] = useState(25);
+  const tableRef = useRef(null);
+  const [filteredData, setFilteredData] = useState([]);
+  const [data, setData] = useState([]);
+  const totalPages = Math.ceil(filteredData.length / itemPerPage);
+  const [download, setDownload] = useState(0);
 
   useEffect(() => {
-    setCurrentPage(1)
-  }, [filteredData])
+    async function fetchData() {
+      try {
+        const response = await axios.get('http://localhost:3000/superadmin-progress');
+        setData(response.data);
+        setFilteredData(response.data);
+      } catch (error) {
+        console.error(error);
+        toast.error('Failed to fetch progress data.');
+      }
+    }
+    fetchData();
+  }, []);
 
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [filteredData]);
   const handleItemPerPage = pages => {
     setItemPerPage(pages)
   }
@@ -94,8 +106,8 @@ export default function SuperProgress() {
                   <td className='text-left'>{college.collegeName}</td>
                   <td className='text-left'>{college.state}</td>
                   <td className='text-left'>{college.district}</td>
-                  <td>{college.studentOnboard}</td>
-                  <td>{college.sapling}</td>
+                  <td>{college.studentsOnboard}</td>
+                  <td>{college.saplingCount}</td>
                   <td>{college.progress}%</td>
                 </tr>
               ))}

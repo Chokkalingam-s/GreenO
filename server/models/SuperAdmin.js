@@ -25,10 +25,6 @@ SuperAdmin.init({
     type: DataTypes.INTEGER,
     defaultValue: 0,
   },
-  progress: {
-    type: DataTypes.FLOAT,
-    defaultValue: 0.0,
-  },
 }, {
   sequelize,
   modelName: 'SuperAdmin',
