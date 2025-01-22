@@ -1,6 +1,7 @@
  Shanker ToDo:
   Profile Page Ui Update
   superAdmin FrontEnd
+  Instructions while upload snap.
 
 Queries to ask :
     -->>AICTE CREATING PRINCIPAL CREDENTIAL ( how they will generate and how they will send to college )
