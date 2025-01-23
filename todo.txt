@@ -1,6 +1,4 @@
  Shanker ToDo:
-  superAdmin FrontEnd
-  CG Foundation content improve
   Instructions while upload snap.
   Profile Page - Setting Update
 
@@ -20,10 +18,12 @@ Queries to ask :
           3> Instructions while upload snap.
        !  4> Contact Us - Dev Page
     BACK END:
-       ?   5> Department certificate   
-       !   6> Contact Us
-       ?  7> Lateral Entry - Onboard  == Based on Dataset given by College
-             New launch - new  2nd 3rd 4th year
+       ?   5> Department certificate 
+       ?   6> College certificate from Overall Admin 
+       !   7> Contact Us
+       ?   8> Student Onboard with database
+              Lateral Entry - Onboard  == Based on Dataset given by College
+     New launch - new  2nd 3rd 4th year
 
     Own Idea : Overall Admin Post - Student and Hod , Principal having common view alone page
 
