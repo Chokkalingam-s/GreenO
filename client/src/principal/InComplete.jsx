@@ -118,7 +118,7 @@ export default function InComplete() {
           Export to PDF
         </button>
       </div>
-      <div className='w-full overflow-y-auto h-full'>
+      <div className='progress'>
         <span className='details_table'>
           <table>
             <thead>
@@ -152,13 +152,15 @@ export default function InComplete() {
             </tbody>
           </table>
         </span>
+      </div>
+      <div className='w-full mt-2'>
         <Pagination
           currentPage={currentPage}
           totalPages={totalPages}
           onPageChange={handlePageChange}
         />
       </div>
-      <span className='w-11/12 absolute -z-40 tableRef hidden opacity-0 text-center'>
+      <span className='tableRef'>
         <table ref={tableRef}>
           <thead>
             <tr>
