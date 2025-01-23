@@ -67,7 +67,7 @@ export default function InComplete() {
   if (loading) return <Splashscreen />
 
   return (
-    <div className='c_main flex-col'>
+    <div className='progress_table'>
       <h2 className='head'>Incomplete Uploads</h2>
       <div className='w-full grid grid-cols-1 md:grid-cols-[30%_18%_15%_15%_15%] items-center justify-end gap-x-2'>
         <SearchComponent data={students} onFilter={setFilteredData} />
