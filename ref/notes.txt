@@ -22,9 +22,6 @@ Home Page:
 	Progress
 
 
-Admin Side:
-
-
 About Us
 A sustainable environmental initiative that promotes afforestation by encouraging
 students to plant and nurture a tree during their academic journey. The project aims
@@ -45,5 +42,13 @@ Any suspicious or unauthorized activities will be reported to the college for ve
 Explore a dedicated section to view a comprehensive record of your tree planting activities.
 When done, always log out securely to protect your account. This ensures the privacy and security of your
 data.
+
+GreenO - One Student One Tree
+
+Grow Green, Grow Together: One student, one sapling—building a sustainable future, one tree at a time.
+Geo-Verified Growth: Upload geotagged sapling photos each semester with authenticity ensured through image and location checks.
+Track and Inspire Progress: Dashboards for HODs, Principals, and Admins to monitor department, college, and national rankings.
+Nationwide Green Movement: Uniting colleges across India to create a collective environmental impact.
+Small Acts, Big Change: Every sapling planted is a step toward hope, positivity, and a greener tomorrow.
 
 	

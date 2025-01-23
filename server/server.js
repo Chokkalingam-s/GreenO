@@ -524,6 +524,17 @@ app.get('/student-get-user-details', authenticateToken, async (req, res) => {
       return res.status(404).json({ message: 'User not found' });
     }
     
+// choks certificate
+
+//     let decryptedMobile;
+//     let decryptedAadhar;
+// if (studentDetails.id > 15) {
+// decryptedMobi1e= decrypt(studentDetails.mobileNumber) ;
+// decryptedAadhar= decrypt(studentDetails.aadharNumber) ;
+// } else {
+// decryptedmobile = studentDetails.mobileNumber;
+// decryptedAadhar = studentDetails. aadharNumber;
+// }
     const decryptedMobile = decrypt(studentDetails.mobileNumber);
     const decryptedAadhar = decrypt(studentDetails.aadharNumber);
 
