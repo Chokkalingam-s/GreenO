@@ -38,8 +38,8 @@ export default function OverallProgress() {
             2
           )
         }))
-        setData(data)
-        setFilteredData(data)
+        setData(updatedData)
+        setFilteredData(updatedData)
       } catch (err) {
         toast.error('Error fetching data: ' + err.message)
       } finally {
