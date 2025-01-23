@@ -4,7 +4,7 @@ import {
   Routes,
   Navigate
 } from 'react-router-dom'
-import { Suspense } from 'react'
+import {Suspense} from 'react'
 import {
   SignIn,
   StudentSignUp,
@@ -26,10 +26,11 @@ import {
   ContactUs,
   SuperDashBoard,
   SuperProgress,
-  InComplete
+  InComplete,
+  Statistics
 } from './exp_components'
-import { ToastContainer } from 'react-toastify'
-import { useAuth } from './components/auth/signin/AuthContext'
+import {ToastContainer} from 'react-toastify'
+import {useAuth} from './components/auth/signin/AuthContext'
 
 const ProtectedRouteWrapper = ({
   children,
@@ -43,7 +44,7 @@ const ProtectedRouteWrapper = ({
 )
 
 export default function App() {
-  const { isAuthenticated, role } = useAuth()
+  const {isAuthenticated, role} = useAuth()
 
   return (
     <Router>
@@ -120,7 +121,11 @@ export default function App() {
                 </ProtectedRouteWrapper>
               }>
               <Route path='/dashboard' element={<SuperDashBoard />} />
-              <Route path='/overall-progress' element={<SuperProgress />} />
+              <Route
+                path='/overall-progress'
+                element={<SuperProgress />}
+              />
+              <Route path='/statistics' element={<Statistics />} />
             </Route>
           </Routes>
         </Suspense>

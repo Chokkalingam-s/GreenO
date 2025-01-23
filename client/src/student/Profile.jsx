@@ -1,9 +1,9 @@
-import { useEffect, useState } from 'react'
+import {useEffect, useState} from 'react'
 import axios from 'axios'
-import { Gauge, gaugeClasses } from '@mui/x-charts/Gauge'
+import {Gauge, gaugeClasses} from '@mui/x-charts/Gauge'
 import html2canvas from 'html2canvas'
 import jsPDF from 'jspdf'
-import { toast } from 'react-toastify'
+import {toast} from 'react-toastify'
 
 export default function Profile() {
   const [studentDetails, setStudentDetails] = useState(null)
@@ -25,7 +25,7 @@ export default function Profile() {
         const response = await axios.get(
           'http://localhost:3000/get-uploaded-images-count',
           {
-            headers: { Authorization: `Bearer ${token}` }
+            headers: {Authorization: `Bearer ${token}`}
           }
         )
         setUploadedCount(Number(response.data.uploadedImagesCount) || 0)
@@ -40,7 +40,7 @@ export default function Profile() {
         const response = await axios.get(
           'http://localhost:3000/student-get-user-details',
           {
-            headers: { Authorization: `Bearer ${token}` }
+            headers: {Authorization: `Bearer ${token}`}
           }
         )
         setStudentDetails(response.data)
@@ -108,7 +108,12 @@ export default function Profile() {
     if (!certificateElement) return
 
     certificateElement.classList.remove('hidden')
-    certificateElement.classList.add('absolute', 'top-0', 'left-0', 'z-[-1]')
+    certificateElement.classList.add(
+      'absolute',
+      'top-0',
+      'left-0',
+      'z-[-1]'
+    )
 
     try {
       await new Promise(resolve => setTimeout(resolve, 500))
@@ -129,8 +134,8 @@ export default function Profile() {
     }
   }
 
-  const DetailItem = ({ label, value, icon }) => {
-    const { viewBox, path } = icons[icon]
+  const DetailItem = ({label, value, icon}) => {
+    const {viewBox, path} = icons[icon]
     return (
       <li className='flex items-center gap-2'>
         <svg viewBox={viewBox}>
@@ -225,9 +230,9 @@ export default function Profile() {
                       fontSize: '1.6rem',
                       fontWeight: 'bold'
                     },
-                    [`& .MuiGauge-bar`]: { fill: '#4caf50' },
-                    [`& .${gaugeClasses.valueArc}`]: { fill: '#aad8b0' },
-                    [`& .MuiGauge-background`]: { fill: '#e0e0e0' }
+                    [`& .MuiGauge-bar`]: {fill: '#4caf50'},
+                    [`& .${gaugeClasses.valueArc}`]: {fill: '#aad8b0'},
+                    [`& .MuiGauge-background`]: {fill: '#e0e0e0'}
                   }}
                   text={() => `${progressPercentage1} / ${totalImages}`}
                 />
@@ -293,7 +298,9 @@ export default function Profile() {
             </div>
           </div>
           <div className='absolute grid grid-cols-2 gap-x-10 w-10/12 left-1/2 -translate-x-1/2 bottom-1/4 md:bottom-20 md:w-fit md:grid-cols-1 glassy md:px-2 round out'>
-            <button onClick={handleGenerateCertificate}>Download PDF</button>
+            <button onClick={handleGenerateCertificate}>
+              Download PDF
+            </button>
             <button onClick={() => setModal(!modal)} className='cancel'>
               Cancel
             </button>

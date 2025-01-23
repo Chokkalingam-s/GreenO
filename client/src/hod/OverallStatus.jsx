@@ -1,6 +1,6 @@
-import { useEffect, useState } from 'react'
+import {useEffect, useState} from 'react'
 import axios from 'axios'
-import { Chart } from 'react-google-charts'
+import {Chart} from 'react-google-charts'
 
 export default function OverallStatus() {
   const [departmentData, setDepartmentData] = useState([])
@@ -17,7 +17,9 @@ export default function OverallStatus() {
       const response = await axios.get(
         'http://localhost:3000/new-department-data',
         {
-          headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem('token')}`
+          }
         }
       )
 
@@ -26,7 +28,10 @@ export default function OverallStatus() {
 
         const processedData = data.map(dept => ({
           ...dept,
-          percentage: ((dept.uploadCount / dept.studentCount) * 100).toFixed(2)
+          percentage: (
+            (dept.uploadCount / dept.studentCount) *
+            100
+          ).toFixed(2)
         }))
 
         const sortedDepartments = processedData.sort((a, b) => {
@@ -103,7 +108,7 @@ export default function OverallStatus() {
     pieHole: 0.4,
     pieStartAngle: 100,
     sliceVisibilityThreshold: 0.02,
-    backgroundColor: { fill: 'transparent' },
+    backgroundColor: {fill: 'transparent'},
     opacity: 0,
     legend: {
       position: 'bottom',

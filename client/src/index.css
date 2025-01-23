@@ -60,7 +60,7 @@ select:disabled {
   @apply w-full h-1 bg-primary rounded-full shadow-2xl;
 }
 .head {
-  @apply text-3xl font-medium w-full pl-2 mb-4;
+  @apply text-2xl font-medium w-full pl-2;
 }
 
 .main,
@@ -193,17 +193,34 @@ nav a {
 .error {
   @apply text-red-500 font-semibold;
 }
-._detail {
-  @apply glassy round flex items-center p-4 justify-evenly max-w-96 gap-x-4 min-w-80;
-  h3,
-  h1 {
-    @apply font-medium;
-  }
-  h3 {
-    @apply text-lg;
-  }
-  svg {
-    @apply w-10 aspect-square fill-primary;
+.info_card {
+  @apply grid grid-cols-1 md:grid-cols-2 gap-x-4 items-center justify-between w-full;
+  div {
+    @apply center gap-x-4 flex-1;
+    ._detail {
+      @apply glassy round flex items-center px-4 py-1 justify-between max-w-96 min-w-64 w-64;
+      &:nth-child(1) {
+        @apply float-left;
+      }
+      &:nth-child(2) {
+        @apply float-right;
+      }
+
+      h3,
+      h1,
+      p {
+        @apply font-medium;
+      }
+      h3 {
+        @apply text-lg;
+      }
+      p {
+        @apply text-2xl text-end;
+      }
+      svg {
+        @apply w-10 aspect-square fill-primary;
+      }
+    }
   }
 }
 .about {
@@ -274,9 +291,11 @@ nav a {
     @apply p-2 glassy out round w-full;
   }
 }
+
 .out {
-  @apply border-2 border-spacing-2 outline-secondary/50;
+  @apply outline-2 outline-offset-2 outline-secondary/50 outline;
 }
+
 .bdr {
   @apply text-xl font-bold mb-4 border-b-2 border-secondary/50 pb-2;
 }
@@ -286,4 +305,9 @@ nav a {
 }
 .progress_table {
   @apply c_main flex-col max-h-[80vh] relative md:top-6;
+}
+.chart {
+  text {
+    @apply fill-white;
+  }
 }

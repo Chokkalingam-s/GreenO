@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import {useEffect, useState} from 'react'
 import axios from 'axios'
 import {
   Chart as ChartJS,
@@ -9,11 +9,18 @@ import {
   Tooltip,
   Legend
 } from 'chart.js'
-import { Bar } from 'react-chartjs-2'
-import { toast } from 'react-toastify'
-import { Splashscreen } from '../exp_components'
+import {Bar} from 'react-chartjs-2'
+import {toast} from 'react-toastify'
+import {Splashscreen} from '../exp_components'
 
-ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend)
+ChartJS.register(
+  CategoryScale,
+  LinearScale,
+  BarElement,
+  Title,
+  Tooltip,
+  Legend
+)
 
 export default function DepartmentHome() {
   const [studentData, setStudentData] = useState(null)
@@ -34,7 +41,9 @@ export default function DepartmentHome() {
         console.log(response.data)
       } catch (error) {
         setError(
-          error.response ? error.response.data.message : 'Error fetching data'
+          error.response
+            ? error.response.data.message
+            : 'Error fetching data'
         )
       }
     }

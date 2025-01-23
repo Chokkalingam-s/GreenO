@@ -1,12 +1,15 @@
-import { CountUi } from '../exp_components'
+import {CountUi} from '../exp_components'
 
 export default function SuperDashboard() {
   return (
-    <div className='c_main flex-col space-y-4 py-4 max-w-4xl'>
-      <h2 className='head w-full'>Dashboard</h2>
+    <div className='c_main flex-col'>
       <CountUi
         data={[0, 0]}
-        title={['Overall Students Onboarded', "Overall Spaling's maintained"]}
+        head='Dashboard'
+        title={[
+          'Students Onboarded',
+          "Spaling's maintained"
+        ]}
       />
     </div>
   )

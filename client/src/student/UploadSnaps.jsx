@@ -1,6 +1,6 @@
-import { useState, useEffect } from 'react'
+import {useState, useEffect} from 'react'
 import axios from 'axios'
-import { toast } from 'react-toastify'
+import {toast} from 'react-toastify'
 
 export default function UploadSnaps() {
   const [email] = useState('')
@@ -10,7 +10,8 @@ export default function UploadSnaps() {
   const [captchaInput, setCaptchaInput] = useState('')
   const [isCaptchaValid, setIsCaptchaValid] = useState(false)
   const [isUploadEnabled, setIsUploadEnabled] = useState(false)
-  const [location, setLocation] = useState({ latitude: '', longitude: '' })
+  const [location, setLocation] = useState({latitude: '', longitude: ''})
+  const [closeModal, setCloseModel] = useState(true)
 
   const generateCaptcha = () => {
     const chars =
@@ -76,7 +77,7 @@ export default function UploadSnaps() {
         const response = await axios.get(
           'http://localhost:3000/student-uploaded-snaps',
           {
-            headers: { Authorization: `Bearer ${token}` }
+            headers: {Authorization: `Bearer ${token}`}
           }
         )
         setUploadedImage(response.data)
@@ -137,82 +138,113 @@ export default function UploadSnaps() {
 
   return (
     <>
-      <div className='main p-6 flex flex-col items-center glassy rounded-lg shadow-lg'>
-        <h2 className='text-3xl font-semibold mb-6'>Upload Image</h2>
-        {!isCaptchaValid && (
-          <div className='captcha-section flex flex-col md:flex-row items-center gap-4 mb-6'>
-            <input
-              type='text'
-              name='captcha'
-              value={captcha}
-              readOnly
-              className='font-bold'
-            />
-            <input
-              type='text'
-              placeholder='Enter captcha'
-              value={captchaInput}
-              onChange={handleCaptchaInput}
-            />
-            <button onClick={handleVerifyCaptcha}>Verify</button>
-          </div>
-        )}
-
-        {location.latitude && location.longitude && (
-          <div className='location-display text-sm mb-4 text-center flex space-x-2'>
-            <p>
-              <b>Latitude:</b> {location.latitude}
-            </p>
-            <p>
-              <b>Longitude:</b> {location.longitude}
-            </p>
-          </div>
-        )}
-
-        {isCaptchaValid && (
-          <>
-            <div className='p-2 w-10/12 md:w-1/2 border-4 border-dashed border-secondary h-64 glassy rounded-md flex justify-center items-center'>
-              <label
-                htmlFor='file-input'
-                className='cursor-pointer py-3 px-6 font-semibold text-lg bg-secondary text-white round transition duration-300 hover:bg-tertiary'>
-                Choose File
-              </label>
-              <input
-                id='file-input'
-                type='file'
-                onChange={handleFileChange}
-                className='hidden'
-              />
-              {file && (
-                <p className='text-gray-600 ml-4 text-sm'>{file.name}</p>
-              )}
+      {closeModal && (
+        <div className='main flex-col glassy round p-2'>
+          <h1 className='head'>Dos and Don&apos;ts</h1>
+          <div className='flex flex-col md:flex-row justify-evenly gap-4 p-4'>
+            <div>
+              <h3 className='font-semibold text-lg mb-2'>Dos</h3>
+              <ul className='list-disc'>
+                <li>Placeholder for Do #1</li>
+                <li>Placeholder for Do #2</li>
+                <li>Placeholder for Do #3</li>
+              </ul>
             </div>
-            <button
-              onClick={handleUpload}
-              disabled={!isUploadEnabled}
-              className={`${isUploadEnabled ? 'text-white' : 'text-gray-200'}`}>
-              Upload
-            </button>
-          </>
-        )}
-
-        <div className='grid gap-2 grid-cols-1 mt-8'>
-          <p className='text-lg font-semibold w-full mb-2 col-span-4 text-center'>
-            Previously Uploaded Image
-          </p>
-          {uploadedImage ? (
-            <>
-              <img
-                src={`http://localhost:3000/uploads/${uploadedImage.filename}`}
-                alt='Uploaded snap'
-                className='w-1/2 mx-auto aspect-square object-contain'
-              />
-            </>
-          ) : (
-            <p className='col-span-4 text-center'>No image uploaded yet.</p>
-          )}
+            <div>
+              <h3 className='font-semibold text-lg mb-2'>Don&apos;ts</h3>
+              <ul className='list-disc ml-4'>
+                <li>Placeholder for Don&apos;t #1</li>
+                <li>Placeholder for Don&apos;t #2</li>
+                <li>Placeholder for Don&apos;t #3</li>
+              </ul>
+            </div>
+          </div>
+          <button onClick={() => setCloseModel(false)}>Got It</button>
         </div>
-      </div>
+      )}
+
+      {!closeModal && (
+        <div className='main flex-col glassy round'>
+          <h1 className='head'>Upload Image</h1>
+          {!isCaptchaValid && (
+            <div className='flex flex-col md:flex-row items-center gap-4 mb-6'>
+              <input
+                type='text'
+                name='captcha'
+                value={captcha}
+                readOnly
+                className='font-bold'
+              />
+              <input
+                type='text'
+                placeholder='Enter captcha'
+                value={captchaInput}
+                onChange={handleCaptchaInput}
+              />
+              <button onClick={handleVerifyCaptcha}>Verify</button>
+            </div>
+          )}
+
+          {location.latitude && location.longitude && (
+            <div className='location-display text-sm mb-4 text-center flex space-x-2'>
+              <p>
+                <b>Latitude:</b> {location.latitude}
+              </p>
+              <p>
+                <b>Longitude:</b> {location.longitude}
+              </p>
+            </div>
+          )}
+
+          {isCaptchaValid && (
+            <>
+              <div className='p-2 w-10/12 md:w-1/2 border-4 border-dashed border-secondary h-64 glassy rounded-md flex justify-center items-center'>
+                <label
+                  htmlFor='file-input'
+                  className='cursor-pointer py-3 px-6 font-semibold text-lg bg-secondary text-white round transition duration-300 hover:bg-tertiary'>
+                  Choose File
+                </label>
+                <input
+                  id='file-input'
+                  type='file'
+                  onChange={handleFileChange}
+                  className='hidden'
+                />
+                {file && (
+                  <p className='text-gray-600 ml-4 text-sm'>{file.name}</p>
+                )}
+              </div>
+              <button
+                onClick={handleUpload}
+                disabled={!isUploadEnabled}
+                className={`${
+                  isUploadEnabled ? 'text-white' : 'text-gray-200'
+                }`}>
+                Upload
+              </button>
+            </>
+          )}
+
+          <div className='grid gap-2 grid-cols-1 mt-8'>
+            <p className='text-lg font-semibold w-full mb-2 col-span-4 text-center'>
+              Previously Uploaded Image
+            </p>
+            {uploadedImage ? (
+              <>
+                <img
+                  src={`http://localhost:3000/uploads/${uploadedImage.filename}`}
+                  alt='Uploaded snap'
+                  className='w-1/2 mx-auto aspect-square object-contain'
+                />
+              </>
+            ) : (
+              <p className='col-span-4 text-center'>
+                No image uploaded yet.
+              </p>
+            )}
+          </div>
+        </div>
+      )}
     </>
   )
 }

@@ -33,8 +33,10 @@ const SuperProgress = lazy(() => import('./superAdmin/superProgress'))
 const SearchComponent = lazy(() => import('./components/SearchComponent'))
 const InComplete = lazy(() => import('./principal/InComplete'))
 const Pagination = lazy(() => import('./components/Pagination'))
+const Statistics = lazy(() => import('./superAdmin/Statistics'))
 
 export {
+  Statistics,
   Pagination,
   SearchComponent,
   SuperDashBoard,
