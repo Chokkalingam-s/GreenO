@@ -1,7 +1,12 @@
  Shanker ToDo:
-  Profile Page Ui Update
   superAdmin FrontEnd
+  CG Foundation content improve
   Instructions while upload snap.
+  Profile Page - Setting Update
+
+Meetings:
+  24 Jan, Friday - Dean Meet
+  29 Jan, Wed - Online meet
 
 Queries to ask :
     -->>AICTE CREATING PRINCIPAL CREDENTIAL ( how they will generate and how they will send to college )
@@ -23,10 +28,8 @@ Queries to ask :
     Own Idea : Overall Admin Post - Student and Hod , Principal having common view alone page
 
 Later:
-  Try - background - doodle / image
-  add email to the verify otp reset password
+  Try - background - doodle / Image
   Initial Image Blur
-
 
   Done :
    1> Data Encryption and Decryption 
