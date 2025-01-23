@@ -3,25 +3,27 @@ import axios from 'axios'
 import {toast} from 'react-toastify'
 import {exportToPDF} from '../functions/export'
 import {renderSortIcon} from '../functions/renderIcon'
+import {Pagination, SearchComponent, Splashscreen} from '../exp_components'
 
 export default function OverallProgress() {
-  const [progressData, setProgressData] = useState([])
+  const [data, setData] = useState([])
   const [loading, setLoading] = useState(true)
-  const [error, setError] = useState(null)
   const tableRef = useRef(null)
   const [sortField, setSortField] = useState('uploadCount')
   const [sortDirection, setSortDirection] = useState('desc')
+  const [filteredData, setFilteredData] = useState([])
+  const [currentPage, setCurrentPage] = useState(1)
+  const [itemPerPage, setItemPerPage] = useState(25)
+  const totalPages = Math.ceil(filteredData.length / itemPerPage)
 
   useEffect(() => {
     const fetchData = async () => {
       setLoading(true)
-      setError(null)
 
       try {
         console.log('Fetching overall progress data...')
         const token = localStorage.getItem('token')
         if (!token) throw new Error('Authentication token is missing.')
-
         const response = await axios.get(
           'http://localhost:3000/college-overall-progress',
           {
@@ -36,8 +38,8 @@ export default function OverallProgress() {
             2
           )
         }))
-
-        setProgressData(updatedData)
+        setData(data)
+        setFilteredData(data)
       } catch (err) {
         toast.error('Error fetching data: ' + err.message)
       } finally {
@@ -51,42 +53,71 @@ export default function OverallProgress() {
   const toggleSortDirection = field => {
     setSortDirection(prev => (prev === 'asc' ? 'desc' : 'asc'))
     setSortField(field)
-    const sorted = [...progressData].sort((a, b) => {
+    const sorted = [...data].sort((a, b) => {
       if (sortDirection === 'asc') {
         return a[field] - b[field]
       }
       return b[field] - a[field]
     })
-    setProgressData(sorted)
+    setData(sorted)
   }
 
   const toggleYearSort = year => {
     setSortDirection(prev => (prev === 'asc' ? 'desc' : 'asc'))
     setSortField(year)
-    const sorted = [...progressData].sort((a, b) => {
+    const sorted = [...data].sort((a, b) => {
       if (sortDirection === 'asc') {
         return a.yearCounts[year] - b.yearCounts[year]
       }
       return b.yearCounts[year] - a.yearCounts[year]
     })
-    setProgressData(sorted)
+    setData(sorted)
+  }
+  useEffect(() => {
+    setCurrentPage(1)
+  }, [filteredData])
+  const handleItemPerPage = pages => {
+    setItemPerPage(pages)
   }
 
+  const handlePageChange = direction => {
+    if (direction === 'next' && currentPage < totalPages) {
+      setCurrentPage(currentPage + 1)
+    } else if (direction === 'prev' && currentPage > 1) {
+      setCurrentPage(currentPage - 1)
+    }
+  }
+
+  const paginatedData = filteredData.slice(
+    (currentPage - 1) * itemPerPage,
+    currentPage * itemPerPage
+  )
+
   return (
-    <div className='c_main relative top-6 w-full'>
-      <div className='main-content'>
-        <div className='flex justify-between items-center'>
-          <h2 className='text-3xl font-medium'>Overall Progress</h2>
-          <button onClick={() => exportToPDF(tableRef.current)}>
-            Export as PDF
-          </button>
-        </div>
-        {error && <p className='error-message'>{error}</p>}
-        {loading ? (
-          <p>Loading...</p>
-        ) : (
-          <>
-            <div className='details_table max-h-[80vh] overflow-y-auto'>
+    <div className='progress_table'>
+      <h2 className='head'>Progress</h2>
+      <div className='w-full grid grid-cols-1 md:grid-cols-[30%_20%_15%] items-center justify-end gap-x-2 float-end'>
+        <SearchComponent data={data} onFilter={setFilteredData} />
+        <select
+          onChange={e => handleItemPerPage(Number(e.target.value))}
+          value={itemPerPage}>
+          <option value={25}>No of items per page</option>
+          <option value={25}>25</option>
+          <option value={50}>50</option>
+          <option value={75}>75</option>
+          <option value={100}>100</option>
+        </select>
+
+        <button onClick={() => exportToPDF(tableRef.current)}>
+          Export to PDF
+        </button>
+      </div>
+      {loading ? (
+        <Splashscreen />
+      ) : (
+        <>
+          <div className='progress'>
+            <span className='details_table'>
               <table>
                 <thead>
                   <tr>
@@ -166,39 +197,7 @@ export default function OverallProgress() {
                   </tr>
                 </thead>
                 <tbody>
-                  {progressData.map((data, index) => (
-                    <tr key={data.department}>
-                      <td>{index + 1}</td>
-                      <td className='text-left pl-2'>{data.department}</td>
-                      <td>{data.studentCount}</td>
-                      <td>{data.uploadCount}</td>
-                      <td>{data.yearCounts.firstYear}</td>
-                      <td>{data.yearCounts.secondYear}</td>
-                      <td>{data.yearCounts.thirdYear}</td>
-                      <td>{data.yearCounts.fourthYear}</td>
-                      <td>{data.progress}%</td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-            <span className='w-11/12 absolute -z-40 tableRef hidden opacity-0 text-center'>
-              <table ref={tableRef}>
-                <thead>
-                  <tr>
-                    <th>Sno</th>
-                    <th>Department Name</th>
-                    <th>Total Students</th>
-                    <th>No. of Plants in Process</th>
-                    <th>1st Year</th>
-                    <th>2nd Year</th>
-                    <th>3rd Year</th>
-                    <th>4th Year</th>
-                    <th>Progress</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {progressData.map((data, index) => (
+                  {paginatedData.map((data, index) => (
                     <tr key={data.department}>
                       <td>{index + 1}</td>
                       <td className='text-left pl-2'>{data.department}</td>
@@ -214,9 +213,48 @@ export default function OverallProgress() {
                 </tbody>
               </table>
             </span>
-          </>
-        )}
-      </div>
+          </div>
+          <div className='w-full mt-2'>
+            <Pagination
+              currentPage={currentPage}
+              totalPages={totalPages}
+              onPageChange={handlePageChange}
+            />
+          </div>
+          <span className='tableRef'>
+            <table ref={tableRef}>
+              <thead>
+                <tr>
+                  <th>Sno</th>
+                  <th>Department Name</th>
+                  <th>Total Students</th>
+                  <th>No. of Plants in Process</th>
+                  <th>1st Year</th>
+                  <th>2nd Year</th>
+                  <th>3rd Year</th>
+                  <th>4th Year</th>
+                  <th>Progress</th>
+                </tr>
+              </thead>
+              <tbody>
+                {data.map((data, index) => (
+                  <tr key={data.department}>
+                    <td>{index + 1}</td>
+                    <td className='text-left pl-2'>{data.department}</td>
+                    <td>{data.studentCount}</td>
+                    <td>{data.uploadCount}</td>
+                    <td>{data.yearCounts.firstYear}</td>
+                    <td>{data.yearCounts.secondYear}</td>
+                    <td>{data.yearCounts.thirdYear}</td>
+                    <td>{data.yearCounts.fourthYear}</td>
+                    <td>{data.progress}%</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </span>
+        </>
+      )}
     </div>
   )
 }

@@ -72,7 +72,7 @@ select:disabled {
   @apply w-fit;
 }
 .c_main {
-  @apply w-11/12;
+  @apply w-full;
 }
 button:not(.Toastify__close-button) {
   @apply text-base center px-4 py-2 my-2 font-medium transition-shadow round text-primary;
@@ -157,7 +157,7 @@ nav a {
 
 .details_table {
   table {
-    @apply w-full table-fixed border-collapse text-center;
+    @apply w-full border-collapse text-center;
   }
 
   thead {
@@ -175,6 +175,9 @@ nav a {
     &:nth-child(6),
     &:nth-child(7) {
       @apply text-center;
+    }
+    div {
+      @apply flex items-center justify-between;
     }
   }
 
@@ -276,4 +279,11 @@ nav a {
 }
 .bdr {
   @apply text-xl font-bold mb-4 border-b-2 border-secondary/50 pb-2;
+}
+
+.progress {
+  @apply w-full overflow-y-auto round glassy max-h-[60vh];
+}
+.progress_table {
+  @apply c_main flex-col max-h-[80vh] relative md:top-6;
 }

@@ -71,7 +71,7 @@ export default function DepartmentProgress() {
   }
 
   return (
-    <div className='c_main flex-col max-h-[90vh] mt-8'>
+    <div className='progress_table'>
       <div className='w-full grid grid-cols-1 md:grid-cols-[38%_15%_25%_18%] items-center justify-end gap-x-2 float-end'>
         <SearchComponent data={data} onFilter={setFilteredData} />
         <select
@@ -97,7 +97,7 @@ export default function DepartmentProgress() {
           Export to PDF
         </button>
       </div>
-      <div className='w-full overflow-y-auto round glassy max-h-[60vh]'>
+      <div className='progress'>
         <span className='details_table'>
           <table>
             <thead>

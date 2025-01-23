@@ -59,7 +59,7 @@ export default function SuperProgress() {
   }
 
   return (
-    <div className='c_main flex-col max-h-[80vh] relative md:top-6'>
+    <div className='progress_table'>
       <h2 className='head text-center'>Progress</h2>
       <div className='w-full grid grid-cols-1 md:grid-cols-[40%_25%_20%] items-center justify-end gap-x-2 float-end'>
         <SearchComponent data={data} onFilter={setFilteredData} />
@@ -85,7 +85,7 @@ export default function SuperProgress() {
           <option value={data.length}>Entire</option>
         </select>
       </div>
-      <div className='w-full overflow-y-auto round glassy max-h-[60vh]'>
+      <div className='progress'>
         <span className='details_table'>
           <CommonTable data={paginatedData} />
         </span>
