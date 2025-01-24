@@ -1,6 +1,8 @@
-import {Branch, Card, Footer} from '../../exp_comp'
+import {Item, Card, Footer, Timeline} from '../../exp_comp'
 import {focusAreas} from './data'
 import {useNavigate} from 'react-router-dom'
+import {missionVisionItems, greenOItems} from './data'
+
 export default function HomePage() {
   const navigate = useNavigate()
   return (
@@ -48,96 +50,82 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className='timeline'>
+      <section className='timeline md:grid hidden'>
         <div className='relative w-full grid grid-cols-3'>
           <div className='hidden md:inline'></div>
-          <div className='item'>
-            <Branch />
-            <p>
-              To empower communities through innovative and sustainable
-              solutions.
-            </p>
-          </div>
-          <div className='item'>
-            <Branch />
-            <p>
-              To create a world where sustainable development drives
-              inclusive growth.
-            </p>
-          </div>
+          <Item
+            classN='item'
+            content='To empower communities through innovative and sustainable solutions.'
+          />
+          <Item
+            classN='item'
+            content='To create a world where sustainable development drives inclusive growth.'
+          />
           <h2 className='title'>Mission and Vision</h2>
           <div className='hidden md:inline'></div>
-          <div className='item1'>
-            <Branch />
-            <p>
-              To promote equality, education, and environmental
-              preservation for a better tomorrow.
-            </p>
-          </div>
-          <div className='item1'>
-            <Branch />
-            <p>
-              To be a catalyst for positive change across environment,
-              education, and empowerment.
-            </p>
-          </div>
+          <Item
+            classN='item1'
+            content='To promote equality, education, and environmental preservation for a better tomorrow.'
+          />
+          <Item
+            classN='item1'
+            content='To be a catalyst for positive change across environment, education, and empowerment.'
+          />
         </div>
         <img src='/mission&vision.svg' alt='icon for mission vision' />
       </section>
 
-      <section className='timeline'>
+      <section className='timeline md:grid hidden'>
         <div className='relative w-full grid md:grid-cols-[20%_26%_28%_26%]'>
           <div className='hidden md:inline'></div>
           <div className='hidden md:inline'></div>
-          <div className='item3'>
-            <Branch />
-            <p>
-              One student, one sapling—building a sustainable future, one
-              tree at a time.
-            </p>
-            <h3>Grow Green, Grow Together</h3>
-          </div>
-          <div className='item3'>
-            <Branch />
-            <p>
-              Upload geotagged sapling photos each semester with
-              authenticity ensured through image and location checks.
-            </p>
-            <h3>Geo-Verified Growth</h3>
-          </div>
-
+          <Item
+            classN='item3'
+            title='Grow Green, Grow Together'
+            content='One student, one sapling—nurturing a greener future, one tree at a time.'
+          />
+          <Item
+            classN='item3'
+            title='Geo-Verified Growth'
+            content='Upload geotagged sapling photos each semester with verified images and locations.'
+          />
           <h2 className='title_last'>
             GreenO <br />
             <span className='text-xl'>One Student One Tree</span>
           </h2>
           <div className='hidden md:inline'></div>
-          <div className='item1'>
-            <Branch />
-            <h3>Track and Inspire Progress</h3>
-            <p>
-              Dashboards for HODs, Principals, and Admins to monitor
-              department, college, and national rankings.
-            </p>
-          </div>
-          <div className='item1'>
-            <Branch />
-            <h3>Nationwide Green Movement</h3>
-            <p>
-              Uniting colleges across India to create a collective
-              environmental impact.
-            </p>
-          </div>
-          <div className='item1'>
-            <Branch />
-            <h3>Small Acts, Big Change</h3>
-            <p>
-              Every sapling planted is a step toward hope, positivity, and
-              a greener tomorrow.
-            </p>
-          </div>
+          <Item
+            classN='item1'
+            title='Track and Inspire Progress'
+            content='Dashboards for HODs, Principals, and Admins to track rankings at department, college, and national levels.'
+          />
+          <Item
+            classN='item1'
+            title='Nationwide Green Movement'
+            content='Uniting colleges across India to create a collective environmental impact.'
+          />
+          <Item
+            classN='item1'
+            title='Small Acts, Big Change'
+            content='Every sapling planted is a step toward hope, positivity, and a greener tomorrow.'
+          />
         </div>
         <img src='/osot.svg' alt='GreenO - One Student One Tree logo' />
       </section>
+
+      <Timeline
+        items={missionVisionItems}
+        title='Mission and Vision'
+        imgSrc='/mission&vision.svg'
+        imgAlt='Icon for Mission and Vision'
+      />
+      <Timeline
+        items={greenOItems}
+        title='GreenO - One Student One Tree'
+        imgSrc='/osot.svg'
+        imgAlt='GreenO - One Student One Tree logo'
+      />
+
       <Footer />
     </>
   )

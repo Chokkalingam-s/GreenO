@@ -103,11 +103,11 @@ div {
   @apply bg-tertiary round;
 }
 .timeline {
-  @apply main grid md:grid-cols-[70%_30%] items-center;
+  @apply main md:grid-cols-[70%_30%] items-center;
   .item,
   .item1,
   .item3 {
-    @apply flex items-center text-center;
+    @apply flex items-center;
   }
   .item,
   .item3 {
@@ -123,7 +123,10 @@ div {
     @apply md:-translate-x-28 -translate-x-0;
   }
   p {
-    @apply w-11/12 mb-4 text-left pl-4;
+    @apply w-11/12 text-left;
+  }
+  span {
+    @apply translate-x-6 my-2;
   }
 }
 
