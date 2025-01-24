@@ -122,7 +122,7 @@ export default function OverallStatus() {
   }
 
   return (
-    <div className='c_main'>
+    <div className='main'>
       <div className='grid grid-cols-2 items-center justify-center space-x-4 w-10/12'>
         <h2 className='head col-span-2 text-center mb-4'>
           Overall Department Contribution

@@ -1,6 +1,6 @@
-import { useState, useEffect } from 'react'
-import { BarChart } from '@mui/x-charts/BarChart'
-import { CountUi } from '../exp_components'
+import {useState, useEffect} from 'react'
+import {BarChart} from '@mui/x-charts/BarChart'
+import {CountUi} from '../exp_components'
 import axios from 'axios'
 
 const chartSetting = {
@@ -62,7 +62,7 @@ export default function AHome() {
             headers: {
               Authorization: `Bearer ${token}`
             },
-            params: { email: userEmail }
+            params: {email: userEmail}
           }
         )
 
@@ -85,10 +85,10 @@ export default function AHome() {
   }, [])
 
   return (
-    <div className='c_main flex-col space-y-4 py-4 max-w-4xl'>
-      <h3 className='head text-center'>Dashboard</h3>
+    <div className='main flex-col space-y-4'>
       <CountUi
         data={[studentCount, saplingCount]}
+        head='Dashboard'
         title={['Students Onboarded', 'Trees Planted']}
       />
       <div className='w-full glassy round mx-auto'>
@@ -103,8 +103,8 @@ export default function AHome() {
             }
           ]}
           series={[
-            { dataKey: 'Students', label: 'Students', color: '#4CAF50' },
-            { dataKey: 'Trees', label: 'Trees', color: '#FFC107' }
+            {dataKey: 'Students', label: 'Students', color: '#4CAF50'},
+            {dataKey: 'Trees', label: 'Trees', color: '#FFC107'}
           ]}
           {...chartSetting}
           sx={{

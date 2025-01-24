@@ -60,7 +60,7 @@ select:disabled {
   @apply w-full h-1 bg-primary rounded-full shadow-2xl;
 }
 .head {
-  @apply text-2xl font-medium w-full pl-2;
+  @apply text-3xl font-medium;
 }
 
 .main,
@@ -198,14 +198,16 @@ nav a {
   div {
     @apply center gap-x-4 flex-1;
     ._detail {
-      @apply glassy round flex items-center px-4 py-1 justify-between max-w-96 min-w-64 w-64;
+      @apply glassy round flex items-center px-4 py-1 justify-between w-72;
       &:nth-child(1) {
         @apply float-left;
       }
       &:nth-child(2) {
         @apply float-right;
       }
-
+      svg {
+        @apply fill-white;
+      }
       h3,
       h1,
       p {

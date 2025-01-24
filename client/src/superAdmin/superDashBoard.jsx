@@ -8,7 +8,7 @@ export default function SuperDashboard() {
         head='Dashboard'
         title={[
           'Students Onboarded',
-          "Spaling's maintained"
+          "Sapling's Maintained"
         ]}
       />
     </div>

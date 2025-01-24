@@ -95,8 +95,8 @@ export default function OverallProgress() {
 
   return (
     <div className='progress_table'>
-      <h2 className='head'>Progress</h2>
-      <div className='w-full grid grid-cols-1 md:grid-cols-[30%_20%_15%] items-center justify-end gap-x-2 float-end'>
+      <div className='w-full grid grid-cols-1 md:grid-cols-[38%_30%_15%_15%] items-center justify-end gap-x-2'>
+        <h2 className='head'>Progress</h2>
         <SearchComponent data={data} onFilter={setFilteredData} />
         <select
           onChange={e => handleItemPerPage(Number(e.target.value))}
