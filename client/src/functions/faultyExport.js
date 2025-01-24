@@ -42,6 +42,8 @@ export const exportToPDF = async table => {
     })
     document.body.removeChild(tempTable) // Cleanup
     const imgData = canvas.toDataURL('image/png')
+    console.log(imgData)
+
     const imgHeight =
       (canvas.height * (pdfWidth - 2 * margin)) / canvas.width
     pdf.addImage(

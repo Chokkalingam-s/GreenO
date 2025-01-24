@@ -140,7 +140,7 @@ export default function DepartmentProgress() {
           onPageChange={handlePageChange}
         />
       </div>
-      <span className='tableRef'>
+      <span className='tableRef hidden'>
         <table ref={tableRef}>
           <thead>
             <tr>

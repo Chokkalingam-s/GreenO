@@ -60,8 +60,8 @@ export default function SuperProgress() {
 
   return (
     <div className='progress_table'>
-      <h2 className='head text-center'>Progress</h2>
-      <div className='w-full grid grid-cols-1 md:grid-cols-[40%_25%_20%] items-center justify-end gap-x-2 float-end'>
+      <div className='w-full grid grid-cols-1 md:grid-cols-[15%_35%_25%_20%] items-center justify-between'>
+        <h2 className='head'>Progress</h2>
         <SearchComponent data={data} onFilter={setFilteredData} />
         <select
           onChange={e => handleItemPerPage(Number(e.target.value))}
@@ -98,7 +98,7 @@ export default function SuperProgress() {
         />
       </div>
 
-      <span className='tableRef'>
+      <span className='tableRef hidden'>
         <CommonTable data={data.slice(0, download)} tableRef={tableRef} />
       </span>
     </div>

@@ -65,7 +65,7 @@ select:disabled {
 
 .main,
 .c_main {
-  @apply md:px-2 round md:py-2 relative glassy center max-h-[90vh];
+  @apply md:px-2 round md:py-2 relative glassy center max-h-[85vh] top-4;
 }
 
 .main {
@@ -255,7 +255,7 @@ nav a {
   filter: invert(1);
 }
 .tableRef {
-  @apply w-11/12 absolute -z-40 hidden opacity-0 text-center;
+  @apply w-11/12 absolute -z-40 opacity-0 text-center;
   table {
     @apply w-full;
   }

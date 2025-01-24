@@ -221,7 +221,7 @@ export default function OverallProgress() {
               onPageChange={handlePageChange}
             />
           </div>
-          <span className='tableRef'>
+          <span className='tableRef hidden'>
             <table ref={tableRef}>
               <thead>
                 <tr>
