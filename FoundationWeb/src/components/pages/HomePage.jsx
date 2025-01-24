@@ -1,6 +1,6 @@
-import { Card, Footer } from '../../exp_comp'
-import { focusAreas } from './data'
-import { useNavigate } from 'react-router-dom'
+import {Branch, Card, Footer} from '../../exp_comp'
+import {focusAreas} from './data'
+import {useNavigate} from 'react-router-dom'
 export default function HomePage() {
   const navigate = useNavigate()
   return (
@@ -12,11 +12,12 @@ export default function HomePage() {
             About Us
           </h1>
           <p className='content'>
-            Welcome to CG Foundation, where impactful change meets innovative
-            action. Our initiatives are crafted with passion, purpose, and a
-            vision to create a sustainable future for all. Join us in building
-            resilient communities and fostering inclusive growth—because every
-            small effort counts towards a giant leap forward.
+            Welcome to CG Foundation, where impactful change meets
+            innovative action. Our initiatives are crafted with passion,
+            purpose, and a vision to create a sustainable future for all.
+            Join us in building resilient communities and fostering
+            inclusive growth—because every small effort counts towards a
+            giant leap forward.
           </p>
         </span>
         <img
@@ -25,6 +26,7 @@ export default function HomePage() {
           className='md:w-9/12 md:h-4/5 absolute bottom-0 md:-bottom-6 md:-right-60 object-cover'
         />
       </section>
+
       <section>
         <h2 className='text-3xl font-bold mb-8'>Domains of Change</h2>
         <p className='text-lg mb-12'>
@@ -46,37 +48,95 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className='section grid-cols-1'>
-        <div className='sect'>
-          <h2>Mission and Vision</h2>
-          <p className='content'>
-            At CG Foundation, our mission is to inspire positive change through
-            holistic development. Rooted in the principles of the United Nations
-            Sustainable Development Goals (SDGs), we aim to foster innovation,
-            uplift marginalized communities, and promote sustainable solutions
-            to preserve our environment.
-          </p>
-          <div className='flex justify-end'>
-            <button>Be a Part</button>
+      <section className='timeline'>
+        <div className='relative w-full grid grid-cols-3'>
+          <div className='hidden md:inline'></div>
+          <div className='item'>
+            <Branch />
+            <p>
+              To empower communities through innovative and sustainable
+              solutions.
+            </p>
+          </div>
+          <div className='item'>
+            <Branch />
+            <p>
+              To create a world where sustainable development drives
+              inclusive growth.
+            </p>
+          </div>
+          <h2 className='title'>Mission and Vision</h2>
+          <div className='hidden md:inline'></div>
+          <div className='item1'>
+            <Branch />
+            <p>
+              To promote equality, education, and environmental
+              preservation for a better tomorrow.
+            </p>
+          </div>
+          <div className='item1'>
+            <Branch />
+            <p>
+              To be a catalyst for positive change across environment,
+              education, and empowerment.
+            </p>
           </div>
         </div>
-        <img src='/mission&vision.svg' alt='placeholder' />
+        <img src='/mission&vision.svg' alt='icon for mission vision' />
       </section>
 
-      <section className='section last'>
-        <div className='sect'>
-          <h2>One Student, One Tree.</h2>
-          <p className='content'>
-            The smallest act of kindness can lead to the biggest change. Every
-            contribution you make, be it your time, resources, or ideas, goes a
-            long way in transforming lives. Step forward, give back, and join
-            hands to leave an indelible mark of hope and positivity.
-          </p>
-          <div className='flex justify-end gap-x-6'>
-            <button>Volunteer With Us</button>
+      <section className='timeline'>
+        <div className='relative w-full grid md:grid-cols-[20%_26%_28%_26%]'>
+          <div className='hidden md:inline'></div>
+          <div className='hidden md:inline'></div>
+          <div className='item3'>
+            <Branch />
+            <p>
+              One student, one sapling—building a sustainable future, one
+              tree at a time.
+            </p>
+            <h3>Grow Green, Grow Together</h3>
+          </div>
+          <div className='item3'>
+            <Branch />
+            <p>
+              Upload geotagged sapling photos each semester with
+              authenticity ensured through image and location checks.
+            </p>
+            <h3>Geo-Verified Growth</h3>
+          </div>
+
+          <h2 className='title_last'>
+            GreenO <br />
+            <span className='text-xl'>One Student One Tree</span>
+          </h2>
+          <div className='hidden md:inline'></div>
+          <div className='item1'>
+            <Branch />
+            <h3>Track and Inspire Progress</h3>
+            <p>
+              Dashboards for HODs, Principals, and Admins to monitor
+              department, college, and national rankings.
+            </p>
+          </div>
+          <div className='item1'>
+            <Branch />
+            <h3>Nationwide Green Movement</h3>
+            <p>
+              Uniting colleges across India to create a collective
+              environmental impact.
+            </p>
+          </div>
+          <div className='item1'>
+            <Branch />
+            <h3>Small Acts, Big Change</h3>
+            <p>
+              Every sapling planted is a step toward hope, positivity, and
+              a greener tomorrow.
+            </p>
           </div>
         </div>
-        <img src='/osot.svg' alt='placeholder' />
+        <img src='/osot.svg' alt='GreenO - One Student One Tree logo' />
       </section>
       <Footer />
     </>
