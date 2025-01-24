@@ -54,21 +54,29 @@ export default function HomePage() {
         <div className='relative w-full grid grid-cols-3'>
           <div className='hidden md:inline'></div>
           <Item
-            classN='item'
+            classN='top'
             content='To empower communities through innovative and sustainable solutions.'
           />
           <Item
-            classN='item'
+            classN='top'
             content='To create a world where sustainable development drives inclusive growth.'
           />
-          <h2 className='title'>Mission and Vision</h2>
+          <span className='title-container'>
+            <h2 className='title'>
+              <div>Mission</div>
+              <div>&</div>
+              <div>Vision</div>
+            </h2>
+            <div className='line'></div>
+          </span>
+
           <div className='hidden md:inline'></div>
           <Item
-            classN='item1'
+            classN='bottom1'
             content='To promote equality, education, and environmental preservation for a better tomorrow.'
           />
           <Item
-            classN='item1'
+            classN='bottom1'
             content='To be a catalyst for positive change across environment, education, and empowerment.'
           />
         </div>
@@ -80,32 +88,33 @@ export default function HomePage() {
           <div className='hidden md:inline'></div>
           <div className='hidden md:inline'></div>
           <Item
-            classN='item3'
+            classN='top1'
             title='Grow Green, Grow Together'
             content='One student, one sapling—nurturing a greener future, one tree at a time.'
           />
           <Item
-            classN='item3'
+            classN='top1'
             title='Geo-Verified Growth'
             content='Upload geotagged sapling photos each semester with verified images and locations.'
           />
           <h2 className='title_last'>
             GreenO <br />
             <span className='text-xl'>One Student One Tree</span>
+            <div className='line'></div>
           </h2>
           <div className='hidden md:inline'></div>
           <Item
-            classN='item1'
+            classN='bottom'
             title='Track and Inspire Progress'
             content='Dashboards for HODs, Principals, and Admins to track rankings at department, college, and national levels.'
           />
           <Item
-            classN='item1'
+            classN='bottom'
             title='Nationwide Green Movement'
             content='Uniting colleges across India to create a collective environmental impact.'
           />
           <Item
-            classN='item1'
+            classN='bottom'
             title='Small Acts, Big Change'
             content='Every sapling planted is a step toward hope, positivity, and a greener tomorrow.'
           />

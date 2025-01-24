@@ -104,43 +104,51 @@ div {
 }
 .timeline {
   @apply main md:grid-cols-[70%_30%] items-center;
-  .item,
-  .item1,
+  .top,
+  .top1,
+  .bottom,
+  .bottom1,
   .item3 {
     @apply flex items-center;
   }
-  .item,
+  .top,
+  .top1,
   .item3 {
     @apply flex-col-reverse;
   }
-  .item {
-    @apply md:-translate-x-6 -translate-x-0;
+  .top {
+    @apply translate-y-20 -translate-x-20 pb-1;
   }
-  .item1 {
-    @apply flex-col md:translate-x-6 translate-x-0;
+  .top1 {
+    @apply translate-y-16 -translate-x-28;
+  }
+  .bottom {
+    @apply flex-col translate-x-6 -translate-y-14;
+  }
+  .bottom1 {
+    @apply flex-col translate-x-6 -translate-y-20 pt-1;
   }
   .item3 {
-    @apply md:-translate-x-28 -translate-x-0;
+    @apply translate-y-0;
   }
   p {
     @apply w-11/12 text-left;
   }
-  span {
-    @apply translate-x-6 my-2;
+}
+
+.title-container {
+  @apply relative col-span-4 flex items-center flex-row;
+  .title {
+    @apply flex flex-col items-center text-center gap-y-4;
+  }
+  .line {
+    @apply w-10/12 h-2 bg-tertiary rounded hidden md:inline-block;
   }
 }
 
-.title {
-  @apply relative col-span-3 my-4;
-  &::after {
-    content: '';
-    @apply w-8/12 h-2 ml-4 bg-tertiary absolute top-1/2 round hidden md:inline;
-  }
-}
 .title_last {
   @apply relative col-span-4 my-4;
-  &::after {
-    content: '';
+  .line {
     @apply w-9/12 h-2 ml-4 bg-tertiary absolute top-1/2 round hidden md:inline;
   }
 }
