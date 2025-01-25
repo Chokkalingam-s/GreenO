@@ -1,6 +1,6 @@
 export default function CommonTable({data, tableRef}) {
   return (
-    <table ref={tableRef}>
+    <table ref={tableRef} className='table-fixed'>
       <thead>
         <tr>
           <th className='text-left'>College Name</th>
