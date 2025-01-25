@@ -42,7 +42,7 @@ export default function Statistics() {
         const response = await axios.get(
           'http://localhost:3000/superadmin-progress'
         )
-        setData(response.data.slice(0, 10))
+        setData(response.data)
       } catch (error) {
         toast.error(`Failed to fetch progress data. ${error}`)
       }
@@ -91,7 +91,7 @@ export default function Statistics() {
   const barChartOptions = {
     indexAxis: 'x',
     responsive: true,
-    maintainAspectRatio: false, // Disable aspect ratio to allow flexible width and height
+    maintainAspectRatio: false,
     plugins: {
       legend: {
         display: false

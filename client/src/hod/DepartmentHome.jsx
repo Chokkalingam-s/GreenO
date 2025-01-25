@@ -24,32 +24,31 @@ ChartJS.register(
 
 export default function DepartmentHome() {
   const [studentData, setStudentData] = useState(null)
-  const [error, setError] = useState(null)
 
   useEffect(() => {
     const fetchDepartmentData = async () => {
       try {
-        // const response = await axios.get(
-        //   'http://localhost:3000/departmentwise-student-data',
-        //   {
-        //     headers: {
-        //       Authorization: `Bearer ${localStorage.getItem('token')}`
-        //     }
-        //   }
-        // )
-        // setStudentData(response.data)
-        setStudentData({
-          totalSaplings: 3,
-          totalStudents: 7,
-          yearCounts: {
-            '1st Year': 0,
-            '2nd Year': 1,
-            '3rd Year': 4,
-            '4th Year': 1
+        const response = await axios.get(
+          'http://localhost:3000/departmentwise-student-data',
+          {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem('token')}`
+            }
           }
-        })
+        )
+        setStudentData(response.data)
+        // setStudentData({
+        //   totalSaplings: 3,
+        //   totalStudents: 7,
+        //   yearCounts: {
+        //     '1st Year': 0,
+        //     '2nd Year': 1,
+        //     '3rd Year': 4,
+        //     '4th Year': 1
+        //   }
+        // })
       } catch (error) {
-        setError(
+        toast.error(
           error.response
             ? error.response.data.message
             : 'Error fetching data'
@@ -60,10 +59,7 @@ export default function DepartmentHome() {
     fetchDepartmentData()
   }, [])
 
-  if (error) toast.error(error)
-  if (!studentData || !studentData.yearCounts) {
-    return <Splashscreen />
-  }
+  if (!studentData || !studentData.yearCounts) return <Splashscreen />
 
   const chartData = {
     labels: Object.keys(studentData.yearCounts),
@@ -155,8 +151,8 @@ export default function DepartmentHome() {
         head='Department Overview'
         title={['Total Students', 'Total Saplings Posted']}
       />
-      <div className='max-h-80 w-full flex-col pb-6'>
-        <h2 className='text-lg'>Year-wise Student Distribution</h2>
+      <div className='max-h-96 w-full flex-col p-6 pb-10'>
+        <h2 className='text-xl'>Year-wise Student Distribution</h2>
         <Bar data={chartData} options={chartOptions} />
       </div>
     </div>

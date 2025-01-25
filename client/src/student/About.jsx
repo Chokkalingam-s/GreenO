@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import {useState, useEffect} from 'react'
 
 export default function StudentHome() {
   const [activeSDG, setActiveSDG] = useState(15)
@@ -36,34 +36,30 @@ export default function StudentHome() {
           cleaner, and healthier—one student, one tree at a time.
         </p>
       </section>
-      <section className='grid md:grid-cols-[70%_30%] grid-cols-1 gap-6 mx-auto glassy round p-6 items-center justify-center justify-items-center'>
-        <span>
-          <h2 className='head col-span-2 mb-4'>
+      <section className='about'>
+        <span className='pl-6'>
+          <h2>
             About <span className='text-secondary'>GreenO</span>
           </h2>
-          <p className='leading-relaxed text-justify'>
+          <p>
             The <strong>Green O Initiative</strong> blends education with
-            environmental sustainability. By planting and nurturing trees during
-            their academic journey, students can contribute to
+            environmental sustainability. By planting and nurturing trees
+            during their academic journey, students can contribute to
             <strong> ecological conservation</strong> and gain a deeper
             understanding of their role in mitigating climate change.
           </p>
-          <p className='mt-3 leading-relaxed text-justify'>
+          <p>
             Each tree symbolizes hope, resilience, and a commitment to a
             brighter, greener future. The program nurtures a spirit of
             responsibility and ecological mindfulness in every participant.
           </p>
         </span>
-        <img
-          src='/home.svg'
-          alt='Green O Initiative'
-          className='round hover:scale-105 transition-transform duration-500'
-        />
+        <img src='/home.svg' alt='Green O Initiative' />
       </section>
 
-      <section className='grid md:grid-cols-[70%_30%] grid-cols-1 gap-6 mx-auto glassy round p-6 items-center justify-center justify-items-center'>
+      <section className='about'>
         <span>
-          <h2 className='text-2xl font-semibold my-6'>How It Works</h2>
+          <h2>How It Works</h2>
           <ol className='list-disc list-inside text-left my-4'>
             <li>
               Enable location access for accurate tree monitoring and
@@ -74,18 +70,16 @@ export default function StudentHome() {
               track its progress.
             </li>
             <li>
-              Monitor and review your growth journey via your student dashboard.
+              Monitor and review your growth journey via your student
+              dashboard.
             </li>
             <li>
-              Receive recognition for contributing towards a sustainable planet!
+              Receive recognition for contributing towards a sustainable
+              planet!
             </li>
           </ol>
         </span>
-        <img
-          src='/homeLast.svg'
-          alt='Green O Initiative'
-          className='round hover:scale-105 transition-transform duration-500'
-        />
+        <img src='/homeLast.svg' alt='Green O Initiative' />
       </section>
     </div>
   )

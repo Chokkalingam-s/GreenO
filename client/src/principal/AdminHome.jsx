@@ -91,7 +91,7 @@ export default function AHome() {
         head='Dashboard'
         title={['Students Onboarded', 'Trees Planted']}
       />
-      <div className='w-full glassy round mx-auto'>
+      <div className='w-full glassy_inline mx-auto'>
         <BarChart
           dataset={data}
           borderRadius={20}

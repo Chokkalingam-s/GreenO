@@ -60,7 +60,7 @@ export default function SuperProgress() {
 
   return (
     <div className='progress_table'>
-      <div className='w-full grid grid-cols-1 md:grid-cols-[15%_35%_25%_20%] items-center justify-between'>
+      <div className='w-full grid grid-cols-1 md:grid-cols-[26%_30%_25%_18%] items-center justify-between'>
         <h2 className='head'>Progress</h2>
         <SearchComponent data={data} onFilter={setFilteredData} />
         <select

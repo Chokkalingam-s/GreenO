@@ -1,6 +1,7 @@
 import {useEffect, useState} from 'react'
 import axios from 'axios'
 import {Chart} from 'react-google-charts'
+import {toast} from 'react-toastify'
 
 export default function OverallStatus() {
   const [departmentData, setDepartmentData] = useState([])
@@ -35,9 +36,8 @@ export default function OverallStatus() {
         }))
 
         const sortedDepartments = processedData.sort((a, b) => {
-          if (b.percentage !== a.percentage) {
+          if (b.percentage !== a.percentage)
             return b.percentage - a.percentage
-          }
           return b.studentCount - a.studentCount
         })
         setDepartmentData(sortedDepartments)
@@ -59,10 +59,10 @@ export default function OverallStatus() {
           ) + 1
         setUserDepartmentRank(userRank)
       } else {
-        console.error('Data format is incorrect:', response.data)
+        toast.error('Data format is incorrect:', response.data)
       }
     } catch (error) {
-      console.error(
+      toast.error(
         'Error fetching department data:',
         error.response ? error.response.data : error.message
       )
@@ -111,18 +111,13 @@ export default function OverallStatus() {
     backgroundColor: {fill: 'transparent'},
     opacity: 0,
     legend: {
-      position: 'bottom',
-      alignment: 'center',
-      textStyle: {
-        color: '#FFFFFF',
-        fontSize: 14
-      }
+      display: false
     },
     colors: colors.slice(0, departmentData.length)
   }
 
   return (
-    <div className='main'>
+    <div className='c_main'>
       <div className='grid grid-cols-2 items-center justify-center space-x-4 w-10/12'>
         <h2 className='head col-span-2 text-center mb-4'>
           Overall Department Contribution
