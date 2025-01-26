@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom'
+import {Link} from 'react-router-dom'
 
 export default function NavBar() {
   return (
@@ -8,7 +8,7 @@ export default function NavBar() {
           CG Foundation
         </Link>
       </h2>
-      <ul className='flex space-x-6 font-medium tracking-wider'>
+      <ul className='flex space-x-6 font-semibold tracking-wider'>
         <li>
           <Link to='/'>Home</Link>
         </li>

@@ -2,6 +2,7 @@ import {Item, Card, Footer, Timeline} from '../../exp_comp'
 import {focusAreas} from './data'
 import {useNavigate} from 'react-router-dom'
 import {missionVisionItems, greenOItems} from './data'
+import About from '../About'
 
 export default function HomePage() {
   const navigate = useNavigate()
@@ -83,8 +84,8 @@ export default function HomePage() {
         <img src='/mission&vision.svg' alt='icon for mission vision' />
       </section>
 
-      <section className='timeline md:grid hidden'>
-        <div className='relative w-full grid md:grid-cols-[20%_26%_28%_26%]'>
+      <section className='timeline md:grid hidden last'>
+        <div className='grid md:grid-cols-[20%_26%_28%_26%]'>
           <div className='hidden md:inline'></div>
           <div className='hidden md:inline'></div>
           <Item
@@ -100,6 +101,9 @@ export default function HomePage() {
           <h2 className='title_last'>
             GreenO <br />
             <span className='text-xl'>One Student One Tree</span>
+            <button className='absolute left-0 -bottom-20 text-xl font-semibold'>
+              Join Us
+            </button>
             <div className='line'></div>
           </h2>
           <div className='hidden md:inline'></div>
@@ -128,13 +132,12 @@ export default function HomePage() {
         imgSrc='/mission&vision.svg'
         imgAlt='Icon for Mission and Vision'
       />
-      <Timeline
+      <About
         items={greenOItems}
         title='GreenO - One Student One Tree'
         imgSrc='/osot.svg'
         imgAlt='GreenO - One Student One Tree logo'
       />
-
       <Footer />
     </>
   )

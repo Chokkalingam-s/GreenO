@@ -1,9 +1,9 @@
-import { Footer } from '../../exp_comp'
+import {Footer} from '../../exp_comp'
 
 export default function GreenOPage() {
   return (
     <div>
-      <div className='relative top-14 z-10 text-center h-[50vh] text-white overflow-hidden center flex-col'>
+      <div className='relative top-16 z-10 text-center h-[50vh] text-white overflow-hidden center flex-col'>
         <h1 className='text-4xl font-semibold mb-4 animate-bounce'>
           Plant a tree today for a better tomorrow!
         </h1>
@@ -21,13 +21,14 @@ export default function GreenOPage() {
           <h2 className='italic'>An Initiative...</h2>
           <br />
           <p>
-            The{' '}
+            The
             <strong className='italic text-tertiary'>
+              {' '}
               One Student One Tree Project
             </strong>{' '}
-            is a global initiative that encourages students to plant trees. The
-            project aims to raise awareness of the importance of trees and to
-            help restore forests.
+            is a global initiative that encourages students to plant trees.
+            The project aims to raise awareness of the importance of trees
+            and to help restore forests.
             <br />
             <br />
             <ul className='list-disc pl-10 text-start'>
@@ -36,9 +37,9 @@ export default function GreenOPage() {
               <li>Fun and rewarding experience</li>
             </ul>
             <br />
-            Overall, the One Student One Tree Project is a valuable initiative
-            that has many benefits for the environment, students, and
-            communities.
+            Overall, the One Student One Tree Project is a valuable
+            initiative that has many benefits for the environment,
+            students, and communities.
           </p>
         </div>
         <img src='/public/osot.svg' className='w-10/12' />
@@ -58,8 +59,8 @@ export default function GreenOPage() {
               <span>
                 <h3>Awareness and education</h3>
                 <p>
-                  Raise awareness about the importance of trees and the need to
-                  protect the environment.
+                  Raise awareness about the importance of trees and the
+                  need to protect the environment.
                 </p>
               </span>
             </div>
@@ -78,8 +79,8 @@ export default function GreenOPage() {
               <span>
                 <h3>Volunteerism</h3>
                 <p>
-                  Encourages students to volunteer their time to plant trees and
-                  to help care for them.
+                  Encourages students to volunteer their time to plant
+                  trees and to help care for them.
                 </p>
               </span>
             </div>
@@ -99,8 +100,9 @@ export default function GreenOPage() {
               <span>
                 <h3>Community engagement</h3>
                 <p>
-                  The project can help to build community spirit by bringing
-                  students together to plant trees and care for them.
+                  The project can help to build community spirit by
+                  bringing students together to plant trees and care for
+                  them.
                 </p>
               </span>
               <h2>🍀</h2>
@@ -159,7 +161,8 @@ export default function GreenOPage() {
         <div className='mb-16'>
           <h2>The Art of Planting</h2>
           <p>
-            Plant a seed of kindness, water it with love, and watch it grow!
+            Plant a seed of kindness, water it with love, and watch it
+            grow!
           </p>
         </div>
         <div className='grid grid-cols-1 md:grid-cols-3 gap-8 px-4 md:px-16'>
@@ -190,7 +193,9 @@ export default function GreenOPage() {
       </section>
       <section className='center flex-col last'>
         <h2>Start from Today!</h2>
-        <p className='mt-4'>Don't wait until tomorrow. Plant the seed today.</p>
+        <p className='mt-4'>
+          Don't wait until tomorrow. Plant the seed today.
+        </p>
         <br />
         <button>Join us now</button>
       </section>

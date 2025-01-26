@@ -1,30 +1,43 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
 body {
   font-family: 'Open Sans', serif;
   @apply bg-primary overflow-x-hidden;
 }
+
 .round {
   @apply shadow-xl rounded-xl hover:shadow-lg transition-shadow duration-200;
 }
-.card {
-  @apply center flex-col gap-y-2 px-2 py-4 glassy out round;
+
+.card,
+button {
+  @apply glassy round;
 }
+
+.card {
+  @apply center flex-col gap-y-2 px-2 py-4 out;
+}
+
 .center {
   @apply flex items-center justify-center;
 }
+
 .glassy {
   @apply bg-secondary/40 backdrop-blur-lg;
 }
+
 .content {
   @apply max-w-[60ch] pr-4 text-justify;
 }
+
 .icon {
   @apply w-5 aspect-square;
 }
+
 button {
-  @apply w-fit glassy px-4 py-2 round font-medium my-4;
+  @apply w-fit px-4 py-2 font-medium my-4;
   &:hover,
   &:focus,
   &:active {
@@ -34,7 +47,8 @@ button {
     @apply cursor-not-allowed opacity-50;
   }
 }
-section {
+
+section:not(.grd_cont) {
   @apply w-11/12 mx-auto border-b-2 border-tertiary py-16;
   button {
     @apply float-end;
@@ -46,51 +60,60 @@ section {
     }
   }
 }
+
 .last {
   @apply border-none;
 }
-.section:not(.last) {
-  @apply grid md:grid-cols-2 items-center justify-center justify-items-center;
-}
+
 a {
   @apply hover:text-tertiary cursor-pointer;
 }
+
 .main {
   @apply w-11/12 mx-auto py-10;
 }
+
 .bg_sect {
-  @apply bg-none lg:bg-[url('/public/phoneSapling.png')];
+  @apply bg-none md:bg-[url('/public/phoneSapling.png')];
   h2 {
     @apply text-2xl font-bold;
   }
   .grd_cont {
-    @apply col-span-2 lg:col-auto space-y-4 lg:space-y-10 w-full md:w-1/2 py-4 lg:py-0;
+    @apply col-span-2 md:col-auto space-y-4 md:space-y-10 md:w-1/2 py-4 md:py-0;
     div {
       @apply center my-10 md:my-0;
     }
   }
 }
+
 .out {
   @apply outline-2 outline outline-offset-2 outline-secondary/80;
 }
+
 div {
+  h2,
+  h3 {
+    @apply text-tertiary font-semibold;
+  }
   h2 {
-    @apply text-3xl font-semibold text-tertiary;
+    @apply text-3xl;
   }
   h3 {
-    @apply font-semibold text-lg;
+    @apply text-lg;
   }
 }
-.cont_1 {
-  div {
-    @apply lg:last:-translate-x-1/2 lg:first:translate-x-1/2;
-  }
+
+.cont_1 div,
+.cont_2 div {
+  @apply md:last:translate-x-1/2 md:first:-translate-x-1/2;
 }
+
+.cont_1 div {
+  @apply md:first:translate-x-1/2 md:last:-translate-x-1/2;
+}
+
 .cont_2 {
   @apply text-end;
-  div {
-    @apply lg:last:translate-x-1/2 lg:first:-translate-x-1/2;
-  }
 }
 
 ::-webkit-scrollbar {
@@ -102,53 +125,60 @@ div {
 ::-webkit-scrollbar-thumb {
   @apply bg-tertiary round;
 }
+
 .timeline {
   @apply main md:grid-cols-[70%_30%] items-center;
   .top,
   .top1,
   .bottom,
-  .bottom1,
-  .item3 {
+  .bottom1 {
     @apply flex items-center;
   }
   .top,
-  .top1,
-  .item3 {
+  .top1 {
     @apply flex-col-reverse;
   }
+  .bottom,
+  .bottom1 {
+    @apply flex-col;
+  }
   .top {
-    @apply translate-y-20 -translate-x-20 pb-1;
+    @apply translate-y-20 pt-1 -translate-x-36;
   }
   .top1 {
     @apply translate-y-16 -translate-x-28;
   }
   .bottom {
-    @apply flex-col translate-x-6 -translate-y-14;
+    @apply -translate-y-14;
   }
   .bottom1 {
-    @apply flex-col translate-x-6 -translate-y-20 pt-1;
-  }
-  .item3 {
-    @apply translate-y-0;
+    @apply -translate-y-20 pt-1;
   }
   p {
-    @apply w-11/12 text-left;
+    @apply w-10/12 text-left;
   }
 }
 
 .title-container {
-  @apply relative col-span-4 flex items-center flex-row;
+  @apply relative col-span-3 flex items-center flex-row;
   .title {
     @apply flex flex-col items-center text-center gap-y-4;
   }
   .line {
-    @apply w-10/12 h-2 bg-tertiary rounded hidden md:inline-block;
+    @apply w-10/12;
   }
 }
 
 .title_last {
   @apply relative col-span-4 my-4;
   .line {
-    @apply w-9/12 h-2 ml-4 bg-tertiary absolute top-1/2 round hidden md:inline;
+    @apply w-9/12 ml-4 absolute top-1/2;
+  }
+}
+
+.title-container,
+.title_last {
+  .line {
+    @apply h-2 bg-tertiary round hidden md:inline;
   }
 }
