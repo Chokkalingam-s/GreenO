@@ -1,16 +1,11 @@
  Shanker ToDo:
-  Instructions while upload snap.
   Profile Page - Setting Update
+  Table Entire download bug 
+  Contact us Dev front end
 
 Meetings:
-  24 Jan, Friday - Dean Meet
   29 Jan, Wed - Online meet
 
-Queries to ask :
-    -->>AICTE CREATING PRINCIPAL CREDENTIAL ( how they will generate and how they will send to college )
-          --> PRINCIPAL CREATING DEPARTMENT CREDENTIAL ( create page fot this and database backend)
-               -->Student sign up - Based on Dataset given by College's
-                  Lateral Entry - Onboard  == Based on Dataset given by College
 
  ToDo ( Chokkalingam and Divakar Reference):
     FRONT END: 
@@ -30,6 +25,10 @@ Queries to ask :
 Later:
   Try - background - doodle / Image
   Initial Image Blur
+    -->>AICTE CREATING PRINCIPAL CREDENTIAL ( how they will generate and how they will send to college )
+          --> PRINCIPAL CREATING DEPARTMENT CREDENTIAL ( create page fot this and database backend)
+               -->Student sign up - Based on Dataset given by College's
+                  Lateral Entry - Onboard  == Based on Dataset given by College
 
   Done :
    1> Data Encryption and Decryption 
