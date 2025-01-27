@@ -103,7 +103,7 @@ export default function HomePage() {
             <span className='text-xl'>One Student One Tree</span>
             <button
                 className='absolute left-0 -bottom-20 text-xl font-semibold'
-                onClick={() => navigate('/greenO')}
+                onClick={() => navigate('/greenO') }
               >
               Join Us
             </button>
