@@ -102,9 +102,8 @@ export default function HomePage() {
             GreenO <br />
             <span className='text-xl'>One Student One Tree</span>
             <button
-                className='absolute left-0 -bottom-20 text-xl font-semibold'
-                onClick={() => navigate('/greenO') }
-              >
+              className='absolute left-0 -bottom-20 text-xl font-semibold'
+              onClick={() => navigate('/greenO')}>
               Join Us
             </button>
             <div className='line'></div>
@@ -137,7 +136,8 @@ export default function HomePage() {
       />
       <About
         items={greenOItems}
-        title='GreenO - One Student One Tree'
+        title='GreenO'
+        title2='One Student One Tree'
         imgSrc='/osot.svg'
         imgAlt='GreenO - One Student One Tree logo'
       />
