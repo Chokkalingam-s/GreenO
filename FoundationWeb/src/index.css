@@ -154,7 +154,7 @@ div {
   .bottom1 {
     @apply -translate-y-20 pt-1;
   }
-  p {
+  p:not(.full) {
     @apply w-10/12 text-left;
   }
 }
@@ -181,4 +181,7 @@ div {
   .line {
     @apply h-2 bg-tertiary round hidden md:inline;
   }
+}
+.full {
+  @apply w-full;
 }

@@ -16,7 +16,7 @@ export default function GreenOPage() {
         <div class='absolute inset-0 bg-black opacity-50 -z-10'></div>
       </div>
 
-      <section className='grid grid-cols-1 md:grid-cols-2 justify-items-center items-center justify-center text-center md:text-start'>
+      <section className='grid grid-cols-1 md:grid-cols-2 justify-items-center items-center justify-center text-center md:text-start mt-6'>
         <div className='content'>
           <h2 className='italic'>An Initiative...</h2>
           <br />
@@ -42,7 +42,7 @@ export default function GreenOPage() {
             students, and communities.
           </p>
         </div>
-        <img src='/public/osot.svg' className='w-10/12' />
+        <img src='/osot.svg' className='w-10/12' />
       </section>
 
       <section className='bg_sect bg-cover bg-center min-h-[80vh]'>

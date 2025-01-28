@@ -8,11 +8,12 @@ export default function Card({
 }) {
   return (
     <div
-      className={`border round p-6 glassy relative hover:shadow-xl transition-shadow duration-200 out ${
-        fixed ? 'h-44' : 'max-h-44'
+      className={`border round glassy relative hover:shadow-xl transition-shadow duration-200 out ${
+        fixed ? 'h-44 p-6' : 'max-h-44 p-4 flex gap-x-4'
       }`}>
       {title && <h3 className='text-xl font-semibold mb-4'>{title}</h3>}
-      <p>{content}</p>
+      {!showBtn && <img src='/svgviewer-output.svg' className='w-6' />}
+      <p className='full'>{content}</p>
       {showBtn && (
         <button
           className='absolute right-4 bottom-0'

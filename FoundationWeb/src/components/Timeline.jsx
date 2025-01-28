@@ -4,7 +4,7 @@ export default function Timeline({items, title, imgSrc, imgAlt}) {
   return (
     <section className='timeline md:hidden grid'>
       <h2 className='text-center text-2xl font-bold my-4'>{title}</h2>
-      <div className='relative w-full grid gap-6'>
+      <div className='relative w-full grid gap-4'>
         {items.map((item, index) => (
           <div key={index}>
             <Card
