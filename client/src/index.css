@@ -70,7 +70,8 @@
 body {
   font-family: 'Poppins', serif;
   background-image: url('/bg.jpg');
-  @apply text-primary bg-primary bg-cover bg-center font-normal bg-fixed w-full;
+  @apply text-primary bg-secondary bg-cover bg-center font-normal bg-fixed
+    w-full;
   p {
     @apply text-base  md:max-w-[70ch];
   }

@@ -10,6 +10,15 @@ export default function Layout() {
   return (
     <>
       <Header />
+      <div
+        className='fixed top-0 w-full h-full -z-10'
+        style={{
+          backgroundImage:
+            'url(/0ba822008116c4db07f85b772a5dcea9-Photoroom.png)',
+          filter:
+            'invert(1) sepia(1) hue-rotate(120deg) saturate(2) brightness(0.4)',
+          opacity: 0.2
+        }}></div>
       <main className='center flex-col relative z-20 min-h-screen'>
         <Outlet />
       </main>
