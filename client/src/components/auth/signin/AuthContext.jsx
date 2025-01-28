@@ -29,7 +29,6 @@ export const AuthProvider = ({ children }) => {
       const decodedToken = decodeJWT(token)
       if (decodedToken) {
         setIsAuthenticated(true)
-        console.log(decodedToken)
         setRole(decodedToken.role)
       }
     }
