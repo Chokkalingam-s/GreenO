@@ -6,10 +6,12 @@ export default function ContactUs() {
   const [description, setDescription] = useState('')
   const [images, setImages] = useState([])
   const navigate = useNavigate()
+  const [preview, setPreview] = useState(false)
 
   const handleImageUpload = e => {
     const files = Array.from(e.target.files)
     setImages(files)
+    setPreview(true)
   }
 
   return (
@@ -46,22 +48,25 @@ export default function ContactUs() {
             accept='image/*'
           />
         </div>
-        <h2 className='text-lg'>Preview</h2>
-        <div className='overflow-y-auto h-40'>
-          {images.length > 0 && (
-            <div className='mt-4 center gap-4 flex-wrap'>
-              {images.map((img, index) => (
-                <img
-                  key={index}
-                  src={URL.createObjectURL(img)}
-                  alt={`Uploaded ${index + 1}`}
-                  className='w-32 h-32 object-cover round'
-                />
-              ))}
+        {preview && (
+          <>
+            <h2 className='text-lg'>Preview</h2>
+            <div className='overflow-y-auto h-40'>
+              {images.length > 0 && (
+                <div className='mt-4 center gap-4 flex-wrap'>
+                  {images.map((img, index) => (
+                    <img
+                      key={index}
+                      src={URL.createObjectURL(img)}
+                      alt={`Uploaded ${index + 1}`}
+                      className='w-32 h-32 object-cover round'
+                    />
+                  ))}
+                </div>
+              )}
             </div>
-          )}
-        </div>
-
+          </>
+        )}
         <span className='flex space-x-2 float-end'>
           <button type='submit'>Submit</button>
           <button
