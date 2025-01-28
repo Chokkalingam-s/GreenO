@@ -140,22 +140,23 @@ export default function UploadSnaps() {
     <div className='main flex-col relative top-2 py-4 px-16'>
       {closeModal && (
         <>
-          <h1 className='head'>Dos and Don&apos;ts</h1>
+          <h1 className='head'>Do&apos;s and Don&apos;ts</h1>
           <div className='flex flex-col md:flex-row justify-evenly gap-4 p-4'>
             <div>
-              <h3 className='font-semibold text-lg mb-2'>Dos</h3>
+              <h3 className='font-semibold text-lg mb-2'>While Uploading the Plant Photo</h3>
+              <h3 className='font-semibold text-lg mb-2'>Do&apos;s</h3>
               <ul className='list-disc'>
-                <li>Placeholder for Do #1</li>
-                <li>Placeholder for Do #2</li>
-                <li>Placeholder for Do #3</li>
+                <li>Include the Full Plant</li>
+                <li>Proper Lighting - Day Light</li>
+                <li>Keep the Same Angle</li>
               </ul>
             </div>
             <div>
               <h3 className='font-semibold text-lg mb-2'>Don&apos;ts</h3>
               <ul className='list-disc ml-4'>
-                <li>Placeholder for Don&apos;t #1</li>
-                <li>Placeholder for Don&apos;t #2</li>
-                <li>Placeholder for Don&apos;t #3</li>
+                <li>Upload of Blurry Images</li>
+                <li>No Filters or Editing</li>
+                <li>Avoid Different Orientations</li>
               </ul>
             </div>
           </div>

@@ -1,6 +1,6 @@
  Shanker ToDo:
   Profile Page - Setting Update
-  Table Entire download bug 
+  Student Side Card
   Contact us Dev front end
 
 Meetings:
@@ -9,18 +9,17 @@ Meetings:
 
  ToDo ( Chokkalingam and Divakar Reference):
     FRONT END: 
-       ?   2> CERTIFICATE : SDG - IMPROVISE
-          3> Instructions while upload snap.
-       !  4> Contact Us - Dev Page
+       ?   1> CERTIFICATE : SDG - IMPROVISE
+       !  2> Contact Us - Dev Page
     BACK END:
-       ?   5> Department certificate 
-       ?   6> College certificate from Overall Admin 
-       !   7> Contact Us
-       ?   8> Student Onboard with database
+       ?   3> Department certificate 
+       ?   4> College certificate from Overall Admin 
+       !   5> Contact Us
+       ?   6> Student Onboard with database
               Lateral Entry - Onboard  == Based on Dataset given by College
      New launch - new  2nd 3rd 4th year
 
-    Own Idea : Overall Admin Post - Student and Hod , Principal having common view alone page
+  Own Idea : Overall Admin Post - Student and Hod , Principal having common view alone page
 
 Later:
   Try - background - doodle / Image
@@ -36,4 +35,5 @@ Later:
    3> Incomplete Student - Report Generation on Principal side
    4> SDG Content in About Page
    5> Overall Admin Work Started
+   6> Instructions while upload snap.
 
