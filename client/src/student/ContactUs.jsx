@@ -1,5 +1,5 @@
-import { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import {useState} from 'react'
+import {useNavigate} from 'react-router-dom'
 
 export default function ContactUs() {
   const [problem, setProblem] = useState('')
@@ -13,7 +13,7 @@ export default function ContactUs() {
   }
 
   return (
-    <div className='main flex-col relative top-2 p-4'>
+    <div className='main flex-col relative top-2 p-4 m-4'>
       <h2 className='head'>Contact Us</h2>
       <div>
         <input
@@ -34,11 +34,9 @@ export default function ContactUs() {
           Images <span className='text-base'>(Optional)</span>
         </label>
         <div
-          className='p-2 border-2 border-dashed border-secondary glassy round center'
+          className='my-4 p-2 border-2 border-dashed border-secondary glassy round center'
           onClick={() => document.getElementById('file-input').click()}>
-          <span className='cursor-pointer p-2 font-medium text-lg bg-secondary round transition duration-300 hover:outline-2 hover:outline outline-offset-2 outline-secondary'>
-            Choose File
-          </span>
+          <span>Choose File</span>
           <input
             id='file-input'
             type='file'

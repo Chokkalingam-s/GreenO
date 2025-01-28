@@ -174,7 +174,7 @@ export default function InComplete() {
             </tr>
           </thead>
           <tbody>
-            {paginatedData.map((student, index) => (
+            {students.map((student, index) => (
               <tr key={index}>
                 <td>{(currentPage - 1) * itemsPerPage + index + 1}</td>
                 <td className='text-left'>{student.regNo}</td>
