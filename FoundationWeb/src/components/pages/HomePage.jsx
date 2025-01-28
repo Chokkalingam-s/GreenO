@@ -101,7 +101,10 @@ export default function HomePage() {
           <h2 className='title_last'>
             GreenO <br />
             <span className='text-xl'>One Student One Tree</span>
-            <button className='absolute left-0 -bottom-20 text-xl font-semibold'>
+            <button
+                className='absolute left-0 -bottom-20 text-xl font-semibold'
+                onClick={() => navigate('/greenO') }
+              >
               Join Us
             </button>
             <div className='line'></div>

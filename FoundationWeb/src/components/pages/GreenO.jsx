@@ -1,6 +1,7 @@
 import {Footer} from '../../exp_comp'
 
 export default function GreenOPage() {
+   window.scrollTo(0, 0)
   return (
     <div>
       <div className='relative top-16 z-10 text-center h-[50vh] text-white overflow-hidden center flex-col'>
