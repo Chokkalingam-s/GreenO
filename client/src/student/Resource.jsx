@@ -14,9 +14,9 @@ export default function Resource() {
     setSelectedCard(null)
   }
   return (
-    <div className='grid grid-cols-1 md:w-8/12 relative top-6 pb-14 md:pb-0 glassy'>
+    <div className='grid grid-cols-1 md:w-8/12 relative top-6 pb-14 md:pb-0'>
       <main className='mx-auto p-4'>
-        <section className='px-6 py-4 glassy_inline'>
+        <section className='px-6 py-4 glassy'>
           <h2 className='head'>GreenO Plant Care</h2>
           <ul className='pl-1'>
             <li>
@@ -33,7 +33,7 @@ export default function Resource() {
           <h2 className='head my-4'>Plant Growth Process</h2>
           <div className='grid grid-cols-1 md:grid-cols-3 gap-4 relative'>
             {plantGrowthData.map((data, index) => (
-              <div key={index} className='glassy_inline p-4'>
+              <div key={index} className='glassy p-4'>
                 <h3 className='font-bold text-lg mb-2'>{data.title}</h3>
                 <p>{data.description}</p>
                 <button
@@ -66,7 +66,7 @@ export default function Resource() {
           <h2 className='head my-4'>Video Resources</h2>
           <div className='grid md:grid-cols-2 gap-4'>
             {videoData.map(video => (
-              <div key={video.id} className='glassy_inline p-2'>
+              <div key={video.id} className='glassy p-2'>
                 <p className='font-semibold'>{video.description}</p>
                 <iframe
                   className='w-full round'

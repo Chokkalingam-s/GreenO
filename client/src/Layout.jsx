@@ -1,16 +1,16 @@
-import { Outlet, useNavigate } from 'react-router-dom'
-import { Header, NavBar } from './exp_components'
+import {Outlet, useNavigate} from 'react-router-dom'
+import {Header, NavBar} from './exp_components'
 import 'react-toastify/dist/ReactToastify.css'
-import { useAuth } from './components/auth/signin/AuthContext'
+import {useAuth} from './components/auth/signin/AuthContext'
 
 export default function Layout() {
   const navigate = useNavigate()
-  const { role } = useAuth()
+  const {role} = useAuth()
 
   return (
     <>
       <Header />
-      <main className='container center flex-col relative z-20 min-h-screen'>
+      <main className='center flex-col relative z-20 min-h-screen'>
         <Outlet />
       </main>
       {role === 'student' && (

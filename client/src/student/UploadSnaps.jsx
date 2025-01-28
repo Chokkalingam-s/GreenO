@@ -137,9 +137,9 @@ export default function UploadSnaps() {
   }
 
   return (
-    <>
+    <div className='main flex-col relative top-2 py-4 px-16'>
       {closeModal && (
-        <div className='main flex-col glassy round p-2'>
+        <>
           <h1 className='head'>Dos and Don&apos;ts</h1>
           <div className='flex flex-col md:flex-row justify-evenly gap-4 p-4'>
             <div>
@@ -160,11 +160,11 @@ export default function UploadSnaps() {
             </div>
           </div>
           <button onClick={() => setCloseModel(false)}>Got It</button>
-        </div>
+        </>
       )}
 
       {!closeModal && (
-        <div className='main flex-col glassy round'>
+        <>
           <h1 className='head'>Upload Image</h1>
           {!isCaptchaValid && (
             <div className='flex flex-col md:flex-row items-center gap-4 mb-6'>
@@ -243,8 +243,8 @@ export default function UploadSnaps() {
               </p>
             )}
           </div>
-        </div>
+        </>
       )}
-    </>
+    </div>
   )
 }
