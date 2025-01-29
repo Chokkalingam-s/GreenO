@@ -256,7 +256,7 @@ export default function Profile() {
                 </button>
               </div>
 
-              <div className='p-2 glassy round out col-span-2 row-span-2'>
+              <div className='p-2 glassy round out col-span-2 row-span-2 mb-6 md:mb-0'>
                 <h2>Settings</h2>
               </div>
             </span>

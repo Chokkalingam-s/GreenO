@@ -10,7 +10,10 @@ export default function UploadSnaps() {
   const [captchaInput, setCaptchaInput] = useState('')
   const [isCaptchaValid, setIsCaptchaValid] = useState(false)
   const [isUploadEnabled, setIsUploadEnabled] = useState(false)
-  const [location, setLocation] = useState({latitude: '', longitude: ''})
+  const [location, setLocation] = useState({
+    latitude: '',
+    longitude: ''
+  })
   const [closeModal, setCloseModel] = useState(true)
 
   const generateCaptcha = () => {
@@ -82,6 +85,7 @@ export default function UploadSnaps() {
         )
         setUploadedImage(response.data)
       } catch (error) {
+        setUploadedImage(null)
         console.error('Error fetching uploaded snap:', error)
       }
     }
@@ -137,115 +141,127 @@ export default function UploadSnaps() {
   }
 
   return (
-    <div className='main flex-col relative top-2 py-4 px-16'>
-      {closeModal && (
-        <>
-          <h1 className='head'>Do&apos;s and Don&apos;ts</h1>
-          <div className='flex flex-col md:flex-row justify-evenly gap-4 p-4'>
+    <div className='main relative top-2 p-4 m-4'>
+      <span>
+        {closeModal && (
+          <>
+            <h1 className='head'>Do&apos;s and Don&apos;ts</h1>
+            <div className='grid md:grid-cols-2 grid-cols-1 justify-evenly gap-4 p-4'>
+              <h3 className='font-semibold text-lg md:col-span-2'>
+                While Uploading the Plant Photo
+              </h3>
+              <span>
+                <h3 className='font-semibold text-lg'>Do&apos;s</h3>
+                <ul className='list-disc'>
+                  <li>Include the Full Plant</li>
+                  <li>Proper Lighting - Day Light</li>
+                  <li>Keep the Same Angle</li>
+                </ul>
+              </span>
+              <span>
+                <h3 className='font-semibold text-lg'>Don&apos;ts</h3>
+                <ul className='list-disc'>
+                  <li>Upload of Blurry Images</li>
+                  <li>No Filters or Editing</li>
+                  <li>Avoid Different Orientations</li>
+                </ul>
+              </span>
+            </div>
+            <button
+              onClick={() => setCloseModel(false)}
+              className='float-end'>
+              Got It
+            </button>
+          </>
+        )}
+        {!closeModal && (
+          <>
+            <h2 className='head'>Upload Image</h2>
             <div>
-              <h3 className='font-semibold text-lg mb-2'>While Uploading the Plant Photo</h3>
-              <h3 className='font-semibold text-lg mb-2'>Do&apos;s</h3>
-              <ul className='list-disc'>
-                <li>Include the Full Plant</li>
-                <li>Proper Lighting - Day Light</li>
-                <li>Keep the Same Angle</li>
-              </ul>
-            </div>
-            <div>
-              <h3 className='font-semibold text-lg mb-2'>Don&apos;ts</h3>
-              <ul className='list-disc ml-4'>
-                <li>Upload of Blurry Images</li>
-                <li>No Filters or Editing</li>
-                <li>Avoid Different Orientations</li>
-              </ul>
-            </div>
-          </div>
-          <button onClick={() => setCloseModel(false)}>Got It</button>
-        </>
-      )}
-
-      {!closeModal && (
-        <>
-          <h1 className='head'>Upload Image</h1>
-          {!isCaptchaValid && (
-            <div className='flex flex-col md:flex-row items-center gap-4 mb-6'>
-              <input
-                type='text'
-                name='captcha'
-                value={captcha}
-                readOnly
-                className='font-bold'
-              />
-              <input
-                type='text'
-                placeholder='Enter captcha'
-                value={captchaInput}
-                onChange={handleCaptchaInput}
-              />
-              <button onClick={handleVerifyCaptcha}>Verify</button>
-            </div>
-          )}
-
-          {location.latitude && location.longitude && (
-            <div className='location-display text-sm mb-4 text-center flex space-x-2'>
-              <p>
-                <b>Latitude:</b> {location.latitude}
-              </p>
-              <p>
-                <b>Longitude:</b> {location.longitude}
-              </p>
-            </div>
-          )}
-
-          {isCaptchaValid && (
-            <>
-              <div className='p-2 w-10/12 md:w-1/2 border-4 border-dashed border-secondary h-64 glassy rounded-md flex justify-center items-center'>
-                <label
-                  htmlFor='file-input'
-                  className='cursor-pointer py-3 px-6 font-semibold text-lg bg-secondary text-white round transition duration-300 hover:bg-tertiary'>
-                  Choose File
-                </label>
-                <input
-                  id='file-input'
-                  type='file'
-                  onChange={handleFileChange}
-                  className='hidden'
-                />
-                {file && (
-                  <p className='text-gray-600 ml-4 text-sm'>{file.name}</p>
+              {!isCaptchaValid && (
+                <div className='flex items-end flex-col'>
+                  <input
+                    type='text'
+                    name='captcha'
+                    value={captcha}
+                    readOnly
+                    className='font-bold'
+                  />
+                  <input
+                    type='text'
+                    placeholder='Enter captcha'
+                    value={captchaInput}
+                    onChange={handleCaptchaInput}
+                  />
+                  <span className='flex items-center gap-x-6'>
+                    {location.latitude && (
+                      <div className='center gap-6'>
+                        <p>
+                          <b>Latitude:</b> {location.latitude}
+                        </p>
+                        <p>
+                          <b>Longitude:</b> {location.longitude}
+                        </p>
+                      </div>
+                    )}
+                    <button onClick={handleVerifyCaptcha}>Verify</button>
+                  </span>
+                </div>
+              )}
+              {isCaptchaValid && (
+                <>
+                  <div className='p-2 border-4 border-dashed border-secondary h-64 glassy center round mt-4'>
+                    <label
+                      htmlFor='file-input'
+                      className='cursor-pointer py-3 px-6 font-semibold text-lg bg-secondary text-white round transition duration-300 hover:bg-tertiary'>
+                      Choose File
+                    </label>
+                    <input
+                      id='file-input'
+                      type='file'
+                      onChange={handleFileChange}
+                      className='hidden'
+                    />
+                    {file && (
+                      <p className='text-gray-600 ml-4 text-sm'>
+                        {file.name}
+                      </p>
+                    )}
+                  </div>
+                  <button
+                    onClick={handleUpload}
+                    disabled={!isUploadEnabled}
+                    className={`${
+                      isUploadEnabled ? 'text-white' : 'text-gray-200'
+                    }`}>
+                    Upload
+                  </button>
+                </>
+              )}
+              <div>
+                <p className='text-xl font-semibold w-full mb-2 col-span-4 text-center'>
+                  Previously Uploaded Image
+                </p>
+                {uploadedImage == null && (
+                  <p className='text-center'>No image uploaded yet.</p>
                 )}
-              </div>
-              <button
-                onClick={handleUpload}
-                disabled={!isUploadEnabled}
-                className={`${
-                  isUploadEnabled ? 'text-white' : 'text-gray-200'
-                }`}>
-                Upload
-              </button>
-            </>
-          )}
-
-          <div className='grid gap-2 grid-cols-1 mt-8'>
-            <p className='text-lg font-semibold w-full mb-2 col-span-4 text-center'>
-              Previously Uploaded Image
-            </p>
-            {uploadedImage ? (
-              <>
                 <img
-                  src={`http://localhost:3000/uploads/${uploadedImage.filename}`}
+                  src={`${
+                    uploadedImage
+                      ? 'http://localhost:3000/uploads' +
+                        uploadedImage.filename
+                      : 'https://placehold.co/600x400'
+                  }`}
                   alt='Uploaded snap'
-                  className='w-1/2 mx-auto aspect-square object-contain'
+                  className={`w-1/2 mx-auto aspect-video object-contain ${
+                    uploadedImage ? '' : 'opacity-0'
+                  }`}
                 />
-              </>
-            ) : (
-              <p className='col-span-4 text-center'>
-                No image uploaded yet.
-              </p>
-            )}
-          </div>
-        </>
-      )}
+              </div>
+            </div>
+          </>
+        )}
+      </span>
     </div>
   )
 }

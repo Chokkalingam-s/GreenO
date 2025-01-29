@@ -14,7 +14,7 @@ export default function Resource() {
     setSelectedCard(null)
   }
   return (
-    <div className='grid grid-cols-1 md:w-8/12 relative top-6 pb-14 md:pb-0'>
+    <div className='grid grid-cols-1 md:w-8/12 relative top-12 md:top-6 pb-14 md:pb-0'>
       <main className='mx-auto p-4'>
         <section className='px-6 py-4 glassy'>
           <h2 className='head'>GreenO Plant Care</h2>
