@@ -183,5 +183,5 @@ div {
   }
 }
 .full {
-  @apply w-full;
+  @apply w-full text-justify;
 }
