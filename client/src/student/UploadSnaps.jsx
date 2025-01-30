@@ -179,20 +179,25 @@ export default function UploadSnaps() {
             <h2 className='head'>Upload Image</h2>
             <div>
               {!isCaptchaValid && (
-                <div className='flex items-end flex-col'>
-                  <input
-                    type='text'
-                    name='captcha'
-                    value={captcha}
-                    readOnly
-                    className='font-bold'
-                  />
-                  <input
-                    type='text'
-                    placeholder='Enter captcha'
-                    value={captchaInput}
-                    onChange={handleCaptchaInput}
-                  />
+                <div className='flex flex-col'>
+                  <span className='grid md:grid-cols-2 grid-cols-1 gap-x-2 my-4'>
+                    <input
+                      type='text'
+                      name='captcha'
+                      value={captcha}
+                      readOnly
+                      className='font-bold'
+                    />
+                    <span className='center gap-x-2'>
+                      <input
+                        type='text'
+                        placeholder='Enter captcha'
+                        value={captchaInput}
+                        onChange={handleCaptchaInput}
+                      />
+                      <button onClick={handleVerifyCaptcha}>Verify</button>
+                    </span>
+                  </span>
                   <span className='flex items-center gap-x-6'>
                     {location.latitude && (
                       <div className='center gap-6'>
@@ -204,7 +209,6 @@ export default function UploadSnaps() {
                         </p>
                       </div>
                     )}
-                    <button onClick={handleVerifyCaptcha}>Verify</button>
                   </span>
                 </div>
               )}
