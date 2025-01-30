@@ -248,7 +248,7 @@ export default function UploadSnaps() {
                 <img
                   src={`${
                     uploadedImage
-                      ? 'http://localhost:3000/uploads' +
+                      ? 'http://localhost:3000/uploads/' +
                         uploadedImage.filename
                       : 'https://placehold.co/600x400'
                   }`}
