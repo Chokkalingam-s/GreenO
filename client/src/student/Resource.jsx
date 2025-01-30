@@ -16,8 +16,8 @@ export default function Resource() {
   return (
     <div className='grid grid-cols-1 md:w-8/12 relative top-12 md:top-6 pb-14 md:pb-0'>
       <main className='mx-auto p-4'>
-        <section className='px-6 py-4 glassy'>
-          <h2 className='head'>GreenO Plant Care</h2>
+        <section className='px-6 py-2 glassy'>
+          <h2 className='text-2xl'>GreenO Plant Care</h2>
           <ul className='pl-1'>
             <li>
               🌿 Water early in the morning to prevent excess evaporation.
@@ -30,7 +30,7 @@ export default function Resource() {
         </section>
 
         <section>
-          <h2 className='head my-4'>Video Resources</h2>
+          <h2 className='text-2xl my-2'>Video Resources</h2>
           <div className='grid md:grid-cols-2 gap-4'>
             {videoData.map(video => (
               <div key={video.id} className='glassy p-2'>
@@ -48,7 +48,7 @@ export default function Resource() {
         </section>
 
         <section className='mb-10 md:mb-0'>
-          <h2 className='head my-4'>Plant Growth Process</h2>
+          <h2 className='text-2xl my-2'>Plant Growth Process</h2>
           <div className='grid grid-cols-1 md:grid-cols-3 gap-4 relative'>
             {plantGrowthData.map((data, index) => (
               <div
