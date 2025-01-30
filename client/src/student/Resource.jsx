@@ -30,6 +30,24 @@ export default function Resource() {
         </section>
 
         <section>
+          <h2 className='head my-4'>Video Resources</h2>
+          <div className='grid md:grid-cols-2 gap-4'>
+            {videoData.map(video => (
+              <div key={video.id} className='glassy p-2'>
+                <p className='font-semibold'>{video.description}</p>
+                <iframe
+                  className='w-full round'
+                  height='200'
+                  src={video.src}
+                  title={video.title}
+                  allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture'
+                  allowFullScreen></iframe>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        <section className='mb-10 md:mb-0'>
           <h2 className='head my-4'>Plant Growth Process</h2>
           <div className='grid grid-cols-1 md:grid-cols-3 gap-4 relative'>
             {plantGrowthData.map((data, index) => (
@@ -67,24 +85,6 @@ export default function Resource() {
             </div>
           </div>
         )}
-
-        <section>
-          <h2 className='head my-4'>Video Resources</h2>
-          <div className='grid md:grid-cols-2 gap-4'>
-            {videoData.map(video => (
-              <div key={video.id} className='glassy p-2'>
-                <p className='font-semibold'>{video.description}</p>
-                <iframe
-                  className='w-full round'
-                  height='200'
-                  src={video.src}
-                  title={video.title}
-                  allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture'
-                  allowFullScreen></iframe>
-              </div>
-            ))}
-          </div>
-        </section>
       </main>
     </div>
   )
