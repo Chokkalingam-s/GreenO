@@ -48,11 +48,11 @@ export default function Resource() {
 
         {showModal && (
           <div className='fixed inset-0 bg-black/50 center z-50'>
-            <div className='glassy center flex-col'>
+            <div className='glassy center flex-col p-6 max-w-[90vw] max-h-[80vh]'>
               <h3 className='head my-2'>{selectedCard?.title}</h3>
-              <p className='w-[60ch] px-4 text-lg'>
+              <div className='md:w-[60ch] px-4 text-lg max-h-[50vh] overflow-y-auto'>
                 {selectedCard?.detailedContent}
-              </p>
+              </div>
               <div className='mt-4 text-right'>
                 <button className='cancel float-end' onClick={handleClose}>
                   Close
