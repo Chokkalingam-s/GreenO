@@ -33,14 +33,20 @@ export default function Resource() {
           <h2 className='head my-4'>Plant Growth Process</h2>
           <div className='grid grid-cols-1 md:grid-cols-3 gap-4 relative'>
             {plantGrowthData.map((data, index) => (
-              <div key={index} className='glassy p-4'>
-                <h3 className='font-bold text-lg mb-2'>{data.title}</h3>
-                <p>{data.description}</p>
-                <button
-                  className='relative -bottom-4 float-end'
-                  onClick={() => handleLearnMoreClick(data)}>
-                  Learn More
-                </button>
+              <div
+                key={index}
+                className='glassy p-4 grid grid-cols-1 grid-rows-1'>
+                <div>
+                  <h3 className='font-bold text-lg mb-2'>{data.title}</h3>
+                  <p>{data.description}</p>
+                </div>
+                <div className='w-full'>
+                  <button
+                    className='float-end'
+                    onClick={() => handleLearnMoreClick(data)}>
+                    Learn More
+                  </button>
+                </div>
               </div>
             ))}
           </div>
