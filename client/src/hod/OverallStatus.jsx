@@ -124,28 +124,22 @@ export default function OverallStatus() {
         </h2>
         {loading ? (
           <p className='text-xl'>Loading...</p>
-        ) : (
+        ) : departmentData.length > 0 ? (
           <>
-            {departmentData.length > 0 ? (
+            <div>
+              <h3 className='text-xl text-center col-span-2'>
+                Department-wise Sapling Count
+              </h3>
               <div>
-                <h3 className='text-xl text-center col-span-2'>
-                  Department-wise Sapling Count
-                </h3>
-                <div className=''>
-                  <Chart
-                    chartType='PieChart'
-                    data={pieChartData}
-                    options={pieChartOptions}
-                    width='100%'
-                    height='400px'
-                  />
-                </div>
+                <Chart
+                  chartType='PieChart'
+                  data={pieChartData}
+                  options={pieChartOptions}
+                  width='100%'
+                  height='400px'
+                />
               </div>
-            ) : (
-              <p className='text-red-600 text-xl'>
-                No data available for departments.
-              </p>
-            )}
+            </div>
             <span>
               <div className='center flex-col details_table space-y-4 my-4'>
                 <h3 className='text-xl'>Top 3 Departments</h3>
@@ -178,6 +172,10 @@ export default function OverallStatus() {
               )}
             </span>
           </>
+        ) : (
+          <p className='text-red-600 text-xl'>
+            No data available for departments.
+          </p>
         )}
       </div>
     </div>

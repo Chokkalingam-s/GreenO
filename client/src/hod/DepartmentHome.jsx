@@ -37,16 +37,6 @@ export default function DepartmentHome() {
           }
         )
         setStudentData(response.data)
-        // setStudentData({
-        //   totalSaplings: 3,
-        //   totalStudents: 7,
-        //   yearCounts: {
-        //     '1st Year': 0,
-        //     '2nd Year': 1,
-        //     '3rd Year': 4,
-        //     '4th Year': 1
-        //   }
-        // })
       } catch (error) {
         toast.error(
           error.response
