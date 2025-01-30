@@ -23,7 +23,7 @@ export default function Resource() {
               🌿 Water early in the morning to prevent excess evaporation.
             </li>
             <li>☀️ Ensure 6 hours of sunlight daily.</li>
-            <li>🍃 Use organic fertilizers for nourishment.</li>
+            <li>🍃 Organic fertilizers for nourishment.</li>
             <li>✂️ Prune plants regularly for healthy growth.</li>
             <li>💧 Monitor soil moisture, avoid over-watering.</li>
           </ul>
