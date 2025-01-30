@@ -1,11 +1,11 @@
-import { useEffect, useRef, useState } from 'react'
+import {useEffect, useRef, useState} from 'react'
 import axios from 'axios'
-import { useNavigate } from 'react-router-dom'
-import { departments, states } from './data'
-import { toast } from 'react-toastify'
+import {useNavigate} from 'react-router-dom'
+import {departments, states} from './data'
+import {toast} from 'react-toastify'
 
 const currentYear = new Date().getFullYear()
-const years = Array.from({ length: 4 }, (_, i) => currentYear + i)
+const years = Array.from({length: 4}, (_, i) => currentYear + i)
 
 export default function StudentSignUp() {
   const [formData, setFormData] = useState({
@@ -24,7 +24,7 @@ export default function StudentSignUp() {
     principalName: '',
     pocNumber: '',
     secEmail: '',
-    dob: '',
+    dob: ''
   })
   const [errors, setErrors] = useState({})
   const [otp, setOtp] = useState('')
@@ -35,7 +35,7 @@ export default function StudentSignUp() {
   const navigate = useNavigate()
 
   useEffect(() => {
-    states.forEach(({ state, districts }) => {
+    states.forEach(({state, districts}) => {
       statesRef.current.push(state)
       districtsRef.current.push(districts)
     })
@@ -47,7 +47,7 @@ export default function StudentSignUp() {
   }, [])
 
   const handleChange = e => {
-    const { name, value } = e.target
+    const {name, value} = e.target
     setFormData(prevData => ({
       ...prevData,
       [name]: value
@@ -70,8 +70,7 @@ export default function StudentSignUp() {
       newErrors.collegeRegisterNumber =
         'College register number must be exactly 12 digits.'
 
-    if (!formData.dob)
-      newErrors.dob = 'Date of birth is required.'
+    if (!formData.dob) newErrors.dob = 'Date of birth is required.'
 
     if (formData.secEmail && !/\S+@\S+\.\S+/.test(formData.secEmail))
       newErrors.secEmail = 'Please enter a valid secondary email.'
@@ -91,7 +90,7 @@ export default function StudentSignUp() {
         'http://localhost:3000/student-signup',
         formData
       )
-      const { token } = response.data
+      const {token} = response.data
 
       if (token) {
         await axios.post('http://localhost:3000/send-otp-process', {
@@ -113,10 +112,13 @@ export default function StudentSignUp() {
   const verifyOtp = async e => {
     e.preventDefault()
     try {
-      const response = await axios.post('http://localhost:3000/verify-otp-process', {
-        email: formData.email,
-        otp
-      })
+      const response = await axios.post(
+        'http://localhost:3000/verify-otp-process',
+        {
+          email: formData.email,
+          otp
+        }
+      )
       if (response.data.success) {
         localStorage.setItem('token', response.data.token)
         toast.success('OTP verified successfully!')
@@ -131,7 +133,7 @@ export default function StudentSignUp() {
   }
 
   return (
-    <div className='container center relative z-20'>
+    <div className='container center relative z-20 px-4'>
       <div className='main'>
         <img
           src='/treegrow.png'
@@ -140,7 +142,9 @@ export default function StudentSignUp() {
         />
         {!otpSent ? (
           <form onSubmit={handleSubmit} className='md:w-1/2 px-4'>
-            <h2 className='head text-center my-2 md:my-0'>Student Sign Up</h2>
+            <h2 className='head text-center my-2 md:my-0'>
+              Student Sign Up
+            </h2>
             <input
               type='text'
               id='name'
@@ -159,7 +163,9 @@ export default function StudentSignUp() {
               placeholder='Email (Primary)'
               required
             />
-            {errors.email && <small className='error'>{errors.email}</small>}
+            {errors.email && (
+              <small className='error'>{errors.email}</small>
+            )}
             <input
               type='password'
               id='password'
@@ -178,7 +184,8 @@ export default function StudentSignUp() {
                 value={formData.state}
                 onChange={e => {
                   const selectedState = e.target.value
-                  const stateIndex = statesRef.current.indexOf(selectedState)
+                  const stateIndex =
+                    statesRef.current.indexOf(selectedState)
 
                   setFormData({
                     ...formData,
@@ -238,17 +245,18 @@ export default function StudentSignUp() {
               onChange={handleChange}
               placeholder='Secondary Email'
             />
-            {errors.secEmail && <small className='error'>{errors.secEmail}</small>}
+            {errors.secEmail && (
+              <small className='error'>{errors.secEmail}</small>
+            )}
 
-           
             <input
-            type='text'
-            id='collegeName'
-            name='collegeName'
-            value={formData.collegeName}
-            onChange={handleChange}
-            placeholder='College Name'
-            required></input>
+              type='text'
+              id='collegeName'
+              name='collegeName'
+              value={formData.collegeName}
+              onChange={handleChange}
+              placeholder='College Name'
+              required></input>
 
             {/* <select
               id='collegeName'
@@ -261,8 +269,6 @@ export default function StudentSignUp() {
                 R.M.K. Engineering College
               </option> }
             </select> */}
-            
-            
 
             <span className='center gap-x-2'>
               <select
@@ -303,7 +309,9 @@ export default function StudentSignUp() {
               required
             />
             {errors.collegeRegisterNumber && (
-              <small className='error'>{errors.collegeRegisterNumber}</small>
+              <small className='error'>
+                {errors.collegeRegisterNumber}
+              </small>
             )}
 
             <input
@@ -339,7 +347,9 @@ export default function StudentSignUp() {
                   </>
                 )}
               </button>
-              <button className='cancel' onClick={() => navigate('/signin')}>
+              <button
+                className='cancel'
+                onClick={() => navigate('/signin')}>
                 Cancel
               </button>
             </span>
