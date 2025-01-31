@@ -9,7 +9,7 @@ export default function About({items, title, title2, imgSrc, imgAlt}) {
         <span>
           <button
             className='text-xl font-semibold'
-            onClick={() => navigate('/greenO')}>
+            onClick={() => navigate('/OneStudentOneTree')}>
             Join Us
           </button>
         </span>

@@ -13,7 +13,7 @@ export default function NavBar() {
           <Link to='/'>Home</Link>
         </li>
         <li>
-          <Link to='/greenO'>GreenO</Link>
+          <Link to='/OneStudentOneTree'>GreenO</Link>
         </li>
       </ul>
     </nav>

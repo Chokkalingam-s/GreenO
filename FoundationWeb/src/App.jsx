@@ -7,7 +7,7 @@ export default function App() {
       <NavBar />
       <Routes>
         <Route path='/' element={<Home />} />
-        <Route path='/greenO' element={<GreenO />} />
+        <Route path='/OneStudentOneTree' element={<GreenO />} />
       </Routes>
     </Router>
   )
