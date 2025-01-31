@@ -47,7 +47,7 @@ export default function App() {
   const {isAuthenticated, role} = useAuth()
 
   return (
-    <Router>
+    <Router  basename="/GreenO">
       <ToastContainer
         className='custom_toastify'
         autoClose={4000}
