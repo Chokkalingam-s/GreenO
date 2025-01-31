@@ -8,7 +8,10 @@ export default function GreenOPage() {
         <h1 className='text-4xl font-semibold mb-4 animate-bounce'>
           Plant a tree today for a better tomorrow!
         </h1>
-        <button>Join us now</button>
+        <a href="https://greeno.cgfoundation.in">
+  <button>Join us now</button>
+</a>
+
         <img
           src='https://images.unsplash.com/photo-1440342359743-84fcb8c21f21?q=80&w=1770&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
           alt='background image'
@@ -198,7 +201,10 @@ export default function GreenOPage() {
           Don't wait until tomorrow. Plant the seed today.
         </p>
         <br />
-        <button>Join us now</button>
+        <a href="https://greeno.cgfoundation.in">
+  <button>Join us now</button>
+</a>
+
       </section>
       <Footer />
     </div>
