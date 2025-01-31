@@ -7,12 +7,13 @@ export default function Activity() {
   const [images, setImages] = useState([])
   const token = localStorage.getItem('token') || ''
   const [modalSrc, setModalSrc] = useState(null)
+  const backendUrl = import.meta.env.VITE_BACKEND_URL
 
   useEffect(() => {
     const fetchImages = async () => {
       try {
         const response = await axios.get(
-          'http://localhost:3000/student-get-uploaded-images',
+          `${backendUrl}/student-get-uploaded-images`,
           {
             headers: { Authorization: `Bearer ${token}` }
           }
@@ -39,11 +40,11 @@ export default function Activity() {
               key={image.id}
               className='glassy round'
               onClick={() =>
-                setModalSrc(`http://localhost:3000/${image.filePath}`)
+                setModalSrc(`${backendUrl}/${image.filePath}`)
               }>
               <img
                 className='w-full mx-auto aspect-video mt-1 object-contain'
-                src={`http://localhost:3000/${image.filePath}`}
+                src={`${backendUrl}/${image.filePath}`}
                 alt={`Semester ${index + 1}`}
               />
               <h3 className='font-medium tracking-wider text-center text-xl my-2'>

@@ -33,6 +33,7 @@ export default function StudentSignUp() {
   const statesRef = useRef([])
   const districtsRef = useRef([])
   const navigate = useNavigate()
+  const backendUrl = import.meta.env.VITE_BACKEND_URL
 
   useEffect(() => {
     states.forEach(({state, districts}) => {
@@ -87,13 +88,13 @@ export default function StudentSignUp() {
     try {
       setLoading(true)
       const response = await axios.post(
-        'http://localhost:3000/student-signup',
+        `${backendUrl}/student-signup`,
         formData
       )
       const {token} = response.data
 
       if (token) {
-        await axios.post('http://localhost:3000/send-otp-process', {
+        await axios.post(`${backendUrl}/send-otp-process`, {
           email: formData.email
         })
         setOtpSent(true)
@@ -113,7 +114,7 @@ export default function StudentSignUp() {
     e.preventDefault()
     try {
       const response = await axios.post(
-        'http://localhost:3000/verify-otp-process',
+        `${backendUrl}/verify-otp-process`,
         {
           email: formData.email,
           otp

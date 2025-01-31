@@ -10,6 +10,7 @@ export default function UploadSnaps() {
   const [captchaInput, setCaptchaInput] = useState('')
   const [isCaptchaValid, setIsCaptchaValid] = useState(false)
   const [isUploadEnabled, setIsUploadEnabled] = useState(false)
+  const backendUrl = import.meta.env.VITE_BACKEND_URL
   const [location, setLocation] = useState({
     latitude: '',
     longitude: ''
@@ -78,7 +79,7 @@ export default function UploadSnaps() {
       const token = localStorage.getItem('token')
       try {
         const response = await axios.get(
-          'http://localhost:3000/student-uploaded-snaps',
+          `${backendUrl}/student-uploaded-snaps`,
           {
             headers: {Authorization: `Bearer ${token}`}
           }
@@ -112,7 +113,7 @@ export default function UploadSnaps() {
     const token = localStorage.getItem('token')
     try {
       const response = await axios.post(
-        'http://localhost:3000/student-upload-snap-page',
+        `${backendUrl}/student-upload-snap-page`,
         formData,
         {
           headers: {
@@ -252,7 +253,7 @@ export default function UploadSnaps() {
                 <img
                   src={`${
                     uploadedImage
-                      ? 'http://localhost:3000/uploads/' +
+                      ? `${backendUrl}/uploads/` +
                         uploadedImage.filename
                       : 'https://placehold.co/600x400'
                   }`}

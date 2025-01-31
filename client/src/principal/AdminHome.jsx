@@ -30,13 +30,14 @@ export default function AHome() {
   const [studentCount, setStudentCount] = useState(10)
   const [saplingCount, setSaplingCount] = useState(10)
   const [data, setData] = useState([])
+  const backendUrl = import.meta.env.VITE_BACKEND_URL
 
   useEffect(() => {
     const token = localStorage.getItem('token')
     const fetchStudentCount = async () => {
       try {
         const response = await axios.get(
-          'http://localhost:3000/college-overall-student-count',
+          `${backendUrl}/college-overall-student-count`,
           {
             headers: {
               Authorization: `Bearer ${token}`
@@ -57,7 +58,7 @@ export default function AHome() {
       try {
         const userEmail = localStorage.getItem('userEmail')
         const response = await axios.get(
-          'http://localhost:3000/college-admin-data',
+          `${backendUrl}/college-admin-data`,
           {
             headers: {
               Authorization: `Bearer ${token}`

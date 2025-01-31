@@ -14,6 +14,7 @@ export default function OverallProgress() {
   const [filteredData, setFilteredData] = useState([])
   const [currentPage, setCurrentPage] = useState(1)
   const [itemPerPage, setItemPerPage] = useState(25)
+  const backendUrl = import.meta.env.VITE_BACKEND_URL
   const totalPages = Math.ceil(filteredData.length / itemPerPage)
 
   useEffect(() => {
@@ -25,7 +26,7 @@ export default function OverallProgress() {
         const token = localStorage.getItem('token')
         if (!token) throw new Error('Authentication token is missing.')
         const response = await axios.get(
-          'http://localhost:3000/college-overall-progress',
+          `${backendUrl}/college-overall-progress`,
           {
             headers: {
               Authorization: `Bearer ${token}`

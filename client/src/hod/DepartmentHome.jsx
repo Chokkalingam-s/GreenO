@@ -24,12 +24,13 @@ ChartJS.register(
 
 export default function DepartmentHome() {
   const [studentData, setStudentData] = useState(null)
+  const backendUrl = import.meta.env.VITE_BACKEND_URL
 
   useEffect(() => {
     const fetchDepartmentData = async () => {
       try {
         const response = await axios.get(
-          'http://localhost:3000/departmentwise-student-data',
+          `${backendUrl}/departmentwise-student-data`,
           {
             headers: {
               Authorization: `Bearer ${localStorage.getItem('token')}`

@@ -7,6 +7,7 @@ export default function ContactUs() {
   const [images, setImages] = useState([])
   const navigate = useNavigate()
   const [preview, setPreview] = useState(false)
+  const backendUrl = import.meta.env.VITE_BACKEND_URL
 
   const handleImageUpload = e => {
     const files = Array.from(e.target.files)

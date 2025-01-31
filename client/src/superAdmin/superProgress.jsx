@@ -13,12 +13,13 @@ export default function SuperProgress() {
   const [data, setData] = useState([])
   const totalPages = Math.ceil(filteredData.length / itemPerPage)
   const [download, setDownload] = useState(0)
+  const backendUrl = import.meta.env.VITE_BACKEND_URL
 
   useEffect(() => {
     async function fetchData() {
       try {
         const response = await axios.get(
-          'http://localhost:3000/superadmin-progress'
+          `${backendUrl}/superadmin-progress`
         )
         setData(response.data)
         setFilteredData(response.data)

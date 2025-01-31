@@ -16,6 +16,7 @@ export default function DepartmentProgress() {
   const [yearFilter, setYearFilter] = useState(0)
   const [itemPerPage, setItemPerPage] = useState(25)
   const tableRef = useRef(null)
+  const backendUrl = import.meta.env.VITE_BACKEND_URL
 
   const totalPages = Math.ceil(filteredData.length / itemPerPage)
   const paginatedData = filteredData.slice(
@@ -44,7 +45,7 @@ export default function DepartmentProgress() {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          'http://localhost:3000/departmentwise-progress-data',
+          `${backendUrl}/departmentwise-progress-data`,
           {
             headers: {
               Authorization: `Bearer ${token}`

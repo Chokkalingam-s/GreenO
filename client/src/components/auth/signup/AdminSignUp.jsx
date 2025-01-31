@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom'
 
 export default function AdminSignUp() {
   const navigate = useNavigate()
+  const backendUrl = import.meta.env.VITE_BACKEND_URL
   const [formData, setFormData] = useState({
     role: 'admin',
     name: '',

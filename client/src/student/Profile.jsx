@@ -13,6 +13,7 @@ export default function Profile() {
   const [modal, setModal] = useState(false)
   const [progressPercentage, setProgressPercentage] = useState(0)
   const [progressPercentage1, setProgressPercentage1] = useState(0)
+  const backendUrl = import.meta.env.VITE_BACKEND_URL
 
   useEffect(() => {
     setProgressPercentage((uploadedCount / totalImages) * 100)
@@ -23,7 +24,7 @@ export default function Profile() {
     const fetchUploadedImagesCount = async () => {
       try {
         const response = await axios.get(
-          'http://localhost:3000/get-uploaded-images-count',
+          `${backendUrl}/get-uploaded-images-count`,
           {
             headers: {Authorization: `Bearer ${token}`}
           }
@@ -38,7 +39,7 @@ export default function Profile() {
     const fetchStudentDetails = async () => {
       try {
         const response = await axios.get(
-          'http://localhost:3000/student-get-user-details',
+          `${backendUrl}/student-get-user-details`,
           {
             headers: {Authorization: `Bearer ${token}`}
           }

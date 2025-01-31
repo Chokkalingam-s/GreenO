@@ -15,12 +15,13 @@ export default function SignIn() {
   const [resetEmail, setResetEmail] = useState('')
   const [showNewPasswordSetup, setShowNewPasswordSetup] = useState(false)
   const [passwordToggle, setPasswordToggle] = useState(false)
+  const backendUrl = import.meta.env.VITE_BACKEND_URL
 
   const handleLogin = async e => {
     e.preventDefault()
     try {
       const response = await axios.post(
-        'http://localhost:3000/student-signin',
+        `${backendUrl}/student-signin`,
         {
           email,
           password
@@ -56,7 +57,7 @@ export default function SignIn() {
     toast.success('OTP is being sent...')
     try {
       const response = await axios.post(
-        'http://localhost:3000/send-otp-process',
+        `${backendUrl}/send-otp-process`,
         {
           email
         }
@@ -80,7 +81,7 @@ export default function SignIn() {
     }
     try {
       const response = await axios.post(
-        'http://localhost:3000/verify-otp-process',
+        `${backendUrl}/verify-otp-process`,
         {
           email: resetEmail,
           otp
@@ -106,7 +107,7 @@ export default function SignIn() {
     }
     try {
       const response = await axios.post(
-        'http://localhost:3000/reset-password',
+        `${backendUrl}/reset-password`,
         {
           email: resetEmail,
           otp,

@@ -28,6 +28,7 @@ ChartJS.register(
 export default function Statistics() {
   const barChartRef = useRef(null)
   const [data, setData] = useState(null)
+  const backendUrl = import.meta.env.VITE_BACKEND_URL
 
   useEffect(() => {
     if (barChartRef.current) {
@@ -40,7 +41,7 @@ export default function Statistics() {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          'http://localhost:3000/superadmin-progress'
+          `${backendUrl}/superadmin-progress`
         )
         setData(response.data)
       } catch (error) {

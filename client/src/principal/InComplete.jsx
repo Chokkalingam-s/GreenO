@@ -13,6 +13,7 @@ export default function InComplete() {
   const [sortDirection, setSortDirection] = useState('desc')
   const [loading, setLoading] = useState(true)
   const tableRef = useRef(null)
+  const backendUrl = import.meta.env.VITE_BACKEND_URL
 
   const {
     currentPage,
@@ -27,7 +28,7 @@ export default function InComplete() {
     const fetchIncompleteStudents = async () => {
       try {
         const response = await axios.get(
-          'http://localhost:3000/incomplete',
+          `${backendUrl}/incomplete`,
           {
             headers: {
               Authorization: `Bearer ${localStorage.getItem('token')}`

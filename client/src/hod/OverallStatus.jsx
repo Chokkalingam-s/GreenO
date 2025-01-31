@@ -8,6 +8,7 @@ export default function OverallStatus() {
   const [topDepartments, setTopDepartments] = useState([])
   const [userDepartmentRank, setUserDepartmentRank] = useState(null)
   const [loading, setLoading] = useState(true)
+  const backendUrl = import.meta.env.VITE_BACKEND_URL
 
   useEffect(() => {
     fetchDepartmentData()
@@ -16,7 +17,7 @@ export default function OverallStatus() {
   const fetchDepartmentData = async () => {
     try {
       const response = await axios.get(
-        'http://localhost:3000/new-department-data',
+        `${backendUrl}/new-department-data`,
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem('token')}`
@@ -44,7 +45,7 @@ export default function OverallStatus() {
         setTopDepartments(sortedDepartments.slice(0, 3))
 
         const userResponse = await axios.get(
-          'http://localhost:3000/new-user-details',
+          `${backendUrl}/new-user-details`,
           {
             headers: {
               Authorization: `Bearer ${localStorage.getItem('token')}`
