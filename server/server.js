@@ -692,10 +692,9 @@ app.get('/college-overall-progress', authenticateToken, async (req, res) => {
 
 app.get('/departmentwise-student-data', authenticateToken, async (req, res) => {
   const { email } = req.user
-
   try {
     const hodUser = await User.findOne({
-      where: { email, role: 'hod', adminType: 'hod' },
+      where: { email, role: 'hod'},
       attributes: ['collegeName', 'department'],
     })
 
@@ -773,7 +772,7 @@ app.get('/departmentwise-progress-data', authenticateToken, async (req, res) => 
 
   try {
     const hodUser = await User.findOne({
-      where: { email, role: 'hod', adminType: 'hod' },
+      where: { email, role: 'hod' },
       attributes: ['collegeName', 'department'],
     })
 
