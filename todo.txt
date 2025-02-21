@@ -1,16 +1,25 @@
  Shanker ToDo:
-  Profile Page - Setting Update
-  Student Side Card
-  Contact us Dev front end
-
-Meetings:
-  29 Jan, Wed - Online meet
+  Features Implementations:
+      Student Side - Profile Card ( Change setting into smtng new)
+      *Post page ( in student hod principal and overall admin)
+         --> create post option in overall admin alone
+      Overall Admin - Contact us -  FrontEnd
+      Principal - Visual the Overall progress of all departments
+   Ui Improvisiation:
+     HOD - Overall Status
+        --> Pi chart 
+     Principal - Incomplete status scroll issue
+   At Last:
+      PDF Download - Data Merge error
+      PDF template dynamic for every college.
+      Notifications in dashboard!
 
 
  ToDo ( Chokkalingam and Divakar Reference):
     FRONT END: 
        ?   1> CERTIFICATE : SDG - IMPROVISE
        !  2> Contact Us - Dev Page
+       PDF template dynamic for every college.
     BACK END:
        ?   3> Department certificate 
        ?   4> College certificate from Overall Admin 
