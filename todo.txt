@@ -1,10 +1,11 @@
  Shanker ToDo:
   Features Implementations:
       Student Side - Profile Card ( Change setting into smtng new)
+      Principal - Visual the Overall progress of all departments
       *Post page ( in student hod principal and overall admin)
          --> create post option in overall admin alone
       Overall Admin - Contact us -  FrontEnd
-      Principal - Visual the Overall progress of all departments
+      
    Ui Improvisiation:
      HOD - Overall Status
         --> Pi chart 
