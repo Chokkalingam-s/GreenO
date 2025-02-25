@@ -8,9 +8,11 @@ body {
 }
 
 .round {
-  @apply shadow-xl rounded-xl hover:shadow-lg transition-shadow duration-200;
+  @apply rounded-xl transition-shadow duration-200;
 }
-
+.sh {
+  @apply shadow-xl;
+}
 .card,
 button {
   @apply glassy round;
@@ -22,6 +24,15 @@ button {
 
 .center {
   @apply flex items-center justify-center;
+}
+
+.menu {
+  button {
+    @apply p-0 m-0;
+  }
+  img {
+    @apply w-6 aspect-square;
+  }
 }
 
 .glassy {
@@ -41,7 +52,7 @@ button {
   &:hover,
   &:focus,
   &:active {
-    @apply scale-105 shadow-2xl transition-transform duration-150;
+    @apply sh duration-150 transition-shadow;
   }
   &:disabled {
     @apply cursor-not-allowed opacity-50;

@@ -1,16 +1,16 @@
  Shanker ToDo:
 
-Cg Foundation 
-  Home page 
-    1. Navbar - corner radius x , about contact in navbar itself and separte page 
-    2. About us removed in first page and hav in separte page 
+Cg Foundation
+  Home page
+    1. Navbar - corner radius x , about contact in navbar itself ✅ and separte page
+    2. About us removed in first page and hav in separte page
         --> Instead catchy phrase and giving out motto
     3. assests and responsiveness ( within the divider)
-    4. Mission Vission structure 
+    4. Mission Vission structure
     5. GreenO Join Us button improvement
     6. Footer remove about and contact
 
-  GreenO Page: 
+  GreenO Page:
     1. Route OSOT , instead of OneStudentOneTree
     2. in context change the color of osot from green to bold black
     3. content improvement
@@ -19,7 +19,7 @@ Cg Foundation
     6. andha section la iruka card , la arrow button which routes to greeno.cgfoundation portal
     7. Join us button in start and end need to be worked in way it depicts redirectingt to new portal
 
-responsiveness 
+responsiveness
 
   Features Implementations:
       Student Side - Profile Card ( Change setting into smtng new)
@@ -27,10 +27,10 @@ responsiveness
       *Post page ( in student hod principal and overall admin)
          --> create post option in overall admin alone
       Overall Admin - Contact us -  FrontEnd
-      
+
    Ui Improvisiation:
      HOD - Overall Status
-        --> Pi chart 
+        --> Pi chart
      Principal - Incomplete status scroll issue
    At Last:
       PDF Download - Data Merge error
@@ -39,13 +39,13 @@ responsiveness
 
 
  ToDo ( Chokkalingam and Divakar Reference):
-    FRONT END: 
+    FRONT END:
        ?   1> CERTIFICATE : SDG - IMPROVISE
        !  2> Contact Us - Dev Page
        PDF template dynamic for every college.
     BACK END:
-       ?   3> Department certificate 
-       ?   4> College certificate from Overall Admin 
+       ?   3> Department certificate
+       ?   4> College certificate from Overall Admin
        !   5> Contact Us
        ?   6> Student Onboard with database
               Lateral Entry - Onboard  == Based on Dataset given by College
@@ -62,10 +62,9 @@ Later:
                   Lateral Entry - Onboard  == Based on Dataset given by College
 
   Done :
-   1> Data Encryption and Decryption 
+   1> Data Encryption and Decryption
    2> Image Compression
    3> Incomplete Student - Report Generation on Principal side
    4> SDG Content in About Page
    5> Overall Admin Work Started
    6> Instructions while upload snap.
-

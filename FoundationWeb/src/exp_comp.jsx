@@ -10,5 +10,19 @@ const GreenO = lazy(() => import('./components/pages/GreenO'))
 const Branch = lazy(() => import('./components/Branch'))
 const Item = lazy(() => import('./components/Item'))
 const Timeline = lazy(() => import('./components/Timeline'))
+const About = lazy(() => import('./components/pages/AboutUs'))
+const Contact = lazy(() => import('./components/pages/Contact'))
 
-export {NavBar, Layout, Home, Footer, Card, GreenO, Branch, Item, Timeline}
+export {
+  NavBar,
+  Layout,
+  Home,
+  Footer,
+  Card,
+  GreenO,
+  Branch,
+  Item,
+  Timeline,
+  About,
+  Contact
+}
