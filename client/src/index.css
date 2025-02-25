@@ -141,22 +141,31 @@ article .banner {
 }
 .logout,
 nav a,
-.contact_us,
 .profile_tab,
 .details_table,
 .search-list {
   svg {
-    @apply fill-primary icon;
+    @apply fill-secondary icon;
   }
 }
-nav a {
-  @apply center scale-95 flex-col md:flex-row;
-  &.active,
-  &:hover,
-  &:focus {
+.contact_us {
+  @apply fill-primary;
+}
+.logout {
+  p {
     @apply text-secondary;
-    svg {
-      @apply fill-secondary;
+  }
+}
+nav {
+  a {
+    @apply center text-secondary flex-col font-medium md:flex-row;
+    &.active,
+    &:hover,
+    &:focus {
+      @apply text-primary font-semibold tracking-wide;
+      svg {
+        @apply fill-primary;
+      }
     }
   }
 }
