@@ -1,4 +1,26 @@
  Shanker ToDo:
+
+Cg Foundation 
+  Home page 
+    1. Navbar - corner radius x , about contact in navbar itself and separte page 
+    2. About us removed in first page and hav in separte page 
+        --> Instead catchy phrase and giving out motto
+    3. assests and responsiveness ( within the divider)
+    4. Mission Vission structure 
+    5. GreenO Join Us button improvement
+    6. Footer remove about and contact
+
+  GreenO Page: 
+    1. Route OSOT , instead of OneStudentOneTree
+    2. in context change the color of osot from green to bold black
+    3. content improvement
+    4. Repetitive usage of OneStudentOneTree - removal
+    5. Progress and evoloution renamed as word similar to stakeholders or contributors
+    6. andha section la iruka card , la arrow button which routes to greeno.cgfoundation portal
+    7. Join us button in start and end need to be worked in way it depicts redirectingt to new portal
+
+responsiveness 
+
   Features Implementations:
       Student Side - Profile Card ( Change setting into smtng new)
       Principal - Visual the Overall progress of all departments
