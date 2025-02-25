@@ -1,4 +1,4 @@
-import { NavLink } from 'react-router-dom'
+import {NavLink} from 'react-router-dom'
 
 function commonDashboard(path) {
   return {
@@ -83,28 +83,25 @@ const superAdminNavItems = [
   }
 ]
 
-export default function NavBar({ type = 0, role }) {
+export default function NavBar({type = 0, role}) {
   const navItems =
     role === 'hod'
       ? hodNavItems
       : role === 'admin'
-      ? principalNavItems
-      : role === 'superAdmin'
-      ? superAdminNavItems
-      : studentNavItems
+        ? principalNavItems
+        : role === 'superAdmin'
+          ? superAdminNavItems
+          : studentNavItems
 
   return (
     <nav
-      className={`glassy round items-center justify-evenly font-medium gap-x-4 p-3 ${
-        type === 0 ? 'hidden md:flex' : 'md:hidden flex fixed bottom-0 w-full'
+      className={`glassy items-center justify-evenly gap-x-4 p-3 font-medium ${
+        type === 0 ? 'hidden md:flex' : 'fixed bottom-0 flex w-full md:hidden'
       } z-20`}>
-      {navItems.map(({ path, viewBox, icon, label }) => (
+      {navItems.map(({path, viewBox, icon, label}) => (
         <NavLink key={path} to={path}>
           {viewBox && icon ? (
-            <svg
-              xmlns='http://www.w3.org/2000/svg'
-              viewBox={viewBox}
-              className='icon'>
+            <svg xmlns='http://www.w3.org/2000/svg' viewBox={viewBox} className='icon'>
               <path d={icon}></path>
             </svg>
           ) : null}

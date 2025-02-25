@@ -1,7 +1,7 @@
-import { useState, useEffect } from 'react'
+import {useState, useEffect} from 'react'
 import axios from 'axios'
-import { toast } from 'react-toastify'
-import { Modal } from '../exp_components'
+import {toast} from 'react-toastify'
+import {Modal} from '../exp_components'
 
 export default function Activity() {
   const [images, setImages] = useState([])
@@ -12,12 +12,9 @@ export default function Activity() {
   useEffect(() => {
     const fetchImages = async () => {
       try {
-        const response = await axios.get(
-          `${backendUrl}/student-get-uploaded-images`,
-          {
-            headers: { Authorization: `Bearer ${token}` }
-          }
-        )
+        const response = await axios.get(`${backendUrl}/student-get-uploaded-images`, {
+          headers: {Authorization: `Bearer ${token}`}
+        })
         setImages(response.data)
       } catch (error) {
         console.error('Error fetching images:', error)
@@ -26,28 +23,24 @@ export default function Activity() {
     }
 
     if (token) fetchImages()
-  }, [token])
+  }, [token, backendUrl])
 
   return (
-    <div className='center flex-col p-4'>
-      <h2 className='head mb-4 round glassy p-2'>Activity</h2>
+    <div className='center flex-col p-4 c_main _h'>
       {images.length === 0 ? (
         <p className='glassy round p-1'>No images uploaded yet.</p>
       ) : (
-        <div className='grid gap-2 grid-cols-2 md:grid-cols-4 round'>
+        <div className='round grid grid-cols-2 gap-2 md:grid-cols-4'>
           {images.map((image, index) => (
             <div
               key={image.id}
-              className='glassy round'
-              onClick={() =>
-                setModalSrc(`${backendUrl}/${image.filePath}`)
-              }>
+              onClick={() => setModalSrc(`${backendUrl}/${image.filePath}`)}>
               <img
-                className='w-full mx-auto aspect-video mt-1 object-contain'
+                className='mx-auto mt-1 aspect-video w-full object-contain'
                 src={`${backendUrl}/${image.filePath}`}
                 alt={`Semester ${index + 1}`}
               />
-              <h3 className='font-medium tracking-wider text-center text-xl my-2'>
+              <h3 className='my-2 text-center text-xl font-medium tracking-wider'>
                 Semester {index + 1}
               </h3>
             </div>
