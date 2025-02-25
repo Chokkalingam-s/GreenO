@@ -26,15 +26,13 @@ export default function Activity() {
   }, [token, backendUrl])
 
   return (
-    <div className='center flex-col p-4 c_main _h'>
+    <div className='c_main f_h flex-col p-4'>
       {images.length === 0 ? (
         <p className='glassy round p-1'>No images uploaded yet.</p>
       ) : (
         <div className='round grid grid-cols-2 gap-2 md:grid-cols-4'>
           {images.map((image, index) => (
-            <div
-              key={image.id}
-              onClick={() => setModalSrc(`${backendUrl}/${image.filePath}`)}>
+            <div key={image.id} onClick={() => setModalSrc(`${backendUrl}/${image.filePath}`)}>
               <img
                 className='mx-auto mt-1 aspect-video w-full object-contain'
                 src={`${backendUrl}/${image.filePath}`}

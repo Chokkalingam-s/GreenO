@@ -1,4 +1,6 @@
 import {NavLink} from 'react-router-dom'
+import {LogOut} from '../../exp_components'
+import {useAuth} from '../auth/signin/AuthContext'
 
 function commonDashboard(path) {
   return {
@@ -83,7 +85,10 @@ const superAdminNavItems = [
   }
 ]
 
-export default function NavBar({type = 0, role}) {
+export default function NavBar() {
+  const {role} = useAuth()
+  const homeLink = role === 'hod' ? '/department' : role === 'admin' ? '/admin' : '/home'
+
   const navItems =
     role === 'hod'
       ? hodNavItems
@@ -94,20 +99,38 @@ export default function NavBar({type = 0, role}) {
           : studentNavItems
 
   return (
-    <nav
-      className={`glassy items-center justify-evenly gap-x-4 p-3 font-medium ${
-        type === 0 ? 'hidden md:flex' : 'fixed bottom-0 flex w-full md:hidden'
-      } z-20`}>
-      {navItems.map(({path, viewBox, icon, label}) => (
-        <NavLink key={path} to={path}>
-          {viewBox && icon ? (
-            <svg xmlns='http://www.w3.org/2000/svg' viewBox={viewBox} className='icon'>
-              <path d={icon}></path>
-            </svg>
-          ) : null}
-          <p>{label}</p>
-        </NavLink>
-      ))}
-    </nav>
+    <header className='glassy fixed top-0 z-50 flex w-full items-center justify-between px-2'>
+      <NavLink className='center w-fit px-2' to={homeLink}>
+        <img src='/GreenO_Logo.png' alt='App Logo' className='w-14 p-1' />
+        <p className='hidden font-medium md:block'>GreenO</p>
+      </NavLink>
+      <span className='center'>
+        <nav className='z-20 hidden items-center justify-evenly gap-x-4 md:flex'>
+          {navItems.map(({path, viewBox, icon, label}) => (
+            <NavLink key={path} to={path}>
+              {viewBox && icon ? (
+                <svg xmlns='http://www.w3.org/2000/svg' viewBox={viewBox} className='icon'>
+                  <path d={icon}></path>
+                </svg>
+              ) : null}
+              <p>{label}</p>
+            </NavLink>
+          ))}
+        </nav>
+        <LogOut />
+      </span>
+      <nav className='fixed bottom-0 z-20 flex w-full items-center justify-evenly gap-x-4 p-3 font-medium md:hidden'>
+        {navItems.map(({path, viewBox, icon, label}) => (
+          <NavLink key={path} to={path}>
+            {viewBox && icon ? (
+              <svg xmlns='http://www.w3.org/2000/svg' viewBox={viewBox} className='icon'>
+                <path d={icon}></path>
+              </svg>
+            ) : null}
+            <p>{label}</p>
+          </NavLink>
+        ))}
+      </nav>
+    </header>
   )
 }

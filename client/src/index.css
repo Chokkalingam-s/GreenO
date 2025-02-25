@@ -11,12 +11,12 @@
 }
 @layer components {
   .glassy {
-    @apply from-primary/30 via-secondary/30 to-primary/30 round bg-gradient-to-tr backdrop-blur-lg;
+    @apply bg-primary/20 backdrop-blur-md;
   }
   .glassy_inline {
     @apply bg-secondary/25 rounded-lg;
   }
-  .glassy::before {
+  .glassy_inline::before {
     @apply absolute inset-0 rounded-xl bg-black/10;
     content: '';
     z-index: -1;
@@ -52,7 +52,7 @@
     @apply mx-2 aspect-square w-5 rounded-none shadow-none;
   }
   .round {
-    @apply rounded-2xl shadow-lg;
+    @apply rounded-2xl;
   }
 }
 .container {
@@ -74,6 +74,9 @@ body {
   transform: translateY(10vh) !important;
 }
 ._h {
+  @apply max-h-[85vh];
+}
+.f_h {
   @apply h-[85vh];
 }
 input,
@@ -109,7 +112,7 @@ button:not(.Toastify__close-button) {
 button:not(.logout, .search-list, .disabled) {
   @apply translate-y-0;
 }
-button:not(.cancel, .Toastify__close-button) {
+button:not(.cancel, .Toastify__close-button, .logout) {
   @apply glassy outline outline-2 outline-offset-2 outline-transparent transition-all duration-200;
   &:hover,
   &:focus,
@@ -147,9 +150,11 @@ nav a,
   }
 }
 nav a {
-  @apply center flex-col md:flex-row;
-  &.active {
-    @apply text-secondary scale-90;
+  @apply center scale-95 flex-col md:flex-row;
+  &.active,
+  &:hover,
+  &:focus {
+    @apply text-secondary;
     svg {
       @apply fill-secondary;
     }
