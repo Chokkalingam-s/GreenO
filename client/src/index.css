@@ -85,17 +85,35 @@ body {
 input,
 textarea,
 select {
-  @apply focus:border-primary hover:border-primary active:border-primary my-2 w-full border-b-2 border-gray-300 bg-transparent px-4 py-2 text-base transition-all duration-200 ease-in-out outline-none focus:border-b-4;
+  @apply ring-secondary round my-2 w-full overflow-hidden border-none bg-transparent px-4 py-2 text-base ring-2 transition-all duration-150 ease-in-out outline-none;
+  /* &:hover,
+  &:focus,
+  &:active {
+    @apply border-secondary rounded-none border-b-2 border-solid ring-0;
+  } */
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: #fff;
+  transition: background-color 5000s ease-in-out 0s;
+  box-shadow: inset 0 0 20px 20px #23232329;
 }
 
 select:disabled,
 input:disabled,
 textarea:disabled {
-  @apply cursor-not-allowed border-none opacity-50;
+  @apply pointer-events-none cursor-not-allowed opacity-50 ring-0 ring-offset-0;
 }
 
 textarea {
   @apply max-h-60;
+}
+.full {
+  @apply h-screen w-full;
 }
 option {
   @apply bg-black;
@@ -108,37 +126,46 @@ select:disabled {
     @apply my-2;
   }
 }
-button:not(.Toastify__close-button) {
-  @apply center round text-primary my-2 px-4 py-2 text-base font-medium transition-shadow;
+
+button {
+  @apply center round text-primary px-4 py-1 text-base font-medium transition-shadow;
   touch-action: manipulation;
   will-change: box-shadow, transform;
+
   &:hover,
   &:focus,
   &:active {
-    box-shadow: #2d23420c 0 4px 4px;
+    box-shadow: #2d234233 0 6px 8px;
+    transform: translateY(-2px);
   }
-}
-button:not(.logout, .search-list, .disabled) {
-  @apply translate-y-0;
-}
-button:not(.cancel, .Toastify__close-button, .logout) {
-  @apply glassy outline outline-2 outline-offset-2 outline-transparent transition-all duration-200;
-  &:hover,
-  &:focus,
-  &:active {
-    @apply outline-secondary -translate-y-[var(--translate-y)];
-    box-shadow: #2d23420c 0 4px 4px;
+
+  &:not(.Toastify__close-button) {
+    &:not(.logout, .search-list, .disabled) {
+      @apply translate-y-0;
+    }
+
+    &:not(.cancel, .logout) {
+      @apply glassy outline outline-2 outline-offset-2 outline-transparent transition-all duration-200;
+
+      &:hover,
+      &:focus,
+      &:active {
+        @apply outline-secondary -translate-y-1;
+        box-shadow: #2d234233 0 8px 12px;
+      }
+    }
   }
-}
-button:disabled,
-.disabled {
-  @apply cursor-not-allowed opacity-60 outline-none;
-}
-button:disabled:hover,
-button:disabled:focus,
-button:disabled:active,
-.disabled:hover {
-  @apply translate-y-0 transform-none shadow-none transition-none outline-none;
+
+  &:disabled,
+  &.disabled {
+    @apply cursor-not-allowed opacity-60 outline-none;
+
+    &:hover,
+    &:focus,
+    &:active {
+      @apply translate-y-0 transform-none shadow-none transition-none outline-none;
+    }
+  }
 }
 article .banner {
   @apply round aspect-video h-56 object-cover;
@@ -162,12 +189,12 @@ nav a,
 }
 .logout {
   p {
-    @apply text-secondary;
+    @apply text-secondary font-medium;
   }
   &.active,
   &:hover,
   &:focus {
-    @apply font-semibold tracking-wide;
+    @apply scale-105;
     svg {
       @apply fill-primary;
     }
@@ -182,7 +209,7 @@ nav {
     &.active,
     &:hover,
     &:focus {
-      @apply text-primary font-semibold tracking-wide;
+      @apply text-primary scale-105;
       svg {
         @apply fill-primary;
       }

@@ -28,8 +28,9 @@ const SearchComponent = lazy(() => import('./components/SearchComponent'))
 const InComplete = lazy(() => import('./principal/InComplete'))
 const Pagination = lazy(() => import('./components/Pagination'))
 const Statistics = lazy(() => import('./superAdmin/Statistics'))
-
+const FloatingLabelInput = lazy(() => import('./components/FloatingLabelInput'))
 export {
+  FloatingLabelInput,
   Statistics,
   Pagination,
   SearchComponent,

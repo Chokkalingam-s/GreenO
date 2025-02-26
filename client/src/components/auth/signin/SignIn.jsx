@@ -1,12 +1,13 @@
-import { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import {useState} from 'react'
+import {useNavigate} from 'react-router-dom'
 import axios from 'axios'
-import { useAuth } from './AuthContext'
-import { toast } from 'react-toastify'
+import {useAuth} from './AuthContext'
+import {toast} from 'react-toastify'
+import {FloatingLabelInput} from '../../FloatingLabelInput'
 
 export default function SignIn() {
   const navigate = useNavigate()
-  const { setIsAuthenticated, setRole } = useAuth()
+  const {setIsAuthenticated, setRole} = useAuth()
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [showOtpPopup, setShowOtpPopup] = useState(false)
@@ -20,14 +21,11 @@ export default function SignIn() {
   const handleLogin = async e => {
     e.preventDefault()
     try {
-      const response = await axios.post(
-        `${backendUrl}/student-signin`,
-        {
-          email,
-          password
-        }
-      )
-      const { token, userRole } = response.data
+      const response = await axios.post(`${backendUrl}/student-signin`, {
+        email,
+        password
+      })
+      const {token, userRole} = response.data
       if (token) {
         localStorage.setItem('token', token)
         localStorage.setItem('role', userRole)
@@ -37,10 +35,10 @@ export default function SignIn() {
           userRole === 'admin'
             ? '/admin'
             : userRole === 'hod'
-            ? '/department'
-            : userRole === 'superAdmin'
-            ? '/dashboard'
-            : '/home'
+              ? '/department'
+              : userRole === 'superAdmin'
+                ? '/dashboard'
+                : '/home'
         )
         toast.success('Login successful!')
       }
@@ -56,12 +54,9 @@ export default function SignIn() {
     }
     toast.success('OTP is being sent...')
     try {
-      const response = await axios.post(
-        `${backendUrl}/send-otp-process`,
-        {
-          email
-        }
-      )
+      const response = await axios.post(`${backendUrl}/send-otp-process`, {
+        email
+      })
       if (response.status === 200) {
         setShowOtpPopup(true)
         setResetEmail(email)
@@ -80,13 +75,10 @@ export default function SignIn() {
       return
     }
     try {
-      const response = await axios.post(
-        `${backendUrl}/verify-otp-process`,
-        {
-          email: resetEmail,
-          otp
-        }
-      )
+      const response = await axios.post(`${backendUrl}/verify-otp-process`, {
+        email: resetEmail,
+        otp
+      })
       if (response.data.success) {
         setShowNewPasswordSetup(true)
         setShowOtpPopup(false)
@@ -106,14 +98,11 @@ export default function SignIn() {
       return
     }
     try {
-      const response = await axios.post(
-        `${backendUrl}/reset-password`,
-        {
-          email: resetEmail,
-          otp,
-          newPassword
-        }
-      )
+      const response = await axios.post(`${backendUrl}/reset-password`, {
+        email: resetEmail,
+        otp,
+        newPassword
+      })
       if (response.status === 200) {
         toast.success('Password reset successfully!')
         setShowNewPasswordSetup(false)
@@ -136,61 +125,63 @@ export default function SignIn() {
   }
 
   return (
-    <div className='container center relative z-10'>
-      <div className='w-full md:w-2/6 mx-4 aspect-square glassy center round'>
+    <div className='center full relative z-10'>
+      <div className='glassy center round mx-4 aspect-square w-full md:w-1/4'>
         {!showOtpPopup && !showNewPasswordSetup && (
-          <form className='p-4' onSubmit={handleLogin}>
+          <form className='center w-full flex-col gap-y-4' onSubmit={handleLogin}>
             <h2 className='head'>Welcome Back!</h2>
-            <input
-              type='email'
-              placeholder='Email'
-              value={email}
-              onChange={e => setEmail(e.target.value)}
-              required
-            />
-            <span className='relative'>
-              <input
-                type={passwordToggle ? 'text' : 'password'}
-                placeholder='Password'
-                value={password}
-                onChange={e => setPassword(e.target.value)}
+            <div className='w-11/12'>
+              <FloatingLabelInput
+                type='email'
+                placeholder='Email'
+                value={email}
+                setValue={setEmail}
               />
-              <img
-                src='/eye-regular.svg'
-                alt='Toggle visibility'
-                onClick={handlePasswordToggle}
-                className='cursor-pointer icon absolute right-0 top-1/2 -translate-y-1/2'
-              />
-            </span>
-            <span className='flex items-center justify-between'>
-              <p
-                className='cursor-pointer text-primary font-medium tracking-wider'
-                onClick={handleForgotPassword}>
-                Forgot Password?
-              </p>
-              <button type='submit' className='gap-x-2'>
-                <p>Sign in</p>
-              </button>
+              <div>
+                <span className='relative'>
+                  <FloatingLabelInput
+                    placeholder='Password'
+                    value={password}
+                    setValue={setPassword}
+                    type={passwordToggle ? 'text' : 'password'}
+                  />
+                  <img
+                    src='/eye-regular.svg'
+                    alt='Toggle visibility'
+                    onClick={handlePasswordToggle}
+                    className='icon absolute top-1/2 right-0 -translate-y-1/2 cursor-pointer'
+                  />
+                </span>
+                <p
+                  className='text-primary cursor-pointer text-end text-sm font-medium tracking-wider'
+                  onClick={handleForgotPassword}>
+                  Forgot Password?
+                </p>
+              </div>
+            </div>
+
+            <span className='flex items-center justify-center'>
+              <button type='submit'>Sign in</button>
             </span>
 
-            <div className='flex items-center justify-center gap-x-2 w-11/12 mx-auto'>
+            <div className='mx-auto flex w-11/12 items-center justify-center gap-x-2'>
               <div className='line'></div>
               <p
-                className='text-sm font-bold text-primary'
-                style={{ textShadow: '0px 2px 2px rgba(0,0,0,0.4)' }}>
+                className='text-primary text-sm font-bold'
+                style={{textShadow: '0px 2px 2px rgba(0,0,0,0.4)'}}>
                 OR
               </p>
               <div className='line'></div>
             </div>
 
-            <span className='center'>
-              <button
-                type='button'
-                className='flex gap-x-4'
+            <p className='mt-2 text-center'>
+              New to GreenO
+              <strong
+                className='inline cursor-pointer pl-2 underline'
                 onClick={() => navigate('/signup')}>
-                <p>New here ?</p>
-              </button>
-            </span>
+                Join Now
+              </strong>
+            </p>
           </form>
         )}
 
@@ -225,9 +216,7 @@ export default function SignIn() {
             />
             <span className='center space-x-2'>
               <button onClick={handleResetPassword}>Reset</button>
-              <button
-                className='cancel'
-                onClick={() => showNewPasswordSetup(false)}>
+              <button className='cancel' onClick={() => showNewPasswordSetup(false)}>
                 Cancel
               </button>
             </span>
