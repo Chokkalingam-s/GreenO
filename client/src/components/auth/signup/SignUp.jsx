@@ -3,6 +3,7 @@ import axios from 'axios'
 import {useNavigate} from 'react-router-dom'
 import {departments, states} from './data'
 import {toast} from 'react-toastify'
+import {FloatingLabelInput} from '../../FloatingLabelInput'
 
 const currentYear = new Date().getFullYear()
 const years = Array.from({length: 4}, (_, i) => currentYear + i)
@@ -68,8 +69,7 @@ export default function StudentSignUp() {
       newErrors.email = 'Please enter a valid Primary email.'
 
     if (formData.collegeRegisterNumber.length !== 12)
-      newErrors.collegeRegisterNumber =
-        'College register number must be exactly 12 digits.'
+      newErrors.collegeRegisterNumber = 'College register number must be exactly 12 digits.'
 
     if (!formData.dob) newErrors.dob = 'Date of birth is required.'
 
@@ -87,10 +87,7 @@ export default function StudentSignUp() {
 
     try {
       setLoading(true)
-      const response = await axios.post(
-        `${backendUrl}/student-signup`,
-        formData
-      )
+      const response = await axios.post(`${backendUrl}/student-signup`, formData)
       const {token} = response.data
 
       if (token) {
@@ -113,13 +110,10 @@ export default function StudentSignUp() {
   const verifyOtp = async e => {
     e.preventDefault()
     try {
-      const response = await axios.post(
-        `${backendUrl}/verify-otp-process`,
-        {
-          email: formData.email,
-          otp
-        }
-      )
+      const response = await axios.post(`${backendUrl}/verify-otp-process`, {
+        email: formData.email,
+        otp
+      })
       if (response.data.success) {
         localStorage.setItem('token', response.data.token)
         toast.success('OTP verified successfully!')
@@ -134,19 +128,13 @@ export default function StudentSignUp() {
   }
 
   return (
-    <div className='container center relative z-20 px-4'>
+    <div className='center relative z-20 container px-4'>
       <div className='main'>
-        <img
-          src='/treegrow.png'
-          alt='Tree Grow'
-          className='w-1/2 md:block hidden'
-        />
+        <img src='/treegrow.png' alt='Tree Grow' className='hidden w-1/2 md:block' />
         {!otpSent ? (
-          <form onSubmit={handleSubmit} className='md:w-1/2 px-4'>
-            <h2 className='head text-center my-2 md:my-0'>
-              Student Sign Up
-            </h2>
-            <input
+          <form onSubmit={handleSubmit} className='px-4 md:w-1/2'>
+            <h2 className='head my-2 text-center md:my-0'>Student Sign Up</h2>
+            <FloatingLabelInput
               type='text'
               id='name'
               name='name'
@@ -155,7 +143,7 @@ export default function StudentSignUp() {
               placeholder='Name'
               required
             />
-            <input
+            <FloatingLabelInput
               type='email'
               id='email'
               name='email'
@@ -164,10 +152,8 @@ export default function StudentSignUp() {
               placeholder='Email (Primary)'
               required
             />
-            {errors.email && (
-              <small className='error'>{errors.email}</small>
-            )}
-            <input
+            {errors.email && <small className='error'>{errors.email}</small>}
+            <FloatingLabelInput
               type='password'
               id='password'
               name='password'
@@ -176,7 +162,6 @@ export default function StudentSignUp() {
               placeholder='Password'
               required
             />
-
             <span className='center gap-x-2'>
               <select
                 type='text'
@@ -185,8 +170,7 @@ export default function StudentSignUp() {
                 value={formData.state}
                 onChange={e => {
                   const selectedState = e.target.value
-                  const stateIndex =
-                    statesRef.current.indexOf(selectedState)
+                  const stateIndex = statesRef.current.indexOf(selectedState)
 
                   setFormData({
                     ...formData,
@@ -214,17 +198,16 @@ export default function StudentSignUp() {
                   })
                 }}
                 required>
-                {districtsRef.current[
-                  statesRef.current.indexOf(formData.state)
-                ]?.map((district, index) => (
-                  <option value={district} key={index}>
-                    {district}
-                  </option>
-                ))}
+                {districtsRef.current[statesRef.current.indexOf(formData.state)]?.map(
+                  (district, index) => (
+                    <option value={district} key={index}>
+                      {district}
+                    </option>
+                  )
+                )}
               </select>
             </span>
-
-            <input
+            <FloatingLabelInput
               type='number'
               id='mobileNumber'
               name='mobileNumber'
@@ -234,11 +217,8 @@ export default function StudentSignUp() {
               placeholder='Mobile Number'
               required
             />
-            {errors.mobileNumber && (
-              <small className='error'>{errors.mobileNumber}</small>
-            )}
-
-            <input
+            {errors.mobileNumber && <small className='error'>{errors.mobileNumber}</small>}
+            <FloatingLabelInput
               type='email'
               id='secEmail'
               name='secEmail'
@@ -246,19 +226,16 @@ export default function StudentSignUp() {
               onChange={handleChange}
               placeholder='Secondary Email'
             />
-            {errors.secEmail && (
-              <small className='error'>{errors.secEmail}</small>
-            )}
-
-            <input
+            {errors.secEmail && <small className='error'>{errors.secEmail}</small>}
+            <FloatingLabelInput
               type='text'
               id='collegeName'
               name='collegeName'
               value={formData.collegeName}
               onChange={handleChange}
               placeholder='College Name'
-              required></input>
-
+              required
+            />
             {/* <select
               id='collegeName'
               name='collegeName'
@@ -270,7 +247,6 @@ export default function StudentSignUp() {
                 R.M.K. Engineering College
               </option> }
             </select> */}
-
             <span className='center gap-x-2'>
               <select
                 id='department'
@@ -299,7 +275,7 @@ export default function StudentSignUp() {
                 ))}
               </select>
             </span>
-            <input
+            <FloatingLabelInput
               type='text'
               id='collegeRegisterNumber'
               name='collegeRegisterNumber'
@@ -310,12 +286,10 @@ export default function StudentSignUp() {
               required
             />
             {errors.collegeRegisterNumber && (
-              <small className='error'>
-                {errors.collegeRegisterNumber}
-              </small>
+              <small className='error'>{errors.collegeRegisterNumber}</small>
             )}
 
-            <input
+            <FloatingLabelInput
               type='date'
               id='dob'
               name='dob'
@@ -325,7 +299,7 @@ export default function StudentSignUp() {
             />
             {errors.dob && <small className='error'>{errors.dob}</small>}
 
-            <input
+            <FloatingLabelInput
               type='text'
               id='aadharNumber'
               name='aadharNumber'
@@ -335,9 +309,8 @@ export default function StudentSignUp() {
               placeholder='Aadhar Number'
               required
             />
-            {errors.aadharNumber && (
-              <small className='error'>{errors.aadharNumber}</small>
-            )}
+            {errors.aadharNumber && <small className='error'>{errors.aadharNumber}</small>}
+
             <span className='flex items-center justify-end gap-x-4'>
               <button type='submit' className='center' disabled={loading}>
                 {loading ? (
@@ -348,9 +321,7 @@ export default function StudentSignUp() {
                   </>
                 )}
               </button>
-              <button
-                className='cancel'
-                onClick={() => navigate('/signin')}>
+              <button className='cancel' onClick={() => navigate('/signin')}>
                 Cancel
               </button>
             </span>

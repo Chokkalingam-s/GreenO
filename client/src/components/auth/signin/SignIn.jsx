@@ -126,11 +126,11 @@ export default function SignIn() {
 
   return (
     <div className='center full relative z-10'>
-      <div className='glassy center round mx-4 aspect-square w-full md:w-1/4'>
+      <div className='glassy center round mx-4 aspect-square w-full p-2 md:w-1/4'>
         {!showOtpPopup && !showNewPasswordSetup && (
           <form className='center w-full flex-col gap-y-4' onSubmit={handleLogin}>
             <h2 className='head'>Welcome Back!</h2>
-            <div className='w-11/12'>
+            <div className='w-full'>
               <FloatingLabelInput
                 type='email'
                 placeholder='Email'
@@ -186,15 +186,17 @@ export default function SignIn() {
         )}
 
         {showOtpPopup && (
-          <div className='w-11/12'>
+          <div className='center w-full flex-col gap-y-20'>
             <h3 className='head'>Verification</h3>
-            <input
-              type='text'
-              placeholder='Enter OTP'
-              value={otp}
-              onChange={e => setOtp(e.target.value)}
-              required
-            />
+            <div className='w-full'>
+              <FloatingLabelInput
+                type='text'
+                id='otp'
+                placeholder='Enter OTP'
+                value={otp}
+                onChange={e => setOtp(e.target.value)}
+              />
+            </div>
             <span className='center space-x-2'>
               <button onClick={handleVerifyOtp}>Verify OTP</button>
               <button className='cancel' onClick={() => setShowOtpPopup(false)}>
