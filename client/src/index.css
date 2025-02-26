@@ -54,6 +54,9 @@
   .round {
     @apply rounded-2xl;
   }
+  .sh {
+    @apply shadow-xl;
+  }
 }
 .container {
   @apply mx-auto min-h-screen;
@@ -81,10 +84,16 @@ body {
 }
 input,
 textarea,
-select,
-select:disabled {
-  @apply round outline-secondary my-2 w-full border-none bg-transparent px-4 py-2 text-base outline outline-2 -outline-offset-1 hover:shadow-sm focus:outline-transparent;
+select {
+  @apply focus:border-primary hover:border-primary active:border-primary my-2 w-full border-b-2 border-gray-300 bg-transparent px-4 py-2 text-base transition-all duration-200 ease-in-out outline-none focus:border-b-4;
 }
+
+select:disabled,
+input:disabled,
+textarea:disabled {
+  @apply cursor-not-allowed border-none opacity-50;
+}
+
 textarea {
   @apply max-h-60;
 }
@@ -154,6 +163,17 @@ nav a,
 .logout {
   p {
     @apply text-secondary;
+  }
+  &.active,
+  &:hover,
+  &:focus {
+    @apply font-semibold tracking-wide;
+    svg {
+      @apply fill-primary;
+    }
+    p {
+      @apply text-primary;
+    }
   }
 }
 nav {

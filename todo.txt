@@ -1,4 +1,4 @@
- Shanker ToDo:
+ Shanker TODO:
 
 Cg Foundation
   Home page
@@ -19,6 +19,8 @@ Cg Foundation
     6. andha section la iruka card , la arrow button which routes to greeno.cgfoundation portal
     7. Join us button in start and end need to be worked in way it depicts redirectingt to new portal
 
+   TODO:
+      getLocation() on upload
 responsiveness
 
   Features Implementations:
