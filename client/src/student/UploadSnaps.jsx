@@ -1,6 +1,7 @@
 import {useState, useEffect} from 'react'
 import axios from 'axios'
 import {toast} from 'react-toastify'
+import {FloatingLabelInput} from '../components/FloatingLabelInput'
 
 export default function UploadSnaps() {
   const [email] = useState('')
@@ -169,9 +170,7 @@ export default function UploadSnaps() {
               </div>
             )}
             <div className='mt-4 flex items-center justify-end'>
-              <button
-                onClick={() => setCloseModel(false)}
-                disabled={locationDenied}>
+              <button onClick={() => setCloseModel(false)} disabled={locationDenied}>
                 Got It
               </button>
             </div>
@@ -183,7 +182,7 @@ export default function UploadSnaps() {
             <div>
               {!isCaptchaValid && (
                 <div className='flex flex-col'>
-                  <span className='my-2 grid grid-cols-1'>
+                  <span className='my-2'>
                     <span className='center'>
                       Captcha:
                       <input
@@ -191,15 +190,16 @@ export default function UploadSnaps() {
                         name='captcha'
                         value={captcha}
                         disabled
-                        className='text-2xl font-bold opacity-100'
+                        className='text-2xl font-bold'
                       />
                     </span>
-                    <span className='center gap-x-2'>
-                      <input
+                    <span className='center w-full gap-x-2 bg-black'>
+                      <FloatingLabelInput
                         type='text'
-                        placeholder='Enter captcha'
+                        id='captcha'
                         value={captchaInput}
-                        onChange={handleCaptchaInput}
+                        setValue={setCaptchaInput}
+                        placeholder='Enter captcha'
                       />
                       <button onClick={handleVerifyCaptcha}>Verify</button>
                     </span>
@@ -208,20 +208,19 @@ export default function UploadSnaps() {
               )}
               {isCaptchaValid && (
                 <>
-                  <div className='border-secondary glassy center round mt-4 h-64 border-4 border-dashed p-2'>
-                    <label
-                      htmlFor='file-input'
-                      className='bg-secondary round hover:bg-tertiary cursor-pointer px-6 py-3 text-lg font-semibold text-white transition duration-300'>
-                      Choose File
-                    </label>
-                    <input
-                      id='file-input'
-                      type='file'
-                      onChange={handleFileChange}
-                      className='hidden'
-                    />
+                  <div
+                      className='border-secondary bg-secondary/20 round center my-4 cursor-pointer border-2 border-dashed p-2'
+                      onClick={() => document.getElementById('file-input').click()}>
+                      <span>Choose File</span>
+                      <input
+                        id='file-input'
+                        type='file'
+                        onChange={handleFileChange}
+                        className='hidden'
+                        accept='image/*'
+                      />
+                    </div>
                     {file && <p className='ml-4 text-sm text-gray-600'>{file.name}</p>}
-                  </div>
                   <button
                     onClick={handleUpload}
                     disabled={!isUploadEnabled}

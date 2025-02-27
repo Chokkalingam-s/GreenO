@@ -73,7 +73,7 @@ export default function ContactUs() {
         )}
         <span className='float-end flex space-x-2'>
           <button type='submit'>Submit</button>
-          <button type='submit' className='cancel' onClick={() => navigate('/home')}>
+          <button type='submit' className='cancel round sh' onClick={() => navigate('/home')}>
             Cancel
           </button>
         </span>
