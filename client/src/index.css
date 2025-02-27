@@ -85,12 +85,18 @@ body {
 input,
 textarea,
 select {
-  @apply ring-secondary round my-2 w-full overflow-hidden border-none bg-transparent px-4 py-2 text-base ring-2 transition-all duration-150 ease-in-out outline-none;
-  /* &:hover,
-  &:focus,
-  &:active {
-    @apply border-secondary rounded-none border-b-2 border-solid ring-0;
-  } */
+  @apply round my-2 w-full overflow-hidden border-none bg-transparent px-4 py-2 text-base transition-all duration-150 ease-in-out outline-none;
+}
+
+input[type='number']::-webkit-inner-spin-button,
+input[type='number']::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type='number'] {
+  appearance: textfield;
+  -moz-appearance: textfield;
 }
 
 input:-webkit-autofill,
