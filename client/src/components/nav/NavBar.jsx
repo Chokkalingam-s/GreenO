@@ -99,7 +99,7 @@ export default function NavBar() {
           : studentNavItems
 
   return (
-    <header className='glassy fixed top-0 z-50 flex w-full items-center justify-between px-2'>
+    <header className='glassy fixed top-0 z-50 flex w-full items-center justify-between px-2 py-1'>
       <NavLink className='center w-fit px-2' to={homeLink}>
         <img src='/GreenO_Logo.png' alt='App Logo' className='w-14 p-1' />
         <p className='hidden font-medium md:block'>GreenO</p>

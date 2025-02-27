@@ -339,24 +339,28 @@ nav {
   }
 }
 .homePage {
-  @apply relative top-16 mb-32 min-h-screen w-11/12 flex-col md:w-8/12;
+  @apply relative top-16 mb-32 min-h-screen w-11/12 flex-col md:w-7/12;
   section {
     @apply my-4;
-    strong {
-      @apply text-secondary;
-    }
-    img {
-      @apply round transition-transform duration-500 hover:scale-105;
+    span {
+      @apply font-semibold italic;
     }
   }
   .about {
-    @apply glassy round mx-auto grid grid-cols-1 items-center justify-center justify-items-center px-4 md:grid-cols-[70%_30%];
-    span {
+    @apply glassy round mx-auto grid grid-cols-1 items-center justify-center justify-items-center md:grid-cols-[70%_30%];
+    img {
+      @apply round;
+    }
+    div {
+      @apply px-4;
       h2 {
-        @apply head col-span-2 mb-4;
+        @apply col-span-2 mb-4 text-2xl;
       }
       p {
-        @apply text-justify leading-relaxed;
+        @apply leading-relaxed;
+      }
+      ol {
+        @apply my-4 list-inside list-disc;
       }
       li {
         @apply my-4;

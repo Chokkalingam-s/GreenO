@@ -167,7 +167,7 @@ export default function StudentSignUp() {
               placeholder='Password'
               required
             />
-            <span className='center gap-x-2 w-full'>
+            <span className='center w-full gap-x-2'>
               <FloatingLabelSelect
                 id='state'
                 value={formData.state}
