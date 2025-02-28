@@ -1,4 +1,6 @@
-import { NavLink } from 'react-router-dom'
+import {NavLink} from 'react-router-dom'
+import {LogOut} from '../../exp_components'
+import {useAuth} from '../auth/signin/AuthContext'
 
 function commonDashboard(path) {
   return {
@@ -19,6 +21,12 @@ function commonProgress(path) {
 
 const studentNavItems = [
   {
+    path: '/home',
+    viewBox: '0 0 576 512',
+    icon: 'M575.8 255.5c0 18-15 32.1-32 32.1l-32 0 .7 160.2c0 2.7-.2 5.4-.5 8.1l0 16.2c0 22.1-17.9 40-40 40l-16 0c-1.1 0-2.2 0-3.3-.1c-1.4 .1-2.8 .1-4.2 .1L416 512l-24 0c-22.1 0-40-17.9-40-40l0-24 0-64c0-17.7-14.3-32-32-32l-64 0c-17.7 0-32 14.3-32 32l0 64 0 24c0 22.1-17.9 40-40 40l-24 0-31.9 0c-1.5 0-3-.1-4.5-.2c-1.2 .1-2.4 .2-3.6 .2l-16 0c-22.1 0-40-17.9-40-40l0-112c0-.9 0-1.9 .1-2.8l0-69.7-32 0c-18 0-32-14-32-32.1c0-9 3-17 10-24L266.4 8c7-7 15-8 22-8s15 2 21 7L564.8 231.5c8 7 12 15 11 24z',
+    label: 'Home'
+  },
+  {
     path: '/activities',
     viewBox: '0 0 512 512',
     icon: 'M225.8 468.2l-2.5-2.3L48.1 303.2C17.4 274.7 0 234.7 0 192.8l0-3.3c0-70.4 50-130.8 119.2-144C158.6 37.9 198.9 47 231 69.6c9 6.4 17.4 13.8 25 22.3c4.2-4.8 8.7-9.2 13.5-13.3c3.7-3.2 7.5-6.2 11.5-9c0 0 0 0 0 0C313.1 47 353.4 37.9 392.8 45.4C462 58.6 512 119.1 512 189.5l0 3.3c0 41.9-17.4 81.9-48.1 110.4L288.7 465.9l-2.5 2.3c-8.2 7.6-19 11.9-30.2 11.9s-22-4.2-30.2-11.9z',
@@ -29,12 +37,6 @@ const studentNavItems = [
     viewBox: '0 0 640 512',
     icon: 'M144 480C64.5 480 0 415.5 0 336c0-62.8 40.2-116.2 96.2-135.9c-.1-2.7-.2-5.4-.2-8.1c0-88.4 71.6-160 160-160c59.3 0 111 32.2 138.7 80.2C409.9 102 428.3 96 448 96c53 0 96 43 96 96c0 12.2-2.3 23.8-6.4 34.6C596 238.4 640 290.1 640 352c0 70.7-57.3 128-128 128l-368 0zm79-217c-9.4 9.4-9.4 24.6 0 33.9s24.6 9.4 33.9 0l39-39L296 392c0 13.3 10.7 24 24 24s24-10.7 24-24l0-134.1 39 39c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-80-80c-9.4-9.4-24.6-9.4-33.9 0l-80 80z',
     label: 'Upload'
-  },
-  {
-    path: '/home',
-    viewBox: '0 0 576 512',
-    icon: 'M575.8 255.5c0 18-15 32.1-32 32.1l-32 0 .7 160.2c0 2.7-.2 5.4-.5 8.1l0 16.2c0 22.1-17.9 40-40 40l-16 0c-1.1 0-2.2 0-3.3-.1c-1.4 .1-2.8 .1-4.2 .1L416 512l-24 0c-22.1 0-40-17.9-40-40l0-24 0-64c0-17.7-14.3-32-32-32l-64 0c-17.7 0-32 14.3-32 32l0 64 0 24c0 22.1-17.9 40-40 40l-24 0-31.9 0c-1.5 0-3-.1-4.5-.2c-1.2 .1-2.4 .2-3.6 .2l-16 0c-22.1 0-40-17.9-40-40l0-112c0-.9 0-1.9 .1-2.8l0-69.7-32 0c-18 0-32-14-32-32.1c0-9 3-17 10-24L266.4 8c7-7 15-8 22-8s15 2 21 7L564.8 231.5c8 7 12 15 11 24z',
-    label: 'Home'
   },
   {
     path: '/resources',
@@ -83,34 +85,52 @@ const superAdminNavItems = [
   }
 ]
 
-export default function NavBar({ type = 0, role }) {
+export default function NavBar() {
+  const {role} = useAuth()
+  const homeLink = role === 'hod' ? '/department' : role === 'admin' ? '/admin' : '/home'
+
   const navItems =
     role === 'hod'
       ? hodNavItems
       : role === 'admin'
-      ? principalNavItems
-      : role === 'superAdmin'
-      ? superAdminNavItems
-      : studentNavItems
+        ? principalNavItems
+        : role === 'superAdmin'
+          ? superAdminNavItems
+          : studentNavItems
 
   return (
-    <nav
-      className={`glassy round items-center justify-evenly font-medium gap-x-4 p-3 ${
-        type === 0 ? 'hidden md:flex' : 'md:hidden flex fixed bottom-0 w-full'
-      } z-20`}>
-      {navItems.map(({ path, viewBox, icon, label }) => (
-        <NavLink key={path} to={path}>
-          {viewBox && icon ? (
-            <svg
-              xmlns='http://www.w3.org/2000/svg'
-              viewBox={viewBox}
-              className='icon'>
-              <path d={icon}></path>
-            </svg>
-          ) : null}
-          <p>{label}</p>
-        </NavLink>
-      ))}
-    </nav>
+    <header className='glassy fixed top-0 z-50 flex w-full items-center justify-between px-2 py-1'>
+      <NavLink className='center w-fit px-2' to={homeLink}>
+        <img src='/GreenO_Logo.png' alt='App Logo' className='w-14 p-1' />
+        <p className='hidden font-medium md:block'>GreenO</p>
+      </NavLink>
+      <span className='center'>
+        <nav className='z-20 hidden items-center justify-evenly gap-x-4 md:flex'>
+          {navItems.map(({path, viewBox, icon, label}) => (
+            <NavLink key={path} to={path}>
+              {viewBox && icon ? (
+                <svg xmlns='http://www.w3.org/2000/svg' viewBox={viewBox} className='icon'>
+                  <path d={icon}></path>
+                </svg>
+              ) : null}
+              <p>{label}</p>
+            </NavLink>
+          ))}
+        </nav>
+        <LogOut />
+      </span>
+      <nav className='fixed bottom-0 z-20 flex w-full items-center justify-evenly gap-x-4 p-3 font-medium md:hidden'>
+        {navItems.map(({path, viewBox, icon, label}) => (
+          <NavLink key={path} to={path}>
+            {viewBox && icon ? (
+              <svg xmlns='http://www.w3.org/2000/svg' viewBox={viewBox} className='icon'>
+                <path d={icon}></path>
+              </svg>
+            ) : null}
+            <p>{label}</p>
+          </NavLink>
+        ))}
+      </nav>
+    </header>
   )
 }

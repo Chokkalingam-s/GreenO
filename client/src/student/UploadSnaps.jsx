@@ -1,11 +1,11 @@
 import {useState, useEffect} from 'react'
 import axios from 'axios'
 import {toast} from 'react-toastify'
+import {FloatingLabelInput} from '../components/FloatingLabelInput'
 
 export default function UploadSnaps() {
   const [email] = useState('')
   const [file, setFile] = useState(null)
-  const [uploadedImage, setUploadedImage] = useState(null)
   const [captcha, setCaptcha] = useState('')
   const [captchaInput, setCaptchaInput] = useState('')
   const [isCaptchaValid, setIsCaptchaValid] = useState(false)
@@ -15,11 +15,10 @@ export default function UploadSnaps() {
     latitude: '',
     longitude: ''
   })
+  const [locationDenied, setLocationDenied] = useState(false)
   const [closeModal, setCloseModel] = useState(true)
-
   const generateCaptcha = () => {
-    const chars =
-      '0123456789ABCDEFGHJKLMNOPQRSTUVWXYZabcdefghijkmnopq@rstuvwxyz'
+    const chars = '0123456789ABCDEFGHJKLMNOPQRSTUVWXYZabcdefghijkmnopq@rstuvwxyz'
     let captcha = ''
     for (let i = 0; i < 6; i++) {
       captcha += chars[Math.floor(Math.random() * chars.length)]
@@ -54,44 +53,48 @@ export default function UploadSnaps() {
   }
 
   useEffect(() => {
-    const fetchLocation = () => {
-      if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(
-          position => {
+    const fetchLocation = async () => {
+      if (!navigator.geolocation) {
+        toast.error('Geolocation is not supported by this browser.')
+        return
+      }
+
+      try {
+        const permission = await navigator.permissions.query({name: 'geolocation'})
+
+        if (permission.state === 'granted') {
+          navigator.geolocation.getCurrentPosition(position => {
             setLocation({
               latitude: position.coords.latitude,
               longitude: position.coords.longitude
             })
-          },
-          () => {
-            toast.error('Location access denied')
-          }
-        )
-      } else {
-        toast.error('Geolocation is not supported by this browser.')
+            setLocationDenied(false)
+          })
+        } else if (permission.state === 'prompt') {
+          navigator.geolocation.getCurrentPosition(
+            position => {
+              setLocation({
+                latitude: position.coords.latitude,
+                longitude: position.coords.longitude
+              })
+              setLocationDenied(false)
+            },
+            () => {
+              toast.error('Location access denied')
+              setLocationDenied(true)
+            }
+          )
+        } else if (permission.state === 'denied') {
+          toast.error('Location access is blocked. Please enable it in browser settings.')
+          setLocationDenied(true)
+        }
+      } catch (err) {
+        toast.error(`Error checking location permissions. ${err}`)
       }
     }
 
     fetchLocation()
     generateCaptcha()
-
-    const fetchUploadedSnap = async () => {
-      const token = localStorage.getItem('token')
-      try {
-        const response = await axios.get(
-          `${backendUrl}/student-uploaded-snaps`,
-          {
-            headers: {Authorization: `Bearer ${token}`}
-          }
-        )
-        setUploadedImage(response.data)
-      } catch (error) {
-        setUploadedImage(null)
-        console.error('Error fetching uploaded snap:', error)
-      }
-    }
-
-    fetchUploadedSnap()
   }, [])
 
   const handleUpload = async () => {
@@ -112,27 +115,19 @@ export default function UploadSnaps() {
 
     const token = localStorage.getItem('token')
     try {
-      const response = await axios.post(
-        `${backendUrl}/student-upload-snap-page`,
-        formData,
-        {
-          headers: {
-            'Content-Type': 'multipart/form-data',
-            Authorization: `Bearer ${token}`
-          }
+      await axios.post(`${backendUrl}/student-upload-snap-page`, formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+          Authorization: `Bearer ${token}`
         }
-      )
-
+      })
       toast.success('File uploaded successfully!')
-      setUploadedImage(response.data.filePath)
       generateCaptcha()
       setFile(null)
     } catch (error) {
-      if (error.response.status === 403) {
-        toast.error(
-          'You can upload a new image only after 4 months from your last upload.'
-        )
-      } else if (error.response.status === 400) {
+      if (error.response?.status === 403) {
+        toast.error('You can upload a new image only after 4 months from your last upload.')
+      } else if (error.response?.status === 400) {
         toast.error(error.response.data.message)
       } else {
         console.error('Upload error:', error)
@@ -142,37 +137,43 @@ export default function UploadSnaps() {
   }
 
   return (
-    <div className='main relative top-2 p-4 m-4'>
+    <div className='glassy round sh m-4 aspect-square px-4 py-2'>
       <span>
         {closeModal && (
           <>
-            <h1 className='head'>Do&apos;s and Don&apos;ts</h1>
-            <div className='grid md:grid-cols-2 grid-cols-1 justify-evenly gap-4 p-4'>
-              <h3 className='font-semibold text-lg md:col-span-2'>
-                While Uploading the Plant Photo
-              </h3>
-              <span>
-                <h3 className='font-semibold text-lg'>Do&apos;s</h3>
-                <ul className='list-disc'>
-                  <li>Include the Full Plant</li>
-                  <li>Proper Lighting - Day Light</li>
-                  <li>Keep the Same Angle</li>
+            <h1 className='mb-4 text-center text-2xl font-bold'>Guidelines</h1>
+
+            <div className='space-y-6 px-6 py-3'>
+              <h3 className='text-lg font-semibold'>Uploading Plant Photo Guidelines</h3>
+
+              <div>
+                <h3 className='text-lg font-semibold text-green-600'>✅ Do&apos;s</h3>
+                <ul className='list-disc space-y-1 pl-6'>
+                  <li>Capture the full plant</li>
+                  <li>Use natural daylight</li>
+                  <li>Try to keep a consistent angle for better comparison.</li>
                 </ul>
-              </span>
-              <span>
-                <h3 className='font-semibold text-lg'>Don&apos;ts</h3>
-                <ul className='list-disc'>
-                  <li>Upload of Blurry Images</li>
-                  <li>No Filters or Editing</li>
-                  <li>Avoid Different Orientations</li>
+              </div>
+
+              <div>
+                <h3 className='text-lg font-semibold text-red-500'>❌ Don&apos;ts</h3>
+                <ul className='list-disc space-y-1 pl-6'>
+                  <li>Avoid blurry images</li>
+                  <li>No filters or edits</li>
+                  <li>Stick to either portrait or landscape mode</li>
                 </ul>
-              </span>
+              </div>
             </div>
-            <button
-              onClick={() => setCloseModel(false)}
-              className='float-end'>
-              Got It
-            </button>
+            {locationDenied && (
+              <div className='border-secondary sh mt-6 rounded-lg border-2 p-4 text-center'>
+                📍 <strong>Kindly allow location access</strong> to ensure accurate verification.
+              </div>
+            )}
+            <div className='mt-4 flex items-center justify-end'>
+              <button onClick={() => setCloseModel(false)} disabled={locationDenied}>
+                Got It
+              </button>
+            </div>
           </>
         )}
         {!closeModal && (
@@ -181,88 +182,53 @@ export default function UploadSnaps() {
             <div>
               {!isCaptchaValid && (
                 <div className='flex flex-col'>
-                  <span className='grid md:grid-cols-2 grid-cols-1 gap-x-2 my-4'>
-                    <input
-                      type='text'
-                      name='captcha'
-                      value={captcha}
-                      readOnly
-                      className='font-bold'
-                    />
-                    <span className='center gap-x-2'>
+                  <span className='my-2'>
+                    <span className='center'>
+                      Captcha:
                       <input
                         type='text'
-                        placeholder='Enter captcha'
+                        name='captcha'
+                        value={captcha}
+                        disabled
+                        className='text-2xl font-bold'
+                      />
+                    </span>
+                    <span className='center w-full gap-x-2 bg-black'>
+                      <FloatingLabelInput
+                        type='text'
+                        id='captcha'
                         value={captchaInput}
-                        onChange={handleCaptchaInput}
+                        setValue={setCaptchaInput}
+                        placeholder='Enter captcha'
                       />
                       <button onClick={handleVerifyCaptcha}>Verify</button>
                     </span>
-                  </span>
-                  <span className='flex items-center gap-x-6'>
-                    {location.latitude && (
-                      <div className='center gap-6'>
-                        <p>
-                          <b>Latitude:</b> {location.latitude}
-                        </p>
-                        <p>
-                          <b>Longitude:</b> {location.longitude}
-                        </p>
-                      </div>
-                    )}
                   </span>
                 </div>
               )}
               {isCaptchaValid && (
                 <>
-                  <div className='p-2 border-4 border-dashed border-secondary h-64 glassy center round mt-4'>
-                    <label
-                      htmlFor='file-input'
-                      className='cursor-pointer py-3 px-6 font-semibold text-lg bg-secondary text-white round transition duration-300 hover:bg-tertiary'>
-                      Choose File
-                    </label>
-                    <input
-                      id='file-input'
-                      type='file'
-                      onChange={handleFileChange}
-                      className='hidden'
-                    />
-                    {file && (
-                      <p className='text-gray-600 ml-4 text-sm'>
-                        {file.name}
-                      </p>
-                    )}
-                  </div>
+                  <div
+                      className='border-secondary bg-secondary/20 round center my-4 cursor-pointer border-2 border-dashed p-2'
+                      onClick={() => document.getElementById('file-input').click()}>
+                      <span>Choose File</span>
+                      <input
+                        id='file-input'
+                        type='file'
+                        onChange={handleFileChange}
+                        className='hidden'
+                        accept='image/*'
+                      />
+                    </div>
+                    {file && <p className='ml-4 text-sm text-gray-600'>{file.name}</p>}
                   <button
                     onClick={handleUpload}
                     disabled={!isUploadEnabled}
-                    className={`${
-                      isUploadEnabled ? 'text-white' : 'text-gray-200'
-                    }`}>
+                    className={`${isUploadEnabled ? 'text-white' : 'text-gray-200'}`}>
                     Upload
                   </button>
                 </>
               )}
-              <div>
-                <p className='text-xl font-semibold w-full mb-2 col-span-4 text-center'>
-                  Previously Uploaded Image
-                </p>
-                {uploadedImage == null && (
-                  <p className='text-center'>No image uploaded yet.</p>
-                )}
-                <img
-                  src={`${
-                    uploadedImage
-                      ? `${backendUrl}/uploads/` +
-                        uploadedImage.filename
-                      : 'https://placehold.co/600x400'
-                  }`}
-                  alt='Uploaded snap'
-                  className={`w-1/2 mx-auto aspect-video object-contain ${
-                    uploadedImage ? '' : 'opacity-0'
-                  }`}
-                />
-              </div>
             </div>
           </>
         )}

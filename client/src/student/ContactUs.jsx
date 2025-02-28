@@ -1,5 +1,6 @@
 import {useState} from 'react'
 import {useNavigate} from 'react-router-dom'
+import {FloatingLabelInput} from '../components/FloatingLabelInput'
 
 export default function ContactUs() {
   const [problem, setProblem] = useState('')
@@ -7,7 +8,6 @@ export default function ContactUs() {
   const [images, setImages] = useState([])
   const navigate = useNavigate()
   const [preview, setPreview] = useState(false)
-  const backendUrl = import.meta.env.VITE_BACKEND_URL
 
   const handleImageUpload = e => {
     const files = Array.from(e.target.files)
@@ -16,28 +16,31 @@ export default function ContactUs() {
   }
 
   return (
-    <div className='main flex-col relative top-2 p-4 m-4'>
+    <div className='main relative top-2 m-4 flex-col p-4'>
       <h2 className='head'>Contact Us</h2>
+      <p className='my-2'>Have an issue or suggestion? Let us know</p>
       <div>
-        <input
+        <FloatingLabelInput
           type='text'
           id='problem'
           value={problem}
-          onChange={e => setProblem(e.target.value)}
-          placeholder='Enter the problem title'
+          setValue={setProblem}
+          placeholder='Issue'
         />
+
         <textarea
           id='description'
           value={description}
           onChange={e => setDescription(e.target.value)}
-          placeholder='Enter the problem description'
+          placeholder='Description'
           rows='5'
+          className='round border-secondary w-full border-2 border-solid'
         />
-        <label className='text-lg font-medium mb-2'>
+        <label className='mb-2 text-lg font-medium'>
           Images <span className='text-base'>(Optional)</span>
         </label>
         <div
-          className='my-4 p-2 border-2 border-dashed border-secondary glassy round center'
+          className='border-secondary bg-secondary/20 round center my-4 cursor-pointer border-2 border-dashed p-2'
           onClick={() => document.getElementById('file-input').click()}>
           <span>Choose File</span>
           <input
@@ -52,15 +55,15 @@ export default function ContactUs() {
         {preview && (
           <>
             <h2 className='text-lg'>Preview</h2>
-            <div className='overflow-y-auto h-40'>
+            <div className='h-40 overflow-y-auto'>
               {images.length > 0 && (
-                <div className='mt-4 center gap-4 flex-wrap'>
+                <div className='center mt-4 flex-wrap gap-4'>
                   {images.map((img, index) => (
                     <img
                       key={index}
                       src={URL.createObjectURL(img)}
                       alt={`Uploaded ${index + 1}`}
-                      className='w-32 h-32 object-cover round'
+                      className='round h-32 w-32 object-cover'
                     />
                   ))}
                 </div>
@@ -68,12 +71,9 @@ export default function ContactUs() {
             </div>
           </>
         )}
-        <span className='flex space-x-2 float-end'>
+        <span className='float-end flex space-x-2'>
           <button type='submit'>Submit</button>
-          <button
-            type='submit'
-            className='cancel'
-            onClick={() => navigate('/home')}>
+          <button type='submit' className='cancel round sh' onClick={() => navigate('/home')}>
             Cancel
           </button>
         </span>

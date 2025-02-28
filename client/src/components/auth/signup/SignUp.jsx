@@ -3,29 +3,33 @@ import axios from 'axios'
 import {useNavigate} from 'react-router-dom'
 import {departments, states} from './data'
 import {toast} from 'react-toastify'
+import {FloatingLabelInput} from '../../FloatingLabelInput'
+import {FloatingLabelSelect} from '../../FloatingLabelSelect'
 
 const currentYear = new Date().getFullYear()
 const years = Array.from({length: 4}, (_, i) => currentYear + i)
 
 export default function StudentSignUp() {
+  const [name, setName] = useState('')
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+  const [mobileNumber, setMobileNumber] = useState('')
+  const [collegeName, setCollegeName] = useState('')
+  const [collegeRegisterNumber, setCollegeRegisterNumber] = useState('')
+  const [aadharNumber, setAadharNumber] = useState('')
+  const [principalName, setPrincipalName] = useState('')
+  const [pocNumber, setPocNumber] = useState('')
+  const [secEmail, setSecEmail] = useState('')
+  const [dob, setDob] = useState('')
+
   const [formData, setFormData] = useState({
     role: 'student',
-    name: '',
-    email: '',
-    password: '',
-    mobileNumber: '',
     state: '',
     district: '',
-    collegeName: '',
     department: '',
-    collegeRegisterNumber: '',
-    yearOfGraduation: '',
-    aadharNumber: '',
-    principalName: '',
-    pocNumber: '',
-    secEmail: '',
-    dob: ''
+    yearOfGraduation: ''
   })
+
   const [errors, setErrors] = useState({})
   const [otp, setOtp] = useState('')
   const [otpSent, setOtpSent] = useState(false)
@@ -68,8 +72,7 @@ export default function StudentSignUp() {
       newErrors.email = 'Please enter a valid Primary email.'
 
     if (formData.collegeRegisterNumber.length !== 12)
-      newErrors.collegeRegisterNumber =
-        'College register number must be exactly 12 digits.'
+      newErrors.collegeRegisterNumber = 'College register number must be exactly 12 digits.'
 
     if (!formData.dob) newErrors.dob = 'Date of birth is required.'
 
@@ -87,10 +90,7 @@ export default function StudentSignUp() {
 
     try {
       setLoading(true)
-      const response = await axios.post(
-        `${backendUrl}/student-signup`,
-        formData
-      )
+      const response = await axios.post(`${backendUrl}/student-signup`, formData)
       const {token} = response.data
 
       if (token) {
@@ -113,13 +113,10 @@ export default function StudentSignUp() {
   const verifyOtp = async e => {
     e.preventDefault()
     try {
-      const response = await axios.post(
-        `${backendUrl}/verify-otp-process`,
-        {
-          email: formData.email,
-          otp
-        }
-      )
+      const response = await axios.post(`${backendUrl}/verify-otp-process`, {
+        email: formData.email,
+        otp
+      })
       if (response.data.success) {
         localStorage.setItem('token', response.data.token)
         toast.success('OTP verified successfully!')
@@ -133,211 +130,158 @@ export default function StudentSignUp() {
     }
   }
 
+  const handleSelectChange = (key, value) => {
+    setFormData(f => ({...f, [key]: value}))
+  }
+
   return (
-    <div className='container center relative z-20 px-4'>
-      <div className='main'>
-        <img
-          src='/treegrow.png'
-          alt='Tree Grow'
-          className='w-1/2 md:block hidden'
-        />
+    <div className='center relative z-20 container px-4'>
+      <div className='c_main'>
+        <img src='/treegrow.png' alt='Tree Grow' className='hidden w-1/2 md:block' />
         {!otpSent ? (
-          <form onSubmit={handleSubmit} className='md:w-1/2 px-4'>
-            <h2 className='head text-center my-2 md:my-0'>
-              Student Sign Up
-            </h2>
-            <input
+          <form onSubmit={handleSubmit} className='px-4 md:w-1/2'>
+            <h2 className='head my-2 text-center md:my-0'>Student Sign Up</h2>
+            <FloatingLabelInput
               type='text'
               id='name'
-              name='name'
-              value={formData.name}
-              onChange={handleChange}
+              value={name}
+              setValue={setName}
               placeholder='Name'
-              required
             />
-            <input
+            <FloatingLabelInput
               type='email'
               id='email'
               name='email'
-              value={formData.email}
-              onChange={handleChange}
+              value={email}
+              setValue={setEmail}
               placeholder='Email (Primary)'
               required
             />
-            {errors.email && (
-              <small className='error'>{errors.email}</small>
-            )}
-            <input
+            {errors.email && <small className='error'>{errors.email}</small>}
+            <FloatingLabelInput
               type='password'
               id='password'
               name='password'
-              value={formData.password}
-              onChange={handleChange}
+              value={password}
+              setValue={setPassword}
               placeholder='Password'
               required
             />
-
-            <span className='center gap-x-2'>
-              <select
-                type='text'
+            <span className='center w-full gap-x-2'>
+              <FloatingLabelSelect
                 id='state'
-                name='state'
                 value={formData.state}
-                onChange={e => {
-                  const selectedState = e.target.value
-                  const stateIndex =
-                    statesRef.current.indexOf(selectedState)
-
-                  setFormData({
-                    ...formData,
-                    state: selectedState,
-                    district: districtsRef.current[stateIndex][0]
-                  })
-                }}
-                required>
+                setValue={value => handleSelectChange('state', value)}>
                 {statesRef.current.map((state, index) => (
-                  <option value={state} key={index}>
+                  <option key={index} value={state}>
                     {state}
                   </option>
                 ))}
-              </select>
+              </FloatingLabelSelect>
 
-              <select
-                type='text'
+              <FloatingLabelSelect
                 id='district'
-                name='district'
                 value={formData.district}
-                onChange={e => {
-                  setFormData({
-                    ...formData,
-                    district: e.target.value
-                  })
-                }}
-                required>
-                {districtsRef.current[
-                  statesRef.current.indexOf(formData.state)
-                ]?.map((district, index) => (
-                  <option value={district} key={index}>
-                    {district}
-                  </option>
-                ))}
-              </select>
+                setValue={value => handleSelectChange('district', value)}>
+                {districtsRef.current[statesRef.current.indexOf(formData.state)]?.map(
+                  (district, index) => (
+                    <option key={index} value={district}>
+                      {district}
+                    </option>
+                  )
+                )}
+              </FloatingLabelSelect>
             </span>
-
-            <input
+            <FloatingLabelInput
               type='number'
               id='mobileNumber'
               name='mobileNumber'
-              value={formData.mobileNumber}
-              onChange={handleChange}
+              value={mobileNumber}
+              setValue={setMobileNumber}
               maxLength='10'
               placeholder='Mobile Number'
               required
             />
-            {errors.mobileNumber && (
-              <small className='error'>{errors.mobileNumber}</small>
-            )}
-
-            <input
+            {errors.mobileNumber && <small className='error'>{errors.mobileNumber}</small>}
+            <FloatingLabelInput
               type='email'
               id='secEmail'
               name='secEmail'
-              value={formData.secEmail}
-              onChange={handleChange}
+              value={secEmail}
+              setValue={setSecEmail}
               placeholder='Secondary Email'
             />
-            {errors.secEmail && (
-              <small className='error'>{errors.secEmail}</small>
-            )}
-
-            <input
+            {errors.secEmail && <small className='error'>{errors.secEmail}</small>}
+            <FloatingLabelInput
               type='text'
               id='collegeName'
               name='collegeName'
-              value={formData.collegeName}
-              onChange={handleChange}
+              value={collegeName}
+              setValue={setCollegeName}
               placeholder='College Name'
-              required></input>
-
-            {/* <select
-              id='collegeName'
-              name='collegeName'
-              value={formData.collegeName}
-              onChange={handleChange}
               required
-              disabled>
-              {<option value='R.M.K. Engineering College'>
-                R.M.K. Engineering College
-              </option> }
-            </select> */}
-
+            />
             <span className='center gap-x-2'>
-              <select
+              <FloatingLabelSelect
                 id='department'
-                name='department'
                 value={formData.department}
-                onChange={handleChange}
-                required>
+                setValue={value => handleSelectChange('department', value)}>
                 <option value=''>Department ?</option>
                 {departments.map(dept => (
                   <option key={dept} value={dept}>
                     {dept}
                   </option>
                 ))}
-              </select>
-              <select
+              </FloatingLabelSelect>
+
+              <FloatingLabelSelect
                 id='yearOfGraduation'
-                name='yearOfGraduation'
                 value={formData.yearOfGraduation}
-                onChange={handleChange}
-                required>
+                setValue={value => handleSelectChange('yearOfGraduation', value)}>
                 <option value=''>Graduation Year</option>
                 {years.map(year => (
                   <option key={year} value={year}>
                     {year}
                   </option>
                 ))}
-              </select>
+              </FloatingLabelSelect>
             </span>
-            <input
+            <FloatingLabelInput
               type='text'
               id='collegeRegisterNumber'
               name='collegeRegisterNumber'
-              value={formData.collegeRegisterNumber}
-              onChange={handleChange}
+              value={collegeRegisterNumber}
+              setValue={setCollegeRegisterNumber}
               maxLength='12'
               placeholder='College Register Number'
               required
             />
             {errors.collegeRegisterNumber && (
-              <small className='error'>
-                {errors.collegeRegisterNumber}
-              </small>
+              <small className='error'>{errors.collegeRegisterNumber}</small>
             )}
 
-            <input
+            <FloatingLabelInput
               type='date'
               id='dob'
               name='dob'
-              value={formData.dob}
-              onChange={handleChange}
+              value={dob}
+              setValue={setDob}
               required
             />
             {errors.dob && <small className='error'>{errors.dob}</small>}
 
-            <input
+            <FloatingLabelInput
               type='text'
               id='aadharNumber'
               name='aadharNumber'
-              value={formData.aadharNumber}
-              onChange={handleChange}
+              value={aadharNumber}
+              setValue={setAadharNumber}
               maxLength='12'
               placeholder='Aadhar Number'
               required
             />
-            {errors.aadharNumber && (
-              <small className='error'>{errors.aadharNumber}</small>
-            )}
+            {errors.aadharNumber && <small className='error'>{errors.aadharNumber}</small>}
+
             <span className='flex items-center justify-end gap-x-4'>
               <button type='submit' className='center' disabled={loading}>
                 {loading ? (
@@ -348,9 +292,7 @@ export default function StudentSignUp() {
                   </>
                 )}
               </button>
-              <button
-                className='cancel'
-                onClick={() => navigate('/signin')}>
+              <button className='cancel' onClick={() => navigate('/signin')}>
                 Cancel
               </button>
             </span>
@@ -358,13 +300,13 @@ export default function StudentSignUp() {
         ) : (
           <form onSubmit={verifyOtp}>
             <label htmlFor='otp'>Enter OTP sent to your email</label>
-            <input
+            <FloatingLabelInput
               type='text'
               id='otp'
               value={otp}
-              onChange={e => setOtp(e.target.value)}
+              setValue={setOtp}
               maxLength='6'
-              required
+              placeholder='Aadhar Number'
             />
             <button type='submit' className='float-end'>
               Verify

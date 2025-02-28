@@ -1,9 +1,4 @@
-import {
-  BrowserRouter as Router,
-  Route,
-  Routes,
-  Navigate
-} from 'react-router-dom'
+import {BrowserRouter as Router, Route, Routes, Navigate} from 'react-router-dom'
 import {Suspense} from 'react'
 import {
   SignIn,
@@ -32,12 +27,7 @@ import {
 import {ToastContainer} from 'react-toastify'
 import {useAuth} from './components/auth/signin/AuthContext'
 
-const ProtectedRouteWrapper = ({
-  children,
-  isAuthenticated,
-  role,
-  allowedRoles
-}) => (
+const ProtectedRouteWrapper = ({children, isAuthenticated, role, allowedRoles}) => (
   <ProtectedRoute isAuthenticated={isAuthenticated}>
     {allowedRoles === role ? children : <Navigate to='/' replace />}
   </ProtectedRoute>
@@ -104,10 +94,7 @@ export default function App() {
                 </ProtectedRouteWrapper>
               }>
               <Route path='/department' element={<DepartmentHome />} />
-              <Route
-                path='/department-progress'
-                element={<DepartmentProgress />}
-              />
+              <Route path='/department-progress' element={<DepartmentProgress />} />
               <Route path='/report' element={<OverallStatus />} />
             </Route>
 
@@ -121,10 +108,7 @@ export default function App() {
                 </ProtectedRouteWrapper>
               }>
               <Route path='/dashboard' element={<SuperDashBoard />} />
-              <Route
-                path='/overall-progress'
-                element={<SuperProgress />}
-              />
+              <Route path='/overall-progress' element={<SuperProgress />} />
               <Route path='/statistics' element={<Statistics />} />
             </Route>
           </Routes>

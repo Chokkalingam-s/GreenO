@@ -1,5 +1,5 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
-import { GreenO, Home, NavBar } from './exp_comp'
+import { About, Contact, GreenO, Home, NavBar } from './exp_comp'
 
 export default function App() {
   return (
@@ -8,6 +8,8 @@ export default function App() {
       <Routes>
         <Route path='/' element={<Home />} />
         <Route path='/OneStudentOneTree' element={<GreenO />} />
+        <Route path='/about' element={<About />} />
+        <Route path='/contact' element={<Contact />} />
       </Routes>
     </Router>
   )
