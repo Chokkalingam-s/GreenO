@@ -39,9 +39,7 @@ export default function StudentHome() {
 
       <section className='about'>
         <div>
-          <h2>
-            About <span className='font-semibold italic'>GreenO</span>
-          </h2>
+          <h2>About GreenO</h2>
           <p>
             The <span>Green O Initiative</span> blends education with environmental sustainability.
             By planting and nurturing trees, students contribute to ecological conservation and

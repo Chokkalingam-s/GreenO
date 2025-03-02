@@ -1,15 +1,39 @@
+import {useEffect, useCallback} from 'react'
+
 export default function Modal({src, onClose}) {
+  // Handle closing on Escape key press
+  const handleKeyDown = useCallback(
+    e => {
+      if (e.key === 'Escape') onClose()
+    },
+    [onClose]
+  )
+
+  useEffect(() => {
+    document.addEventListener('keydown', handleKeyDown)
+    return () => document.removeEventListener('keydown', handleKeyDown)
+  }, [handleKeyDown])
+
   return (
     <>
       {src && (
-        <div className='fixed inset-0 flex items-center justify-center bg-black/40'>
-          <div className='glassy round fixed top-1/2 left-1/2 flex aspect-video w-11/12 -translate-x-1/2 -translate-y-1/2 flex-col items-center md:w-1/2'>
-            <div className='aspect-square w-8/12'>
-              <img src={src} className='h-full w-full object-contain' />
-            </div>
-            <button onClick={onClose} className='cancel absolute right-2 bottom-0'>
-              Cancel
+        <div
+          className='fixed inset-0 flex items-center justify-center bg-black/70 backdrop-blur-sm'
+          onClick={onClose}>
+          <div
+            className='round glassy relative w-11/12 max-w-3xl p-4 shadow-lg md:w-1/2'
+            onClick={e => e.stopPropagation()}>
+            <button onClick={onClose} className='cancel test absolute -top-3 -right-3'>
+              <img src='/xmark-solid.svg' alt='Close' className='h-5 w-5' />
             </button>
+
+            <div className='flex items-center justify-center'>
+              <img
+                src={src}
+                alt='Modal Content'
+                className='round max-h-[75vh] w-full object-contain'
+              />
+            </div>
           </div>
         </div>
       )}

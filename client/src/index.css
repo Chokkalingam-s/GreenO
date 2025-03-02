@@ -36,13 +36,13 @@
     @apply w-11/12;
   }
   .btn {
-    @apply aspect-square w-6 rounded-full;
+    @apply w-8 rounded-full px-2;
     img {
-      @apply w-10;
+      @apply m-0;
     }
   }
   .cancel {
-    @apply center sh bg-red-500 px-1;
+    @apply center h-8 w-8 rounded-full bg-red-500 transition;
   }
   .cancel:hover,
   .cancel:focus,
@@ -150,15 +150,15 @@ select:disabled {
   }
 }
 
-button:not(.cancel) {
-  @apply center round text-primary px-2 py-1 text-base transition-shadow;
+button:not(.cancel, .test) {
+  @apply center round text-primary sh min-h-10 min-w-20 px-2 py-1 text-base transition-shadow;
   touch-action: manipulation;
   will-change: box-shadow, transform;
 
   &:hover,
   &:focus,
   &:active {
-    box-shadow: #2d234233 0 6px 8px;
+    @apply shadow-md;
     transform: translateY(-2px);
   }
 
@@ -168,13 +168,12 @@ button:not(.cancel) {
     }
 
     &:not(.cancel, .logout) {
-      @apply bg-secondary/20 outline outline-2 outline-offset-2 outline-transparent backdrop-blur-md transition-all duration-200;
+      @apply bg-secondary/20 outline outline-2 outline-offset-2 outline-transparent backdrop-blur-md transition-all duration-150;
 
       &:hover,
       &:focus,
       &:active {
-        @apply outline-secondary -translate-y-1;
-        box-shadow: #2d234233 0 8px 12px;
+        @apply outline-secondary;
       }
     }
   }
@@ -186,13 +185,18 @@ button:not(.cancel) {
     &:hover,
     &:focus,
     &:active {
-      @apply translate-y-0 border-none shadow-none outline-none;
+      @apply border-none shadow-none outline-none;
     }
   }
 }
 article .banner {
   @apply round aspect-video h-56 object-cover;
 }
+
+.toastBody {
+  font-family: 'Poppins', serif;
+}
+
 .list {
   li {
     @apply flex items-center;

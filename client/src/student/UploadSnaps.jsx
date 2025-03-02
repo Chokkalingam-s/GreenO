@@ -1,55 +1,28 @@
 import {useState, useEffect} from 'react'
 import axios from 'axios'
 import {toast} from 'react-toastify'
-import {FloatingLabelInput} from '../components/FloatingLabelInput'
+import {Captcha} from './Captcha'
 
 export default function UploadSnaps() {
   const [email] = useState('')
   const [file, setFile] = useState(null)
-  const [captcha, setCaptcha] = useState('')
-  const [captchaInput, setCaptchaInput] = useState('')
   const [isCaptchaValid, setIsCaptchaValid] = useState(false)
   const [isUploadEnabled, setIsUploadEnabled] = useState(false)
   const backendUrl = import.meta.env.VITE_BACKEND_URL
-  const [location, setLocation] = useState({
-    latitude: '',
-    longitude: ''
-  })
+  const [location, setLocation] = useState({latitude: '', longitude: ''})
   const [locationDenied, setLocationDenied] = useState(false)
   const [closeModal, setCloseModel] = useState(true)
-  const generateCaptcha = () => {
-    const chars = '0123456789ABCDEFGHJKLMNOPQRSTUVWXYZabcdefghijkmnopq@rstuvwxyz'
-    let captcha = ''
-    for (let i = 0; i < 6; i++) {
-      captcha += chars[Math.floor(Math.random() * chars.length)]
-    }
-    setCaptcha(captcha)
-    setCaptchaInput('')
-    setIsCaptchaValid(false)
-    setIsUploadEnabled(false)
-  }
 
   const handleFileChange = e => {
-    setFile(e.target.files[0])
-    validateUpload(e.target.files[0], isCaptchaValid)
+    const selectedFile = e.target.files[0]
+    if (selectedFile) {
+      setFile(selectedFile)
+      validateUpload(selectedFile, isCaptchaValid)
+    }
   }
-
-  const handleCaptchaInput = e => setCaptchaInput(e.target.value)
 
   const validateUpload = (selectedFile, captchaIsValid) => {
-    if (selectedFile && captchaIsValid) setIsUploadEnabled(true)
-    else setIsUploadEnabled(false)
-  }
-
-  const handleVerifyCaptcha = () => {
-    if (captchaInput === captcha) {
-      toast.success('Captcha verified successfully!')
-      setIsCaptchaValid(true)
-      validateUpload(file, true)
-    } else {
-      toast.error('Captcha is incorrect. Please try again.')
-      setIsCaptchaValid(false)
-    }
+    setIsUploadEnabled(!!(selectedFile && captchaIsValid))
   }
 
   useEffect(() => {
@@ -60,52 +33,37 @@ export default function UploadSnaps() {
       }
 
       try {
-        const permission = await navigator.permissions.query({name: 'geolocation'})
-
-        if (permission.state === 'granted') {
-          navigator.geolocation.getCurrentPosition(position => {
-            setLocation({
-              latitude: position.coords.latitude,
-              longitude: position.coords.longitude
-            })
-            setLocationDenied(false)
-          })
-        } else if (permission.state === 'prompt') {
-          navigator.geolocation.getCurrentPosition(
-            position => {
-              setLocation({
-                latitude: position.coords.latitude,
-                longitude: position.coords.longitude
-              })
-              setLocationDenied(false)
-            },
-            () => {
-              toast.error('Location access denied')
-              setLocationDenied(true)
-            }
-          )
-        } else if (permission.state === 'denied') {
-          toast.error('Location access is blocked. Please enable it in browser settings.')
-          setLocationDenied(true)
-        }
+        navigator.permissions.query({name: 'geolocation'}).then(permission => {
+          if (permission.state === 'granted' || permission.state === 'prompt') {
+            navigator.geolocation.getCurrentPosition(
+              position => {
+                setLocation({
+                  latitude: position.coords.latitude,
+                  longitude: position.coords.longitude
+                })
+                setLocationDenied(false)
+              },
+              () => {
+                toast.error('Location access denied')
+                setLocationDenied(true)
+              }
+            )
+          } else {
+            toast.error('Location access is blocked. Please enable it in browser settings.')
+            setLocationDenied(true)
+          }
+        })
       } catch (err) {
-        toast.error(`Error checking location permissions. ${err}`)
+        toast.error(`Error checking location permissions: ${err.message}`)
       }
     }
 
     fetchLocation()
-    generateCaptcha()
   }, [])
 
   const handleUpload = async () => {
-    if (!file) {
-      toast.error('Please select a file to upload.')
-      return
-    }
-    if (!isCaptchaValid) {
-      toast.error('Captcha is incorrect. Please try again.')
-      return
-    }
+    if (!file) return toast.error('Please select a file to upload.')
+    if (!isCaptchaValid) return toast.error('Captcha is incorrect. Please try again.')
 
     const formData = new FormData()
     formData.append('email', email)
@@ -113,39 +71,36 @@ export default function UploadSnaps() {
     formData.append('latitude', location.latitude)
     formData.append('longitude', location.longitude)
 
-    const token = localStorage.getItem('token')
     try {
       await axios.post(`${backendUrl}/student-upload-snap-page`, formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
-          Authorization: `Bearer ${token}`
+          Authorization: `Bearer ${localStorage.getItem('token')}`
         }
       })
       toast.success('File uploaded successfully!')
-      generateCaptcha()
       setFile(null)
     } catch (error) {
-      if (error.response?.status === 403) {
-        toast.error('You can upload a new image only after 4 months from your last upload.')
-      } else if (error.response?.status === 400) {
-        toast.error(error.response.data.message)
+      if (error.response) {
+        const {status, data} = error.response
+        if (status === 403)
+          toast.error('You can upload a new image only after 4 months from your last upload.')
+        else if (status === 400) toast.error(data.message || 'Bad request.')
+        else toast.error('Error uploading file. Please try again.')
       } else {
-        console.error('Upload error:', error)
-        toast.error('Error uploading file. Please try again.')
+        toast.error('Network error. Please check your connection.')
       }
     }
   }
 
   return (
-    <div className='glassy round sh m-4 aspect-square px-4 py-2'>
+    <div className='glassy round sh m-4 min-w-3/12 aspect-square px-4 py-2'>
       <span>
-        {closeModal && (
-          <>
+        {closeModal ? (
+          <div className='mt-6'>
             <h1 className='mb-4 text-center text-2xl font-bold'>Guidelines</h1>
-
             <div className='space-y-6 px-6 py-3'>
               <h3 className='text-lg font-semibold'>Uploading Plant Photo Guidelines</h3>
-
               <div>
                 <h3 className='text-lg font-semibold text-green-600'>✅ Do&apos;s</h3>
                 <ul className='list-disc space-y-1 pl-6'>
@@ -154,7 +109,6 @@ export default function UploadSnaps() {
                   <li>Try to keep a consistent angle for better comparison.</li>
                 </ul>
               </div>
-
               <div>
                 <h3 className='text-lg font-semibold text-red-500'>❌ Don&apos;ts</h3>
                 <ul className='list-disc space-y-1 pl-6'>
@@ -170,66 +124,50 @@ export default function UploadSnaps() {
               </div>
             )}
             <div className='mt-4 flex items-center justify-end'>
-              <button onClick={() => setCloseModel(false)} disabled={locationDenied}>
+              <button onClick={() => setCloseModel(false)} disabled={false}>
                 Got It
               </button>
             </div>
-          </>
-        )}
-        {!closeModal && (
+          </div>
+        ) : (
           <>
             <h2 className='head'>Upload Image</h2>
-            <div>
-              {!isCaptchaValid && (
-                <div className='flex flex-col'>
-                  <span className='my-2'>
-                    <span className='center'>
-                      Captcha:
-                      <input
-                        type='text'
-                        name='captcha'
-                        value={captcha}
-                        disabled
-                        className='text-2xl font-bold'
-                      />
-                    </span>
-                    <span className='center w-full gap-x-2 bg-black'>
-                      <FloatingLabelInput
-                        type='text'
-                        id='captcha'
-                        value={captchaInput}
-                        setValue={setCaptchaInput}
-                        placeholder='Enter captcha'
-                      />
-                      <button onClick={handleVerifyCaptcha}>Verify</button>
-                    </span>
-                  </span>
+            {!isCaptchaValid ? (
+              <Captcha onVerify={setIsCaptchaValid} />
+            ) : (
+              <div>
+                <div
+                  className='border-secondary bg-secondary/20 round center my-4 cursor-pointer border-2 border-dashed p-2'
+                  onClick={() => document.getElementById('file-input').click()}>
+                  <span>Choose File</span>
+                  <input
+                    id='file-input'
+                    type='file'
+                    onChange={handleFileChange}
+                    className='hidden'
+                    accept='image/*'
+                  />
                 </div>
-              )}
-              {isCaptchaValid && (
-                <>
-                  <div
-                      className='border-secondary bg-secondary/20 round center my-4 cursor-pointer border-2 border-dashed p-2'
-                      onClick={() => document.getElementById('file-input').click()}>
-                      <span>Choose File</span>
-                      <input
-                        id='file-input'
-                        type='file'
-                        onChange={handleFileChange}
-                        className='hidden'
-                        accept='image/*'
-                      />
-                    </div>
-                    {file && <p className='ml-4 text-sm text-gray-600'>{file.name}</p>}
+                {file && (
+                  <div className='mt-2 ml-4'>
+                    <img
+                      src={URL.createObjectURL(file)}
+                      alt='Preview'
+                      className='mx-auto mt-2 h-48 w-48 rounded-md object-contain'
+                    />
+                    <p className='my-4 text-sm'>{file.name}</p>
+                  </div>
+                )}
+                <span className='flex items-center justify-end'>
                   <button
                     onClick={handleUpload}
                     disabled={!isUploadEnabled}
-                    className={`${isUploadEnabled ? 'text-white' : 'text-gray-200'}`}>
+                    className={isUploadEnabled ? 'text-white' : 'text-gray-200'}>
                     Upload
                   </button>
-                </>
-              )}
-            </div>
+                </span>
+              </div>
+            )}
           </>
         )}
       </span>

@@ -44,6 +44,7 @@ export default function App() {
         newestOnTop={true}
         hideProgressBar
         theme='dark'
+        bodyClassName='toastBody'
       />
       <SplashWithDelay>
         <Suspense fallback={<Splash />}>
@@ -64,8 +65,8 @@ export default function App() {
               }>
               <Route path='/home' element={<About />} />
               <Route path='/activities' element={<Activity />} />
-              <Route path='/upload_snap' element={<UploadSnaps />} />
-              <Route path='/resources' element={<Resource />} />
+              <Route path='/upload' element={<UploadSnaps />} />
+              <Route path='/guide' element={<Resource />} />
               <Route path='/profile' element={<Profile />} />
               <Route path='/contact_us' element={<ContactUs />} />
             </Route>
