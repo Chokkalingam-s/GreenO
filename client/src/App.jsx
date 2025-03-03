@@ -14,7 +14,7 @@ import {
   Splash,
   Profile,
   Layout,
-  About,
+  Home,
   Activity,
   OverallStatus,
   SplashWithDelay,
@@ -63,12 +63,12 @@ export default function App() {
                   <Layout />
                 </ProtectedRouteWrapper>
               }>
-              <Route path='/home' element={<About />} />
+              <Route path='/home' element={<Home />} />
               <Route path='/activities' element={<Activity />} />
               <Route path='/upload' element={<UploadSnaps />} />
               <Route path='/guide' element={<Resource />} />
               <Route path='/profile' element={<Profile />} />
-              <Route path='/contact_us' element={<ContactUs />} />
+              <Route path='/contact' element={<ContactUs />} />
             </Route>
 
             <Route

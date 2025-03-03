@@ -24,9 +24,9 @@ export default function StudentHome() {
               : ' urgent actions to combat climate change and foster resilience.'}
           </p>
         </section>
-        <section className='mx-auto grid grid-cols-1 items-center justify-center justify-items-center md:grid-cols-[78%_20%]'>
+        <section className='mx-auto grid grid-cols-1 items-center justify-center justify-items-center md:grid-cols-[78%_20%] about'>
           <div>
-            <h1 className='mb-4 text-2xl font-semibold'>Green O Initiative</h1>
+            <h2>Green O Initiative</h2>
             <p className='text-md leading-relaxed'>
               Empowering students to nurture and grow trees as part of their academic journey.
               Together, let&apos;s make the planet greener, cleaner, and healthier—one student, one

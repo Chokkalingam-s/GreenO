@@ -2,7 +2,7 @@ import {lazy} from 'react'
 const SignIn = lazy(() => import('./components/auth/signin/SignIn'))
 const StudentSignUp = lazy(() => import('./components/auth/signup/SignUp'))
 const AdminSignUp = lazy(() => import('./components/auth/signup/AdminSignUp'))
-const About = lazy(() => import('./student/About'))
+const Home = lazy(() => import('./student/Home'))
 const AdminHome = lazy(() => import('./principal/AdminHome'))
 const Activity = lazy(() => import('./student/Activity'))
 const UploadSnaps = lazy(() => import('./student/UploadSnaps'))
@@ -47,7 +47,7 @@ export {
   SignIn,
   StudentSignUp,
   AdminSignUp,
-  About,
+  Home,
   AdminHome,
   Activity,
   UploadSnaps,

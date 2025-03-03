@@ -1,0 +1,50 @@
+import { createContext, useContext, useEffect, useState } from 'react'
+
+const AuthContext = createContext()
+
+export const useAuth = () => useContext(AuthContext)
+
+export const AuthProvider = ({ children }) => {
+  const [isAuthenticated, setIsAuthenticated] = useState(false)
+  const [role, setRole] = useState('')
+  const backendUrl = import.meta.env.VITE_BACKEND_URL
+
+  const verifyToken = async token => {
+    try {
+      const response = await fetch(`${backendUrl}/verify_token.php`, {
+        method: 'GET',
+        headers: { Authorization: `Bearer ${token}` }
+      })
+      const data = await response.json()
+
+      if (data.authenticated) {
+        setIsAuthenticated(true)
+        setRole(data.user.role)
+      } else {
+        localStorage.removeItem('token')
+        setIsAuthenticated(false)
+        setRole('')
+      }
+    } catch (error) {
+      console.error('Token verification failed:', error)
+      localStorage.removeItem('token')
+      setIsAuthenticated(false)
+      setRole('')
+    }
+  }
+
+  useEffect(() => {
+    const token = localStorage.getItem('token')
+    if (token) {
+      verifyToken(token)
+    }
+  }, [])
+
+  return (
+    <AuthContext.Provider
+      value={{ isAuthenticated, setIsAuthenticated, role, setRole }}>
+      {children}
+    </AuthContext.Provider>
+  )
+}
+l

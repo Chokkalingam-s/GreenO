@@ -1,7 +1,6 @@
 import {useEffect, useCallback} from 'react'
 
 export default function Modal({src, onClose}) {
-  // Handle closing on Escape key press
   const handleKeyDown = useCallback(
     e => {
       if (e.key === 'Escape') onClose()
@@ -23,7 +22,7 @@ export default function Modal({src, onClose}) {
           <div
             className='round glassy relative w-11/12 max-w-3xl p-4 shadow-lg md:w-1/2'
             onClick={e => e.stopPropagation()}>
-            <button onClick={onClose} className='cancel test absolute -top-3 -right-3'>
+            <button onClick={onClose} className='cancel btn_r absolute -top-3 -right-3'>
               <img src='/xmark-solid.svg' alt='Close' className='h-5 w-5' />
             </button>
 
