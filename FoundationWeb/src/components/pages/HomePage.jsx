@@ -8,23 +8,21 @@ export default function HomePage() {
   const navigate = useNavigate()
   return (
     <>
-      <section className='h-screen flex'>
-        <span className='absolute top-1/2 -translate-y-1/2 md:left-20 space-y-4 z-20'>
-          <h1 className='text-5xl font-bold mb-10'>CG Foundation</h1>
+      <section className='flex h-screen'>
+        <span className='absolute top-1/2 z-20 -translate-y-1/2 space-y-4 md:left-20'>
+          <h1 className='mb-10 text-5xl font-bold'>CG Foundation</h1>
         </span>
         <img
           src='/home1.svg'
           alt='foundation background'
-          className='md:w-9/12 md:h-4/5 absolute bottom-0 md:-bottom-6 md:-right-60 object-cover'
+          className='absolute bottom-0 object-cover md:-right-60 md:-bottom-6 md:h-4/5 md:w-9/12'
         />
       </section>
 
       <section>
-        <h2 className='text-3xl font-bold mb-8'>Domains of Change</h2>
-        <p className='text-lg mb-12'>
-          We believe in targeted actions to maximize impact.
-        </p>
-        <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8'>
+        <h2 className='mb-8 text-3xl font-bold'>Domains of Change</h2>
+        <p className='mb-12 text-lg'>We believe in targeted actions to maximize impact.</p>
+        <div className='grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3'>
           {focusAreas.map((area, index) => (
             <Card
               key={index}
@@ -40,8 +38,8 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className='timeline md:grid hidden'>
-        <div className='relative w-full grid grid-cols-3'>
+      <section className='timeline hidden md:grid'>
+        <div className='relative grid w-full grid-cols-3'>
           <div className='hidden md:inline'></div>
           <Item
             classN='top'
@@ -73,7 +71,7 @@ export default function HomePage() {
         <img src='/mission&vision.svg' alt='icon for mission vision' />
       </section>
 
-      <section className='timeline md:grid hidden last'>
+      <section className='timeline last hidden md:grid'>
         <div className='grid md:grid-cols-[20%_26%_28%_26%]'>
           <div className='hidden md:inline'></div>
           <div className='hidden md:inline'></div>
@@ -91,8 +89,8 @@ export default function HomePage() {
             GreenO <br />
             <span className='text-xl'>One Student One Tree</span>
             <button
-              className='absolute left-0 -bottom-20 text-xl font-semibold'
-              onClick={() => navigate('/OneStudentOneTree')}>
+              className='absolute -bottom-20 left-0 text-xl font-semibold'
+              onClick={() => navigate('/OSOT')}>
               Join Us
             </button>
             <div className='line'></div>

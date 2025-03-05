@@ -99,7 +99,7 @@ export default function Profile() {
           <path d={path}></path>
         </svg>
         <div>
-          <p className='text-sm uppercase text-secondary font-bold'>{label}</p>
+          <p className='text-sm uppercase'>{label}</p>
           <p className='font-medium'>{value}</p>
         </div>
       </li>
@@ -112,7 +112,7 @@ export default function Profile() {
         <p>Loading...</p>
       ) : (
         <div className='center relative top-16 mb-36 flex-col md:top-0 md:mb-0'>
-          <h3 className='mb-2 w-full pl-6 text-2xl font-bold tracking-wide md:col-span-2 md:text-center'>
+          <h3 className='mb-2 w-full pl-6 text-2xl md:col-span-2 md:text-center'>
             {studentDetails?.name}&apos;s Profile
           </h3>
 
@@ -120,7 +120,7 @@ export default function Profile() {
             <div className='order-2 md:order-none'>
               <div className='center profile_tab flex-col gap-y-4'>
                 <div>
-                  <h4 className='bdr text-secondary'>Personal Details</h4>
+                  <h4 className='bdr'>Personal Details</h4>
                   <ul className='space-y-2'>
                     <DetailItem label='Name' value={studentDetails.name} icon='person' />
                     <DetailItem label='Email' value={studentDetails.email} icon='email' />
@@ -175,14 +175,12 @@ export default function Profile() {
                   cornerRadius='50%'
                   sx={{
                     [`& .${gaugeClasses.valueText}`]: {
-                      fontSize: '1.8rem',
+                      fontSize: '1.6rem',
                       fontWeight: 'bold'
                     },
-                    [`& .${gaugeClasses.valueText} tspan`]: {
-                      fill: '#E3F6E5'
-                    },
-                    [`& .MuiGauge-bar`]: {fill: '#E3F6E5'},
-                    [`& .${gaugeClasses.valueArc}`]: {fill: '#E3F6E5'}
+                    [`& .MuiGauge-bar`]: {fill: '#4caf50'},
+                    [`& .${gaugeClasses.valueArc}`]: {fill: '#aad8b0'},
+                    [`& .MuiGauge-background`]: {fill: '#e0e0e0'}
                   }}
                   text={() => `${progressPercentage1} / ${totalImages}`}
                 />

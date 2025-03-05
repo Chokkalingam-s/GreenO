@@ -1,9 +1,10 @@
-import {useEffect, useState} from 'react'
+import {useState} from 'react'
 import {useNavigate} from 'react-router-dom'
 import axios from 'axios'
 import {useAuth} from './AuthContext'
 import {toast} from 'react-toastify'
 import {FloatingLabelInput} from '../../FloatingLabelInput'
+import {EyeIcon} from './EyeIcon'
 
 export default function SignIn() {
   const navigate = useNavigate()
@@ -15,11 +16,13 @@ export default function SignIn() {
   const [newPassword, setNewPassword] = useState('')
   const [resetEmail, setResetEmail] = useState('')
   const [showNewPasswordSetup, setShowNewPasswordSetup] = useState(false)
-  const [passwordToggle, setPasswordToggle] = useState(false)
+  const [isLoading, setIsLoading] = useState(false)
   const backendUrl = import.meta.env.VITE_BACKEND_URL
+  const [passwordVisible, setPasswordVisible] = useState(false)
 
   const handleLogin = async e => {
     e.preventDefault()
+    setIsLoading(true)
     try {
       const response = await axios.post(`${backendUrl}/student-signin`, {
         email,
@@ -44,6 +47,8 @@ export default function SignIn() {
       }
     } catch (error) {
       toast.error(error.response?.data?.message || 'Login failed')
+    } finally {
+      setIsLoading(false)
     }
   }
 
@@ -112,21 +117,13 @@ export default function SignIn() {
     }
   }
 
-  const handlePasswordToggle = e => {
-    setPasswordToggle(prevState => {
-      const newPasswordToggle = !prevState
-      const src = e.target.src
-      const newSrc = newPasswordToggle
-        ? src.replace('regular', 'slash-regular')
-        : src.replace('slash-regular', 'regular')
-      e.target.src = newSrc
-      return newPasswordToggle
-    })
+  const handlePasswordToggle = () => {
+    setPasswordVisible(prev => !prev)
   }
 
   return (
     <div className='center full relative z-10'>
-      <div className='glassy center round mx-4 aspect-square w-full p-2 md:w-1/4'>
+      <div className='glassy center round sh outline-secondary mx-4 aspect-square w-full p-2 outline outline-2 outline-offset-2 md:w-3/12'>
         {!showOtpPopup && !showNewPasswordSetup && (
           <form className='center w-full flex-col gap-y-4' onSubmit={handleLogin}>
             <h2 className='head'>Welcome Back!</h2>
@@ -143,29 +140,26 @@ export default function SignIn() {
                     placeholder='Password'
                     value={password}
                     setValue={setPassword}
-                    type={passwordToggle ? 'text' : 'password'}
+                    type={passwordVisible ? 'text' : 'password'}
                   />
-                  <img
-                    src='/eye-regular.svg'
-                    alt='Toggle visibility'
-                    onClick={handlePasswordToggle}
-                    className='icon absolute top-1/2 right-0 -translate-y-1/2 cursor-pointer'
-                  />
+                  <EyeIcon isVisible={passwordVisible} onClick={handlePasswordToggle} />
                 </span>
-                <p
-                  className='text-primary cursor-pointer text-end text-sm font-medium tracking-wider'
-                  onClick={handleForgotPassword}>
+                <p className='_link text-end text-xs' onClick={handleForgotPassword}>
                   Forgot Password?
                 </p>
               </div>
             </div>
-
             <span className='flex items-center justify-center'>
-              <button type='submit'>Sign in</button>
+              <button
+                type='submit'
+                disabled={isLoading}
+                className={isLoading ? 'cursor-not-allowed opacity-50' : ''}>
+                {isLoading ? 'Signing in...' : 'Sign in'}
+              </button>
             </span>
 
             <div className='mx-auto flex w-11/12 items-center justify-center gap-x-2'>
-              <div className='line'></div>
+              <hr className='line' />
               <p
                 className='text-primary text-sm font-bold'
                 style={{textShadow: '0px 2px 2px rgba(0,0,0,0.4)'}}>
@@ -176,17 +170,15 @@ export default function SignIn() {
 
             <p className='mt-2 text-center'>
               New to GreenO
-              <strong
-                className='inline cursor-pointer pl-2 underline'
-                onClick={() => navigate('/signup')}>
+              <p className='_link inline' onClick={() => navigate('/signup')}>
                 Join Now
-              </strong>
+              </p>
             </p>
           </form>
         )}
 
         {showOtpPopup && (
-          <div className='center w-full flex-col gap-y-20'>
+          <div className='center animate-fadeIn w-full flex-col gap-y-20'>
             <h3 className='head'>Verification</h3>
             <div className='w-full'>
               <FloatingLabelInput
@@ -207,7 +199,7 @@ export default function SignIn() {
         )}
 
         {showNewPasswordSetup && (
-          <div className='w-11/12'>
+          <div className='animate-fadeIn w-11/12'>
             <h3 className='head'>Set New Password</h3>
             <input
               type='password'

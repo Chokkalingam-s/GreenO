@@ -30,7 +30,7 @@ export default function Activity() {
       {images.length === 0 ? (
         <p>No images uploaded yet.</p>
       ) : (
-        <div className='round grid grid-cols-2 gap-2 md:grid-cols-4'>
+        <div className='round grid grid-cols-2 gap-2 overflow-y-auto md:grid-cols-4'>
           {images.map((image, index) => (
             <div key={image.id} onClick={() => setModalSrc(`${backendUrl}/${image.filePath}`)}>
               <img

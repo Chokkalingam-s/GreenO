@@ -4,10 +4,10 @@ export default {
   theme: {
     extend: {
       colors: {
-        primary: '#E3F6E5', // Soft misty green (for light backgrounds & frosted effects)
-        secondary: '#A4C3A2', // Muted sage green (for cards & secondary elements)
-        tertiary: '#4B6B43', // Rich deep forest green (for contrast & depth)
-        accent: '#8F5E38' // Earthy warm brown (for highlights & buttons)
+        primary: '#3B8F69', // Deep Forest Green (Dominant, not too dark)
+        secondary: '#B7E4C7', // Soft Sage Green (Better for backgrounds)
+        tertiary: '#2C2C2C', // Soft Charcoal (Dark but comfortable)
+        accent: '#F5F5F5' // Soft White (Better for readability)
       }
     }
   },

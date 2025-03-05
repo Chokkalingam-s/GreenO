@@ -3,6 +3,7 @@
 @tailwind utilities;
 :root {
   --translate-y: 0.2rem;
+  --font: 'Varela Round', sans-serif;
 }
 @media (prefers-reduced-motion: reduce) {
   :root {
@@ -11,8 +12,8 @@
 }
 @layer components {
   .glassy {
-    @apply bg-secondary/30 backdrop-blur-lg;
-}
+    @apply bg-primary/20 backdrop-blur-lg;
+  }
   .glassy_inline {
     @apply bg-secondary/10 sh round;
   }
@@ -20,7 +21,7 @@
     @apply flex items-center justify-center;
   }
   .line {
-    @apply bg-secondary/20 h-1 w-full rounded-full shadow-2xl;
+    @apply sh bg-secondary border-secondary h-1 w-full rounded-full border-2;
   }
   .head {
     @apply text-3xl font-medium;
@@ -53,7 +54,7 @@
     @apply outline outline-2 outline-offset-2 outline-red-500;
   }
   .icon {
-    @apply mx-2 aspect-square w-5 rounded-none shadow-none;
+    @apply h-5 w-5;
   }
   .round {
     @apply rounded-2xl;
@@ -64,28 +65,34 @@
 }
 
 body {
-  font-family: 'Poppins', serif;
-  background-image: url('/bg.jpg');
-  @apply text-primary bg-secondary w-full bg-cover bg-fixed bg-center;
-  p {
-    @apply text-base md:max-w-[65ch];
-  }
+  font-family: var(--font);
+  background-image: url('/marita-kavelashvili-ugnrXk1129g-unsplash.jpg');
+  @apply bg-secondary w-full bg-cover bg-fixed bg-center text-white;
+
   &::after {
     content: '';
     @apply fixed inset-0 top-0 bg-black/40;
   }
+
+  svg {
+    @apply icon fill-accent;
+  }
+
+  p {
+    @apply text-base md:max-w-[65ch];
+  }
+
   button:not(.cancel, .Toastify__close-button) {
-    @apply fill-primary text-primary center round sh bg-secondary/30 min-h-10 min-w-20 px-4 py-2 text-base font-medium shadow-md shadow-black/10 outline outline-2 outline-offset-2 outline-transparent backdrop-blur-lg transition-all duration-200 ease-in-out hover:shadow-lg hover:shadow-black/20;
+    @apply fill-primary center round bg-secondary/30 flex min-h-10 min-w-20 justify-center gap-x-2 px-4 py-2 text-base font-medium shadow-md shadow-black/10 outline outline-2 outline-offset-2 outline-transparent backdrop-blur-lg transition-all duration-200 ease-in-out;
 
     &:hover,
     &:focus,
     &:active {
-      @apply outline-accent bg-secondary/50 text-tertiary;
+      @apply outline-accent bg-accent;
     }
 
     &:disabled {
       @apply cursor-not-allowed opacity-50 shadow-none outline-none;
-
       &:hover,
       &:focus,
       &:active {
@@ -94,21 +101,31 @@ body {
     }
   }
 
-  button:not(.cancel),
-  nav a {
-    @apply fill-tertiary text-tertiary center font-semibold tracking-wide drop-shadow-md transition-all duration-150 ease-in-out;
+  nav a:not(.logo) {
+    @apply round fill-accent relative flex justify-center gap-x-2 px-3 py-2 font-medium tracking-wide drop-shadow-md transition-all duration-150 ease-in-out outline-none;
 
-    &:active,
-    &:hover,
-    &:focus {
-      @apply fill-primary text-primary drop-shadow-lg;
+    &.active {
+      &::after {
+        content: '';
+        @apply bg-accent absolute bottom-2 left-1/2 h-0.5 w-8/12 -translate-x-1/2 rounded-full transition-all duration-300;
+      }
     }
   }
+}
 
-  nav a {
-    @apply flex-col md:flex-row;
+._link {
+  @apply text-secondary cursor-pointer pl-2 font-medium tracking-wider underline transition-colors duration-200 ease-in-out focus-visible:outline-none;
+
+  &:hover,
+  &:focus-visible {
+    @apply text-accent underline-offset-4;
+  }
+
+  &:active {
+    @apply text-secondary scale-[0.98];
   }
 }
+
 .custom_toastify {
   transform: translateY(10vh) !important;
 }
@@ -122,10 +139,15 @@ body {
 input,
 textarea,
 select {
-  @apply round my-2 w-full overflow-hidden border-none bg-transparent px-4 py-2 text-base transition-all duration-150 ease-in-out outline-none;
+  @apply border-secondary focus:border-accent hover:border-accent my-2 w-full overflow-hidden rounded-xl border-2 border-solid bg-transparent px-4 py-2 text-base transition-all duration-200 ease-in-out outline-none placeholder:transition-opacity placeholder:duration-200 hover:shadow-lg hover:placeholder:opacity-0 focus:shadow-xl focus:outline-none focus:placeholder:opacity-0;
+
   &:disabled {
     @apply pointer-events-none cursor-not-allowed opacity-50 ring-0 ring-offset-0;
   }
+}
+
+label {
+  @apply text-accent pointer-events-none absolute right-0 rounded-lg px-2 opacity-0 transition-transform;
 }
 
 input[type='number'] {
@@ -173,7 +195,7 @@ select:disabled {
     section {
       @apply px-6 py-2;
       h2 {
-        @apply text-xl underline underline-offset-2;
+        @apply text-xl;
       }
       h3 {
         @apply my-1;
@@ -187,7 +209,7 @@ article .banner {
 }
 
 .toastBody {
-  font-family: 'Poppins', serif;
+  font-family: var(--font);
 }
 
 .list {
@@ -203,19 +225,6 @@ article .banner {
   }
 }
 
-nav {
-  a {
-    @apply center text-secondary flex-col font-medium md:flex-row;
-    &.active,
-    &:hover,
-    &:focus {
-      @apply text-primary scale-105;
-      svg {
-        @apply fill-primary;
-      }
-    }
-  }
-}
 .Toastify {
   @apply absolute top-4 right-2;
 }
@@ -224,14 +233,14 @@ nav {
     @apply w-full border-collapse text-center;
   }
   thead {
-    @apply bg-tertiary sticky top-0 z-20;
+    @apply bg-secondary sticky top-0 z-20;
   }
   th,
   td {
     @apply p-2;
   }
   th {
-    @apply bg-tertiary text-left font-medium;
+    @apply bg-secondary text-left font-medium;
     &:nth-child(5),
     &:nth-child(6),
     &:nth-child(7) {
@@ -283,9 +292,7 @@ nav {
     }
   }
 }
-.about {
-  @apply glassy round relative mx-auto grid items-center justify-center gap-x-4 p-2 md:grid-cols-[60%_30%];
-}
+
 ::-webkit-scrollbar {
   @apply bg-primary w-1;
 }
@@ -333,18 +340,16 @@ nav {
   }
 }
 .homePage {
-  @apply relative top-16 mb-32 min-h-screen w-11/12 flex-col md:w-7/12;
+  @apply center glassy min-h-screen w-11/12 flex-col gap-y-4 rounded-lg px-4 py-6 md:w-7/12;
   section {
-    @apply my-4;
+    @apply w-full py-4;
     span {
       @apply font-semibold;
     }
   }
   .about {
-    @apply glassy round mx-auto grid grid-cols-1 items-center justify-center justify-items-center md:grid-cols-[70%_30%];
-    img {
-      @apply round;
-    }
+    @apply round mx-auto grid grid-cols-1 items-center justify-center justify-items-center md:grid-cols-[66%_30%];
+
     div {
       @apply px-4;
       h2 {
@@ -370,9 +375,12 @@ nav {
   > div {
     @apply glassy round w-full p-2;
   }
+  h4 {
+    @apply text-secondary;
+  }
 }
 .bdr {
-  @apply border-secondary/50 mb-4 border-b-2 pb-2 text-xl font-bold;
+  @apply border-secondary mb-4 border-b-2 pb-2 text-xl font-medium;
 }
 .progress {
   @apply round glassy_inline max-h-[60vh] w-full overflow-y-auto;

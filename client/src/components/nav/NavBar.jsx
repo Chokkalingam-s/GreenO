@@ -51,7 +51,6 @@ const studentNavItems = [
   }
 ]
 
-
 const principalNavItems = [
   commonDashboard('/admin'),
   commonProgress('/progress'),
@@ -99,13 +98,13 @@ export default function NavBar() {
           : studentNavItems
 
   return (
-    <header className='glassy fixed bottom-0 z-50 flex h-12 w-full items-center justify-between px-2 py-1 md:top-0'>
-      <NavLink className='center w-fit px-2' to={homeLink}>
-        <img src='/GreenO_Logo.png' alt='App Logo' className='w-14 p-1' />
+    <nav className='glassy sh fixed bottom-0 z-50 flex h-12 w-full items-center justify-between px-2 py-1 md:top-0'>
+      <NavLink className='center logo w-fit px-2' to={homeLink}>
+        <img src='/GreenO_Logo.png' alt='App Logo' className='w-16 p-1' />
         <p className='hidden font-medium md:block'>GreenO</p>
       </NavLink>
       <span className='center'>
-        <nav className='z-20 hidden items-center justify-evenly gap-x-4 md:flex'>
+        <div className='z-20 hidden items-center justify-evenly gap-x-4 md:flex'>
           {navItems.map(({path, viewBox, icon, label}) => (
             <NavLink key={path} to={path}>
               {viewBox && icon ? (
@@ -116,20 +115,8 @@ export default function NavBar() {
               <p>{label}</p>
             </NavLink>
           ))}
-        </nav>
+        </div>
       </span>
-      <nav className='fixed bottom-0 z-20 flex w-full items-center justify-evenly gap-x-4 p-3 font-medium md:hidden'>
-        {navItems.map(({path, viewBox, icon, label}) => (
-          <NavLink key={path} to={path}>
-            {viewBox && icon ? (
-              <svg xmlns='http://www.w3.org/2000/svg' viewBox={viewBox} className='icon'>
-                <path d={icon}></path>
-              </svg>
-            ) : null}
-            <p>{label}</p>
-          </NavLink>
-        ))}
-      </nav>
-    </header>
+    </nav>
   )
 }

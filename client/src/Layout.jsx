@@ -10,7 +10,7 @@ export default function Layout() {
   return (
     <>
       <NavBar />
-      <main className='center relative z-20 min-h-screen flex-col'>
+      <main className='relative z-20 my-16 flex min-h-screen flex-col overflow-auto center'>
         <Outlet />
       </main>
       {role === 'student' && (
