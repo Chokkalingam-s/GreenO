@@ -16,10 +16,10 @@ export default function ContactUs() {
   }
 
   return (
-    <div className='main relative top-2 m-4 flex-col p-4'>
+    <div className='main relative top-2 flex-col p-4'>
       <h2 className='head'>Contact Us</h2>
       <p className='my-2'>Have an issue or suggestion? Let us know</p>
-      <div>
+      <div className='w-full'>
         <FloatingLabelInput
           type='text'
           id='problem'

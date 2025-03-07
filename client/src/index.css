@@ -12,7 +12,7 @@
 }
 @layer components {
   .glassy {
-    @apply from-primary/20 to-secondary/10 sh bg-[linear-gradient(120deg,_var(--tw-gradient-stops))] backdrop-blur-md;
+    @apply from-primary/20 to-secondary/20 sh bg-[linear-gradient(120deg,_var(--tw-gradient-stops))] backdrop-blur-md;
   }
   .glassy_inline {
     @apply bg-secondary/10 sh round;
@@ -83,19 +83,28 @@ body {
   }
 
   button:not(.cancel, .Toastify__close-button) {
-    @apply fill-accent c round bg-primary/20 sh flex min-h-10 min-w-20 justify-center gap-x-2 px-4 py-2 text-base font-bold backdrop-blur-lg transition-all duration-150 ease-linear outline-none;
+    @apply from-primary/30 to-secondary/20 text-accent border-primary/30 hover:border-secondary/40 sh relative flex min-h-10 min-w-24 place-items-center items-center justify-center gap-x-2 rounded-full border bg-gradient-to-b px-4 py-2 text-sm font-semibold tracking-wide uppercase backdrop-blur-md transition-all duration-200 ease-in-out outline-none;
 
     &:hover,
-    &:focus,
-    &:active {
-      @apply bg-secondary/50 text-accent;
-      svg {
-        @apply fill-accent;
+    &:focus {
+      @apply from-primary/40 to-secondary/30 text-accent bg-gradient-to-b;
+
+      &::before {
+        content: '';
+        @apply bg-accent/10 absolute inset-0 rounded-full blur-sm;
       }
     }
 
+    svg {
+      @apply fill-accent scale-110 transition-transform duration-150;
+    }
+
+    &:active {
+      @apply bg-primary/50 scale-[0.98];
+    }
+
     &:disabled {
-      @apply bg-accent/40 text-accent cursor-not-allowed opacity-50 shadow-none;
+      @apply bg-accent/30 text-accent cursor-not-allowed opacity-50 shadow-none;
     }
   }
 
