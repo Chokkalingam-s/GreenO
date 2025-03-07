@@ -12,7 +12,7 @@
 }
 @layer components {
   .glassy {
-    @apply from-primary/20 via-secondary/10 sh bg-[linear-gradient(120deg,_var(--tw-gradient-stops))] backdrop-blur-md;
+    @apply from-primary/20 to-secondary/10 sh bg-[linear-gradient(120deg,_var(--tw-gradient-stops))] backdrop-blur-md;
   }
   .glassy_inline {
     @apply bg-secondary/10 sh round;
