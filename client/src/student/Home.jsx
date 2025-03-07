@@ -51,13 +51,13 @@ export default function StudentHome() {
             : ' takes urgent action against climate change and fosters resilience.'}
         </p>
       </header>
-      <div className='grid gap-12 md:gap-16'>
+      <div className='grid gap-6'>
         {sections.map(({title, content, imgSrc}, index) => (
           <article
             key={title}
             className={`flex flex-col-reverse items-center md:flex-row ${
               index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'
-            } glassy animate-fadeIn round sh gap-6 p-6 text-justify`}>
+            } glassy animate-fadeIn round sh gap-6 px-6 py-4 text-justify`}>
             <div className='flex-1 text-center md:text-left'>
               <h2 className='mb-4 text-2xl font-semibold tracking-wide'>{title}</h2>
               {Array.isArray(content) && content[0].startsWith('🌍') ? (
