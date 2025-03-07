@@ -99,11 +99,11 @@ export default function NavBar() {
 
   return (
     <nav className='glassy sh fixed bottom-0 z-50 flex h-12 w-full items-center justify-between px-2 py-1 md:top-0'>
-      <NavLink className='center logo w-fit px-2' to={homeLink}>
+      <NavLink className='c logo w-fit px-2' to={homeLink}>
         <img src='/GreenO_Logo.png' alt='App Logo' className='w-16 p-1' />
         <p className='hidden font-medium md:block'>GreenO</p>
       </NavLink>
-      <span className='center'>
+      <span className='c'>
         <div className='z-20 hidden items-center justify-evenly gap-x-4 md:flex'>
           {navItems.map(({path, viewBox, icon, label}) => (
             <NavLink key={path} to={path}>

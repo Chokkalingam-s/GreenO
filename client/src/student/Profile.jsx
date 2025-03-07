@@ -95,11 +95,11 @@ export default function Profile() {
     const {viewBox, path} = icons[icon]
     return (
       <li className='flex items-center gap-2'>
-        <svg viewBox={viewBox}>
+        <svg viewBox={viewBox} className='fill-secondary icon'>
           <path d={path}></path>
         </svg>
         <div>
-          <p className='text-sm uppercase text-secondary font-bold'>{label}</p>
+          <p className='text-secondary text-sm font-bold uppercase'>{label}</p>
           <p className='font-medium'>{value}</p>
         </div>
       </li>

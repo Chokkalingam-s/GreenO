@@ -26,7 +26,7 @@ export default function Activity() {
   }, [token, backendUrl])
 
   return (
-    <div className='c_main f_h flex-col p-4'>
+    <div className='c_main f_h'>
       {images.length === 0 ? (
         <p>No images uploaded yet.</p>
       ) : (

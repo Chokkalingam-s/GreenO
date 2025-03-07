@@ -122,10 +122,10 @@ export default function SignIn() {
   }
 
   return (
-    <div className='center full relative z-10'>
-      <div className='glassy center round sh outline-secondary mx-4 aspect-square w-full p-2 outline outline-2 outline-offset-2 md:w-3/12'>
+    <div className='c full relative z-10'>
+      <div className='glassy center round sh mx-4 aspect-square w-full p-2 md:w-3/12'>
         {!showOtpPopup && !showNewPasswordSetup && (
-          <form className='center w-full flex-col gap-y-4' onSubmit={handleLogin}>
+          <form className='center mt-5 w-full flex-col gap-y-4' onSubmit={handleLogin}>
             <h2 className='head'>Welcome Back!</h2>
             <div className='w-full'>
               <FloatingLabelInput
@@ -149,19 +149,19 @@ export default function SignIn() {
                 </p>
               </div>
             </div>
-            <span className='flex items-center justify-center'>
+            <span className='signin my-4 flex items-center justify-center'>
               <button
                 type='submit'
                 disabled={isLoading}
-                className={isLoading ? 'cursor-not-allowed opacity-50' : ''}>
+                className={isLoading ? 'cursor-not-allowed opacity-50' : 'w-32'}>
                 {isLoading ? 'Signing in...' : 'Sign in'}
               </button>
             </span>
 
-            <div className='mx-auto flex w-11/12 items-center justify-center gap-x-2'>
+            <div className='mx-auto flex w-11/12 items-center justify-center gap-2'>
               <hr className='line' />
               <p
-                className='text-primary text-sm font-bold'
+                className='text-sm font-semibold tracking-widest'
                 style={{textShadow: '0px 2px 2px rgba(0,0,0,0.4)'}}>
                 OR
               </p>

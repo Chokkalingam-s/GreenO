@@ -12,23 +12,23 @@
 }
 @layer components {
   .glassy {
-    @apply bg-primary/20 backdrop-blur-lg;
+    @apply from-primary/20 via-secondary/10 sh bg-[linear-gradient(120deg,_var(--tw-gradient-stops))] backdrop-blur-md;
   }
   .glassy_inline {
     @apply bg-secondary/10 sh round;
   }
-  .center {
+  .c {
     @apply flex items-center justify-center;
   }
   .line {
-    @apply sh bg-secondary border-secondary h-1 w-full rounded-full border-2;
+    @apply sh bg-secondary/20 border-secondary/10 h-1 w-full rounded-full border-2;
   }
   .head {
-    @apply text-3xl font-medium;
+    @apply my-2 text-3xl font-medium;
   }
   .main,
   .c_main {
-    @apply glassy center relative top-4 max-h-[85vh] rounded-xl md:px-2 md:py-2;
+    @apply glassy c round md:px-2 md:py-2;
   }
   .main {
     @apply w-fit;
@@ -43,7 +43,7 @@
     @apply h-8 w-8 rounded-full;
   }
   .cancel {
-    @apply center bg-red-500 transition;
+    @apply c bg-red-500 transition;
     img {
       @apply aspect-square w-20;
     }
@@ -74,40 +74,38 @@ body {
     @apply fixed inset-0 top-0 bg-black/40;
   }
 
-  svg {
+  /* svg:not(.Toastify__toast-icon) {
     @apply icon fill-accent;
-  }
+  } */
 
   p {
     @apply text-base md:max-w-[65ch];
   }
 
   button:not(.cancel, .Toastify__close-button) {
-    @apply fill-primary center round bg-secondary/30 flex min-h-10 min-w-20 justify-center gap-x-2 px-4 py-2 text-base font-medium shadow-md shadow-black/10 outline outline-2 outline-offset-2 outline-transparent backdrop-blur-lg transition-all duration-200 ease-in-out;
+    @apply fill-accent c round bg-primary/20 sh flex min-h-10 min-w-20 justify-center gap-x-2 px-4 py-2 text-base font-bold backdrop-blur-lg transition-all duration-150 ease-linear outline-none;
 
     &:hover,
     &:focus,
     &:active {
-      @apply outline-accent bg-accent;
+      @apply bg-secondary/50 text-accent;
+      svg {
+        @apply fill-accent;
+      }
     }
 
     &:disabled {
-      @apply cursor-not-allowed opacity-50 shadow-none outline-none;
-      &:hover,
-      &:focus,
-      &:active {
-        @apply border-none shadow-none outline-none;
-      }
+      @apply bg-accent/40 text-accent cursor-not-allowed opacity-50 shadow-none;
     }
   }
 
   nav a:not(.logo) {
-    @apply round fill-accent relative flex justify-center gap-x-2 px-3 py-2 font-medium tracking-wide drop-shadow-md transition-all duration-150 ease-in-out outline-none;
+    @apply round fill-accent hover:text-secondary hover:fill-secondary relative flex justify-center gap-x-2 px-3 py-2 font-medium tracking-wide drop-shadow-md transition-all duration-150 ease-in-out outline-none;
 
     &.active {
       &::after {
         content: '';
-        @apply bg-accent absolute bottom-2 left-1/2 h-0.5 w-8/12 -translate-x-1/2 rounded-full transition-all duration-300;
+        @apply bg-accent hover:bg-secondary absolute bottom-2 left-1/2 h-0.5 w-8/12 -translate-x-1/2 rounded-full transition-all duration-150;
       }
     }
   }
@@ -217,13 +215,6 @@ article .banner {
     @apply flex items-center;
   }
 }
-.profile_tab,
-.details_table,
-.search-list {
-  svg {
-    @apply fill-secondary icon;
-  }
-}
 
 .Toastify {
   @apply absolute top-4 right-2;
@@ -263,7 +254,7 @@ article .banner {
 .info_card {
   @apply grid w-full grid-cols-1 items-center justify-between gap-x-4 md:grid-cols-2;
   div {
-    @apply center flex-1 gap-x-4;
+    @apply c flex-1 gap-x-4;
     ._detail {
       @apply glassy_inline round flex w-72 items-center justify-between px-4 py-1;
       &:nth-child(1) {
@@ -271,9 +262,6 @@ article .banner {
       }
       &:nth-child(2) {
         @apply float-right;
-      }
-      svg {
-        @apply fill-white;
       }
       h3,
       h1,
@@ -285,9 +273,6 @@ article .banner {
       }
       p {
         @apply text-end text-2xl;
-      }
-      svg {
-        @apply fill-primary aspect-square w-10;
       }
     }
   }
@@ -340,7 +325,7 @@ article .banner {
   }
 }
 .homePage {
-  @apply center glassy min-h-screen w-11/12 flex-col gap-y-4 rounded-lg px-4 py-6 md:w-7/12;
+  @apply c glassy min-h-screen w-11/12 flex-col gap-y-4 rounded-lg px-4 py-6 md:w-7/12;
   section {
     @apply w-full py-4;
     span {

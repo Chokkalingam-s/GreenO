@@ -4,10 +4,9 @@ export default {
   theme: {
     extend: {
       colors: {
-        primary: '#3B8F69', // Deep Forest Green (Dominant, not too dark)
-        secondary: '#B7E4C7', // Soft Sage Green (Better for backgrounds)
-        tertiary: '#2C2C2C', // Soft Charcoal (Dark but comfortable)
-        accent: '#F5F5F5' // Soft White (Better for readability)
+        primary: '#2E7D32', // Forest Green (Stronger natural feel)
+        secondary: '#A5D6A7', // Fresh Leaf Green (Lighter, good for backgrounds)
+        accent: '#FAF9F6' // Soft Off-White (Better readability)
       }
     }
   },

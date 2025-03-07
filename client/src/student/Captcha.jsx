@@ -20,19 +20,17 @@ export function Captcha({onVerify}) {
       canvas.width = 150
       canvas.height = 50
 
-      // Background noise
       ctx.fillStyle = '#F7FFF0'
       ctx.fillRect(0, 0, canvas.width, canvas.height)
 
       for (let i = 0; i < 5; i++) {
-        ctx.strokeStyle = `rgba(${Math.random() * 255}, ${Math.random() * 255}, ${Math.random() * 255}, 0.5)`
+        ctx.strokeStyle = `rgba(${Math.random() * 255}, ${Math.random() * 255}, ${Math.random() * 255}, 0.8)`
         ctx.beginPath()
         ctx.moveTo(Math.random() * canvas.width, Math.random() * canvas.height)
         ctx.lineTo(Math.random() * canvas.width, Math.random() * canvas.height)
         ctx.stroke()
       }
 
-      // CAPTCHA text rendering
       const fonts = ['Arial', 'Courier New', 'Georgia', 'Verdana']
       ctx.textBaseline = 'middle'
       ctx.textAlign = 'center'
@@ -70,8 +68,8 @@ export function Captcha({onVerify}) {
   }
 
   return (
-    <div className='center mt-10 flex-col space-y-6'>
-      <canvas ref={canvasRef} className='round sh w-56' />
+    <div className='center flex-col space-y-6'>
+      <canvas ref={canvasRef} className='round sh w-56 mx-auto' />
       <div className='flex items-center space-x-1'>
         <FloatingLabelInput
           id='captcha'
