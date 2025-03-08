@@ -57,7 +57,7 @@ export default function ContactUs() {
             <h2 className='text-lg'>Preview</h2>
             <div className='h-40 overflow-y-auto'>
               {images.length > 0 && (
-                <div className='center mt-4 flex-wrap gap-4'>
+                <div className='mt-2 grid grid-cols-2 gap-2'>
                   {images.map((img, index) => (
                     <img
                       key={index}

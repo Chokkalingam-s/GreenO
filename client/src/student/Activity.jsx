@@ -30,19 +30,21 @@ export default function Activity() {
       {images.length === 0 ? (
         <p>No images uploaded yet.</p>
       ) : (
-        <div className='round grid grid-cols-2 gap-2 overflow-y-auto md:grid-cols-4'>
-          {images.map((image, index) => (
-            <div key={image.id} onClick={() => setModalSrc(`${backendUrl}/${image.filePath}`)}>
-              <img
-                className='mx-auto mt-1 aspect-video w-full object-contain'
-                src={`${backendUrl}/${image.filePath}`}
-                alt={`Semester ${index + 1}`}
-              />
-              <h3 className='my-2 text-center text-xl font-medium tracking-wider'>
-                Semester {index + 1}
-              </h3>
-            </div>
-          ))}
+        <div className='max-h-[calc(100vh-150px)] min-h-0 overflow-y-auto'>
+          <div className='round grid grid-cols-2 gap-2 md:grid-cols-4'>
+            {images.map((image, index) => (
+              <div key={image.id} onClick={() => setModalSrc(`${backendUrl}/${image.filePath}`)}>
+                <img
+                  className='mx-auto mt-1 aspect-video w-full object-contain'
+                  src={`${backendUrl}/${image.filePath}`}
+                  alt={`Semester ${index + 1}`}
+                />
+                <h3 className='my-2 text-center text-xl font-medium tracking-wider'>
+                  Semester {index + 1}
+                </h3>
+              </div>
+            ))}
+          </div>
         </div>
       )}
       {modalSrc && <Modal src={modalSrc} onClose={() => setModalSrc(null)} />}

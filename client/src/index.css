@@ -28,7 +28,7 @@
   }
   .main,
   .c_main {
-    @apply glassy c round md:px-2 md:py-2;
+    @apply glassy round md:px-2 md:py-2;
   }
   .main {
     @apply w-fit;
@@ -62,7 +62,7 @@
     @apply h-5 w-5;
   }
   .round {
-    @apply rounded-2xl;
+    @apply rounded-3xl;
   }
   .sh {
     @apply shadow-2xl;
@@ -151,7 +151,7 @@ body {
 input,
 textarea,
 select {
-  @apply border-secondary focus:border-accent hover:border-accent my-2 w-full overflow-hidden rounded-xl border-2 border-solid bg-transparent px-4 py-2 text-base transition-all duration-200 ease-in-out outline-none placeholder:transition-opacity placeholder:duration-200 hover:shadow-lg hover:placeholder:opacity-0 focus:shadow-xl focus:outline-none focus:placeholder:opacity-0;
+  @apply border-secondary focus:border-accent hover:border-accent my-2 w-full overflow-hidden round border-2 border-solid bg-transparent px-4 py-2 text-base transition-all duration-200 ease-in-out outline-none placeholder:transition-opacity placeholder:duration-200 hover:shadow-lg hover:placeholder:opacity-0 focus:shadow-xl focus:outline-none focus:placeholder:opacity-0;
 
   &:disabled {
     @apply pointer-events-none cursor-not-allowed opacity-50 ring-0 ring-offset-0;
