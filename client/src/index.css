@@ -12,7 +12,7 @@
 }
 @layer components {
   .glassy {
-    @apply from-primary/20 to-secondary/20 sh bg-[linear-gradient(120deg,_var(--tw-gradient-stops))] backdrop-blur-md;
+    @apply from-primary/20 via-secondary/20 to-primary/20 sh bg-[linear-gradient(120deg,_var(--tw-gradient-stops))] backdrop-blur-md;
   }
   .glassy_inline {
     @apply bg-secondary/10 sh round;
@@ -43,16 +43,21 @@
     @apply h-8 w-8 rounded-full;
   }
   .cancel {
-    @apply c bg-red-500 transition;
-    img {
-      @apply aspect-square w-20;
+    @apply text-accent hover:bg-accent/40 focus:ring-accent/50 active:bg-accent/50 round flex min-h-10 min-w-24 items-center justify-center gap-x-2 bg-red-500 px-5 py-2.5 text-base font-semibold shadow-md backdrop-blur-lg transition-all duration-200 ease-in-out hover:-translate-y-0.5 hover:shadow-lg focus:ring-2 focus:outline-none active:translate-y-0 active:shadow-none;
+
+    svg {
+      @apply fill-accent transition-all;
+    }
+
+    &:hover svg {
+      @apply fill-accent/80 scale-110;
+    }
+
+    &:disabled {
+      @apply bg-accent/50 text-accent/70 cursor-not-allowed opacity-50 shadow-none;
     }
   }
-  .cancel:hover,
-  .cancel:focus,
-  .cancel:active {
-    @apply outline outline-2 outline-offset-2 outline-red-500;
-  }
+
   .icon {
     @apply h-5 w-5;
   }
@@ -374,7 +379,7 @@ article .banner {
   }
 }
 .bdr {
-  @apply border-secondary mb-4 border-b-2 pb-2 text-xl font-medium;
+  @apply border-secondary mb-2 border-b-2 text-xl font-medium;
 }
 .progress {
   @apply round glassy_inline max-h-[60vh] w-full overflow-y-auto;

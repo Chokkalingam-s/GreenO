@@ -112,15 +112,15 @@ export default function Profile() {
         <p>Loading...</p>
       ) : (
         <div className='center relative top-16 mb-36 flex-col md:top-0 md:mb-0'>
-          <h3 className='mb-2 w-full pl-6 text-2xl font-bold tracking-wide md:col-span-2 md:text-center'>
+          <h3 className='mb-6 w-full pl-6 text-2xl font-bold tracking-wide md:col-span-2 md:text-center'>
             {studentDetails?.name}&apos;s Profile
           </h3>
 
-          <div className='grid w-full grid-cols-1 md:max-w-[65vw] md:grid-cols-[40%_60%] md:gap-x-4'>
+          <div className='grid w-full grid-cols-1 md:max-w-[65vw] md:grid-cols-[40%_60%] md:gap-x-2'>
             <div className='order-2 md:order-none'>
-              <div className='center profile_tab flex-col gap-y-4'>
+              <div className='c profile_tab flex-col gap-y-2'>
                 <div>
-                  <h4 className='bdr text-secondary'>Personal Details</h4>
+                  <h4 className='bdr'>Personal Details</h4>
                   <ul className='space-y-2'>
                     <DetailItem label='Name' value={studentDetails.name} icon='person' />
                     <DetailItem label='Email' value={studentDetails.email} icon='email' />
@@ -138,7 +138,7 @@ export default function Profile() {
                 </div>
                 <div>
                   <h4 className='bdr'>Educational Details</h4>
-                  <ul className='space-y-4'>
+                  <ul className='space-y-2'>
                     <DetailItem
                       label='College Name'
                       value={studentDetails.collegeName}
@@ -163,7 +163,7 @@ export default function Profile() {
                 </div>
               </div>
             </div>
-            <span className='mx-auto grid h-full w-11/12 grid-cols-2 grid-rows-[auto_1fr_1fr] gap-x-4 gap-y-6 md:w-full md:gap-y-4'>
+            <span className='mx-auto grid h-full w-11/12 grid-cols-2 grid-rows-[auto_1fr_1fr] gap-x-2 gap-y-6 md:w-full md:gap-y-2'>
               <div className='glassy round out h-52'>
                 <Gauge
                   value={progressPercentage}
@@ -189,7 +189,7 @@ export default function Profile() {
                 <p className='absolute bottom-1.5 w-full text-center text-lg'>My Progress</p>
               </div>
 
-              <div className='center glassy round out h-52 flex-col'>
+              <div className='c glassy round out h-52 flex-col gap-y-4'>
                 <img
                   src='/Certificate.png'
                   alt='certificate icon'
