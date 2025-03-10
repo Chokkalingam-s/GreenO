@@ -1,13 +1,13 @@
 import {useState, useEffect} from 'react'
 import axios from 'axios'
 import {toast} from 'react-toastify'
-import {Modal} from '../exp_components'
+import {useOverlay} from '../components/OverlayContext'
 
 export default function Activity() {
   const [images, setImages] = useState([])
   const token = localStorage.getItem('token') || ''
-  const [modalSrc, setModalSrc] = useState(null)
   const backendUrl = import.meta.env.VITE_BACKEND_URL
+  const {setModalSrc} = useOverlay()
 
   useEffect(() => {
     const fetchImages = async () => {
@@ -28,17 +28,28 @@ export default function Activity() {
   return (
     <div className='c_main f_h'>
       {images.length === 0 ? (
-        <p>No images uploaded yet.</p>
+        <div className='c f_h'>
+          <p>No images uploaded yet.</p>
+        </div>
       ) : (
         <div className='max-h-[calc(100vh-150px)] min-h-0 overflow-y-auto'>
           <div className='round grid grid-cols-2 gap-2 md:grid-cols-4'>
             {images.map((image, index) => (
-              <div key={image.id} onClick={() => setModalSrc(`${backendUrl}/${image.filePath}`)}>
-                <img
-                  className='mx-auto mt-1 aspect-video w-full object-contain'
-                  src={`${backendUrl}/${image.filePath}`}
-                  alt={`Semester ${index + 1}`}
-                />
+              <div
+                key={image.id}
+                className='group relative cursor-pointer'
+                onClick={() => setModalSrc(`${backendUrl}/${image.filePath}`)}>
+                <div className='relative mx-auto w-1/2 overflow-hidden'>
+                  <img
+                    className='round sh aspect-square w-full object-cover transition-transform duration-150 ease-in-out hover:scale-105'
+                    src={`${backendUrl}/${image.filePath}`}
+                    alt={`Semester ${index + 1}`}
+                  />
+                  <div className='round absolute bottom-0 left-0 w-full py-2 text-center text-sm font-bold text-black backdrop-blur-md'>
+                    Tap to View
+                  </div>
+                </div>
+
                 <h3 className='my-2 text-center text-xl font-medium tracking-wider'>
                   Semester {index + 1}
                 </h3>
@@ -47,7 +58,6 @@ export default function Activity() {
           </div>
         </div>
       )}
-      {modalSrc && <Modal src={modalSrc} onClose={() => setModalSrc(null)} />}
     </div>
   )
 }

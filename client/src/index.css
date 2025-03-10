@@ -37,24 +37,38 @@
     @apply w-11/12;
   }
   .btn {
-    @apply round min-w-20 px-2;
-  }
-  .btn_r {
-    @apply h-8 w-8 rounded-full;
+    @apply round c min-w-24 gap-x-2 px-4 py-2 transition-all duration-150 ease-in-out;
   }
   .cancel {
-    @apply text-accent hover:bg-accent/40 focus:ring-accent/50 active:bg-accent/50 round flex min-h-10 min-w-24 items-center justify-center gap-x-2 bg-red-500 px-5 py-2.5 text-base font-semibold shadow-md backdrop-blur-lg transition-all duration-200 ease-in-out hover:-translate-y-0.5 hover:shadow-lg focus:ring-2 focus:outline-none active:translate-y-0 active:shadow-none;
+    @apply sh bg-red-500 hover:translate-y-0.5 active:translate-y-0 active:shadow-none;
 
-    svg {
-      @apply fill-accent transition-all;
+    &:hover,
+    &:focus,
+    &:active {
+      @apply bg-red-500 text-white;
     }
 
-    &:hover svg {
-      @apply fill-accent/80 scale-110;
+    svg,
+    img {
+      @apply h-5 w-5 fill-white transition-all;
+    }
+
+    &:hover svg,
+    &:hover img {
+      @apply scale-110;
     }
 
     &:disabled {
-      @apply bg-accent/50 text-accent/70 cursor-not-allowed opacity-50 shadow-none;
+      @apply cursor-not-allowed bg-red-500 opacity-50 shadow-none;
+    }
+  }
+
+  .btn_r {
+    @apply flex h-8 w-8 min-w-0 items-center justify-center rounded-full p-0 shadow-lg;
+
+    svg,
+    img {
+      @apply h-4 w-4;
     }
   }
 
@@ -88,7 +102,7 @@ body {
   }
 
   button:not(.cancel, .Toastify__close-button) {
-    @apply from-primary/30 to-secondary/20 text-accent border-primary/30 hover:border-secondary/40 sh relative flex min-h-10 min-w-24 place-items-center items-center justify-center gap-x-2 rounded-full border bg-gradient-to-b px-4 py-2 text-sm font-semibold tracking-wide uppercase backdrop-blur-md transition-all duration-200 ease-in-out outline-none;
+    @apply from-primary/30 to-secondary/20 text-accent border-primary/30 hover:border-secondary/40 sh relative flex min-h-10 min-w-24 translate-y-0.5 place-items-center items-center justify-center gap-x-2 rounded-full border bg-gradient-to-b px-4 py-2 text-sm font-semibold tracking-wide uppercase backdrop-blur-md transition-all duration-200 ease-in-out outline-none;
 
     &:hover,
     &:focus {
@@ -151,7 +165,7 @@ body {
 input,
 textarea,
 select {
-  @apply border-secondary focus:border-accent hover:border-accent my-2 w-full overflow-hidden round border-2 border-solid bg-transparent px-4 py-2 text-base transition-all duration-200 ease-in-out outline-none placeholder:transition-opacity placeholder:duration-200 hover:shadow-lg hover:placeholder:opacity-0 focus:shadow-xl focus:outline-none focus:placeholder:opacity-0;
+  @apply border-secondary focus:border-accent hover:border-accent round my-2 w-full overflow-hidden border-2 border-solid bg-transparent px-4 py-2 text-base transition-all duration-200 ease-in-out outline-none placeholder:transition-opacity placeholder:duration-200 hover:shadow-lg hover:placeholder:opacity-0 focus:shadow-xl focus:outline-none focus:placeholder:opacity-0;
 
   &:disabled {
     @apply pointer-events-none cursor-not-allowed opacity-50 ring-0 ring-offset-0;
@@ -201,9 +215,9 @@ select:disabled {
 }
 
 .resource {
-  @apply relative top-12 grid grid-cols-1 pb-14 md:top-6 md:w-8/12 md:pb-0;
-  > section {
-    @apply glassy round sh mx-auto p-4;
+  @apply grid grid-cols-1 md:w-8/12;
+  > div {
+    @apply glassy round sh mx-auto px-4 py-2;
     section {
       @apply px-6 py-2;
       h2 {
@@ -296,7 +310,7 @@ article .banner {
   @apply bg-primary w-1;
 }
 ::-webkit-scrollbar-thumb {
-  @apply round bg-black;
+  @apply round bg-secondary;
 }
 .cert {
   p {

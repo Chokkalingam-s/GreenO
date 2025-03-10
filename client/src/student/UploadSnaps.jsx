@@ -94,7 +94,7 @@ export default function UploadSnaps() {
   }
 
   return (
-    <div className='glassy round sh m-4 min-w-3/12 aspect-square px-4 py-2'>
+    <div className='glassy round sh m-4 aspect-square min-w-3/12 px-4 py-2'>
       <span>
         {closeModal ? (
           <div className='mt-6'>
@@ -155,7 +155,7 @@ export default function UploadSnaps() {
                       alt='Preview'
                       className='mx-auto mt-2 h-48 w-48 rounded-md object-contain'
                     />
-                    <p className='my-4 text-sm'>{file.name}</p>
+                    <p className='my-4 text-center text-sm'>{file.name}</p>
                   </div>
                 )}
                 <span className='flex items-center justify-end'>

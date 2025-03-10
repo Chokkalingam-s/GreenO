@@ -3,7 +3,7 @@ import {toast} from 'react-toastify'
 import {FloatingLabelInput} from '../components/FloatingLabelInput'
 
 const generateRandomText = (length = 6) => {
-  const chars = '0123456789ABCDEFGHJKLMNOPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz'
+  const chars = '0123456789#abcdefghijkmnopqrstuvwxyz'
   return Array.from({length}, () => chars[Math.floor(Math.random() * chars.length)]).join('')
 }
 
@@ -69,7 +69,7 @@ export function Captcha({onVerify}) {
 
   return (
     <div className='center flex-col space-y-6'>
-      <canvas ref={canvasRef} className='round sh w-56 mx-auto' />
+      <canvas ref={canvasRef} className='round sh mx-auto w-56' />
       <div className='flex items-center space-x-1'>
         <FloatingLabelInput
           id='captcha'

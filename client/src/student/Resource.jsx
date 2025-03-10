@@ -11,7 +11,7 @@ export default function Resource() {
 
   return (
     <div className='resource'>
-      <section>
+      <div>
         <section>
           <h2>GreenO Plant Care</h2>
           <ul>
@@ -59,47 +59,39 @@ export default function Resource() {
 
         {showModal && (
           <div
-            className='center modal fixed inset-0 z-50 bg-black/60'
-            onClick={e => handleClose(e)}>
-            <div className='glassy round sh center relative z-50 max-h-[80vh] max-w-[90vw] flex-col p-6 backdrop-blur-lg'>
+            className='fixed inset-0 z-50 flex items-center justify-center bg-black/60'
+            onClick={handleClose}>
+            <div className='glassy round sh relative z-50 flex max-h-[80vh] max-w-[90vw] flex-col p-6 backdrop-blur-lg'>
               <h3 className='head my-2'>{`Stage ${currentSlide + 1}`}</h3>
-              <p className='text-primary max-h-[50vh] overflow-y-auto px-4'>
+              <p className='max-h-[50vh] overflow-y-auto px-4'>
                 {plantGrowthData[currentSlide].detailedContent}
               </p>
 
-              <div className='relative -right-1/2 bottom-0 flex -translate-x-1/2 items-center gap-x-4'>
+              <div className='mt-4 flex items-center justify-center gap-x-4'>
                 {currentSlide > 0 && (
                   <button onClick={() => setCurrentSlide(currentSlide - 1)}>
-                    <img
-                      src='/arrow-up-solid.svg'
-                      alt='navigation button'
-                      className='icon -rotate-90'
-                    />
+                    <img src='/arrow-up-solid.svg' alt='Previous' className='icon -rotate-90' />
                   </button>
                 )}
                 {[...Array(3)].map((_, i) => (
                   <div
                     key={i}
-                    className={`my-1 h-2 w-2 rounded-full ${i === currentSlide ? 'bg-primary' : 'bg-tertiary'}`}
+                    className={`h-2 w-2 rounded-full ${i === currentSlide ? 'bg-primary' : 'bg-secondary'}`}
                   />
                 ))}
                 {currentSlide < 2 && (
                   <button onClick={() => setCurrentSlide(currentSlide + 1)}>
-                    <img
-                      src='/arrow-up-solid.svg'
-                      alt='navigation button'
-                      className='icon -rotate-[270deg]'
-                    />
+                    <img src='/arrow-up-solid.svg' alt='Next' className='icon -rotate-[270deg]' />
                   </button>
                 )}
-                <button className='cancel btn' onClick={() => setShowModal(false)}>
-                  <img src='/xmark-solid.svg' alt='close icon' />
+                <button className='btn cancel btn_r' onClick={() => setShowModal(false)}>
+                  <img src='/xmark-solid.svg' alt='Close' />
                 </button>
               </div>
             </div>
           </div>
         )}
-      </section>
+      </div>
     </div>
   )
 }
