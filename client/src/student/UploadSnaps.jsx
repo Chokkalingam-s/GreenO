@@ -94,24 +94,24 @@ export default function UploadSnaps() {
   }
 
   return (
-    <div className='glassy round sh m-4 aspect-square min-w-3/12 px-4 py-2'>
+    <div className='glassy round sh m-4 aspect-square w-11/12 px-4 py-2 md:w-1/3'>
       <span>
         {closeModal ? (
           <div className='mt-6'>
-            <h1 className='mb-4 text-center text-2xl font-bold'>Guidelines</h1>
-            <div className='space-y-6 px-6 py-3'>
-              <h3 className='text-lg font-semibold'>Uploading Plant Photo Guidelines</h3>
+            <h1 className='mb-4 text-center text-2xl font-bold md:text-3xl'>Guidelines</h1>
+            <div className='space-y-6 px-4 py-3 md:px-8'>
+              <h3 className='text-lg font-semibold md:text-xl'>Uploading Plant Photo Guidelines</h3>
               <div>
-                <h3 className='text-lg font-semibold text-green-600'>✅ Do&apos;s</h3>
-                <ul className='list-disc space-y-1 pl-6'>
+                <h3 className='text-lg font-semibold text-green-600 md:text-xl'>✅ Do&apos;s</h3>
+                <ul className='list-disc space-y-1 pl-4 md:pl-6'>
                   <li>Capture the full plant</li>
                   <li>Use natural daylight</li>
                   <li>Try to keep a consistent angle for better comparison.</li>
                 </ul>
               </div>
               <div>
-                <h3 className='text-lg font-semibold text-red-500'>❌ Don&apos;ts</h3>
-                <ul className='list-disc space-y-1 pl-6'>
+                <h3 className='text-lg font-semibold text-red-500 md:text-xl'>❌ Don&apos;ts</h3>
+                <ul className='list-disc space-y-1 pl-4 md:pl-6'>
                   <li>Avoid blurry images</li>
                   <li>No filters or edits</li>
                   <li>Stick to either portrait or landscape mode</li>
@@ -131,13 +131,13 @@ export default function UploadSnaps() {
           </div>
         ) : (
           <>
-            <h2 className='head'>Upload Image</h2>
+            <h2 className='head text-lg md:text-xl'>Upload Image</h2>
             {!isCaptchaValid ? (
               <Captcha onVerify={setIsCaptchaValid} />
             ) : (
               <div>
                 <div
-                  className='border-secondary bg-secondary/20 round center my-4 cursor-pointer border-2 border-dashed p-2'
+                  className='border-secondary bg-secondary/20 round center my-4 cursor-pointer border-2 border-dashed p-2 md:p-4'
                   onClick={() => document.getElementById('file-input').click()}>
                   <span>Choose File</span>
                   <input
@@ -153,9 +153,9 @@ export default function UploadSnaps() {
                     <img
                       src={URL.createObjectURL(file)}
                       alt='Preview'
-                      className='mx-auto mt-2 h-48 w-48 rounded-md object-contain'
+                      className='mx-auto mt-2 h-32 w-32 rounded-md object-contain md:h-48 md:w-48'
                     />
-                    <p className='my-4 text-center text-sm'>{file.name}</p>
+                    <p className='my-4 text-center text-sm md:text-base'>{file.name}</p>
                   </div>
                 )}
                 <span className='flex items-center justify-end'>

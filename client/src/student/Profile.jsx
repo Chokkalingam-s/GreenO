@@ -37,7 +37,7 @@ export default function Profile() {
 
     const fetchStudentDetails = async () => {
       try {
-        const response = await axios.get(`${backendUrl}/student-get-user-details`, {
+        const response = await axios.get(`http://localhost:5000/student-get-user-details`, {
           headers: {Authorization: `Bearer ${token}`}
         })
         setStudentDetails(response.data)
@@ -111,8 +111,8 @@ export default function Profile() {
       {loading ? (
         <p>Loading...</p>
       ) : studentDetails ? (
-        <div className='center relative top-16 mb-36 flex-col md:top-0 md:mb-0'>
-          <h3 className='mb-6 w-full pl-6 text-2xl font-bold tracking-wide md:col-span-2 md:text-center'>
+        <div className='center relative top-0 mb-16 flex-col md:mb-0'>
+          <h3 className='mb-4 pl-6 text-2xl font-bold tracking-wide md:col-span-2 md:text-center'>
             {studentDetails?.name}&apos;s Profile
           </h3>
 
@@ -164,7 +164,7 @@ export default function Profile() {
               </div>
             </div>
 
-            <span className='mx-auto grid h-full w-11/12 grid-cols-2 grid-rows-[auto_1fr_1fr] gap-x-2 gap-y-6 md:w-full md:gap-y-2'>
+            <span className='mx-auto grid h-full w-11/12 grid-cols-2 grid-rows-[auto_1fr_1fr] gap-2 md:w-full'>
               <div className='glassy round h-56'>
                 <Gauge
                   value={progressPercentage}
@@ -199,7 +199,7 @@ export default function Profile() {
                 </button>
               </div>
 
-              <div className='glassy round c relative col-span-2 row-span-2 flex-col px-2 text-center md:mb-0'>
+              <div className='glassy round c col-span-2 row-span-2 mb-2 h-72 flex-col px-2 text-center md:mb-0 md:h-auto'>
                 <h3 className='text-2xl font-extrabold'>{studentDetails?.collegeName}</h3>
                 <p className='text-accent/80 mt-2 text-sm tracking-wide'>Institution Rankings</p>
 

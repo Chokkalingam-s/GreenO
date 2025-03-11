@@ -25,9 +25,9 @@ export default function Resource() {
         <div className='line'></div>
         <section>
           <h2>Video Resources</h2>
-          <div className='grid gap-4 md:grid-cols-2'>
+          <div className='grid md:grid-cols-2'>
             {videoData.map(video => (
-              <div key={video.id} className='px-4 py-2'>
+              <div key={video.id} className='md:px-4 py-2'>
                 <iframe
                   className='round sh w-full'
                   height='200'
