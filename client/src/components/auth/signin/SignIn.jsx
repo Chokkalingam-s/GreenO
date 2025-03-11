@@ -4,7 +4,7 @@ import axios from 'axios'
 import {useAuth} from './AuthContext'
 import {toast} from 'react-toastify'
 import {FloatingLabelInput} from '../../FloatingLabelInput'
-import {EyeIcon} from './EyeIcon'
+// import {EyeIcon} from './EyeIcon'
 
 export default function SignIn() {
   const navigate = useNavigate()
@@ -117,9 +117,9 @@ export default function SignIn() {
     }
   }
 
-  const handlePasswordToggle = () => {
-    setPasswordVisible(prev => !prev)
-  }
+  // const handlePasswordToggle = () => {
+  //   setPasswordVisible(prev => !prev)
+  // }
 
   return (
     <div className='c full relative z-10'>
@@ -142,7 +142,7 @@ export default function SignIn() {
                     setValue={setPassword}
                     type={passwordVisible ? 'text' : 'password'}
                   />
-                  <EyeIcon isVisible={passwordVisible} onClick={handlePasswordToggle} />
+                  {/* <EyeIcon isVisible={passwordVisible} onClick={handlePasswordToggle} /> */}
                 </span>
                 <p className='_link text-end text-xs' onClick={handleForgotPassword}>
                   Forgot Password?
@@ -170,9 +170,9 @@ export default function SignIn() {
 
             <p className='mt-2 text-center'>
               New to GreenO
-              <p className='_link inline' onClick={() => navigate('/signup')}>
+              <span className='_link inline' onClick={() => navigate('/signup')}>
                 Join Now
-              </p>
+              </span>
             </p>
           </form>
         )}

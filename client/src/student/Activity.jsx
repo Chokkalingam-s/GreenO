@@ -7,7 +7,11 @@ export default function Activity() {
   const [images, setImages] = useState([])
   const token = localStorage.getItem('token') || ''
   const backendUrl = import.meta.env.VITE_BACKEND_URL
-  const {setModalSrc} = useOverlay()
+  const {showOverlay} = useOverlay()
+
+  const openModal = src => {
+    showOverlay(<img src={src} alt='Full view' className='max-h-full max-w-full' />)
+  }
 
   useEffect(() => {
     const fetchImages = async () => {
@@ -38,7 +42,7 @@ export default function Activity() {
               <div
                 key={image.id}
                 className='group relative cursor-pointer'
-                onClick={() => setModalSrc(`${backendUrl}/${image.filePath}`)}>
+                onClick={() => openModal(`${backendUrl}/${image.filePath}`)}>
                 <div className='relative mx-auto w-1/2 overflow-hidden'>
                   <img
                     className='round sh aspect-square w-full object-cover transition-transform duration-150 ease-in-out hover:scale-105'

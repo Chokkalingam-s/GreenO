@@ -39,9 +39,9 @@ export default function StudentHome() {
   ]
 
   return (
-    <section className='mx-auto w-2/3 flex-col px-6 py-12'>
-      <header className='mb-12 h-24 text-center'>
-        <h2 className='text-4xl font-bold tracking-wide'>
+    <section className='mx-auto max-w-screen-lg flex-col px-4'>
+      <header className='h-44 text-center md:mt-6 md:h-32'>
+        <h2 className='text-3xl font-bold tracking-wide'>
           {activeSDG === 15 ? '🌍' : '🌏'} Sustainable Development Goal {activeSDG}
         </h2>
         <p className='mx-auto mt-2 max-w-2xl text-lg'>
@@ -51,7 +51,7 @@ export default function StudentHome() {
             : ' takes urgent action against climate change and fosters resilience.'}
         </p>
       </header>
-      <div className='grid gap-6'>
+      <div className='mb-10 grid gap-4 md:mb-0'>
         {sections.map(({title, content, imgSrc}, index) => (
           <article
             key={title}
@@ -75,7 +75,7 @@ export default function StudentHome() {
               )}
             </div>
             <div className='flex flex-1 justify-center'>
-              <img src={imgSrc} alt={title} className='w-10/12 lg:w-3/4' />
+              <img src={imgSrc} alt={title} className='w-10/12 max-w-full md:w-3/4' />
             </div>
           </article>
         ))}

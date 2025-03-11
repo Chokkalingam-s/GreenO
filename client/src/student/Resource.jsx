@@ -84,7 +84,7 @@ export default function Resource() {
                     <img src='/arrow-up-solid.svg' alt='Next' className='icon -rotate-[270deg]' />
                   </button>
                 )}
-                <button className='btn cancel btn_r' onClick={() => setShowModal(false)}>
+                <button className='cancel btn_r' onClick={() => setShowModal(false)}>
                   <img src='/xmark-solid.svg' alt='Close' />
                 </button>
               </div>

@@ -17,8 +17,6 @@ export default function StudentSignUp() {
   const [collegeName, setCollegeName] = useState('')
   const [collegeRegisterNumber, setCollegeRegisterNumber] = useState('')
   const [aadharNumber, setAadharNumber] = useState('')
-  const [principalName, setPrincipalName] = useState('')
-  const [pocNumber, setPocNumber] = useState('')
   const [secEmail, setSecEmail] = useState('')
   const [dob, setDob] = useState('')
 
@@ -51,33 +49,36 @@ export default function StudentSignUp() {
     }))
   }, [])
 
-  const handleChange = e => {
-    const {name, value} = e.target
-    setFormData(prevData => ({
-      ...prevData,
-      [name]: value
-    }))
-  }
-
   const validateForm = () => {
     const newErrors = {}
 
-    if (formData.mobileNumber.length !== 10)
-      newErrors.mobileNumber = 'Mobile number must be 10 digits.'
+    if (!mobileNumber || mobileNumber.length !== 10 || !/^[0-9]{10}$/.test(mobileNumber)) {
+      newErrors.mobileNumber = 'Mobile number must be exactly 10 digits.'
+    }
 
-    if (formData.aadharNumber.length !== 12)
-      newErrors.aadharNumber = 'Aadhar number must be 12 digits.'
+    if (!aadharNumber || aadharNumber.length !== 12 || !/^[0-9]{12}$/.test(aadharNumber)) {
+      newErrors.aadharNumber = 'Aadhar number must be exactly 12 digits.'
+    }
 
-    if (!formData.email && !/\S+@\S+\.\S+/.test(formData.email))
-      newErrors.email = 'Please enter a valid Primary email.'
+    if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      newErrors.email = 'Please enter a valid primary email.'
+    }
 
-    if (formData.collegeRegisterNumber.length !== 12)
+    if (
+      !collegeRegisterNumber ||
+      collegeRegisterNumber.length !== 12 ||
+      !/^[0-9]{12}$/.test(collegeRegisterNumber)
+    ) {
       newErrors.collegeRegisterNumber = 'College register number must be exactly 12 digits.'
+    }
 
-    if (!formData.dob) newErrors.dob = 'Date of birth is required.'
+    if (!dob) {
+      newErrors.dob = 'Date of birth is required.'
+    }
 
-    if (formData.secEmail && !/\S+@\S+\.\S+/.test(formData.secEmail))
+    if (secEmail && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(secEmail)) {
       newErrors.secEmail = 'Please enter a valid secondary email.'
+    }
 
     setErrors(newErrors)
     return Object.keys(newErrors).length === 0
@@ -135,8 +136,8 @@ export default function StudentSignUp() {
   }
 
   return (
-    <div className='center relative z-20 container px-4'>
-      <div className='c_main'>
+    <div className='c relative z-20 h-screen'>
+      <div className='c_main py-2'>
         <img src='/treegrow.png' alt='Tree Grow' className='hidden w-1/2 md:block' />
         {!otpSent ? (
           <form onSubmit={handleSubmit} className='px-4 md:w-1/2'>
@@ -172,6 +173,7 @@ export default function StudentSignUp() {
                 id='state'
                 value={formData.state}
                 setValue={value => handleSelectChange('state', value)}>
+                <option value=''>State</option>
                 {statesRef.current.map((state, index) => (
                   <option key={index} value={state}>
                     {state}
@@ -183,6 +185,7 @@ export default function StudentSignUp() {
                 id='district'
                 value={formData.district}
                 setValue={value => handleSelectChange('district', value)}>
+                <option value=''>District</option>
                 {districtsRef.current[statesRef.current.indexOf(formData.state)]?.map(
                   (district, index) => (
                     <option key={index} value={district}>
@@ -226,7 +229,7 @@ export default function StudentSignUp() {
                 id='department'
                 value={formData.department}
                 setValue={value => handleSelectChange('department', value)}>
-                <option value=''>Department ?</option>
+                <option value=''>Department</option>
                 {departments.map(dept => (
                   <option key={dept} value={dept}>
                     {dept}
@@ -292,7 +295,7 @@ export default function StudentSignUp() {
                   </>
                 )}
               </button>
-              <button className='cancel' onClick={() => navigate('/signin')}>
+              <button className='cancel btn' onClick={() => navigate('/signin')}>
                 Cancel
               </button>
             </span>
