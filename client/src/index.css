@@ -133,7 +133,7 @@ body {
     &.active {
       &::after {
         content: '';
-        @apply bg-accent hover:bg-secondary absolute bottom-2 left-1/2 h-0.5 w-8/12 -translate-x-1/2 rounded-full transition-all duration-150;
+        @apply bg-accent hover:bg-secondary absolute bottom-1 left-1/2 h-0.5 w-8/12 -translate-x-1/2 rounded-full transition-all duration-150;
       }
     }
   }
