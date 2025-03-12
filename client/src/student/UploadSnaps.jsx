@@ -124,7 +124,7 @@ export default function UploadSnaps() {
               </div>
             )}
             <div className='mt-4 flex items-center justify-end'>
-              <button onClick={() => setCloseModel(false)} disabled={false}>
+              <button onClick={() => setCloseModel(false)} disabled={locationDenied}>
                 Got It
               </button>
             </div>

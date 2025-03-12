@@ -1,4 +1,4 @@
-import {createContext, useContext, useState} from 'react'
+import {createContext, useContext, useState, useEffect} from 'react'
 
 const OverlayContext = createContext()
 
@@ -15,6 +15,20 @@ export function OverlayProvider({children}) {
     setIsOpen(false)
     setContent(null)
   }
+
+  useEffect(() => {
+    const handleKeyDown = e => {
+      if (e.key === 'Escape') hideOverlay()
+    }
+
+    if (isOpen) {
+      document.addEventListener('keydown', handleKeyDown)
+    } else {
+      document.removeEventListener('keydown', handleKeyDown)
+    }
+
+    return () => document.removeEventListener('keydown', handleKeyDown)
+  }, [isOpen])
 
   return (
     <OverlayContext.Provider value={{isOpen, showOverlay, hideOverlay, setContent}}>

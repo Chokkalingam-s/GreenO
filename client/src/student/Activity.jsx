@@ -37,7 +37,7 @@ export default function Activity() {
         </div>
       ) : (
         <div className='max-h-[calc(100vh-150px)] min-h-0 overflow-y-auto'>
-          <div className='round grid grid-cols-2 gap-2 md:grid-cols-4'>
+          <div className='round grid grid-cols-2 gap-2 py-10 md:grid-cols-4 md:py-0'>
             {images.map((image, index) => (
               <div
                 key={image.id}

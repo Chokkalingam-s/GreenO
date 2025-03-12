@@ -215,7 +215,7 @@ select:disabled {
 }
 
 .resource {
-  @apply grid grid-cols-1 md:w-8/12 w-11/12;
+  @apply mb-10 grid w-11/12 grid-cols-1 md:w-8/12;
   > div {
     @apply glassy round sh mx-auto px-4 py-2;
     section {

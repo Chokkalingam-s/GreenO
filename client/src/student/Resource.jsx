@@ -1,12 +1,39 @@
 import {useState} from 'react'
 import {plantGrowthData, videoData} from './data'
+import {useOverlay} from '../components/OverlayContext'
 
 export default function Resource() {
-  const [showModal, setShowModal] = useState(false)
-  const [currentSlide, setCurrentSlide] = useState(0)
+  const {showOverlay} = useOverlay()
+  const [, setCurrentSlide] = useState(0)
 
-  const handleClose = e => {
-    if (e.target.matches('.modal')) setShowModal(false)
+  const openModal = index => {
+    setCurrentSlide(index)
+    showOverlay(
+      <div className='flex flex-col p-2'>
+        <h3 className='head my-2'>{`Stage ${index + 1}`}</h3>
+        <p className='max-h-[50vh] overflow-y-auto px-4'>
+          {plantGrowthData[index].detailedContent}
+        </p>
+        <div className='mt-4 flex items-center justify-center gap-x-4'>
+          {index > 0 && (
+            <button onClick={() => openModal(index - 1)}>
+              <img src='/arrow-up-solid.svg' alt='Previous' className='icon -rotate-90' />
+            </button>
+          )}
+          {[...Array(3)].map((_, i) => (
+            <div
+              key={i}
+              className={`h-2 w-2 rounded-full ${i === index ? 'bg-primary' : 'bg-secondary'}`}
+            />
+          ))}
+          {index < 2 && (
+            <button onClick={() => openModal(index + 1)}>
+              <img src='/arrow-up-solid.svg' alt='Next' className='icon -rotate-[270deg]' />
+            </button>
+          )}
+        </div>
+      </div>
+    )
   }
 
   return (
@@ -22,12 +49,14 @@ export default function Resource() {
             <li>💧 Monitor soil moisture, avoid over-watering.</li>
           </ul>
         </section>
+
         <div className='line'></div>
+
         <section>
           <h2>Video Resources</h2>
           <div className='grid md:grid-cols-2'>
             {videoData.map(video => (
-              <div key={video.id} className='md:px-4 py-2'>
+              <div key={video.id} className='py-2 md:px-4'>
                 <iframe
                   className='round sh w-full'
                   height='200'
@@ -39,58 +68,23 @@ export default function Resource() {
             ))}
           </div>
         </section>
+
         <div className='line'></div>
+
         <section>
           <div className='mb-2 flex items-center justify-between'>
             <h2>Plant Growth Process</h2>
-            <button onClick={() => setShowModal(true)}>Learn More</button>
+            <button onClick={() => openModal(0)}>Learn More</button>
           </div>
-          <div className='relative grid grid-cols-1 gap-4 md:grid-cols-3'>
+          <div className='grid gap-4 md:grid-cols-3'>
             {plantGrowthData.map((data, index) => (
-              <div key={index} className='glassy_inline sh grid grid-cols-1 grid-rows-1 p-4'>
-                <div>
-                  <h3 className='mb-2 text-lg font-bold'>{data.title}</h3>
-                  <p>{data.description}</p>
-                </div>
+              <div key={index} className='glassy_inline sh p-4'>
+                <h3 className='mb-2 text-lg font-bold'>{data.title}</h3>
+                <p>{data.description}</p>
               </div>
             ))}
           </div>
         </section>
-
-        {showModal && (
-          <div
-            className='fixed inset-0 z-50 flex items-center justify-center bg-black/60'
-            onClick={handleClose}>
-            <div className='glassy round sh relative z-50 flex max-h-[80vh] max-w-[90vw] flex-col p-6 backdrop-blur-lg'>
-              <h3 className='head my-2'>{`Stage ${currentSlide + 1}`}</h3>
-              <p className='max-h-[50vh] overflow-y-auto px-4'>
-                {plantGrowthData[currentSlide].detailedContent}
-              </p>
-
-              <div className='mt-4 flex items-center justify-center gap-x-4'>
-                {currentSlide > 0 && (
-                  <button onClick={() => setCurrentSlide(currentSlide - 1)}>
-                    <img src='/arrow-up-solid.svg' alt='Previous' className='icon -rotate-90' />
-                  </button>
-                )}
-                {[...Array(3)].map((_, i) => (
-                  <div
-                    key={i}
-                    className={`h-2 w-2 rounded-full ${i === currentSlide ? 'bg-primary' : 'bg-secondary'}`}
-                  />
-                ))}
-                {currentSlide < 2 && (
-                  <button onClick={() => setCurrentSlide(currentSlide + 1)}>
-                    <img src='/arrow-up-solid.svg' alt='Next' className='icon -rotate-[270deg]' />
-                  </button>
-                )}
-                <button className='cancel btn_r' onClick={() => setShowModal(false)}>
-                  <img src='/xmark-solid.svg' alt='Close' />
-                </button>
-              </div>
-            </div>
-          </div>
-        )}
       </div>
     </div>
   )
