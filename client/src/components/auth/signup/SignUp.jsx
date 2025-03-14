@@ -10,6 +10,7 @@ const currentYear = new Date().getFullYear()
 const years = Array.from({length: 4}, (_, i) => currentYear + i)
 
 export default function StudentSignUp() {
+  const [step, setStep] = useState(1)
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
@@ -134,171 +135,220 @@ export default function StudentSignUp() {
   const handleSelectChange = (key, value) => {
     setFormData(f => ({...f, [key]: value}))
   }
+  const validateStep = () => {
+    if (step === 1) {
+      return name.trim() && email.trim() && password.trim() && !errors.email
+    }
+    if (step === 2) {
+      return (
+        formData.state &&
+        formData.district &&
+        mobileNumber.trim() &&
+        !errors.mobileNumber &&
+        (!secEmail || !errors.secEmail)
+      )
+    }
+    if (step === 3) {
+      return (
+        collegeName.trim() &&
+        formData.department &&
+        formData.yearOfGraduation &&
+        collegeRegisterNumber.trim() &&
+        !errors.collegeRegisterNumber &&
+        dob &&
+        !errors.dob &&
+        aadharNumber.trim() &&
+        !errors.aadharNumber
+      )
+    }
+    return true
+  }
+
+  const nextStep = () => {
+    if (validateStep()) {
+      setStep(prev => prev + 1)
+    } else {
+      alert('Please fill all required fields correctly before proceeding.')
+    }
+  }
+  const prevStep = () => {
+    setStep(prev => prev - 1)
+  }
 
   return (
     <div className='c relative z-20 h-screen'>
-      <div className='c_main py-2'>
+      <div className='glassy round md:c block w-11/12 py-2 md:w-1/2'>
         <img src='/treegrow.png' alt='Tree Grow' className='hidden w-1/2 md:block' />
         {!otpSent ? (
-          <form onSubmit={handleSubmit} className='px-4 md:w-1/2'>
+          <form onSubmit={handleSubmit} className='px-2 md:w-1/2'>
             <h2 className='head my-2 text-center md:my-0'>Student Sign Up</h2>
-            <FloatingLabelInput
-              type='text'
-              id='name'
-              value={name}
-              setValue={setName}
-              placeholder='Name'
-            />
-            <FloatingLabelInput
-              type='email'
-              id='email'
-              name='email'
-              value={email}
-              setValue={setEmail}
-              placeholder='Email (Primary)'
-              required
-            />
-            {errors.email && <small className='error'>{errors.email}</small>}
-            <FloatingLabelInput
-              type='password'
-              id='password'
-              name='password'
-              value={password}
-              setValue={setPassword}
-              placeholder='Password'
-              required
-            />
-            <span className='center w-full gap-x-2'>
-              <FloatingLabelSelect
-                id='state'
-                value={formData.state}
-                setValue={value => handleSelectChange('state', value)}>
-                <option value=''>State</option>
-                {statesRef.current.map((state, index) => (
-                  <option key={index} value={state}>
-                    {state}
-                  </option>
-                ))}
-              </FloatingLabelSelect>
 
-              <FloatingLabelSelect
-                id='district'
-                value={formData.district}
-                setValue={value => handleSelectChange('district', value)}>
-                <option value=''>District</option>
-                {districtsRef.current[statesRef.current.indexOf(formData.state)]?.map(
-                  (district, index) => (
-                    <option key={index} value={district}>
-                      {district}
-                    </option>
-                  )
-                )}
-              </FloatingLabelSelect>
-            </span>
-            <FloatingLabelInput
-              type='number'
-              id='mobileNumber'
-              name='mobileNumber'
-              value={mobileNumber}
-              setValue={setMobileNumber}
-              maxLength='10'
-              placeholder='Mobile Number'
-              required
-            />
-            {errors.mobileNumber && <small className='error'>{errors.mobileNumber}</small>}
-            <FloatingLabelInput
-              type='email'
-              id='secEmail'
-              name='secEmail'
-              value={secEmail}
-              setValue={setSecEmail}
-              placeholder='Secondary Email'
-            />
-            {errors.secEmail && <small className='error'>{errors.secEmail}</small>}
-            <FloatingLabelInput
-              type='text'
-              id='collegeName'
-              name='collegeName'
-              value={collegeName}
-              setValue={setCollegeName}
-              placeholder='College Name'
-              required
-            />
-            <span className='center gap-x-2'>
-              <FloatingLabelSelect
-                id='department'
-                value={formData.department}
-                setValue={value => handleSelectChange('department', value)}>
-                <option value=''>Department</option>
-                {departments.map(dept => (
-                  <option key={dept} value={dept}>
-                    {dept}
-                  </option>
-                ))}
-              </FloatingLabelSelect>
-
-              <FloatingLabelSelect
-                id='yearOfGraduation'
-                value={formData.yearOfGraduation}
-                setValue={value => handleSelectChange('yearOfGraduation', value)}>
-                <option value=''>Graduation Year</option>
-                {years.map(year => (
-                  <option key={year} value={year}>
-                    {year}
-                  </option>
-                ))}
-              </FloatingLabelSelect>
-            </span>
-            <FloatingLabelInput
-              type='text'
-              id='collegeRegisterNumber'
-              name='collegeRegisterNumber'
-              value={collegeRegisterNumber}
-              setValue={setCollegeRegisterNumber}
-              maxLength='12'
-              placeholder='College Register Number'
-              required
-            />
-            {errors.collegeRegisterNumber && (
-              <small className='error'>{errors.collegeRegisterNumber}</small>
+            {step === 1 && (
+              <>
+                <FloatingLabelInput
+                  type='text'
+                  id='name'
+                  value={name}
+                  setValue={setName}
+                  placeholder='Name'
+                />
+                <FloatingLabelInput
+                  type='email'
+                  id='email'
+                  value={email}
+                  setValue={setEmail}
+                  placeholder='Email (Primary)'
+                  required
+                />
+                {errors.email && <small className='error'>{errors.email}</small>}
+                <FloatingLabelInput
+                  type='password'
+                  id='password'
+                  value={password}
+                  setValue={setPassword}
+                  placeholder='Password'
+                  required
+                />
+              </>
             )}
 
-            <FloatingLabelInput
-              type='date'
-              id='dob'
-              name='dob'
-              value={dob}
-              setValue={setDob}
-              required
-            />
-            {errors.dob && <small className='error'>{errors.dob}</small>}
+            {step === 2 && (
+              <>
+                <span className='center w-full gap-x-2'>
+                  <FloatingLabelSelect
+                    id='state'
+                    value={formData.state}
+                    setValue={value => handleSelectChange('state', value)}>
+                    <option value=''>State</option>
+                    {statesRef.current.map((state, index) => (
+                      <option key={index} value={state}>
+                        {state}
+                      </option>
+                    ))}
+                  </FloatingLabelSelect>
+                  <FloatingLabelSelect
+                    id='district'
+                    value={formData.district}
+                    setValue={value => handleSelectChange('district', value)}>
+                    <option value=''>District</option>
+                    {districtsRef.current[statesRef.current.indexOf(formData.state)]?.map(
+                      (district, index) => (
+                        <option key={index} value={district}>
+                          {district}
+                        </option>
+                      )
+                    )}
+                  </FloatingLabelSelect>
+                </span>
+                <FloatingLabelInput
+                  type='number'
+                  id='mobileNumber'
+                  value={mobileNumber}
+                  setValue={setMobileNumber}
+                  placeholder='Mobile Number'
+                  required
+                />
+                {errors.mobileNumber && <small className='error'>{errors.mobileNumber}</small>}
+                <FloatingLabelInput
+                  type='email'
+                  id='secEmail'
+                  value={secEmail}
+                  setValue={setSecEmail}
+                  placeholder='Secondary Email'
+                />
+                {errors.secEmail && <small className='error'>{errors.secEmail}</small>}
+              </>
+            )}
 
-            <FloatingLabelInput
-              type='text'
-              id='aadharNumber'
-              name='aadharNumber'
-              value={aadharNumber}
-              setValue={setAadharNumber}
-              maxLength='12'
-              placeholder='Aadhar Number'
-              required
-            />
-            {errors.aadharNumber && <small className='error'>{errors.aadharNumber}</small>}
-
-            <span className='flex items-center justify-end gap-x-4'>
-              <button type='submit' className='center' disabled={loading}>
-                {loading ? (
-                  'Loading...'
-                ) : (
-                  <>
-                    <p>Finish</p>
-                  </>
+            {step === 3 && (
+              <>
+                <FloatingLabelInput
+                  type='text'
+                  id='collegeName'
+                  value={collegeName}
+                  setValue={setCollegeName}
+                  placeholder='College Name'
+                  required
+                />
+                <span className='center gap-x-2'>
+                  <FloatingLabelSelect
+                    id='department'
+                    value={formData.department}
+                    setValue={value => handleSelectChange('department', value)}>
+                    <option value=''>Department</option>
+                    {departments.map(dept => (
+                      <option key={dept} value={dept}>
+                        {dept}
+                      </option>
+                    ))}
+                  </FloatingLabelSelect>
+                  <FloatingLabelSelect
+                    id='yearOfGraduation'
+                    value={formData.yearOfGraduation}
+                    setValue={value => handleSelectChange('yearOfGraduation', value)}>
+                    <option value=''>Graduation Year</option>
+                    {years.map(year => (
+                      <option key={year} value={year}>
+                        {year}
+                      </option>
+                    ))}
+                  </FloatingLabelSelect>
+                </span>
+                <FloatingLabelInput
+                  type='text'
+                  id='collegeRegisterNumber'
+                  value={collegeRegisterNumber}
+                  setValue={setCollegeRegisterNumber}
+                  placeholder='College Register Number'
+                  required
+                />
+                {errors.collegeRegisterNumber && (
+                  <small className='error'>{errors.collegeRegisterNumber}</small>
                 )}
-              </button>
-              <button className='cancel btn' onClick={() => navigate('/signin')}>
-                Cancel
-              </button>
-            </span>
+                <FloatingLabelInput type='date' id='dob' value={dob} setValue={setDob} required />
+                {errors.dob && <small className='error'>{errors.dob}</small>}
+                <FloatingLabelInput
+                  type='text'
+                  id='aadharNumber'
+                  value={aadharNumber}
+                  setValue={setAadharNumber}
+                  placeholder='Aadhar Number'
+                  required
+                />
+                {errors.aadharNumber && <small className='error'>{errors.aadharNumber}</small>}
+              </>
+            )}
+
+            {/* Navigation Buttons with Dots in Between */}
+            <div className='mt-4 flex items-center justify-between'>
+              {step > 1 ? (
+                <button type='button' onClick={prevStep}>
+                  Back
+                </button>
+              ) : (
+                <div />
+              )}
+
+              {/* Step Indicator Dots */}
+              <div className='flex space-x-2'>
+                {[...Array(3)].map((_, i) => (
+                  <div
+                    key={i}
+                    className={`h-2.5 w-2.5 rounded-full ${step === i + 1 ? 'bg-primary' : 'bg-secondary'}`}
+                  />
+                ))}
+              </div>
+
+              {step < 3 ? (
+                <button type='button' onClick={nextStep}>
+                  Next
+                </button>
+              ) : (
+                <button type='submit' disabled={loading}>
+                  {loading ? 'Loading...' : 'Finish'}
+                </button>
+              )}
+            </div>
           </form>
         ) : (
           <form onSubmit={verifyOtp}>
@@ -309,11 +359,9 @@ export default function StudentSignUp() {
               value={otp}
               setValue={setOtp}
               maxLength='6'
-              placeholder='Aadhar Number'
+              placeholder='OTP'
             />
-            <button type='submit' className='float-end'>
-              Verify
-            </button>
+            <button type='submit'>Verify</button>
           </form>
         )}
       </div>

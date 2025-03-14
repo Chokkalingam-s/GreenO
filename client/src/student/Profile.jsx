@@ -37,7 +37,7 @@ export default function Profile() {
 
     const fetchStudentDetails = async () => {
       try {
-        const response = await axios.get(`${backendUrl}/student-get-user-details`, {
+        const response = await axios.get(`http://localhost:5000/student-get-user-details`, {
           headers: {Authorization: `Bearer ${token}`}
         })
         setStudentDetails(response.data)
@@ -106,6 +106,13 @@ export default function Profile() {
     )
   }
 
+  function getDepartmentAbbreviation(department) {
+    return department
+      .split(/\s|-/)
+      .map(word => word[0].toUpperCase())
+      .join('')
+  }
+
   return (
     <>
       {loading ? (
@@ -120,42 +127,38 @@ export default function Profile() {
             <div className='order-2 md:order-none'>
               <div className='c profile_tab flex-col gap-y-2'>
                 <div>
-                  <h4 className='bdr ml-4'>Personal Details</h4>
+                  <h4 className='bdr ml-4'>Personal Information</h4>
                   <ul className='ml-4 space-y-2'>
                     <DetailItem label='Name' value={studentDetails.name} icon='person' />
                     <DetailItem label='Email' value={studentDetails.email} icon='email' />
                     <DetailItem
-                      label='Mobile Number'
+                      label='Phone Number'
                       value={studentDetails.mobileNumber}
                       icon='phone'
                     />
                     <DetailItem
-                      label='Aadhar Number'
+                      label='Aadhar ID'
                       value={studentDetails.aadharNumber}
                       icon='aad_card'
                     />
                   </ul>
                 </div>
                 <div>
-                  <h4 className='bdr ml-4'>Educational Details</h4>
+                  <h4 className='bdr ml-4'>Academic Information</h4>
                   <ul className='ml-4 space-y-2'>
-                    <DetailItem
-                      label='College Name'
-                      value={studentDetails.collegeName}
-                      icon='school'
-                    />
+                    <DetailItem label='College' value={studentDetails.collegeName} icon='school' />
                     <DetailItem
                       label='Department'
                       value={studentDetails.department}
                       icon='domain'
                     />
                     <DetailItem
-                      label='College Register Number'
+                      label='Register Number'
                       value={studentDetails.collegeRegisterNumber}
                       icon='badge'
                     />
                     <DetailItem
-                      label='Year of Graduation'
+                      label='Graduation Year'
                       value={studentDetails.yearOfGraduation}
                       icon='calendar'
                     />
@@ -199,15 +202,25 @@ export default function Profile() {
                 </button>
               </div>
 
-              <div className='glassy round c col-span-2 row-span-2 mb-2 h-72 flex-col px-2 text-center md:mb-0 md:h-auto'>
+              <div className='glassy round col-span-2 row-span-2 mb-2 flex h-72 flex-col justify-center px-2 pl-6 md:mb-0 md:h-auto'>
                 <h3 className='text-2xl font-extrabold'>{studentDetails?.collegeName}</h3>
-                <p className='text-accent/80 mt-2 text-sm tracking-wide'>Institution Rankings</p>
+                <p className='text-accent/80 mt-2 text-sm tracking-wide'>Rankings</p>
 
-                <div className='mt-4 flex w-full max-w-xs flex-col gap-4'>
+                <div className='mt-4 ml-6 flex w-full max-w-xs flex-col gap-4'>
                   {[
-                    {label: '🎓 District Rank', color: 'text-primary', max: 10},
-                    {label: '🏆 State Rank', color: 'text-accent', max: 100},
-                    {label: '🌍 India Rank', color: 'text-secondary', max: 500}
+                    {
+                      label: `${getDepartmentAbbreviation(studentDetails.department)} Rank`,
+                      color: 'text-primary',
+                      max: 10
+                    },
+                    {label: 'College Rank', color: 'text-accent', max: 50},
+                    {
+                      label: `${getDepartmentAbbreviation(studentDetails.department)} Dept Rank`,
+                      color: 'text-secondary',
+                      max: 20
+                    },
+                    {label: 'State Rank', color: 'text-accent', max: 100},
+                    {label: 'Country Rank', color: 'text-secondary', max: 500}
                   ].map(({label, color, max}, i) => (
                     <div
                       key={i}
@@ -227,10 +240,8 @@ export default function Profile() {
         </div>
       ) : (
         <div className='c glassy round flex-col p-4 text-center'>
-          <h2 className='text-2xl font-bold'>Profile Data Not Available</h2>
-          <p className='mt-2 text-lg'>
-            There was an issue fetching your profile. Please try again later.
-          </p>
+          <h2 className='text-2xl font-bold'>Profile Data Unavailable</h2>
+          <p className='mt-2 text-lg'>Unable to retrieve your profile. Please try again later.</p>
           <div className='mt-4'>
             <LogOut />
           </div>
@@ -248,11 +259,11 @@ export default function Profile() {
                 <span className='cert'>
                   <h2>{studentDetails.name}</h2>
                   <p>
-                    From Department of <strong>{studentDetails.department}</strong>,
+                    From the <strong>{studentDetails.department}</strong> Department,
                     <strong> {studentDetails.collegeName}</strong>
                   </p>
                   <p>
-                    Successfully Grown a Tree in academic period
+                    Successfully Grown a Tree during the academic period
                     <br />
                     <strong>
                       {studentDetails.yearOfGraduation - 4} - {studentDetails.yearOfGraduation}

@@ -40,7 +40,7 @@
     @apply round c min-w-24 gap-x-2 px-4 py-2 transition-all duration-150 ease-in-out;
   }
   .cancel {
-    @apply sh bg-red-500 hover:translate-y-0.5 active:translate-y-0 active:shadow-none;
+    @apply sh bg-red-500 uppercase hover:translate-y-0.5 active:translate-y-0 active:shadow-none;
 
     &:hover,
     &:focus,
@@ -215,7 +215,7 @@ select:disabled {
 }
 
 .resource {
-  @apply mb-10 grid w-11/12 grid-cols-1 md:w-8/12;
+  @apply mb-10 grid w-11/12 grid-cols-1 md:mb-0 md:w-8/12;
   > div {
     @apply glassy round sh mx-auto px-4 py-2;
     section {

@@ -38,7 +38,7 @@ export function OverlayProvider({children}) {
           className='c fixed inset-0 z-50 bg-black/50 p-4 backdrop-blur-md'
           onClick={hideOverlay}>
           <div
-            className='glassy round sh relative flex aspect-auto max-h-[90vh] w-full max-w-[90vw] flex-col items-center justify-center p-4 sm:w-3/4 md:w-1/2 lg:w-1/3 xl:w-1/4'
+            className='glassy round sh relative aspect-auto max-h-[90vh] flex-col c p-2 w-full md:w-1/2'
             onClick={e => e.stopPropagation()}>
             {content}
             <button className='btn cancel btn_r absolute top-2 right-2 p-1' onClick={hideOverlay}>
