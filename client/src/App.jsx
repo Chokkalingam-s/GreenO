@@ -22,7 +22,10 @@ import {
   SuperDashBoard,
   SuperProgress,
   InComplete,
-  Statistics
+  Statistics,
+  AdminProfile,
+  HodProfile,
+  SupAdProfile
 } from './exp_components'
 import {ToastContainer} from 'react-toastify'
 import {useAuth} from './components/auth/signin/AuthContext'
@@ -56,6 +59,33 @@ export default function App() {
               <Route path='/signup' element={<StudentSignUp />} />
               <Route path='/admin-signup' element={<AdminSignUp />} />
 
+              {/* Profile Redirection Based on Role */}
+              {/* Profile Route with Layout */}
+              <Route
+                element={
+                  <ProtectedRoute isAuthenticated={isAuthenticated}>
+                    <Layout />
+                  </ProtectedRoute>
+                }>
+                <Route
+                  path='/profile'
+                  element={
+                    role === 'student' ? (
+                      <Profile />
+                    ) : role === 'admin' ? (
+                      <AdminProfile />
+                    ) : role === 'hod' ? (
+                      <HodProfile />
+                    ) : role === 'superAdmin' ? (
+                      <SupAdProfile />
+                    ) : (
+                      <Navigate to='/' replace />
+                    )
+                  }
+                />
+              </Route>
+
+              {/* Student Routes */}
               <Route
                 element={
                   <ProtectedRouteWrapper
@@ -69,10 +99,11 @@ export default function App() {
                 <Route path='/activities' element={<Activity />} />
                 <Route path='/upload' element={<UploadSnaps />} />
                 <Route path='/guide' element={<Resource />} />
-                <Route path='/profile' element={<Profile />} />
+                <Route path='/student-profile' element={<Profile />} />
                 <Route path='/contact' element={<ContactUs />} />
               </Route>
 
+              {/* Admin Routes */}
               <Route
                 element={
                   <ProtectedRouteWrapper
@@ -85,8 +116,10 @@ export default function App() {
                 <Route path='/admin' element={<AdminHome />} />
                 <Route path='/progress' element={<OverallProgress />} />
                 <Route path='/inComplete' element={<InComplete />} />
+                <Route path='/admin-profile' element={<AdminProfile />} />
               </Route>
 
+              {/* HOD Routes */}
               <Route
                 element={
                   <ProtectedRouteWrapper
@@ -99,8 +132,10 @@ export default function App() {
                 <Route path='/department' element={<DepartmentHome />} />
                 <Route path='/department-progress' element={<DepartmentProgress />} />
                 <Route path='/report' element={<OverallStatus />} />
+                <Route path='/hod-profile' element={<DepartmentHome />} />
               </Route>
 
+              {/* Super Admin Routes */}
               <Route
                 element={
                   <ProtectedRouteWrapper
@@ -113,6 +148,7 @@ export default function App() {
                 <Route path='/dashboard' element={<SuperDashBoard />} />
                 <Route path='/overall-progress' element={<SuperProgress />} />
                 <Route path='/statistics' element={<Statistics />} />
+                <Route path='/superadmin-profile' element={<SuperDashBoard />} />
               </Route>
             </Routes>
           </Suspense>

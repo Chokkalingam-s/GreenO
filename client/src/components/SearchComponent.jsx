@@ -27,15 +27,13 @@ export default function SearchComponent({data, onFilter}) {
         'collegeName',
         'district',
         'state'
-      ].some(key =>
-        student[key]?.toString().toLowerCase().includes(lowerCaseQuery)
-      )
+      ].some(key => student[key]?.toString().toLowerCase().includes(lowerCaseQuery))
     )
     onFilter(filteredData)
   }
 
   return (
-    <span className='relative search-list'>
+    <span className='search-list relative'>
       <input
         type='text'
         placeholder='Search by Name or Register Number'

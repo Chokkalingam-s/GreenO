@@ -5,7 +5,7 @@ import jsPDF from 'jspdf'
 import {toast} from 'react-toastify'
 import {LogOut} from '../exp_components'
 import {Gauge, gaugeClasses} from '@mui/x-charts'
-import {icons} from './data'
+import {icons} from '../exported_data'
 
 export default function Profile() {
   const [studentDetails, setStudentDetails] = useState(null)
@@ -118,7 +118,7 @@ export default function Profile() {
       {loading ? (
         <p>Loading...</p>
       ) : studentDetails ? (
-        <div className='center relative top-0 mb-16 flex-col md:mb-0'>
+        <div className='mb-12 flex-col md:mb-0'>
           <h3 className='mb-4 pl-6 text-2xl font-bold tracking-wide md:col-span-2 md:text-center'>
             {studentDetails?.name}&apos;s Profile
           </h3>
@@ -166,7 +166,6 @@ export default function Profile() {
                 </div>
               </div>
             </div>
-
             <span className='mx-auto grid h-full w-11/12 grid-cols-2 grid-rows-[auto_1fr_1fr] gap-2 md:w-full'>
               <div className='glassy round h-56'>
                 <Gauge
@@ -201,12 +200,11 @@ export default function Profile() {
                   Certificate
                 </button>
               </div>
-
               <div className='glassy round col-span-2 row-span-2 mb-2 flex h-72 flex-col justify-center px-2 pl-6 md:mb-0 md:h-auto'>
                 <h3 className='text-2xl font-extrabold'>{studentDetails?.collegeName}</h3>
                 <p className='text-accent/80 mt-2 text-sm tracking-wide'>Rankings</p>
 
-                <div className='mt-4 ml-6 flex w-full max-w-xs flex-col gap-4'>
+                <div className='mt-4 flex w-full flex-col gap-4'>
                   {[
                     {
                       label: `${getDepartmentAbbreviation(studentDetails.department)} Rank`,
@@ -222,26 +220,26 @@ export default function Profile() {
                     {label: 'State Rank', color: 'text-accent', max: 100},
                     {label: 'Country Rank', color: 'text-secondary', max: 500}
                   ].map(({label, color, max}, i) => (
-                    <div
-                      key={i}
-                      className='flex items-center justify-between text-lg font-semibold'>
+                    <div key={i} className='flex items-center justify-between text-lg md:w-3/5'>
                       <p>{label}</p>
                       <p className={`${color} font-bold`}>#{Math.floor(Math.random() * max) + 1}</p>
                     </div>
                   ))}
                 </div>
-
-                <div className='absolute right-2 bottom-2 flex w-11/12 items-center justify-end'>
+                <div className='absolute right-2 bottom-2 hidden w-11/12 items-center justify-end md:flex'>
                   <LogOut />
                 </div>
               </div>
             </span>
           </div>
+          <div className='flex w-full items-center justify-start md:hidden'>
+            <LogOut full={true} />
+          </div>
         </div>
       ) : (
         <div className='c glassy round flex-col p-4 text-center'>
           <h2 className='text-2xl font-bold'>Profile Data Unavailable</h2>
-          <p className='mt-2 text-lg'>Unable to retrieve your profile. Please try again later.</p>
+          <p className='mt-2 text-lg'>Unable to retrieve your profile. Please try again.</p>
           <div className='mt-4'>
             <LogOut />
           </div>

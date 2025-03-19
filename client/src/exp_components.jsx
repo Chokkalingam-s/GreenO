@@ -29,7 +29,14 @@ const InComplete = lazy(() => import('./principal/InComplete'))
 const Pagination = lazy(() => import('./components/Pagination'))
 const Statistics = lazy(() => import('./superAdmin/Statistics'))
 const FloatingLabelInput = lazy(() => import('./components/FloatingLabelInput'))
+const AdminProfile = lazy(() => import('./principal/AdminProfile'))
+const HodProfile = lazy(() => import('./hod/HodProfile'))
+const SupAdProfile = lazy(()=> import('./superAdmin/SupAdProfile'))
+
+
 export {
+  HodProfile,
+  SupAdProfile,
   FloatingLabelInput,
   Statistics,
   Pagination,
@@ -53,6 +60,7 @@ export {
   UploadSnaps,
   Resource,
   Profile,
+  AdminProfile,
   ProtectedRoute,
   OverallProgress,
   DepartmentHome,

@@ -10,7 +10,7 @@ export default function Activity() {
   const {showOverlay} = useOverlay()
 
   const openModal = src => {
-    showOverlay(<img src={src} alt='Full view' className='h-1/2 w-1/2' />)
+    showOverlay(<img src={src} alt='Full view' className='aspect-auto w-1/2' />)
   }
 
   useEffect(() => {

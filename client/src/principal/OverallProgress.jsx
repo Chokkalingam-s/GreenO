@@ -25,19 +25,14 @@ export default function OverallProgress() {
         console.log('Fetching overall progress data...')
         const token = localStorage.getItem('token')
         if (!token) throw new Error('Authentication token is missing.')
-        const response = await axios.get(
-          `${backendUrl}/college-overall-progress`,
-          {
-            headers: {
-              Authorization: `Bearer ${token}`
-            }
+        const response = await axios.get(`${backendUrl}/college-overall-progress`, {
+          headers: {
+            Authorization: `Bearer ${token}`
           }
-        )
+        })
         const updatedData = response.data.map(item => ({
           ...item,
-          progress: ((item.uploadCount / item.studentCount) * 100).toFixed(
-            2
-          )
+          progress: ((item.uploadCount / item.studentCount) * 100).toFixed(2)
         }))
         setData(updatedData)
         setFilteredData(updatedData)
@@ -49,7 +44,7 @@ export default function OverallProgress() {
     }
 
     fetchData()
-  }, [])
+  }, [backendUrl])
 
   const toggleSortDirection = field => {
     setSortDirection(prev => (prev === 'asc' ? 'desc' : 'asc'))
@@ -96,12 +91,10 @@ export default function OverallProgress() {
 
   return (
     <div className='progress_table'>
-      <div className='w-full grid grid-cols-1 md:grid-cols-[38%_30%_15%_15%] items-center justify-end gap-x-2'>
+      <div className='grid w-full grid-cols-1 items-center justify-end gap-x-2 md:grid-cols-[38%_30%_15%_15%]'>
         <h2 className='head'>Progress</h2>
         <SearchComponent data={data} onFilter={setFilteredData} />
-        <select
-          onChange={e => handleItemPerPage(Number(e.target.value))}
-          value={itemPerPage}>
+        <select onChange={e => handleItemPerPage(Number(e.target.value))} value={itemPerPage}>
           <option value={25}>No of items per page</option>
           <option value={25}>25</option>
           <option value={50}>50</option>
@@ -109,9 +102,7 @@ export default function OverallProgress() {
           <option value={100}>100</option>
         </select>
 
-        <button onClick={() => exportToPDF(tableRef.current)}>
-          Export to PDF
-        </button>
+        <button onClick={() => exportToPDF(tableRef.current)}>Export to PDF</button>
       </div>
       {loading ? (
         <Splashscreen />
@@ -124,75 +115,46 @@ export default function OverallProgress() {
                   <tr>
                     <th>Sno</th>
                     <th>Department Name</th>
-                    <th
-                      onClick={() => toggleSortDirection('studentCount')}>
+                    <th onClick={() => toggleSortDirection('studentCount')}>
                       <div>
                         <span>Total Students</span>
-                        {renderSortIcon(
-                          'studentCount',
-                          sortField,
-                          sortDirection
-                        )}
+                        {renderSortIcon('studentCount', sortField, sortDirection)}
                       </div>
                     </th>
                     <th onClick={() => toggleSortDirection('uploadCount')}>
                       <div>
                         <span>No. of Plants in Process</span>
-                        {renderSortIcon(
-                          'uploadCount',
-                          sortField,
-                          sortDirection
-                        )}
+                        {renderSortIcon('uploadCount', sortField, sortDirection)}
                       </div>
                     </th>
                     <th onClick={() => toggleYearSort('firstYear')}>
                       <div>
                         <span>1st Year</span>
-                        {renderSortIcon(
-                          'firstYear',
-                          sortField,
-                          sortDirection
-                        )}
+                        {renderSortIcon('firstYear', sortField, sortDirection)}
                       </div>
                     </th>
                     <th onClick={() => toggleYearSort('secondYear')}>
                       <div>
                         <span>2nd Year</span>
-                        {renderSortIcon(
-                          'secondYear',
-                          sortField,
-                          sortDirection
-                        )}
+                        {renderSortIcon('secondYear', sortField, sortDirection)}
                       </div>
                     </th>
                     <th onClick={() => toggleYearSort('thirdYear')}>
                       <div>
                         <span>3rd Year</span>
-                        {renderSortIcon(
-                          'thirdYear',
-                          sortField,
-                          sortDirection
-                        )}
+                        {renderSortIcon('thirdYear', sortField, sortDirection)}
                       </div>
                     </th>
                     <th onClick={() => toggleYearSort('fourthYear')}>
                       <div>
                         <span>4th Year</span>
-                        {renderSortIcon(
-                          'fourthYear',
-                          sortField,
-                          sortDirection
-                        )}
+                        {renderSortIcon('fourthYear', sortField, sortDirection)}
                       </div>
                     </th>
                     <th onClick={() => toggleSortDirection('progress')}>
                       <div>
                         <span>Progress</span>
-                        {renderSortIcon(
-                          'progress',
-                          sortField,
-                          sortDirection
-                        )}
+                        {renderSortIcon('progress', sortField, sortDirection)}
                       </div>
                     </th>
                   </tr>
@@ -201,7 +163,7 @@ export default function OverallProgress() {
                   {paginatedData.map((data, index) => (
                     <tr key={data.department}>
                       <td>{index + 1}</td>
-                      <td className='text-left pl-2'>{data.department}</td>
+                      <td className='pl-2 text-left'>{data.department}</td>
                       <td>{data.studentCount}</td>
                       <td>{data.uploadCount}</td>
                       <td>{data.yearCounts.firstYear}</td>
@@ -215,7 +177,7 @@ export default function OverallProgress() {
               </table>
             </span>
           </div>
-          <div className='w-full mt-2'>
+          <div className='mt-2 w-full'>
             <Pagination
               currentPage={currentPage}
               totalPages={totalPages}
@@ -241,7 +203,7 @@ export default function OverallProgress() {
                 {data.map((data, index) => (
                   <tr key={data.department}>
                     <td>{index + 1}</td>
-                    <td className='text-left pl-2'>{data.department}</td>
+                    <td className='pl-2 text-left'>{data.department}</td>
                     <td>{data.studentCount}</td>
                     <td>{data.uploadCount}</td>
                     <td>{data.yearCounts.firstYear}</td>

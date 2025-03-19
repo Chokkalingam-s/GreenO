@@ -1,5 +1,5 @@
 import {useState} from 'react'
-import {plantGrowthData, videoData} from './data'
+import {plantGrowthData, videoData} from '../exported_data'
 import {useOverlay} from '../components/OverlayContext'
 
 export default function Resource() {

@@ -5,7 +5,7 @@ import jsPDF from 'jspdf'
 import {toast} from 'react-toastify'
 import {LogOut} from '../exp_components'
 import {Gauge, gaugeClasses} from '@mui/x-charts'
-import {icons} from './data'
+import {icons} from '../exported_data'
 
 export default function Profile() {
   const [studentDetails, setStudentDetails] = useState(null)
@@ -95,67 +95,70 @@ export default function Profile() {
     const {viewBox, path} = icons[icon]
     return (
       <li className='flex items-center gap-2'>
-        <svg viewBox={viewBox}>
+        <svg viewBox={viewBox} className='fill-secondary icon'>
           <path d={path}></path>
         </svg>
         <div>
-          <p className='text-sm uppercase'>{label}</p>
+          <p className='text-secondary text-sm font-bold uppercase'>{label}</p>
           <p className='font-medium'>{value}</p>
         </div>
       </li>
     )
   }
 
+  function getDepartmentAbbreviation(department) {
+    return department
+      .split(/\s|-/)
+      .map(word => word[0].toUpperCase())
+      .join('')
+  }
+
   return (
     <>
       {loading ? (
         <p>Loading...</p>
-      ) : (
-        <div className='center relative top-16 mb-36 flex-col md:top-0 md:mb-0'>
-          <h3 className='mb-2 w-full pl-6 text-2xl md:col-span-2 md:text-center'>
+      ) : studentDetails ? (
+        <div className='mb-12 flex-col md:mb-0'>
+          <h3 className='mb-4 pl-6 text-2xl font-bold tracking-wide md:col-span-2 md:text-center'>
             {studentDetails?.name}&apos;s Profile
           </h3>
 
-          <div className='grid w-full grid-cols-1 md:max-w-[65vw] md:grid-cols-[40%_60%] md:gap-x-4'>
+          <div className='grid w-full grid-cols-1 md:max-w-[65vw] md:grid-cols-[40%_60%] md:gap-x-2'>
             <div className='order-2 md:order-none'>
-              <div className='center profile_tab flex-col gap-y-4'>
+              <div className='c profile_tab flex-col gap-y-2'>
                 <div>
-                  <h4 className='bdr'>Personal Details</h4>
-                  <ul className='space-y-2'>
+                  <h4 className='bdr ml-4'>Personal Information</h4>
+                  <ul className='ml-4 space-y-2'>
                     <DetailItem label='Name' value={studentDetails.name} icon='person' />
                     <DetailItem label='Email' value={studentDetails.email} icon='email' />
                     <DetailItem
-                      label='Mobile Number'
+                      label='Phone Number'
                       value={studentDetails.mobileNumber}
                       icon='phone'
                     />
                     <DetailItem
-                      label='Aadhar Number'
+                      label='Aadhar ID'
                       value={studentDetails.aadharNumber}
                       icon='aad_card'
                     />
                   </ul>
                 </div>
                 <div>
-                  <h4 className='bdr'>Educational Details</h4>
-                  <ul className='space-y-4'>
-                    <DetailItem
-                      label='College Name'
-                      value={studentDetails.collegeName}
-                      icon='school'
-                    />
+                  <h4 className='bdr ml-4'>Academic Information</h4>
+                  <ul className='ml-4 space-y-2'>
+                    <DetailItem label='College' value={studentDetails.collegeName} icon='school' />
                     <DetailItem
                       label='Department'
                       value={studentDetails.department}
                       icon='domain'
                     />
                     <DetailItem
-                      label='College Register Number'
+                      label='Register Number'
                       value={studentDetails.collegeRegisterNumber}
                       icon='badge'
                     />
                     <DetailItem
-                      label='Year of Graduation'
+                      label='Graduation Year'
                       value={studentDetails.yearOfGraduation}
                       icon='calendar'
                     />
@@ -163,8 +166,8 @@ export default function Profile() {
                 </div>
               </div>
             </div>
-            <span className='mx-auto grid h-full w-11/12 grid-cols-2 grid-rows-[auto_1fr_1fr] gap-x-4 gap-y-6 md:w-full md:gap-y-4'>
-              <div className='glassy round out h-52'>
+            <span className='mx-auto grid h-full w-11/12 grid-cols-2 grid-rows-[auto_1fr_1fr] gap-2 md:w-full'>
+              <div className='glassy round h-56'>
                 <Gauge
                   value={progressPercentage}
                   min={0}
@@ -174,38 +177,71 @@ export default function Profile() {
                   thickness={4}
                   cornerRadius='50%'
                   sx={{
-                    [`& .${gaugeClasses.valueText}`]: {
-                      fontSize: '1.6rem',
-                      fontWeight: 'bold'
-                    },
-                    [`& .MuiGauge-bar`]: {fill: '#4caf50'},
-                    [`& .${gaugeClasses.valueArc}`]: {fill: '#aad8b0'},
-                    [`& .MuiGauge-background`]: {fill: '#e0e0e0'}
+                    [`& .${gaugeClasses.valueText}`]: {fontSize: '1.8rem', fontWeight: 'bold'},
+                    [`& .${gaugeClasses.valueText} tspan`]: {fill: '#E3F6E5'},
+                    [`& .MuiGauge-bar`]: {fill: '#E3F6E5'},
+                    [`& .${gaugeClasses.valueArc}`]: {fill: '#E3F6E5'}
                   }}
                   text={() => `${progressPercentage1} / ${totalImages}`}
                 />
                 <p className='absolute bottom-1.5 w-full text-center text-lg'>My Progress</p>
               </div>
 
-              <div className='center glassy round out h-52 flex-col'>
+              <div className='c glassy round h-56 flex-col gap-y-2'>
                 <img
                   src='/Certificate.png'
                   alt='certificate icon'
-                  className='round w-11/12 md:w-8/12'
+                  className='round w-10/12 md:w-9/12'
                 />
                 <button
                   onClick={handleClick}
-                  className={`${progressPercentage < 100 ? 'disabled' : ''} w-11/12`}>
+                  disabled={progressPercentage < 100}
+                  className='w-11/12'>
                   Certificate
                 </button>
               </div>
+              <div className='glassy round col-span-2 row-span-2 mb-2 flex h-72 flex-col justify-center px-2 pl-6 md:mb-0 md:h-auto'>
+                <h3 className='text-2xl font-extrabold'>{studentDetails?.collegeName}</h3>
+                <p className='text-accent/80 mt-2 text-sm tracking-wide'>Rankings</p>
 
-              <div className='glassy round out col-span-2 row-span-2 mb-6 p-2 md:mb-0'>
-                <div className='absolute bottom-4 flex w-11/12 items-center justify-end'>
+                <div className='mt-4 flex w-full flex-col gap-4'>
+                  {[
+                    {
+                      label: `${getDepartmentAbbreviation(studentDetails.department)} Rank`,
+                      color: 'text-primary',
+                      max: 10
+                    },
+                    {label: 'College Rank', color: 'text-accent', max: 50},
+                    {
+                      label: `${getDepartmentAbbreviation(studentDetails.department)} Dept Rank`,
+                      color: 'text-secondary',
+                      max: 20
+                    },
+                    {label: 'State Rank', color: 'text-accent', max: 100},
+                    {label: 'Country Rank', color: 'text-secondary', max: 500}
+                  ].map(({label, color, max}, i) => (
+                    <div key={i} className='flex items-center justify-between text-lg md:w-3/5'>
+                      <p>{label}</p>
+                      <p className={`${color} font-bold`}>#{Math.floor(Math.random() * max) + 1}</p>
+                    </div>
+                  ))}
+                </div>
+                <div className='absolute right-2 bottom-2 hidden w-11/12 items-center justify-end md:flex'>
                   <LogOut />
                 </div>
               </div>
             </span>
+          </div>
+          <div className='flex w-full items-center justify-start md:hidden'>
+            <LogOut full={true} />
+          </div>
+        </div>
+      ) : (
+        <div className='c glassy round flex-col p-4 text-center'>
+          <h2 className='text-2xl font-bold'>Profile Data Unavailable</h2>
+          <p className='mt-2 text-lg'>Unable to retrieve your profile. Please try again.</p>
+          <div className='mt-4'>
+            <LogOut />
           </div>
         </div>
       )}
@@ -221,15 +257,14 @@ export default function Profile() {
                 <span className='cert'>
                   <h2>{studentDetails.name}</h2>
                   <p>
-                    From Department of
-                    <strong> {studentDetails.department}</strong>,
+                    From the <strong>{studentDetails.department}</strong> Department,
                     <strong> {studentDetails.collegeName}</strong>
                   </p>
                   <p>
-                    Successfully Grown a Tree in academic period
+                    Successfully Grown a Tree during the academic period
                     <br />
                     <strong>
-                      {studentDetails.yearOfGraduation - 4} -{studentDetails.yearOfGraduation}
+                      {studentDetails.yearOfGraduation - 4} - {studentDetails.yearOfGraduation}
                     </strong>
                   </p>
                 </span>
@@ -238,7 +273,7 @@ export default function Profile() {
               )}
             </div>
           </div>
-          <div className='glassy round out absolute bottom-1/4 left-1/2 grid w-10/12 -translate-x-1/2 grid-cols-2 gap-x-10 md:bottom-20 md:w-fit md:grid-cols-1 md:px-2'>
+          <div className='glassy round absolute bottom-1/4 left-1/2 grid w-10/12 -translate-x-1/2 grid-cols-2 gap-x-10 md:bottom-20 md:w-fit md:grid-cols-1 md:px-2'>
             <button onClick={handleGenerateCertificate}>Download PDF</button>
             <button onClick={() => setModal(!modal)} className='cancel'>
               Cancel

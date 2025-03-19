@@ -94,15 +94,15 @@ export default function UploadSnaps() {
   }
 
   return (
-    <div className='glassy round sh m-4 aspect-square w-11/12 px-4 py-2 md:w-1/3'>
+    <div className='glassy round sh m-4 aspect-square w-11/12 p-2 md:w-1/3'>
       <span>
         {closeModal ? (
           <div className='mt-6'>
             <h1 className='mb-4 text-center text-2xl font-bold md:text-3xl'>Guidelines</h1>
-            <div className='space-y-6 px-4 py-3 md:px-8'>
+            <div className='space-y-6 p-2'>
               <h3 className='text-lg font-semibold md:text-xl'>Uploading Plant Photo Guidelines</h3>
               <div>
-                <h3 className='text-lg font-semibold text-green-600 md:text-xl'>✅ Do&apos;s</h3>
+                <h3 className='text-secondary font-semibold'>✅ Do&apos;s</h3>
                 <ul className='list-disc space-y-1 pl-4 md:pl-6'>
                   <li>Capture the full plant</li>
                   <li>Use natural daylight</li>
@@ -110,7 +110,7 @@ export default function UploadSnaps() {
                 </ul>
               </div>
               <div>
-                <h3 className='text-lg font-semibold text-red-500 md:text-xl'>❌ Don&apos;ts</h3>
+                <h3 className='text-xl font-semibold text-red-200'>❌ Don&apos;ts</h3>
                 <ul className='list-disc space-y-1 pl-4 md:pl-6'>
                   <li>Avoid blurry images</li>
                   <li>No filters or edits</li>
@@ -119,8 +119,8 @@ export default function UploadSnaps() {
               </div>
             </div>
             {locationDenied && (
-              <div className='border-secondary sh mt-6 rounded-lg border-2 p-4 text-center'>
-                📍 <strong>Kindly allow location access</strong> to ensure accurate verification.
+              <div className='border-secondary sh round mt-6 border-2 py-4 text-center'>
+                📍<strong>Kindly allow location access</strong> to ensure accurate verification.
               </div>
             )}
             <div className='mt-4 flex items-center justify-end'>

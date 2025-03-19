@@ -36,22 +36,17 @@ export default function DepartmentProgress() {
   }
 
   const handlePageChange = direction => {
-    if (direction === 'next' && currentPage < totalPages)
-      setCurrentPage(currentPage + 1)
-    if (direction === 'prev' && currentPage > 1)
-      setCurrentPage(currentPage - 1)
+    if (direction === 'next' && currentPage < totalPages) setCurrentPage(currentPage + 1)
+    if (direction === 'prev' && currentPage > 1) setCurrentPage(currentPage - 1)
   }
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(
-          `${backendUrl}/departmentwise-progress-data`,
-          {
-            headers: {
-              Authorization: `Bearer ${token}`
-            }
+        const response = await axios.get(`${backendUrl}/departmentwise-progress-data`, {
+          headers: {
+            Authorization: `Bearer ${token}`
           }
-        )
+        })
         setData(response.data)
       } catch (error) {
         console.error('Error fetching department progress:', error)
@@ -59,7 +54,7 @@ export default function DepartmentProgress() {
     }
 
     fetchData()
-  }, [token])
+  }, [backendUrl, token])
 
   const sortData = field => {
     const sorted = [...filteredData].sort((a, b) => {
@@ -73,21 +68,17 @@ export default function DepartmentProgress() {
 
   return (
     <div className='progress_table'>
-      <div className='w-full grid grid-cols-1 md:grid-cols-[22%_35%_15%_15%_10%] items-center justify-center gap-x-2'>
+      <div className='grid w-full grid-cols-1 items-center justify-center gap-x-2 md:grid-cols-[22%_35%_15%_15%_10%]'>
         <h2 className='head'>Progress</h2>
         <SearchComponent data={data} onFilter={setFilteredData} />
-        <select
-          onChange={e => handleYearFilter(Number(e.target.value))}
-          value={yearFilter}>
+        <select onChange={e => handleYearFilter(Number(e.target.value))} value={yearFilter}>
           <option value={0}>All Years</option>
           <option value={1}>1st Year</option>
           <option value={2}>2nd Year</option>
           <option value={3}>3rd Year</option>
           <option value={4}>4th Year</option>
         </select>
-        <select
-          onChange={e => handleItemPerPage(Number(e.target.value))}
-          value={itemPerPage}>
+        <select onChange={e => handleItemPerPage(Number(e.target.value))} value={itemPerPage}>
           <option value={25}>No of items per page</option>
           <option value={25}>25</option>
           <option value={50}>50</option>
@@ -95,9 +86,7 @@ export default function DepartmentProgress() {
           <option value={100}>100</option>
         </select>
 
-        <button onClick={() => exportToPDF(tableRef.current)}>
-          Export to PDF
-        </button>
+        <button onClick={() => exportToPDF(tableRef.current)}>PDF Export</button>
       </div>
       <div className='progress'>
         <span className='details_table'>
@@ -109,12 +98,7 @@ export default function DepartmentProgress() {
                 <th>Current Year</th>
                 <th
                   onClick={() =>
-                    toggleSortDirection(
-                      'uploadCount',
-                      setSortDirection,
-                      setSortField,
-                      sortData
-                    )
+                    toggleSortDirection('uploadCount', setSortDirection, setSortField, sortData)
                   }
                   className='center'>
                   Upload Count
@@ -135,7 +119,7 @@ export default function DepartmentProgress() {
           </table>
         </span>
       </div>
-      <div className='w-full mt-2'>
+      <div className='mt-2 w-full'>
         <Pagination
           currentPage={currentPage}
           totalPages={totalPages}
