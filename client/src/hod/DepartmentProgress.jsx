@@ -100,7 +100,7 @@ export default function DepartmentProgress() {
                   onClick={() =>
                     toggleSortDirection('uploadCount', setSortDirection, setSortField, sortData)
                   }
-                  className='center'>
+                  className='c gap-x-2'>
                   Upload Count
                   {renderSortIcon('uploadCount', sortField, sortDirection)}
                 </th>

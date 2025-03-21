@@ -78,7 +78,7 @@ export default function Resource() {
           </div>
           <div className='grid gap-4 md:grid-cols-3'>
             {plantGrowthData.map((data, index) => (
-              <div key={index} className='glassy_inline sh p-4'>
+              <div key={index} className='glassy_inline sh round p-4'>
                 <h3 className='mb-2 text-lg font-bold'>{data.title}</h3>
                 <p>{data.description}</p>
               </div>

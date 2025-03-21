@@ -39,7 +39,7 @@ export default function StudentHome() {
   ]
 
   return (
-    <section className='mx-auto max-w-screen-lg flex-col px-4'>
+    <section className='mx-auto max-w-screen-lg flex-col px-4 my-10'>
       <header className='h-44 text-center md:mt-6 md:h-32'>
         <h2 className='text-3xl font-bold tracking-wide'>
           {activeSDG === 15 ? '🌍' : '🌏'} Sustainable Development Goal {activeSDG}

@@ -1,7 +1,8 @@
 export const chart_color = {
   '& .MuiChartsAxis-tickLabel, & .MuiChartsAxis-label, & .MuiChartsLegend-series text': {
     fill: '#fff !important',
-    color: '#fff'
+    color: '#fff',
+    fontSize: '1rem !important'
   }
 }
 

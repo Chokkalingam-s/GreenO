@@ -35,7 +35,7 @@ export function OverlayProvider({children}) {
       {children}
       {isOpen && (
         <div
-          className='c fixed inset-0 z-50 bg-black/50 p-4 backdrop-blur-md'
+          className='c fixed inset-0 z-50 bg-black/50 backdrop-blur-md'
           onClick={hideOverlay}>
           <div
             className='glassy round sh relative aspect-auto max-h-[90vh] flex-col c p-2 w-full md:w-1/2'

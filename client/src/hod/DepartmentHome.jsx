@@ -42,14 +42,28 @@ export default function DepartmentHome() {
         title={['Total Students', 'Total Saplings Posted']}
       />
       <div className='glassy_inline round mx-auto w-full'>
-        <h2 className='p-2 text-xl'>Year-wise Student Distribution</h2>
+        <h2 className='text-secondary/80 p-2 text-xl'>Year-wise Student Distribution</h2>
         <BarChart
           dataset={chartData}
           xAxis={[{scaleType: 'band', dataKey: 'year'}]}
-          series={[{dataKey: 'students', label: 'Number of Students', color: colors[1]}]}
+          series={[
+            {
+              dataKey: 'students',
+              label: 'Number of Students',
+              color: 'url(#barGradient)'
+            }
+          ]}
           sx={chart_color}
           {...chartSetting}
         />
+        <svg width='0' height='0'>
+          <defs>
+            <linearGradient id='barGradient' x1='0' x2='0' y1='1' y2='0'>
+              <stop offset='0%' stopColor='#3E8E42cc' />
+              <stop offset='100%' stopColor='#ADFFAFcc' />
+            </linearGradient>
+          </defs>
+        </svg>
       </div>
     </div>
   )

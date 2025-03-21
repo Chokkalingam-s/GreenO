@@ -1,6 +1,7 @@
 import {useState} from 'react'
 import {useNavigate} from 'react-router-dom'
 import {FloatingLabelInput} from '../components/FloatingLabelInput'
+import {useAuth} from '../components/auth/signin/AuthContext'
 
 export default function ContactUs() {
   const [problem, setProblem] = useState('')
@@ -8,6 +9,7 @@ export default function ContactUs() {
   const [images, setImages] = useState([])
   const navigate = useNavigate()
   const [preview, setPreview] = useState(false)
+  const {role} = useAuth()
 
   const handleImageUpload = e => {
     const files = Array.from(e.target.files)
@@ -15,6 +17,24 @@ export default function ContactUs() {
     setPreview(true)
   }
 
+  const handleCancel = () => {
+    switch (role) {
+      case 'student':
+        navigate('/home')
+        break
+      case 'admin':
+        navigate('/admin')
+        break
+      case 'hod':
+        navigate('/department')
+        break
+      case 'superAdmin':
+        navigate('/dashboard')
+        break
+      default:
+        navigate('/signin')
+    }
+  }
   return (
     <div className='main relative top-2 flex flex-col p-4'>
       <h2 className='head'>Contact Us</h2>
@@ -56,7 +76,7 @@ export default function ContactUs() {
 
           <span className='float-end flex space-x-2'>
             <button type='submit'>Submit</button>
-            <button type='submit' className='cancel round sh btn' onClick={() => navigate('/home')}>
+            <button type='button' className='cancel round sh btn' onClick={handleCancel}>
               Cancel
             </button>
           </span>

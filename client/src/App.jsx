@@ -83,6 +83,7 @@ export default function App() {
                     )
                   }
                 />
+                <Route path='/contact' element={<ContactUs />} />
               </Route>
 
               {/* Student Routes */}

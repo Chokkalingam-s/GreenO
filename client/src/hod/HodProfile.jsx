@@ -99,12 +99,12 @@ export default function Profile() {
       {loading ? (
         <p>Loading...</p>
       ) : studentDetails ? (
-        <div className='mb-12 flex-col md:mb-0'>
+        <div className='mb-12 w-1/2 flex-col md:mb-0'>
           <h3 className='mb-4 pl-6 text-2xl font-bold tracking-wide md:col-span-2 md:text-center'>
             {studentDetails?.name}&apos;s Profile
           </h3>
 
-          <div className='grid w-full grid-cols-1 md:max-w-[65vw] md:grid-cols-[40%_60%] md:gap-x-2'>
+          <div className='grid w-full grid-cols-1 md:max-w-[65vw] md:grid-cols-2 md:gap-x-2'>
             {/* Personal & Academic Information */}
             <div className='order-2 md:order-none'>
               <div className='c profile_tab flex-col gap-y-2'>
@@ -127,25 +127,40 @@ export default function Profile() {
                 </div>
               </div>
             </div>
-
             {/* Student & Tree Information */}
-            <span className='mx-auto grid h-full w-11/12 grid-cols-2 grid-rows-[auto_1fr_1fr] gap-2 md:w-full'>
-              <div className='glassy round flex h-56 flex-col justify-center'>
-                <p className='text-lg font-bold'>Student Strength</p>
-                <p className='text-2xl font-extrabold'>{studentDetails.uploadCount}</p>
-              </div>
-
-              <div className='glassy round flex h-56 flex-col justify-center'>
-                <p className='text-lg font-bold'>Trees Planted</p>
-                <p className='text-2xl font-extrabold'>{studentDetails.uploadCount * 2}</p>
-              </div>
-
-              <div className='glassy round col-span-2 flex h-56 flex-col justify-center'>
-                <p className='text-lg font-bold'>Certificates Earned</p>
-                <p className='text-2xl font-extrabold'>{studentDetails.uploadCount * 1.5}</p>
-              </div>
+            <span className='info_card mx-auto grid h-full w-11/12 grid-cols-2 grid-rows-2 gap-2 md:w-full'>
+              {[
+                {
+                  viewBox: icons['person'].viewBox,
+                  iconPath:icons['person'].path,
+                  title: 'Student Strength',
+                  value: studentDetails.uploadCount
+                },
+                // {
+                //   viewBox: ,
+                //   iconPath:'',
+                //   title: 'Trees Planted',
+                //   value: studentDetails.uploadCount * 2
+                // },
+                {
+                  title: 'Certificates Earned',
+                  value: studentDetails.uploadCount * 1.5
+                }
+              ].map((item, index) => (
+                <div key={index} className='_detail'>
+                  {item.iconPath && (
+                    <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'>
+                      <path d={item.iconPath} />
+                    </svg>
+                  )}
+                  <span>
+                    <p className='text-lg font-bold'>{item.title}</p>
+                    <p className='text-2xl font-extrabold'>{item.value}</p>
+                  </span>
+                </div>
+              ))}
             </span>
-
+            );
             {/* Rankings */}
             <div className='glassy round col-span-2 row-span-2 mb-2 flex h-72 flex-col justify-center px-2 pl-6 md:mb-0 md:h-auto'>
               <h3 className='text-2xl font-extrabold'>{studentDetails?.collegeName}</h3>
@@ -163,10 +178,13 @@ export default function Profile() {
                   </div>
                 ))}
               </div>
+              <div className='absolute right-2 bottom-2 hidden w-11/12 items-center justify-end md:flex'>
+                <LogOut />
+              </div>
             </div>
           </div>
 
-          <div className='flex w-full items-center justify-start'>
+          <div className='flex w-full items-center justify-start md:hidden'>
             <LogOut full={true} />
           </div>
         </div>
