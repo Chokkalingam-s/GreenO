@@ -46,7 +46,7 @@ export default function InComplete() {
     }
 
     fetchIncompleteStudents()
-  }, [])
+  }, [backendUrl])
 
   const sortData = field => {
     const sorted = [...filteredData].sort((a, b) => {
@@ -69,17 +69,14 @@ export default function InComplete() {
 
   return (
     <div className='progress_table'>
-      <div className='w-full grid grid-cols-1 md:grid-cols-[22%_25%_15%_12%_12%_10%] items-center justify-end gap-x-2'>
-        <h2 className='head'>Incomplete Uploads</h2>
+      <div className='grid w-full items-center justify-end gap-x-2 md:grid-cols-[20%_24%_14%_12%_12%_10%]'>
+        <h2 className='head bg-black'>Incomplete Uploads</h2>
         <SearchComponent data={students} onFilter={setFilteredData} />
         <select
           onChange={e => {
             const semester = e.target.value
             setFilteredData(
-              students.filter(
-                student =>
-                  !semester || student.currentSemester === Number(semester)
-              )
+              students.filter(student => !semester || student.currentSemester === Number(semester))
             )
           }}
           defaultValue=''>
@@ -94,9 +91,7 @@ export default function InComplete() {
           onChange={e => {
             const year = e.target.value
             setFilteredData(
-              students.filter(
-                student => !year || student.currentYear === Number(year)
-              )
+              students.filter(student => !year || student.currentYear === Number(year))
             )
           }}
           defaultValue=''>
@@ -115,9 +110,7 @@ export default function InComplete() {
           <option value={25}>25</option>
           <option value={50}>50</option>
         </select>
-        <button onClick={() => exportToPDF(tableRef.current)}>
-          Export to PDF
-        </button>
+        <button onClick={() => exportToPDF(tableRef.current)}>PDF Export</button>
       </div>
       <div className='progress'>
         <span className='details_table'>
@@ -130,9 +123,7 @@ export default function InComplete() {
                 <th>Department</th>
                 <th>Current Semester</th>
                 <th>Current Year</th>
-                <th
-                  onClick={() => toggleSortDirection('uploadCount')}
-                  className='center'>
+                <th onClick={() => toggleSortDirection('uploadCount')} className='center'>
                   Upload Count
                   {renderSortIcon('uploadCount', sortField, sortDirection)}
                 </th>
@@ -154,7 +145,7 @@ export default function InComplete() {
           </table>
         </span>
       </div>
-      <div className='w-full mt-2'>
+      <div className='mt-2 w-full'>
         <Pagination
           currentPage={currentPage}
           totalPages={totalPages}

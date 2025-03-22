@@ -253,7 +253,7 @@ article .banner {
 }
 .details_table {
   table {
-    @apply w-full table-fixed border-collapse text-center;
+    @apply w-full border-collapse text-center;
   }
   thead {
     @apply bg-primary sticky top-0 z-20 backdrop-blur-lg;
@@ -263,14 +263,14 @@ article .banner {
     @apply px-1 py-2;
   }
   th {
-    @apply font-semibold tracking-wide;
+    @apply tracking-wide whitespace-nowrap;
     &:nth-child(5),
     &:nth-child(6),
     &:nth-child(7) {
       @apply text-center;
     }
     div {
-      @apply flex items-center justify-between;
+      @apply flex items-center justify-between gap-x-2;
     }
   }
   tbody {

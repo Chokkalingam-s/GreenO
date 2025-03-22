@@ -90,7 +90,7 @@ export default function DepartmentProgress() {
       </div>
       <div className='progress'>
         <span className='details_table'>
-          <table>
+          <table className='table-fixed'>
             <thead>
               <tr>
                 <th>Name</th>

@@ -91,7 +91,7 @@ export default function OverallProgress() {
 
   return (
     <div className='progress_table'>
-      <div className='grid w-full grid-cols-1 items-center justify-end gap-x-2 md:grid-cols-[38%_30%_15%_15%]'>
+      <div className='grid w-full grid-cols-1 items-center justify-end gap-x-2 md:grid-cols-[38%_30%_16%_15%]'>
         <h2 className='head'>Progress</h2>
         <SearchComponent data={data} onFilter={setFilteredData} />
         <select onChange={e => handleItemPerPage(Number(e.target.value))} value={itemPerPage}>
@@ -102,7 +102,7 @@ export default function OverallProgress() {
           <option value={100}>100</option>
         </select>
 
-        <button onClick={() => exportToPDF(tableRef.current)}>Export to PDF</button>
+        <button onClick={() => exportToPDF(tableRef.current)}>PDF Export</button>
       </div>
       {loading ? (
         <Splashscreen />
@@ -117,43 +117,43 @@ export default function OverallProgress() {
                     <th>Department Name</th>
                     <th onClick={() => toggleSortDirection('studentCount')}>
                       <div>
-                        <span>Total Students</span>
+                        <p>Total Students</p>
                         {renderSortIcon('studentCount', sortField, sortDirection)}
                       </div>
                     </th>
                     <th onClick={() => toggleSortDirection('uploadCount')}>
                       <div>
-                        <span>No. of Plants in Process</span>
+                        <p>No. of Plants in Process</p>
                         {renderSortIcon('uploadCount', sortField, sortDirection)}
                       </div>
                     </th>
                     <th onClick={() => toggleYearSort('firstYear')}>
                       <div>
-                        <span>1st Year</span>
+                        <p>1st Year</p>
                         {renderSortIcon('firstYear', sortField, sortDirection)}
                       </div>
                     </th>
                     <th onClick={() => toggleYearSort('secondYear')}>
                       <div>
-                        <span>2nd Year</span>
+                        <p>2nd Year</p>
                         {renderSortIcon('secondYear', sortField, sortDirection)}
                       </div>
                     </th>
                     <th onClick={() => toggleYearSort('thirdYear')}>
                       <div>
-                        <span>3rd Year</span>
+                        <p>3rd Year</p>
                         {renderSortIcon('thirdYear', sortField, sortDirection)}
                       </div>
                     </th>
                     <th onClick={() => toggleYearSort('fourthYear')}>
                       <div>
-                        <span>4th Year</span>
+                        <p>4th Year</p>
                         {renderSortIcon('fourthYear', sortField, sortDirection)}
                       </div>
                     </th>
                     <th onClick={() => toggleSortDirection('progress')}>
                       <div>
-                        <span>Progress</span>
+                        <p>Progress</p>
                         {renderSortIcon('progress', sortField, sortDirection)}
                       </div>
                     </th>
