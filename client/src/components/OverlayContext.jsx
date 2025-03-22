@@ -1,4 +1,5 @@
 import {createContext, useContext, useState, useEffect} from 'react'
+import CloseButton from './CloseButton'
 
 const OverlayContext = createContext()
 
@@ -34,16 +35,12 @@ export function OverlayProvider({children}) {
     <OverlayContext.Provider value={{isOpen, showOverlay, hideOverlay, setContent}}>
       {children}
       {isOpen && (
-        <div
-          className='c fixed inset-0 z-50 bg-black/50 backdrop-blur-md'
-          onClick={hideOverlay}>
+        <div className='c fixed inset-0 z-50 bg-black/50 backdrop-blur-md' onClick={hideOverlay}>
           <div
-            className='glassy round sh relative aspect-auto max-h-[90vh] flex-col c p-2 w-full md:w-1/2'
+            className='glassy round sh c relative aspect-auto max-h-[90vh] w-full flex-col p-2 md:w-1/2'
             onClick={e => e.stopPropagation()}>
             {content}
-            <button className='btn cancel btn_r absolute top-2 right-2 p-1' onClick={hideOverlay}>
-              <img src='/xmark-solid.svg' alt='Close' className='h-6 w-6' />
-            </button>
+            <CloseButton onClick={hideOverlay} />
           </div>
         </div>
       )}

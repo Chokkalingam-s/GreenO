@@ -2,6 +2,7 @@ import {useState} from 'react'
 import {useNavigate} from 'react-router-dom'
 import {FloatingLabelInput} from '../components/FloatingLabelInput'
 import {useAuth} from '../components/auth/signin/AuthContext'
+import CloseButton from '../components/CloseButton'
 
 export default function ContactUs() {
   const [problem, setProblem] = useState('')
@@ -40,8 +41,8 @@ export default function ContactUs() {
       <h2 className='head'>Contact Us</h2>
       <p className='my-2'>Have an issue or suggestion? Let us know</p>
 
-      <div className={`${preview ? 'flex' : ''} w-full gap-4`}>
-        <div className={`round ${preview ? 'w-1/2' : ''}`}>
+      <div className={`${preview ? 'md:flex' : ''} w-full gap-4`}>
+        <div className={`round ${preview ? 'mt-2 w-full md:w-1/2' : ''}`}>
           <FloatingLabelInput
             type='text'
             id='problem'
@@ -54,7 +55,7 @@ export default function ContactUs() {
             value={description}
             onChange={e => setDescription(e.target.value)}
             placeholder='Description'
-            rows='5'
+            rows='4'
             className='round border-secondary w-full border-2 border-solid p-2'
           />
           <label className='mb-2 text-lg font-medium'>
@@ -74,19 +75,17 @@ export default function ContactUs() {
             />
           </div>
 
-          <span className='float-end flex space-x-2'>
-            <button type='submit'>Submit</button>
-            <button type='button' className='cancel round sh btn' onClick={handleCancel}>
-              Cancel
-            </button>
-          </span>
+          <button type='submit' className='w-full'>
+            Submit
+          </button>
+          <CloseButton onClick={handleCancel} />
         </div>
 
         {preview && images.length > 0 ? (
-          <div className='round w-1/2 -translate-y-4 p-2'>
+          <div className='round c mt-4 flex-col p-2 md:mt-0 md:w-1/2 md:-translate-y-8'>
             <h2 className='text-lg'>Preview</h2>
-            <div className='max-h-80 overflow-y-auto px-1'>
-              <div className='mt-2 grid grid-cols-2 gap-2'>
+            <div className='max-h-40 overflow-y-auto px-1 md:max-h-80'>
+              <div className='mt-2 grid grid-cols-2 place-items-center gap-2'>
                 {images.map((img, index) => (
                   <img
                     key={index}

@@ -83,7 +83,7 @@
     @apply h-5 w-5;
   }
   .round {
-    @apply rounded-3xl;
+    @apply rounded-2xl;
   }
   .sh {
     @apply shadow-2xl;
