@@ -36,7 +36,7 @@ export default function SearchComponent({data, onFilter}) {
     <span className='search-list relative'>
       <input
         type='text'
-        placeholder='Search by Name or Register Number'
+        placeholder='Search by Name or Reg. no.'
         value={query}
         onChange={handleSearch}
         className='placeholder:text-accent pl-10'

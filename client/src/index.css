@@ -410,6 +410,9 @@ article .banner {
 }
 .progress_table {
   @apply c_main max-h-[90vh] flex-col;
+  > div:first-child {
+    @apply grid w-full items-center justify-end gap-x-2;
+  }
   svg {
     @apply icon fill-white;
   }

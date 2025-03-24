@@ -5,6 +5,7 @@ import {toast} from 'react-toastify'
 import {exportToPDF} from '../functions/export'
 import {renderSortIcon} from '../functions/renderIcon'
 import {usePagination} from '../hooks/usePagination'
+import FilterComponent from '../components/FilterComponent'
 
 export default function InComplete() {
   const [students, setStudents] = useState([])
@@ -27,14 +28,11 @@ export default function InComplete() {
   useEffect(() => {
     const fetchIncompleteStudents = async () => {
       try {
-        const response = await axios.get(
-          `${backendUrl}/incomplete`,
-          {
-            headers: {
-              Authorization: `Bearer ${localStorage.getItem('token')}`
-            }
+        const response = await axios.get(`${backendUrl}/incomplete`, {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem('token')}`
           }
-        )
+        })
         const studentData = response.data
         setStudents(studentData)
         setFilteredData(studentData)
@@ -69,47 +67,15 @@ export default function InComplete() {
 
   return (
     <div className='progress_table'>
-      <div className='grid w-full items-center justify-end gap-x-2 md:grid-cols-[20%_24%_14%_12%_12%_10%]'>
-        <h2 className='head bg-black'>Incomplete Uploads</h2>
+      <div className='md:grid-cols-[24%_24%_14%_12%_12%_10%]'>
+        <h2 className='head'>Incomplete Uploads</h2>
         <SearchComponent data={students} onFilter={setFilteredData} />
-        <select
-          onChange={e => {
-            const semester = e.target.value
-            setFilteredData(
-              students.filter(student => !semester || student.currentSemester === Number(semester))
-            )
-          }}
-          defaultValue=''>
-          <option value=''>Filter by Semester</option>
-          {[1, 2, 3, 4, 5, 6, 7, 8].map(sem => (
-            <option key={sem} value={sem}>
-              {sem} Semester
-            </option>
-          ))}
-        </select>
-        <select
-          onChange={e => {
-            const year = e.target.value
-            setFilteredData(
-              students.filter(student => !year || student.currentYear === Number(year))
-            )
-          }}
-          defaultValue=''>
-          <option value=''>Filter by Year</option>
-          {[1, 2, 3, 4].map(year => (
-            <option key={year} value={year}>
-              Year {year}
-            </option>
-          ))}
-        </select>
-        <select
-          onChange={e => handleItemsPerPageChange(Number(e.target.value))}
-          value={itemsPerPage}>
-          <option value={10}>Items per page</option>
-          <option value={10}>10</option>
-          <option value={25}>25</option>
-          <option value={50}>50</option>
-        </select>
+        <FilterComponent
+          students={students}
+          setFilteredData={setFilteredData}
+          itemsPerPage={itemsPerPage}
+          handleItemsPerPageChange={handleItemsPerPageChange}
+        />
         <button onClick={() => exportToPDF(tableRef.current)}>PDF Export</button>
       </div>
       <div className='progress'>
@@ -123,7 +89,7 @@ export default function InComplete() {
                 <th>Department</th>
                 <th>Current Semester</th>
                 <th>Current Year</th>
-                <th onClick={() => toggleSortDirection('uploadCount')} className='center'>
+                <th onClick={() => toggleSortDirection('uploadCount')} className='c'>
                   Upload Count
                   {renderSortIcon('uploadCount', sortField, sortDirection)}
                 </th>
