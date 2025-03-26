@@ -18,7 +18,7 @@ export default function SignIn() {
   const [showNewPasswordSetup, setShowNewPasswordSetup] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
   const backendUrl = import.meta.env.VITE_BACKEND_URL
-  const [passwordVisible, setPasswordVisible] = useState(false)
+  // const [passwordVisible, setPasswordVisible] = useState(false)
 
   const handleLogin = async e => {
     e.preventDefault()
@@ -134,20 +134,19 @@ export default function SignIn() {
                 value={email}
                 setValue={setEmail}
               />
-              <div>
-                <span className='relative'>
-                  <FloatingLabelInput
-                    placeholder='Password'
-                    value={password}
-                    setValue={setPassword}
-                    type={passwordVisible ? 'text' : 'password'}
-                  />
-                  {/* <EyeIcon isVisible={passwordVisible} onClick={handlePasswordToggle} /> */}
-                </span>
-                <p className='_link text-end text-xs' onClick={handleForgotPassword}>
-                  Forgot Password?
-                </p>
-              </div>
+              <span className='relative'>
+                <FloatingLabelInput
+                  placeholder='Password'
+                  value={password}
+                  setValue={setPassword}
+                  type='password'
+                  // type={passwordVisible ? 'text' : 'password'}
+                />
+                {/* <EyeIcon isVisible={passwordVisible} onClick={handlePasswordToggle} /> */}
+              </span>
+              <p className='_link text-end text-xs' onClick={handleForgotPassword}>
+                Forgot Password?
+              </p>
             </div>
             <span className='signin my-4 flex items-center justify-center'>
               <button

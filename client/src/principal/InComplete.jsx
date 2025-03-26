@@ -35,7 +35,7 @@ export default function InComplete() {
         })
         const studentData = response.data
         setStudents(studentData)
-        setFilteredData(studentData)
+        // setFilteredData(studentData)
       } catch (err) {
         toast.error(`Failed to fetch incomplete students. ${err}`)
       } finally {
@@ -67,7 +67,7 @@ export default function InComplete() {
 
   return (
     <div className='progress_table'>
-      <div className='md:grid-cols-[24%_24%_14%_12%_12%_10%]'>
+      <div className='md:grid-cols-[48%_24%_12%_14%]'>
         <h2 className='head'>Incomplete Uploads</h2>
         <SearchComponent data={students} onFilter={setFilteredData} />
         <FilterComponent
@@ -86,7 +86,7 @@ export default function InComplete() {
                 <th>S.No</th>
                 <th>Register Number</th>
                 <th>Student Name</th>
-                <th>Department</th>
+                <th className='text-left'>Department</th>
                 <th>Current Semester</th>
                 <th>Current Year</th>
                 <th onClick={() => toggleSortDirection('uploadCount')} className='c'>
@@ -100,7 +100,7 @@ export default function InComplete() {
                 <tr key={index}>
                   <td>{(currentPage - 1) * itemsPerPage + index + 1}</td>
                   <td className='text-left'>{student.regNo}</td>
-                  <td className='text-left'>{student.name}</td>
+                  <td>{student.name}</td>
                   <td className='text-left'>{student.department}</td>
                   <td>{student.currentSemester}</td>
                   <td>{student.currentYear}</td>
@@ -118,7 +118,7 @@ export default function InComplete() {
           onPageChange={handlePageChange}
         />
       </div>
-      <span className='tableRef'>
+      <span className='tableRef hidden'>
         <table ref={tableRef}>
           <thead>
             <tr>

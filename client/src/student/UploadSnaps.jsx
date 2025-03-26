@@ -94,7 +94,7 @@ export default function UploadSnaps() {
   }
 
   return (
-    <div className='glassy round sh m-4 aspect-square w-11/12 p-2 md:w-1/3'>
+    <div className='glassy round sh m-4 min-h-72 w-11/12 p-2 md:w-1/3'>
       <span>
         {closeModal ? (
           <div className='mt-6'>
@@ -124,45 +124,47 @@ export default function UploadSnaps() {
               </div>
             )}
             <div className='mt-4 flex items-center justify-end'>
-              <button onClick={() => setCloseModel(false)} disabled={locationDenied}>
+              <button onClick={() => setCloseModel(false)} disabled={false}>
                 Got It
               </button>
             </div>
           </div>
         ) : (
           <>
-            <h2 className='head text-lg md:text-xl'>Upload Image</h2>
+            <h2 className='head'>Upload Image</h2>
             {!isCaptchaValid ? (
               <Captcha onVerify={setIsCaptchaValid} />
             ) : (
               <div>
-                <div
-                  className='border-secondary bg-secondary/20 round center my-4 cursor-pointer border-2 border-dashed p-2 md:p-4'
-                  onClick={() => document.getElementById('file-input').click()}>
-                  <span>Choose File</span>
-                  <input
-                    id='file-input'
-                    type='file'
-                    onChange={handleFileChange}
-                    className='hidden'
-                    accept='image/*'
-                  />
-                </div>
-                {file && (
-                  <div className='mt-2 ml-4'>
-                    <img
-                      src={URL.createObjectURL(file)}
-                      alt='Preview'
-                      className='mx-auto mt-2 h-32 w-32 rounded-md object-contain md:h-48 md:w-48'
+                <div className='c'>
+                  <div
+                    className='border-secondary bg-secondary/20 round c mx-auto aspect-square w-4/12 cursor-pointer border-2 border-dashed p-2'
+                    onClick={() => document.getElementById('file-input').click()}>
+                    <span>Choose File</span>
+                    <input
+                      id='file-input'
+                      type='file'
+                      onChange={handleFileChange}
+                      className='hidden'
+                      accept='image/*'
                     />
-                    <p className='my-4 text-center text-sm md:text-base'>{file.name}</p>
                   </div>
-                )}
-                <span className='flex items-center justify-end'>
+                  {file && (
+                    <div className='c flex-col mr-6'>
+                      <img
+                        src={URL.createObjectURL(file)}
+                        alt='Preview'
+                        className='mx-auto h-32 w-32 object-contain '
+                      />
+                      <p className='mb-2 text-center text-sm md:text-base'>{file.name}</p>
+                    </div>
+                  )}
+                </div>
+                <span className='c mt-2'>
                   <button
                     onClick={handleUpload}
                     disabled={!isUploadEnabled}
-                    className={isUploadEnabled ? 'text-white' : 'text-gray-200'}>
+                    className={isUploadEnabled ? 'text-accent' : 'text-gray-200'}>
                     Upload
                   </button>
                 </span>

@@ -5,6 +5,7 @@ import {toggleSortDirection} from '../functions/sort'
 import {renderSortIcon} from '../functions/renderIcon'
 import {exportToPDF} from '../functions/export'
 import {Pagination} from '../exp_components'
+import FilterComponent from '../components/FilterComponent'
 
 export default function DepartmentProgress() {
   const [data, setData] = useState([])
@@ -68,7 +69,7 @@ export default function DepartmentProgress() {
 
   return (
     <div className='progress_table'>
-      <div className='grid w-full grid-cols-1 items-center justify-center gap-x-2 md:grid-cols-[22%_35%_15%_15%_10%]'>
+      <div className='md:grid-cols-[22%_35%_15%_15%_10%]'>
         <h2 className='head'>Progress</h2>
         <SearchComponent data={data} onFilter={setFilteredData} />
         <select onChange={e => handleYearFilter(Number(e.target.value))} value={yearFilter}>
@@ -93,6 +94,7 @@ export default function DepartmentProgress() {
           <table className='table-fixed'>
             <thead>
               <tr>
+                <th>S. No</th>
                 <th>Name</th>
                 <th>Register Number</th>
                 <th>Current Year</th>
@@ -109,6 +111,7 @@ export default function DepartmentProgress() {
             <tbody>
               {paginatedData.map((student, index) => (
                 <tr key={index}>
+                  <td>{index + 1}</td>
                   <td>{student.name}</td>
                   <td>{student.registerNumber}</td>
                   <td>{student.currentYear}</td>

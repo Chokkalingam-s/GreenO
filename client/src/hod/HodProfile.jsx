@@ -3,7 +3,7 @@ import axios from 'axios'
 import html2canvas from 'html2canvas'
 import jsPDF from 'jspdf'
 import {toast} from 'react-toastify'
-import {LogOut} from '../exp_components'
+import {CountUi, LogOut} from '../exp_components'
 import {icons} from '../exported_data'
 
 export default function Profile() {
@@ -128,39 +128,10 @@ export default function Profile() {
               </div>
             </div>
             {/* Student & Tree Information */}
-            <span className='info_card mx-auto grid h-full w-11/12 grid-cols-2 grid-rows-2 gap-2 md:w-full'>
-              {[
-                {
-                  viewBox: icons['person'].viewBox,
-                  iconPath:icons['person'].path,
-                  title: 'Student Strength',
-                  value: studentDetails.uploadCount
-                },
-                // {
-                //   viewBox: ,
-                //   iconPath:'',
-                //   title: 'Trees Planted',
-                //   value: studentDetails.uploadCount * 2
-                // },
-                {
-                  title: 'Certificates Earned',
-                  value: studentDetails.uploadCount * 1.5
-                }
-              ].map((item, index) => (
-                <div key={index} className='_detail'>
-                  {item.iconPath && (
-                    <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'>
-                      <path d={item.iconPath} />
-                    </svg>
-                  )}
-                  <span>
-                    <p className='text-lg font-bold'>{item.title}</p>
-                    <p className='text-2xl font-extrabold'>{item.value}</p>
-                  </span>
-                </div>
-              ))}
-            </span>
-            );
+            <CountUi
+              title={['Student Strength', 'Certificates Earned', 'Trees Planted']}
+              data={[studentDetails.uploadCount, studentDetails.uploadCount * 1.5]}
+            />
             {/* Rankings */}
             <div className='glassy round col-span-2 row-span-2 mb-2 flex h-72 flex-col justify-center px-2 pl-6 md:mb-0 md:h-auto'>
               <h3 className='text-2xl font-extrabold'>{studentDetails?.collegeName}</h3>

@@ -91,11 +91,11 @@ export default function OverallProgress() {
 
   return (
     <div className='progress_table'>
-      <div className='grid w-full grid-cols-1 items-center justify-end gap-x-2 md:grid-cols-[38%_30%_16%_15%]'>
-        <h2 className='head'>Progress</h2>
+      <div className='md:grid-cols-[38%_30%_16%_15%]'>
+        <h2 className='head pl-4'>Progress</h2>
         <SearchComponent data={data} onFilter={setFilteredData} />
         <select onChange={e => handleItemPerPage(Number(e.target.value))} value={itemPerPage}>
-          <option value={25}>No of items per page</option>
+          <option value={25}>Items per page</option>
           <option value={25}>25</option>
           <option value={50}>50</option>
           <option value={75}>75</option>
@@ -114,7 +114,7 @@ export default function OverallProgress() {
                 <thead>
                   <tr>
                     <th>Sno</th>
-                    <th>Department Name</th>
+                    <th className='text-left'>Department Name</th>
                     <th onClick={() => toggleSortDirection('studentCount')}>
                       <div>
                         <p>Total Students</p>

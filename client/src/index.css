@@ -104,7 +104,7 @@ body {
   }
 
   button:not(.cancel, .Toastify__close-button) {
-    @apply from-primary/30 to-secondary/20 text-accent border-primary/30 hover:border-secondary/40 sh round relative flex min-h-10 min-w-24 translate-y-0.5 place-items-center items-center justify-center gap-x-2 border bg-gradient-to-b px-4 py-2 text-sm font-semibold tracking-wide uppercase backdrop-blur-md transition-all duration-200 ease-in-out outline-none;
+    @apply from-primary/30 to-secondary/20 text-accent border-primary/30 hover:border-secondary/40 sh round relative flex min-h-10 min-w-24 place-items-center items-center justify-center gap-x-2 border bg-gradient-to-b px-4 py-2 text-sm font-semibold tracking-wide uppercase backdrop-blur-md transition-all duration-200 ease-in-out outline-none;
 
     &:hover,
     &:focus {
@@ -130,7 +130,7 @@ body {
   }
 
   nav a:not(.logo) {
-    @apply fill-accent hover:text-secondary hover:fill-secondary relative flex items-stretch justify-center gap-x-2 px-3 py-2 font-medium tracking-wide drop-shadow-md transition-all duration-150 ease-in-out outline-none;
+    @apply fill-accent hover:text-secondary hover:fill-secondary relative flex items-center justify-center gap-x-2 px-3 py-2 font-medium tracking-wide drop-shadow-md transition-all duration-150 ease-in-out outline-none md:items-stretch;
 
     &.active {
       @apply text-secondary fill-secondary;
@@ -169,7 +169,7 @@ body {
 input,
 textarea,
 select {
-  @apply border-secondary focus:border-accent hover:border-accent round my-2 w-full overflow-hidden border-2 border-solid bg-transparent px-4 py-2 text-base transition-all duration-200 ease-in-out outline-none placeholder:text-gray-600 placeholder:transition-opacity placeholder:duration-200 hover:shadow-lg hover:placeholder:opacity-0 focus:shadow-xl focus:outline-none focus:placeholder:opacity-0;
+  @apply border-secondary focus:border-accent hover:border-accent round w-full border-2 border-solid bg-transparent px-4 py-2 text-base transition-all duration-200 ease-in-out outline-none placeholder:text-gray-300 placeholder:transition-opacity placeholder:duration-200 hover:shadow-lg hover:placeholder:opacity-0 focus:shadow-xl focus:outline-none focus:placeholder:opacity-0;
 
   &:disabled {
     @apply pointer-events-none cursor-not-allowed opacity-50 ring-0 ring-offset-0;
@@ -411,7 +411,7 @@ article .banner {
 .progress_table {
   @apply c_main max-h-[90vh] flex-col;
   > div:first-child {
-    @apply grid w-full items-center justify-end gap-x-2;
+    @apply mb-2 grid w-full items-center justify-end gap-x-2;
   }
   svg {
     @apply icon fill-white;

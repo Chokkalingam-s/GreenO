@@ -200,7 +200,7 @@ export default function Profile() {
                   Certificate
                 </button>
               </div>
-              <div className='glassy round col-span-2 row-span-2 mb-2 flex h-72 flex-col justify-center px-2 pl-6 md:mb-0 md:h-auto'>
+              <div className='glassy round col-span-2 row-span-2 mb-2 flex h-72 flex-col justify-center px-2 pl-6 text-center md:mb-0 md:h-auto'>
                 <h3 className='text-2xl font-extrabold'>{studentDetails?.collegeName}</h3>
                 <p className='text-accent/80 mt-2 text-sm tracking-wide'>Rankings</p>
 
@@ -220,15 +220,17 @@ export default function Profile() {
                     {label: 'State Rank', color: 'text-accent', max: 100},
                     {label: 'Country Rank', color: 'text-secondary', max: 500}
                   ].map(({label, color, max}, i) => (
-                    <div key={i} className='flex items-center justify-between text-lg md:w-3/5'>
+                    <div
+                      key={i}
+                      className='flex items-center justify-between text-lg w-11/12 mx-auto'>
                       <p>{label}</p>
                       <p className={`${color} font-bold`}>#{Math.floor(Math.random() * max) + 1}</p>
                     </div>
                   ))}
                 </div>
-                <div className='absolute right-2 bottom-2 hidden w-11/12 items-center justify-end md:flex'>
+                {/* <div className='absolute right-2 bottom-2 hidden w-11/12 items-center justify-end md:flex'>
                   <LogOut />
-                </div>
+                </div> */}
               </div>
             </span>
           </div>

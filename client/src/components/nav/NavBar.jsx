@@ -110,7 +110,7 @@ export default function NavBar() {
       <span className='c flex w-full justify-end'>
         <div className='flex w-full items-center justify-evenly md:w-auto md:gap-x-4'>
           {navItems.map(({path, viewBox, icon, label}) => (
-            <NavLink key={path} to={path} className='c flex-col md:flex-row md:gap-1'>
+            <NavLink key={path} to={path} className='flex-col md:flex-row md:gap-1'>
               {viewBox && icon ? (
                 <svg xmlns='http://www.w3.org/2000/svg' viewBox={viewBox} className='icon'>
                   <path d={icon}></path>

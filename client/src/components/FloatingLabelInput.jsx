@@ -1,6 +1,14 @@
-export const FloatingLabelInput = ({type = 'text', id, placeholder, value, setValue, ...props}) => {
+export const FloatingLabelInput = ({
+  type = 'text',
+  id,
+  placeholder,
+  value,
+  setValue,
+  space = 1,
+  ...props
+}) => {
   return (
-    <div className='relative'>
+    <div className={`relative ${space == 1 ? 'mb-4' : ''}`}>
       <input
         type={type}
         id={id || null}

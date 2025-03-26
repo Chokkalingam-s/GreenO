@@ -68,14 +68,15 @@ export function Captcha({onVerify}) {
   }
 
   return (
-    <div className='center flex-col space-y-6'>
+    <div className='c absolute top-1/2 left-1/2 -translate-x-1/2 w-full h-52 -translate-y-1/2 flex-col space-y-6 p-2'>
       <canvas ref={canvasRef} className='round sh mx-auto w-56' />
-      <div className='flex items-center space-x-1'>
+      <div className='c space-x-1'>
         <FloatingLabelInput
           id='captcha'
           value={inputValue}
           setValue={setInputValue}
           placeholder='Captcha'
+          space={0}
         />
         <button onClick={handleVerify}>Verify</button>
         <button onClick={handleRefresh}>Refresh</button>
