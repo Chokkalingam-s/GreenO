@@ -39,7 +39,7 @@ export default function StudentHome() {
   ]
 
   return (
-    <section className='mx-auto my-10 max-w-screen-lg flex-col px-4'>
+    <section className='mx-auto my-16 max-w-screen-lg flex-col px-4'>
       <header className='h-44 text-center md:mt-6 md:h-32'>
         <h2 className='text-3xl font-bold tracking-wide'>
           {activeSDG === 15 ? '🌍' : '🌏'} Sustainable Development Goal {activeSDG}
@@ -59,9 +59,7 @@ export default function StudentHome() {
               index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'
             } glassy animate-fadeIn round sh gap-6 px-6 py-4 text-justify`}>
             <div className='flex-1 text-center md:text-left'>
-              <h2 className='mb-4 text-left text-2xl font-semibold tracking-wide'>
-                {title}
-              </h2>
+              <h2 className='mb-4 text-left text-2xl font-semibold tracking-wide'>{title}</h2>
               {Array.isArray(content) && content[0].startsWith('🌍') ? (
                 <ul className='space-y-2'>
                   {content.map((item, idx) => (
