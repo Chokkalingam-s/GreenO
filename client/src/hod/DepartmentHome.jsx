@@ -5,6 +5,7 @@ import {toast} from 'react-toastify'
 import {CountUi, Splashscreen} from '../exp_components'
 import {chart_color, colors} from '../components/ChartColor_settings'
 import {chartSetting} from '../components/Chart_Settings'
+import {icon} from '../exported_data'
 
 export default function DepartmentHome() {
   const [studentData, setStudentData] = useState(null)
@@ -40,6 +41,7 @@ export default function DepartmentHome() {
         data={[studentData.totalStudents, studentData.totalSaplings]}
         head='Department Overview'
         title={['Total Students', 'Total Saplings Posted']}
+        icons={[icon.group, icon.sapling]}
       />
       <div className='glassy_inline round mx-auto w-full'>
         <h2 className='text-secondary/80 p-2 text-xl'>Year-wise Student Distribution</h2>

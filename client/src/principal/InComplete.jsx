@@ -6,6 +6,7 @@ import {exportToPDF} from '../functions/export'
 import {renderSortIcon} from '../functions/renderIcon'
 import {usePagination} from '../hooks/usePagination'
 import FilterComponent from '../components/FilterComponent'
+import PaginationSelector from '../components/PaginationSelector'
 
 export default function InComplete() {
   const [students, setStudents] = useState([])
@@ -67,14 +68,14 @@ export default function InComplete() {
 
   return (
     <div className='progress_table'>
-      <div className='md:grid-cols-[48%_24%_12%_14%]'>
+      <div className='md:grid-cols-[1fr_22%_14%_12%_14%]'>
         <h2 className='head'>Incomplete Uploads</h2>
         <SearchComponent data={students} onFilter={setFilteredData} />
+        <PaginationSelector {...{itemsPerPage, handleItemsPerPageChange}} />
         <FilterComponent
           students={students}
           setFilteredData={setFilteredData}
           itemsPerPage={itemsPerPage}
-          handleItemsPerPageChange={handleItemsPerPageChange}
         />
         <button onClick={() => exportToPDF(tableRef.current)}>PDF Export</button>
       </div>

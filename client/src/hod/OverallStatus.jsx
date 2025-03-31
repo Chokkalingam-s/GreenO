@@ -1,10 +1,10 @@
 import {useEffect, useState} from 'react'
 import axios from 'axios'
-import {PieChart} from '@mui/x-charts/PieChart'
 import {toast} from 'react-toastify'
 import {abbreviateDepartmentName} from '../functions/abbreviations'
-// import {chart_color} from '../components/ChartColor_settings'
-
+import {BarChart} from '@mui/x-charts'
+import {chart_color, colors} from '../components/ChartColor_settings'
+import {chartSetting} from '../components/Chart_Settings'
 export default function OverallStatus() {
   const [departmentData, setDepartmentData] = useState([])
   const [topDepartments, setTopDepartments] = useState([])
@@ -66,75 +66,70 @@ export default function OverallStatus() {
     ...item,
     color: generateColor(index)
   }))
+  const sortedChartData = [...formattedChartData].sort((a, b) => b.value - a.value)
+  const top3Departments = sortedChartData.slice(0, 3).map(item => item.id)
 
-  const chart_color = {
-    '& .MuiPieArc-root': {
-      stroke: '#fff'
-    }
+  const labels = formattedChartData.map(item => item.label)
+  const values = formattedChartData.map(item => item.value)
+
+  const getBarColor = id => {
+    const index = top3Departments.indexOf(id)
+    if (index === 0) return '#FFD700'
+    if (index === 1) return '#C0C0C0'
+    if (index === 2) return '#CD7F32'
+    return `${colors[0]}66`
+  }
+
+  const colorMap = {
+    type: 'ordinal',
+    values: labels,
+    colors: formattedChartData.map(item => getBarColor(item.id))
   }
 
   return (
-    <div className='main c flex-col space-y-6 gap-x-4'>
-      <h2 className='head'>Overall Department Contribution</h2>
+    <div className='glassy c round w-8/12 flex-col space-y-2 gap-x-4'>
+      <h2 className='head w-11/12 text-left'>Overall Department Contribution</h2>
 
       {loading ? (
         <p className='text-xl'>Loading...</p>
       ) : departmentData.length > 0 ? (
-        <div className='grid grid-cols-2 place-items-center'>
-          <div>
-            <h3 className='text-xl font-medium'>Department-wise Sapling Count</h3>
-            <div className='c h-96 w-96'>
-              <PieChart
-                series={[
-                  {
-                    data: formattedChartData,
-                    innerRadius: 6,
-                    outerRadius: 140,
-                    paddingAngle: 2,
-                    cornerRadius: 4,
-                    highlightScope: {faded: 'global', highlighted: 'item'}
-                  }
-                ]}
-                sx={chart_color}
-                slotProps={{
-                  legend: {
-                    direction: 'row',
-                    position: {vertical: 'bottom', horizontal: 'middle'}
-                  }
-                }}
-              />
-            </div>
+        <div className='c w-11/12 flex-col place-items-center'>
+          <div className='flex items-end gap-4'>
+            {topDepartments
+              .sort(a => (a.index === 1 ? -1 : a.index === 0 ? 0 : 1))
+              .map((dept, i) => {
+                const order = [1, 0, 2][i]
+                return (
+                  <div
+                    key={dept.department}
+                    className={`round glassy_inline sh relative flex w-36 flex-col items-center p-2 ${
+                      order === 0 ? 'h-32' : order === 1 ? 'h-28' : 'h-24'
+                    }`}>
+                    <span className='text-3xl'>{['🥈', '🥇', '🥉'][i]}</span>
+                    <p className='text-base'>
+                      {abbreviateDepartmentName(topDepartments[order].department)}
+                    </p>
+                    <p className='text-sm text-gray-300'>{topDepartments[order].percentage}%</p>
+                    <div
+                      className='sh absolute bottom-0 h-2 w-full rounded-b-2xl'
+                      style={{backgroundColor: `${['#C0C0C0', '#FFD700', '#CD7F32'][i]}`}}></div>
+                  </div>
+                )
+              })}
           </div>
 
-          <div className='w-full flex-col'>
-            <div className='sh glassy_inline round p-2'>
-              <h3 className='head'>Top 3 Departments</h3>
-              <div className='overflow-x-auto'>
-                <table className='details_table w-full'>
-                  <thead>
-                    <tr>
-                      <th>Rank</th>
-                      <th>Department</th>
-                      <th>Progress</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {topDepartments.map((dept, index) => (
-                      <tr key={dept.department}>
-                        <td>{index === 0 ? '🥇' : index === 1 ? '🥈' : '🥉'}</td>
-                        <td>{abbreviateDepartmentName(dept.department)}</td>
-                        <td>{dept.percentage}%</td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
+          <div>
+            <h3 className='text-secondary mt-2 text-xl font-medium'>
+              Department-wise Sapling Count
+            </h3>
+            <div className='h-[50vh] w-[60vw]'>
+              <BarChart
+                xAxis={[{scaleType: 'band', data: labels, colorMap}]}
+                series={[{data: values}]}
+                sx={chart_color}
+                {...chartSetting}
+              />
             </div>
-            {userDepartmentRank && (
-              <p className='mt-4 text-center text-lg'>
-                Your department is currently ranked: <strong>{userDepartmentRank}</strong>
-              </p>
-            )}
           </div>
         </div>
       ) : (

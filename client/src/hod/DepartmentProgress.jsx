@@ -6,6 +6,7 @@ import {renderSortIcon} from '../functions/renderIcon'
 import {exportToPDF} from '../functions/export'
 import {Pagination} from '../exp_components'
 import FilterComponent from '../components/FilterComponent'
+import PaginationSelector from '../components/PaginationSelector'
 
 export default function DepartmentProgress() {
   const [data, setData] = useState([])
@@ -69,7 +70,7 @@ export default function DepartmentProgress() {
 
   return (
     <div className='progress_table'>
-      <div className='md:grid-cols-[22%_35%_15%_15%_10%]'>
+      <div className='md:grid-cols-[35%_22%_14%_14%_12%]'>
         <h2 className='head'>Progress</h2>
         <SearchComponent data={data} onFilter={setFilteredData} />
         <select onChange={e => handleYearFilter(Number(e.target.value))} value={yearFilter}>
@@ -79,14 +80,7 @@ export default function DepartmentProgress() {
           <option value={3}>3rd Year</option>
           <option value={4}>4th Year</option>
         </select>
-        <select onChange={e => handleItemPerPage(Number(e.target.value))} value={itemPerPage}>
-          <option value={25}>No of items per page</option>
-          <option value={25}>25</option>
-          <option value={50}>50</option>
-          <option value={75}>75</option>
-          <option value={100}>100</option>
-        </select>
-
+        <PaginationSelector {...{itemPerPage, handleItemPerPage}} />
         <button onClick={() => exportToPDF(tableRef.current)}>PDF Export</button>
       </div>
       <div className='progress'>

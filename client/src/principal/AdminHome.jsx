@@ -5,6 +5,7 @@ import axios from 'axios'
 import {chart_color, colors} from '../components/ChartColor_settings'
 import {abbreviateDepartmentName} from '../functions/abbreviations'
 import {chartSetting} from '../components/Chart_Settings'
+import {icon} from '../exported_data'
 
 export default function AHome() {
   const [studentCount, setStudentCount] = useState(10)
@@ -56,6 +57,7 @@ export default function AHome() {
         data={[studentCount, saplingCount]}
         head='Dashboard'
         title={['Students Onboarded', 'Trees Planted']}
+        icons={[icon.person, icon.sapling]}
       />
       <div className='glassy_inline round mx-auto w-full'>
         <BarChart
