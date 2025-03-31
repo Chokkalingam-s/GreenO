@@ -38,7 +38,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className='timeline hidden md:grid'>
+      {/* <section className='timeline hidden md:grid'>
         <div className='relative grid w-full grid-cols-3'>
           <div className='hidden md:inline'></div>
           <Item
@@ -69,6 +69,15 @@ export default function HomePage() {
           />
         </div>
         <img src='/mission&vision.svg' alt='icon for mission vision' />
+      </section> */}
+
+      <section className='px-6 py-10'>
+        <h2 className='mb-6 text-center text-2xl font-bold'>Our Mission & Vision</h2>
+        <div className='grid grid-cols-2 gap-4 md:grid-cols-4'>
+          {missionVisionItems.map((item, index) => (
+            <Card key={index} content={item.content} showBtn={false} fixed={false} />
+          ))}
+        </div>
       </section>
 
       <section className='timeline last hidden md:grid'>

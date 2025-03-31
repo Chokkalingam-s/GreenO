@@ -1,49 +1,71 @@
-import {Link, useLocation} from 'react-router-dom'
 import {useState} from 'react'
+import {Link, useLocation} from 'react-router-dom'
 
-export default function NavBar() {
+const navLinks = [
+  {path: '/', label: 'Home'},
+  {path: '/OneStudentOneTree', label: 'GreenO'},
+  {path: '/about', label: 'About'},
+  {path: '/contact', label: 'Contact'}
+]
+
+export default function Navbar() {
   const {pathname} = useLocation()
   const [isOpen, setIsOpen] = useState(false)
-  const navLinks = [
-    {path: '/', label: 'Home'},
-    {path: '/OneStudentOneTree', label: 'GreenO'},
-    {path: '/about', label: 'About'},
-    {path: '/contact', label: 'Contact'}
-  ]
 
   return (
-    <nav className='bg-secondary/40 fixed top-0 z-50 flex h-16 w-full items-center justify-between px-6 py-4 shadow-md backdrop-blur-lg md:px-10'>
-      <h2 className='text-xl font-bold'>
-        <Link to='/' className='hover:text-secondary transition'>
-          CG Foundation
-        </Link>
-      </h2>
-      <div className='md:hidden'>
-        <button onClick={() => setIsOpen(!isOpen)} className='bg-none'>
-          <img
-            src={isOpen ? '/xmark-solid.svg' : '/bars-solid.svg'}
-            alt='menu icon'
-            className='aspect-square w-6'
-          />
-        </button>
-      </div>
-      <div
-        className={`bg-secondary/40 center absolute top-16 right-0 h-screen w-8/12 flex-col space-y-4 p-6 shadow-xl backdrop-blur-lg transition-transform md:relative md:top-0 md:h-auto md:w-auto md:flex-row md:space-y-0 md:space-x-6 md:bg-none md:p-0 md:shadow-none ${
-          isOpen ? 'translate-x-0' : 'translate-x-full md:translate-x-0'
-        }`}>
-        {navLinks.map(({path, label}) => (
-          <span
-            key={path}
-            className={`${pathname === path ? 'text-tertiary text-lg font-bold' : 'text-base'}`}>
+    <>
+      {/* Navbar */}
+      <nav className='bg-secondary/30 fixed top-0 z-50 flex h-16 w-full items-center justify-between px-6 py-4 shadow-md backdrop-blur-md md:px-10'>
+        <h2 className='text-xl font-bold'>
+          <Link to='/' className='hover:text-secondary transition'>
+            CG Foundation
+          </Link>
+        </h2>
+
+        {/* Desktop Nav */}
+        <div className='hidden space-x-6 md:flex'>
+          {navLinks.map(({path, label}) => (
             <Link
+              key={path}
               to={path}
-              onClick={() => setIsOpen(false)}
-              className='hover:text-tertiary transition'>
+              className={`hover:text-tertiary transition ${
+                pathname === path ? 'text-tertiary font-bold' : ''
+              }`}>
               {label}
             </Link>
-          </span>
-        ))}
+          ))}
+        </div>
+
+        {/* Menu Button for Mobile */}
+        <button onClick={() => setIsOpen(true)} className='md:hidden'>
+          <img src='/bars-solid.svg' alt='menu icon' className='aspect-square w-6' />
+        </button>
+      </nav>
+
+      {/* Sidebar for Mobile */}
+      <div
+        className={`fixed inset-0 z-50 flex ${isOpen ? 'block' : 'hidden'} transition-transform`}>
+        {/* Sidebar */}
+        <div className='bg-secondary/40 relative z-50 h-full w-64 p-6 shadow-xl backdrop-blur-md'>
+          <button onClick={() => setIsOpen(false)} className='absolute top-4 right-4'>
+            <img src='/xmark-solid.svg' alt='close menu' className='w-6' />
+          </button>
+
+          <nav className='mt-10 space-y-4'>
+            {navLinks.map(({path, label}) => (
+              <Link
+                key={path}
+                to={path}
+                onClick={() => setIsOpen(false)}
+                className={`hover:text-tertiary block text-lg transition ${
+                  pathname === path ? 'text-tertiary font-bold' : ''
+                }`}>
+                {label}
+              </Link>
+            ))}
+          </nav>
+        </div>
       </div>
-    </nav>
+    </>
   )
 }

@@ -17,9 +17,8 @@ body {
 button {
   @apply glassy round;
 }
-
 .card {
-  @apply center flex-col gap-y-2 px-2 py-4 out;
+  @apply center out flex-col gap-y-2 px-2 py-4;
 }
 
 .center {
@@ -28,10 +27,10 @@ button {
 
 .menu {
   button {
-    @apply p-0 m-0;
+    @apply m-0 p-0;
   }
   img {
-    @apply w-6 aspect-square;
+    @apply aspect-square w-6;
   }
 }
 
@@ -44,15 +43,15 @@ button {
 }
 
 .icon {
-  @apply w-5 aspect-square;
+  @apply aspect-square w-5;
 }
 
 button {
-  @apply w-fit px-4 py-2 font-medium my-4;
+  @apply my-4 w-fit px-4 py-2 font-medium;
   &:hover,
   &:focus,
   &:active {
-    @apply sh duration-150 transition-shadow;
+    @apply sh transition-shadow duration-150;
   }
   &:disabled {
     @apply cursor-not-allowed opacity-50;
@@ -60,14 +59,14 @@ button {
 }
 
 section:not(.grd_cont) {
-  @apply w-11/12 mx-auto border-b-2 border-tertiary py-16;
+  @apply border-tertiary mx-auto w-11/12 border-b-2 py-16;
   button {
     @apply float-end;
   }
   .sect {
-    @apply w-11/12 order-1 md:order-none;
+    @apply order-1 w-11/12 md:order-none;
     h2 {
-      @apply text-3xl font-bold mb-8;
+      @apply mb-8 text-3xl font-bold;
     }
   }
 }
@@ -81,7 +80,7 @@ a {
 }
 
 .main {
-  @apply w-11/12 mx-auto py-10;
+  @apply mx-auto w-11/12 py-10;
 }
 
 .bg_sect {
@@ -90,7 +89,7 @@ a {
     @apply text-2xl font-bold;
   }
   .grd_cont {
-    @apply col-span-2 md:col-auto space-y-4 md:space-y-10 md:w-1/2 py-4 md:py-0;
+    @apply col-span-2 space-y-4 py-4 md:col-auto md:w-1/2 md:space-y-10 md:py-0;
     div {
       @apply center my-10 md:my-0;
     }
@@ -98,7 +97,7 @@ a {
 }
 
 .out {
-  @apply outline-2 outline outline-offset-2 outline-secondary/80;
+  @apply outline-secondary/80 outline outline-2 outline-offset-2;
 }
 
 div {
@@ -116,7 +115,7 @@ div {
 
 .cont_1 div,
 .cont_2 div {
-  @apply md:last:translate-x-1/2 md:first:-translate-x-1/2;
+  @apply md:first:-translate-x-1/2 md:last:translate-x-1/2;
 }
 
 .cont_1 div {
@@ -128,17 +127,15 @@ div {
 }
 
 ::-webkit-scrollbar {
-  @apply w-2;
-}
-::-webkit-scrollbar-track {
-  @apply bg-primary;
+  @apply w-1 bg-black;
 }
 ::-webkit-scrollbar-thumb {
-  @apply bg-tertiary round;
+  @apply round bg-secondary;
 }
-
+/* 413720302033960 ID */
+/* 413720344636927 ID2  */
 .timeline {
-  @apply main md:grid-cols-[70%_30%] items-center;
+  @apply main items-center md:grid-cols-[70%_30%];
   .top,
   .top1,
   .bottom,
@@ -154,10 +151,10 @@ div {
     @apply flex-col;
   }
   .top {
-    @apply translate-y-20 pt-1 -translate-x-36;
+    @apply -translate-x-36 translate-y-20 pt-1;
   }
   .top1 {
-    @apply translate-y-16 -translate-x-28;
+    @apply -translate-x-28 translate-y-16;
   }
   .bottom {
     @apply -translate-y-14;
@@ -171,9 +168,9 @@ div {
 }
 
 .title-container {
-  @apply relative col-span-3 flex items-center flex-row;
+  @apply relative col-span-3 flex flex-row items-center;
   .title {
-    @apply flex flex-col items-center text-center gap-y-4;
+    @apply flex flex-col items-center gap-y-4 text-center;
   }
   .line {
     @apply w-10/12;
@@ -183,16 +180,16 @@ div {
 .title_last {
   @apply relative col-span-4 my-4;
   .line {
-    @apply w-9/12 ml-4 absolute top-1/2;
+    @apply absolute top-1/2 ml-4 w-9/12;
   }
 }
 
 .title-container,
 .title_last {
   .line {
-    @apply h-2 bg-tertiary round hidden md:inline;
+    @apply bg-tertiary round hidden h-2 md:inline;
   }
 }
 .full {
-  @apply w-full text-justify;
+  @apply w-full;
 }
