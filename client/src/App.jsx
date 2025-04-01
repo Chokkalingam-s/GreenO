@@ -5,6 +5,7 @@ import {ToastContainer} from 'react-toastify'
 import {useAuth} from './components/auth/signin/AuthContext'
 import {OverlayProvider} from './components/OverlayContext'
 import ProtectedRoute from './components/auth/ProtectedRoute'
+
 const SplashWithDelay = l('./components/SplashWithDelay')
 const SignIn = l('./components/auth/signin/SignIn')
 const StudentSignUp = l('./components/auth/signup/SignUp')
