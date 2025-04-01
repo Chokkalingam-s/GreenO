@@ -3,11 +3,10 @@ import axios from 'axios'
 import html2canvas from 'html2canvas'
 import jsPDF from 'jspdf'
 import {toast} from 'react-toastify'
-import {LogOut} from '../exp_components'
 import {Gauge, gaugeClasses} from '@mui/x-charts'
-import {icons} from '../exported_data'
 
 export default function SuperAdminProfile() {
+  console.log('SUPER ADMIN')
   const [studentDetails, setStudentDetails] = useState(null)
   const [loading, setLoading] = useState(true)
   const [uploadedCount, setUploadedCount] = useState(null)

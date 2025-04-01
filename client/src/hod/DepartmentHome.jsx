@@ -2,7 +2,7 @@ import {useEffect, useState} from 'react'
 import axios from 'axios'
 import {BarChart} from '@mui/x-charts/BarChart'
 import {toast} from 'react-toastify'
-import {chart_color, colors} from '../components/ChartColor_settings'
+import {chart_color} from '../components/ChartColor_settings'
 import {chartSetting} from '../components/Chart_Settings'
 import {icon} from '../exported_data'
 import SplashScreen from '../components/Splashscreen'
@@ -43,6 +43,7 @@ export default function DepartmentHome() {
         head='Department Overview'
         title={['Total Students', 'Total Saplings Posted']}
         icons={[icon.group, icon.sapling]}
+        center={false}
       />
       <div className='glassy_inline round mx-auto w-full'>
         <h2 className='text-secondary/80 p-2 text-xl'>Year-wise Student Distribution</h2>

@@ -11,7 +11,7 @@ const SignIn = l('./components/auth/signin/SignIn')
 const StudentSignUp = l('./components/auth/signup/SignUp')
 const AdminSignUp = l('./components/auth/signup/AdminSignUp')
 const Layout = l('./Layout')
-const Profile = l('./hod/HodProfile')
+const Profile = l('./student/profile')
 const SplashScreen = l('./components/Splashscreen')
 const AdminProfile = l('./principal/AdminProfile')
 const HodProfile = l('./hod/HodProfile')
@@ -39,7 +39,7 @@ const ProtectedRouteWrapper = ({children, isAuthenticated, role, allowedRoles}) 
 
 export default function App() {
   const {isAuthenticated, role} = useAuth()
-
+  console.log('role', role)
   return (
     <Router>
       <ToastContainer
@@ -70,13 +70,13 @@ export default function App() {
                 <Route
                   path='/profile'
                   element={
-                    role === 'student' ? (
+                    role == 'student' ? (
                       <Profile />
-                    ) : role === 'admin' ? (
+                    ) : role == 'admin' ? (
                       <AdminProfile />
-                    ) : role === 'hod' ? (
+                    ) : role == 'hod' ? (
                       <HodProfile />
-                    ) : role === 'superAdmin' ? (
+                    ) : role == 'superAdmin' ? (
                       <SuperAdminProfile />
                     ) : (
                       <Navigate to='/' replace />
@@ -100,8 +100,6 @@ export default function App() {
                 <Route path='/activities' element={<Activity />} />
                 <Route path='/upload' element={<UploadSnaps />} />
                 <Route path='/guide' element={<Resource />} />
-                <Route path='/student-profile' element={<Profile />} />
-                <Route path='/contact' element={<ContactUs />} />
               </Route>
 
               {/* Admin Routes */}

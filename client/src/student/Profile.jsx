@@ -4,7 +4,7 @@ import html2canvas from 'html2canvas'
 import jsPDF from 'jspdf'
 import {toast} from 'react-toastify'
 import {Gauge, gaugeClasses} from '@mui/x-charts'
-import {icons} from '../exported_data'
+import {icon as ic} from '../exported_data'
 import Logout from '../components/LogOut'
 
 export default function Profile() {
@@ -92,7 +92,7 @@ export default function Profile() {
   }
 
   const DetailItem = ({label, value, icon}) => {
-    const {viewBox, path} = icons[icon]
+    const {viewBox, path} = ic[icon]
     return (
       <li className='flex items-center gap-2'>
         <svg viewBox={viewBox} className='fill-secondary icon'>

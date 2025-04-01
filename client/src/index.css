@@ -281,17 +281,16 @@ article .banner {
   @apply font-semibold text-red-500;
 }
 .info_card {
-  @apply grid w-full grid-cols-1 items-center justify-between gap-x-4 md:grid-cols-2;
+  @apply grid w-full items-center justify-between gap-x-4;
   div {
-    @apply c flex-1 gap-x-4;
+    @apply c flex-1 gap-x-2;
   }
   ._detail {
-    @apply glassy_inline round relative flex w-72 items-center justify-between px-4 py-1;
+    @apply glassy_inline round relative flex w-72 items-center justify-between px-4 py-1 backdrop-blur-md;
     &::after {
       content: '';
       @apply border-secondary round absolute top-1/2 right-0.5 h-10 -translate-y-1/2 border border-r-2 border-solid;
     }
-    /* :not(.Toastify__toast-icon) */
     svg {
       @apply fill-secondary w-10;
     }
@@ -308,7 +307,6 @@ article .banner {
     }
     h3 {
       @apply text-secondary text-lg tracking-wide;
-      /* text-shadow: 0px 2px 3px rgba(0, 0, 0, 0.2); */
     }
     p {
       @apply text-end text-2xl;
