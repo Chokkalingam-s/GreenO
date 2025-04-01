@@ -2,10 +2,11 @@ import {useEffect, useState} from 'react'
 import axios from 'axios'
 import {BarChart} from '@mui/x-charts/BarChart'
 import {toast} from 'react-toastify'
-import {CountUi, Splashscreen} from '../exp_components'
 import {chart_color, colors} from '../components/ChartColor_settings'
 import {chartSetting} from '../components/Chart_Settings'
 import {icon} from '../exported_data'
+import SplashScreen from '../components/Splashscreen'
+import CountUI from '../components/CountUI'
 
 export default function DepartmentHome() {
   const [studentData, setStudentData] = useState(null)
@@ -28,7 +29,7 @@ export default function DepartmentHome() {
     fetchDepartmentData()
   }, [backendUrl])
 
-  if (!studentData || !studentData.yearCounts) return <Splashscreen />
+  if (!studentData || !studentData.yearCounts) return <SplashScreen />
 
   const chartData = Object.keys(studentData.yearCounts).map(year => ({
     year,
@@ -37,7 +38,7 @@ export default function DepartmentHome() {
 
   return (
     <div className='main flex-col space-y-4'>
-      <CountUi
+      <CountUI
         data={[studentData.totalStudents, studentData.totalSaplings]}
         head='Department Overview'
         title={['Total Students', 'Total Saplings Posted']}

@@ -3,7 +3,9 @@ import axios from 'axios'
 import {toast} from 'react-toastify'
 import {exportToPDF} from '../functions/export'
 import {renderSortIcon} from '../functions/renderIcon'
-import {Pagination, SearchComponent, Splashscreen} from '../exp_components'
+import SearchComponent from '../components/SearchComponent'
+import SplashScreen from '../components/Splashscreen'
+import Pagination from '../components/Pagination'
 
 export default function OverallProgress() {
   const [data, setData] = useState([])
@@ -105,7 +107,7 @@ export default function OverallProgress() {
         <button onClick={() => exportToPDF(tableRef.current)}>PDF Export</button>
       </div>
       {loading ? (
-        <Splashscreen />
+        <SplashScreen />
       ) : (
         <>
           <div className='progress'>

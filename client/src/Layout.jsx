@@ -1,6 +1,7 @@
 import {Outlet, useNavigate} from 'react-router-dom'
-import {LogOut, NavBar} from './exp_components'
 import 'react-toastify/dist/ReactToastify.css'
+import Logout from './components/LogOut'
+import NavBar from './components/nav/NavBar'
 
 export default function Layout() {
   const navigate = useNavigate()
@@ -13,7 +14,7 @@ export default function Layout() {
       </main>
       <div className='c fixed right-4 bottom-16 z-50 gap-x-4 md:bottom-6'>
         <span className='hidden md:block'>
-          <LogOut />
+          <Logout />
         </span>
         <button onClick={() => navigate('/contact')}>
           <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512' className='icon'>

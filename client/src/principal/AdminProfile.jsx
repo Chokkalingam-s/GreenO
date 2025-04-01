@@ -3,9 +3,9 @@ import axios from 'axios'
 import html2canvas from 'html2canvas'
 import jsPDF from 'jspdf'
 import {toast} from 'react-toastify'
-import {LogOut} from '../exp_components'
 import {Gauge, gaugeClasses} from '@mui/x-charts'
 import {icons} from '../exported_data'
+import Logout from '../components/LogOut'
 
 export default function AdminProfile() {
   const [studentDetails, setStudentDetails] = useState(null)
@@ -227,13 +227,13 @@ export default function AdminProfile() {
                   ))}
                 </div>
                 <div className='absolute right-2 bottom-2 hidden w-11/12 items-center justify-end md:flex'>
-                  <LogOut />
+                  <Logout />
                 </div>
               </div>
             </span>
           </div>
           <div className='flex w-full items-center justify-start md:hidden'>
-            <LogOut full={true} />
+            <Logout full={true} />
           </div>
         </div>
       ) : (
@@ -241,7 +241,7 @@ export default function AdminProfile() {
           <h2 className='text-2xl font-bold'>Profile Data Unavailable</h2>
           <p className='mt-2 text-lg'>Unable to retrieve your profile. Please try again.</p>
           <div className='mt-4'>
-            <LogOut />
+            <Logout />
           </div>
         </div>
       )}

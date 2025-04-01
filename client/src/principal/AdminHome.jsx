@@ -1,11 +1,11 @@
 import {useState, useEffect} from 'react'
 import {BarChart} from '@mui/x-charts/BarChart'
-import {CountUi} from '../exp_components'
 import axios from 'axios'
 import {chart_color, colors} from '../components/ChartColor_settings'
 import {abbreviateDepartmentName} from '../functions/abbreviations'
 import {chartSetting} from '../components/Chart_Settings'
 import {icon} from '../exported_data'
+import CountUI from '../components/CountUI'
 
 export default function AdminHome() {
   const [studentCount, setStudentCount] = useState(10)
@@ -53,7 +53,7 @@ export default function AdminHome() {
 
   return (
     <div className='main flex-col space-y-4'>
-      <CountUi
+      <CountUI
         data={[studentCount, saplingCount]}
         head='Dashboard'
         title={['Students Onboarded', 'Trees Planted']}

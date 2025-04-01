@@ -1,12 +1,14 @@
 import {useState, useEffect, useRef} from 'react'
 import axios from 'axios'
-import {Pagination, SearchComponent, Splashscreen} from '../exp_components'
 import {toast} from 'react-toastify'
 import {exportToPDF} from '../functions/export'
 import {renderSortIcon} from '../functions/renderIcon'
 import {usePagination} from '../hooks/usePagination'
 import FilterComponent from '../components/FilterComponent'
 import PaginationSelector from '../components/PaginationSelector'
+import SplashScreen from '../components/Splashscreen'
+import SearchComponent from '../components/SearchComponent'
+import Pagination from '../components/Pagination'
 
 export default function InComplete() {
   const [students, setStudents] = useState([])
@@ -64,7 +66,7 @@ export default function InComplete() {
     sortData(field)
   }
 
-  if (loading) return <Splashscreen />
+  if (loading) return <SplashScreen />
 
   return (
     <div className='progress_table'>

@@ -3,8 +3,9 @@ import axios from 'axios'
 import html2canvas from 'html2canvas'
 import jsPDF from 'jspdf'
 import {toast} from 'react-toastify'
-import {CountUi, LogOut} from '../exp_components'
 import {icons} from '../exported_data'
+import CountUI from '../components/CountUI'
+import Logout from '../components/LogOut'
 
 export default function HodProfile() {
   const [studentDetails, setStudentDetails] = useState(null)
@@ -128,7 +129,7 @@ export default function HodProfile() {
               </div>
             </div>
             {/* Student & Tree Information */}
-            <CountUi
+            <CountUI
               title={['Student Strength', 'Certificates Earned', 'Trees Planted']}
               data={[studentDetails.uploadCount, studentDetails.uploadCount * 1.5]}
             />
@@ -150,13 +151,13 @@ export default function HodProfile() {
                 ))}
               </div>
               <div className='absolute right-2 bottom-2 hidden w-11/12 items-center justify-end md:flex'>
-                <LogOut />
+                <Logout />
               </div>
             </div>
           </div>
 
           <div className='flex w-full items-center justify-start md:hidden'>
-            <LogOut full={true} />
+            <Logout full={true} />
           </div>
         </div>
       ) : (

@@ -4,9 +4,8 @@ import SearchComponent from '../components/SearchComponent'
 import {toggleSortDirection} from '../functions/sort'
 import {renderSortIcon} from '../functions/renderIcon'
 import {exportToPDF} from '../functions/export'
-import {Pagination} from '../exp_components'
-import FilterComponent from '../components/FilterComponent'
 import PaginationSelector from '../components/PaginationSelector'
+import Pagination from '../components/Pagination'
 
 export default function DepartmentProgress() {
   const [data, setData] = useState([])
