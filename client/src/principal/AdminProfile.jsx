@@ -7,7 +7,7 @@ import {LogOut} from '../exp_components'
 import {Gauge, gaugeClasses} from '@mui/x-charts'
 import {icons} from '../exported_data'
 
-export default function Profile() {
+export default function AdminProfile() {
   const [studentDetails, setStudentDetails] = useState(null)
   const [loading, setLoading] = useState(true)
   const [uploadedCount, setUploadedCount] = useState(null)

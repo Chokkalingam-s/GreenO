@@ -89,7 +89,7 @@ export default function OverallStatus() {
   return (
     <div className='glassy c round w-8/12 flex-col space-y-2 gap-x-4'>
       <h2 className='head w-11/12 text-left'>Overall Department Contribution</h2>
-
+      <h3 className='text-secondary mt-2 text-xl font-medium'>Department-wise Sapling Count</h3>
       {loading ? (
         <p className='text-xl'>Loading...</p>
       ) : departmentData.length > 0 ? (
@@ -119,9 +119,6 @@ export default function OverallStatus() {
           </div>
 
           <div>
-            <h3 className='text-secondary mt-2 text-xl font-medium'>
-              Department-wise Sapling Count
-            </h3>
             <div className='h-[50vh] w-[60vw]'>
               <BarChart
                 xAxis={[{scaleType: 'band', data: labels, colorMap}]}

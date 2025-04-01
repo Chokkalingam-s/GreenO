@@ -1,7 +1,7 @@
-import { useState } from 'react'
+import {useState} from 'react'
 
 const Location = () => {
-  const [location, setLocation] = useState({ latitude: null, longitude: null })
+  const [location, setLocation] = useState({latitude: null, longitude: null})
   const [error, setError] = useState(null)
 
   const getLocation = () => {
@@ -10,11 +10,11 @@ const Location = () => {
         position => {
           setLocation({
             latitude: position.coords.latitude,
-            longitude: position.coords.longitude,
+            longitude: position.coords.longitude
           })
         },
         error => setError(error.message),
-        { enableHighAccuracy: true }
+        {enableHighAccuracy: true}
       )
     } else {
       setError('Geolocation is not supported by this browser.')

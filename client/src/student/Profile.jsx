@@ -3,9 +3,9 @@ import axios from 'axios'
 import html2canvas from 'html2canvas'
 import jsPDF from 'jspdf'
 import {toast} from 'react-toastify'
-import {LogOut} from '../exp_components'
 import {Gauge, gaugeClasses} from '@mui/x-charts'
 import {icons} from '../exported_data'
+import Logout from '../components/LogOut'
 
 export default function Profile() {
   const [studentDetails, setStudentDetails] = useState(null)
@@ -222,20 +222,17 @@ export default function Profile() {
                   ].map(({label, color, max}, i) => (
                     <div
                       key={i}
-                      className='flex items-center justify-between text-lg w-11/12 mx-auto'>
+                      className='mx-auto flex w-11/12 items-center justify-between text-lg'>
                       <p>{label}</p>
                       <p className={`${color} font-bold`}>#{Math.floor(Math.random() * max) + 1}</p>
                     </div>
                   ))}
                 </div>
-                {/* <div className='absolute right-2 bottom-2 hidden w-11/12 items-center justify-end md:flex'>
-                  <LogOut />
-                </div> */}
               </div>
             </span>
           </div>
           <div className='flex w-full items-center justify-start md:hidden'>
-            <LogOut full={true} />
+            <Logout full={true} />
           </div>
         </div>
       ) : (
@@ -243,7 +240,7 @@ export default function Profile() {
           <h2 className='text-2xl font-bold'>Profile Data Unavailable</h2>
           <p className='mt-2 text-lg'>Unable to retrieve your profile. Please try again.</p>
           <div className='mt-4'>
-            <LogOut />
+            <Logout />
           </div>
         </div>
       )}

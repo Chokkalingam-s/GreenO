@@ -1,35 +1,33 @@
 import {BrowserRouter as Router, Route, Routes, Navigate} from 'react-router-dom'
 import {Suspense} from 'react'
-import {
-  SignIn,
-  StudentSignUp,
-  AdminSignUp,
-  AdminHome,
-  UploadSnaps,
-  Resource,
-  ProtectedRoute,
-  OverallProgress,
-  DepartmentHome,
-  DepartmentProgress,
-  Splash,
-  Profile,
-  Layout,
-  Home,
-  Activity,
-  OverallStatus,
-  SplashWithDelay,
-  ContactUs,
-  SuperDashBoard,
-  SuperProgress,
-  InComplete,
-  Statistics,
-  AdminProfile,
-  HodProfile,
-  SupAdProfile
-} from './exp_components'
 import {ToastContainer} from 'react-toastify'
 import {useAuth} from './components/auth/signin/AuthContext'
 import {OverlayProvider} from './components/OverlayContext'
+import ProtectedRoute from './components/auth/ProtectedRoute'
+import SplashWithDelay from './components/SplashWithDelay'
+import SignIn from './components/auth/signin/SignIn'
+import StudentSignUp from './components/auth/signup/SignUp'
+import AdminSignUp from './components/auth/signup/AdminSignUp'
+import Layout from './Layout'
+import Profile from './hod/HodProfile'
+import SplashScreen from './components/Splashscreen'
+import AdminProfile from './principal/AdminProfile'
+import HodProfile from './hod/HodProfile'
+import SuperAdminProfile from './superAdmin/SupAdProfile'
+import ContactUs from './student/ContactUs'
+import StudentHome from './student/Home'
+import Activity from './student/Activity'
+import UploadSnaps from './student/UploadSnaps'
+import Resource from './student/Resource'
+import AdminHome from './principal/AdminHome'
+import OverallProgress from './principal/OverallProgress'
+import InComplete from './principal/InComplete'
+import DepartmentHome from './hod/DepartmentHome'
+import DepartmentProgress from './hod/DepartmentProgress'
+import OverallStatus from './hod/OverallStatus'
+import SuperDashboard from './superAdmin/superDashBoard'
+import SuperProgress from './superAdmin/superProgress'
+import Statistics from './superAdmin/Statistics'
 
 const ProtectedRouteWrapper = ({children, isAuthenticated, role, allowedRoles}) => (
   <ProtectedRoute isAuthenticated={isAuthenticated}>
@@ -52,7 +50,7 @@ export default function App() {
       />
       <SplashWithDelay>
         <OverlayProvider>
-          <Suspense fallback={<Splash />}>
+          <Suspense fallback={<SplashScreen />}>
             <Routes>
               <Route path='/signin' element={<SignIn />} />
               <Route path='/' element={<Navigate to='/signin' replace />} />
@@ -77,7 +75,7 @@ export default function App() {
                     ) : role === 'hod' ? (
                       <HodProfile />
                     ) : role === 'superAdmin' ? (
-                      <SupAdProfile />
+                      <SuperAdminProfile />
                     ) : (
                       <Navigate to='/' replace />
                     )
@@ -96,7 +94,7 @@ export default function App() {
                     <Layout />
                   </ProtectedRouteWrapper>
                 }>
-                <Route path='/home' element={<Home />} />
+                <Route path='/home' element={<StudentHome />} />
                 <Route path='/activities' element={<Activity />} />
                 <Route path='/upload' element={<UploadSnaps />} />
                 <Route path='/guide' element={<Resource />} />
@@ -117,7 +115,6 @@ export default function App() {
                 <Route path='/admin' element={<AdminHome />} />
                 <Route path='/progress' element={<OverallProgress />} />
                 <Route path='/inComplete' element={<InComplete />} />
-                <Route path='/admin-profile' element={<AdminProfile />} />
               </Route>
 
               {/* HOD Routes */}
@@ -133,7 +130,6 @@ export default function App() {
                 <Route path='/department' element={<DepartmentHome />} />
                 <Route path='/department-progress' element={<DepartmentProgress />} />
                 <Route path='/report' element={<OverallStatus />} />
-                <Route path='/hod-profile' element={<DepartmentHome />} />
               </Route>
 
               {/* Super Admin Routes */}
@@ -146,10 +142,9 @@ export default function App() {
                     <Layout />
                   </ProtectedRouteWrapper>
                 }>
-                <Route path='/dashboard' element={<SuperDashBoard />} />
+                <Route path='/dashboard' element={<SuperDashboard />} />
                 <Route path='/overall-progress' element={<SuperProgress />} />
                 <Route path='/statistics' element={<Statistics />} />
-                <Route path='/superadmin-profile' element={<SuperDashBoard />} />
               </Route>
             </Routes>
           </Suspense>

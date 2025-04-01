@@ -4,20 +4,18 @@ export default function SplashScreen() {
   const [loadingText, setLoadingText] = useState('GreenO')
   useEffect(() => {
     const interval = setInterval(() => {
-      setLoadingText(prev =>
-        prev === 'GreenO!' ? 'Please wait' : 'GreenO...'
-      )
+      setLoadingText(prev => (prev === 'GreenO!' ? 'Please wait' : 'GreenO...'))
     }, 1000)
     return () => clearInterval(interval)
   }, [])
   return (
-    <div className='flex flex-col items-center justify-center h-screen relative z-20'>
+    <div className='relative z-20 flex h-screen flex-col items-center justify-center'>
       <img
         src='/GreenO_Logo.png'
         alt='Splash'
-        className='w-44 aspect-square mb-5 glassy p-4 rounded-full shadow-lg object-cover'
+        className='glassy mb-5 aspect-square w-44 rounded-full object-cover p-4 shadow-lg'
       />
-      <p className='head text-white text-center'>{loadingText}</p>
+      <p className='head text-center text-white'>{loadingText}</p>
     </div>
   )
 }

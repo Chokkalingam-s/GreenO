@@ -7,7 +7,7 @@ import {abbreviateDepartmentName} from '../functions/abbreviations'
 import {chartSetting} from '../components/Chart_Settings'
 import {icon} from '../exported_data'
 
-export default function AHome() {
+export default function AdminHome() {
   const [studentCount, setStudentCount] = useState(10)
   const [saplingCount, setSaplingCount] = useState(10)
   const [data, setData] = useState([])

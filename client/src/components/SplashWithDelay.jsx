@@ -1,7 +1,7 @@
-import { useState, useEffect } from 'react'
-import { Splashscreen } from '../exp_components'
+import {useState, useEffect} from 'react'
+import SplashScreen from './Splashscreen'
 
-export default function SplashWithDelay({ children }) {
+export default function SplashWithDelay({children}) {
   const [showChildren, setShowChildren] = useState(false)
 
   useEffect(() => {
@@ -9,5 +9,5 @@ export default function SplashWithDelay({ children }) {
     return () => clearTimeout(timeout)
   }, [])
 
-  return showChildren ? children : <Splashscreen />
+  return showChildren ? children : <SplashScreen />
 }

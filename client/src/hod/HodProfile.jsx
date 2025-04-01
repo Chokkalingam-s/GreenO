@@ -6,7 +6,7 @@ import {toast} from 'react-toastify'
 import {CountUi, LogOut} from '../exp_components'
 import {icons} from '../exported_data'
 
-export default function Profile() {
+export default function HodProfile() {
   const [studentDetails, setStudentDetails] = useState(null)
   const [loading, setLoading] = useState(true)
   const [uploadedCount, setUploadedCount] = useState(null)

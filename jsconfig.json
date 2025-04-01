@@ -1,0 +1,16 @@
+{
+  "compilerOptions": {
+    "target": "ES6",
+    "module": "ESNext",
+    "moduleResolution": "Node",
+    "jsx": "react",
+    "strict": true,
+    "baseUrl": "client/src",
+    "paths": {
+      "@/*": ["*"]
+    },
+    "lib": ["ESNext", "DOM"]
+  },
+  "include": ["client/src/**/*"],
+  "exclude": ["node_modules", "server"]
+}
