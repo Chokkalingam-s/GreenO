@@ -118,8 +118,8 @@ export default function Profile() {
       {loading ? (
         <p>Loading...</p>
       ) : studentDetails ? (
-        <div className='mb-12 flex-col md:mb-0'>
-          <h3 className='mb-4 pl-6 text-2xl font-bold tracking-wide md:col-span-2 md:text-center'>
+        <div className='mt-12 mb-24 flex-col md:mb-0'>
+          <h3 className='mb-4 pl-6 text-base font-bold tracking-wide md:col-span-2 md:text-center md:text-2xl'>
             {studentDetails?.name}&apos;s Profile
           </h3>
 
@@ -200,7 +200,7 @@ export default function Profile() {
                   Certificate
                 </button>
               </div>
-              <div className='glassy round col-span-2 row-span-2 mb-2 flex h-72 flex-col justify-center px-2 pl-6 text-center md:mb-0 md:h-auto'>
+              <div className='glassy round col-span-2 row-span-2 mb-2 flex h-72 flex-col justify-center px-2 text-center md:mb-0 md:h-auto'>
                 <h3 className='text-2xl font-extrabold'>{studentDetails?.collegeName}</h3>
                 <p className='text-accent/80 mt-2 text-sm tracking-wide'>Rankings</p>
 

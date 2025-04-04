@@ -33,14 +33,7 @@ export default function UploadSnaps() {
       }
     })
   }, [])
-
-  const handleFileChange = e => {
-    const selectedFile = e.target.files[0]
-    if (selectedFile) {
-      setFile(selectedFile)
-      setIsUploadEnabled(isCaptchaValid)
-    }
-  }
+  if (!isMobile) toast.error('Use a phone to upload...')
 
   const handleCapture = e => {
     const capturedFile = e.target.files[0]
@@ -111,7 +104,7 @@ export default function UploadSnaps() {
             </div>
           )}
           <div className='mt-4 flex items-center justify-end'>
-            <button onClick={() => setCloseModal(false)} disabled={locationDenied}>
+            <button onClick={() => setCloseModal(false)} disabled={false}>
               Got It
             </button>
           </div>
@@ -120,45 +113,57 @@ export default function UploadSnaps() {
         <>
           <h2 className='head'>Upload Image</h2>
           {!isMobile ? (
-            <p className='text-center text-lg'>Use a phone to upload.</p>
-          ) : (
-            <div>
-              {!isCaptchaValid && <Captcha onVerify={setIsCaptchaValid} />}
-              <div className='c'>
-                <input
-                  type='file'
-                  accept='image/*'
-                  capture='environment'
-                  id='camera-input'
-                  className='hidden'
-                  onClick={e => (e.target.value = null)}
-                  onChange={handleCapture}
-                />
-                <div
-                  className='border-secondary bg-secondary/20 round c mx-auto aspect-square w-4/12 cursor-pointer flex-col border-2 border-dashed p-2'
-                  onClick={() => document.getElementById('camera-input')?.click()}>
-                  <span>Take a Picture</span>
-                </div>
-                {file && (
-                  <div className='c mr-6 flex-col'>
-                    <img
-                      src={URL.createObjectURL(file)}
-                      alt='Preview'
-                      className='mx-auto h-32 w-32 object-contain'
-                    />
-                    <p className='mb-2 text-center text-sm md:text-base'>{file.name}</p>
-                  </div>
-                )}
-              </div>
-              <span className='c mt-2'>
-                <button
-                  onClick={handleUpload}
-                  disabled={!isUploadEnabled}
-                  className={isUploadEnabled ? 'text-accent' : 'text-gray-200'}>
-                  Upload
-                </button>
-              </span>
+            <div className='c mt-10 flex-col gap-y-10'>
+              <p className='text-center text-lg'>Use a phone to upload.</p>
+              <svg
+                xmlns='http://www.w3.org/2000/svg'
+                viewBox='0 0 384 512'
+                className='fill-secondary sh w-24 animate-bounce'>
+                <path d='M16 64C16 28.7 44.7 0 80 0L304 0c35.3 0 64 28.7 64 64l0 384c0 35.3-28.7 64-64 64L80 512c-35.3 0-64-28.7-64-64L16 64zM224 448a32 32 0 1 0 -64 0 32 32 0 1 0 64 0zM304 64L80 64l0 320 224 0 0-320z' />
+              </svg>
             </div>
+          ) : (
+            <>
+              {!isCaptchaValid && <Captcha onVerify={setIsCaptchaValid} />}
+              {isCaptchaValid && (
+                <>
+                  <div className='c'>
+                    <input
+                      type='file'
+                      accept='image/*'
+                      capture='environment'
+                      id='camera-input'
+                      className='hidden'
+                      onClick={e => (e.target.value = null)}
+                      onChange={handleCapture}
+                    />
+                    <div
+                      className='border-secondary bg-secondary/20 round c mx-auto aspect-square w-1/2 cursor-pointer flex-col border-2 border-dashed p-2'
+                      onClick={() => document.getElementById('camera-input')?.click()}>
+                      <span>Take a Picture</span>
+                    </div>
+                    {file && (
+                      <div className='c mr-6 flex-col'>
+                        <img
+                          src={URL.createObjectURL(file)}
+                          alt='Preview'
+                          className='mx-auto h-32 w-32 object-contain'
+                        />
+                        <p className='mb-2 text-center text-sm md:text-base'>{file.name}</p>
+                      </div>
+                    )}
+                  </div>
+                  <span className='c mt-2'>
+                    <button
+                      onClick={handleUpload}
+                      disabled={!isUploadEnabled}
+                      className={isUploadEnabled ? 'text-accent' : 'text-gray-200'}>
+                      Upload
+                    </button>
+                  </span>
+                </>
+              )}
+            </>
           )}
         </>
       )}
