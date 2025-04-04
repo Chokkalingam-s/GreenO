@@ -15,7 +15,7 @@ export default function HodProfile() {
 
     const fetchStudentDetails = async () => {
       try {
-        const response = await axios.get(`http://localhost:5000/student-get-user-details`, {
+        const response = await axios.get(`${backendUrl}/student-get-user-details`, {
           headers: {Authorization: `Bearer ${token}`}
         })
         setStudentDetails(response.data)
