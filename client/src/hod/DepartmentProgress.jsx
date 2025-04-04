@@ -88,7 +88,7 @@ export default function DepartmentProgress() {
             <thead>
               <tr>
                 <th>S. No</th>
-                <th>Name</th>
+                <th className='text-left'>Name</th>
                 <th>Register Number</th>
                 <th>Current Year</th>
                 <th
@@ -105,7 +105,7 @@ export default function DepartmentProgress() {
               {paginatedData.map((student, index) => (
                 <tr key={index}>
                   <td>{index + 1}</td>
-                  <td>{student.name}</td>
+                  <td className='text-left'>{student.name}</td>
                   <td>{student.registerNumber}</td>
                   <td>{student.currentYear}</td>
                   <td>{student.uploadCount}</td>
