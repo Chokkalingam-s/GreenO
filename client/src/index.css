@@ -47,7 +47,7 @@
     @apply mx-auto mt-4 w-11/12;
   }
   .cancel {
-    @apply sh bg-red-600 font-bold uppercase hover:translate-y-0.5 active:translate-y-0 active:shadow-none;
+    @apply sh bg-red-500 text-sm font-semibold uppercase hover:translate-y-0.5 active:translate-y-0 active:shadow-none;
 
     &:hover,
     &:focus,
@@ -104,7 +104,7 @@ body {
   }
 
   button:not(.cancel, .Toastify__close-button) {
-    @apply from-primary/30 to-secondary/20 text-accent border-primary/30 hover:border-secondary/40 sh round relative flex min-h-10 min-w-24 place-items-center items-center justify-center gap-x-2 border bg-gradient-to-b px-4 py-2 text-sm font-semibold tracking-wide uppercase backdrop-blur-md transition-all duration-200 ease-in-out outline-none;
+    @apply from-primary/30 to-secondary/20 text-accent border-primary/30 hover:border-secondary/40 sh round c relative min-h-10 min-w-24 gap-x-2 border bg-gradient-to-b px-4 py-2 text-sm font-semibold tracking-wide uppercase backdrop-blur-md transition-all duration-200 ease-in-out outline-none;
 
     &:hover,
     &:focus {
@@ -169,11 +169,17 @@ body {
 input,
 textarea,
 select {
-  @apply border-secondary focus:border-accent hover:border-accent round w-full border-2 border-solid bg-transparent px-4 py-2 text-base transition-all duration-200 ease-in-out outline-none placeholder:text-gray-300 placeholder:transition-opacity placeholder:duration-200 hover:shadow-lg hover:placeholder:opacity-0 focus:shadow-xl focus:outline-none focus:placeholder:opacity-0;
+  @apply border-secondary focus:border-accent hover:border-accent round w-full border-2 border-solid bg-transparent px-4 py-2 text-base transition-all duration-200 ease-in-out outline-none hover:shadow-lg focus:shadow-xl focus:outline-none;
 
   &:disabled {
     @apply pointer-events-none cursor-not-allowed opacity-50 ring-0 ring-offset-0;
   }
+}
+
+input:not(.search),
+textarea,
+select {
+  @apply placeholder:text-gray-300 placeholder:transition-opacity placeholder:duration-200 hover:placeholder:opacity-0 focus:placeholder:opacity-0;
 }
 
 label {
