@@ -1,74 +1,55 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import 'tailwindcss';
 
 body {
-  font-family: 'Open Sans', serif;
-  @apply bg-primary overflow-x-hidden;
+  font-family: 'Inter', sans-serif;
+  @apply overflow-x-hidden bg-gradient-to-tl from-green-600/40 to-green-500/20;
 }
 
-.round {
-  @apply rounded-xl transition-shadow duration-200;
-}
 .sh {
   @apply shadow-xl;
 }
-.card,
-button {
-  @apply glassy round;
+
+.glassy {
+  @apply rounded-xl bg-green-200/40 backdrop-blur-sm transition-shadow duration-200;
 }
+
 .card {
-  @apply center out flex-col gap-y-2 px-2 py-4;
+  @apply flex flex-col items-center justify-center gap-y-2 px-2 py-4 outline-2 outline-offset-2 outline-green-600/80;
 }
 
 .center {
   @apply flex items-center justify-center;
 }
 
-.menu {
-  button {
-    @apply m-0 p-0;
-  }
-  img {
-    @apply aspect-square w-6;
-  }
+.menu button {
+  @apply m-0 p-0;
 }
-
-.glassy {
-  @apply bg-secondary/40 backdrop-blur-lg;
+.menu img,
+.icon {
+  @apply aspect-square;
+}
+.menu img {
+  @apply w-6;
+}
+.icon {
+  @apply w-5;
 }
 
 .content {
-  @apply max-w-[60ch] pr-4 text-justify;
-}
-
-.icon {
-  @apply aspect-square w-5;
-}
-
-button {
-  @apply my-4 w-fit px-4 py-2 font-medium;
-  &:hover,
-  &:focus,
-  &:active {
-    @apply sh transition-shadow duration-150;
-  }
-  &:disabled {
-    @apply cursor-not-allowed opacity-50;
-  }
+  @apply max-w-[60ch] pr-6 text-justify;
 }
 
 section:not(.grd_cont) {
-  @apply border-tertiary mx-auto w-11/12 border-b-2 py-16;
-  button {
-    @apply float-end;
-  }
-  .sect {
-    @apply order-1 w-11/12 md:order-none;
-    h2 {
-      @apply mb-8 text-3xl font-bold;
-    }
-  }
+  @apply mx-auto w-11/12 border-b-2 border-green-600/20 py-16;
+}
+section:not(.grd_cont) button {
+  @apply float-end;
+}
+section:not(.grd_cont) .sect {
+  @apply order-1 w-11/12 md:order-none;
+}
+section:not(.grd_cont) .sect h2 {
+  @apply mb-8 text-3xl font-bold;
 }
 
 .last {
@@ -76,7 +57,7 @@ section:not(.grd_cont) {
 }
 
 a {
-  @apply hover:text-tertiary cursor-pointer;
+  @apply cursor-pointer hover:text-green-600;
 }
 
 .main {
@@ -85,43 +66,28 @@ a {
 
 .bg_sect {
   @apply bg-none md:bg-[url('/public/phoneSapling.png')];
-  h2 {
-    @apply text-2xl font-bold;
-  }
-  .grd_cont {
-    @apply col-span-2 space-y-4 py-4 md:col-auto md:w-1/2 md:space-y-10 md:py-0;
-    div {
-      @apply center my-10 md:my-0;
-    }
-  }
+}
+.bg_sect h2 {
+  @apply text-2xl font-bold;
+}
+.bg_sect .grd_cont {
+  @apply col-span-2 space-y-4 py-4 md:col-auto md:w-1/2 md:space-y-10 md:py-0;
+}
+.bg_sect .grd_cont div {
+  @apply flex items-center justify-center gap-x-2 md:my-4;
 }
 
 .out {
-  @apply outline-secondary/80 outline outline-2 outline-offset-2;
-}
-
-div {
-  h2,
-  h3 {
-    @apply text-tertiary font-semibold;
-  }
-  h2 {
-    @apply text-3xl;
-  }
-  h3 {
-    @apply text-lg;
-  }
+  @apply outline-2 outline-offset-2 outline-green-600/40;
 }
 
 .cont_1 div,
 .cont_2 div {
   @apply md:first:-translate-x-1/2 md:last:translate-x-1/2;
 }
-
 .cont_1 div {
   @apply md:first:translate-x-1/2 md:last:-translate-x-1/2;
 }
-
 .cont_2 {
   @apply text-end;
 }
@@ -130,66 +96,102 @@ div {
   @apply w-1 bg-black;
 }
 ::-webkit-scrollbar-thumb {
-  @apply round bg-secondary;
+  @apply rounded-xl bg-green-600 transition-shadow duration-200;
 }
-/* 413720302033960 ID */
-/* 413720344636927 ID2  */
+
 .timeline {
-  @apply main items-center md:grid-cols-[70%_30%];
-  .top,
-  .top1,
-  .bottom,
-  .bottom1 {
-    @apply flex items-center;
-  }
-  .top,
-  .top1 {
-    @apply flex-col-reverse;
-  }
-  .bottom,
-  .bottom1 {
-    @apply flex-col;
-  }
-  .top {
-    @apply -translate-x-36 translate-y-20 pt-1;
-  }
-  .top1 {
-    @apply -translate-x-28 translate-y-16;
-  }
-  .bottom {
-    @apply -translate-y-14;
-  }
-  .bottom1 {
-    @apply -translate-y-20 pt-1;
-  }
-  p:not(.full) {
-    @apply w-10/12 text-left;
-  }
+  @apply mx-auto items-center py-10 md:grid-cols-[80%_20%];
+}
+.timeline .top,
+.timeline .top1,
+.timeline .bottom,
+.timeline .bottom1 {
+  @apply flex items-center;
+}
+.timeline .top,
+.timeline .top1 {
+  @apply flex-col-reverse;
+}
+.timeline .bottom,
+.timeline .bottom1 {
+  @apply flex-col;
+}
+.timeline .top1 {
+  @apply -translate-x-28 translate-y-14;
+}
+.timeline .bottom {
+  @apply -translate-y-12;
+}
+
+.timeline p:not(.full) {
+  @apply w-11/12 text-left;
 }
 
 .title-container {
   @apply relative col-span-3 flex flex-row items-center;
-  .title {
-    @apply flex flex-col items-center gap-y-4 text-center;
-  }
-  .line {
-    @apply w-10/12;
-  }
+}
+.title-container .title {
+  @apply flex flex-col items-center gap-y-4 text-center;
+}
+.title-container .line {
+  @apply w-10/12;
 }
 
 .title_last {
   @apply relative col-span-4 my-4;
-  .line {
-    @apply absolute top-1/2 ml-4 w-9/12;
+}
+.title_last .line {
+  @apply absolute top-1/2 ml-4 w-9/12;
+}
+
+.title-container .line,
+.title_last .line {
+  @apply hidden h-2 rounded-xl bg-green-600 transition-shadow duration-200 md:inline;
+}
+
+.full {
+  @apply w-full;
+}
+
+.contact input,
+.contact textarea {
+  @apply w-full rounded-xl border border-green-500 p-2 transition-shadow duration-200 focus:ring-2 focus:ring-green-600 focus:outline-none;
+}
+
+/*new*/
+
+.gradient {
+  @apply bg-gradient-to-r from-green-600 to-green-500;
+}
+.grad_txt {
+  @apply bg-gradient-to-r from-green-700 to-green-600 bg-clip-text text-transparent;
+}
+
+button {
+  @apply my-4 rounded-xl bg-green-200 fill-green-700 px-4 py-2 font-medium text-green-700 transition-colors duration-200 hover:bg-green-600 hover:fill-white hover:text-white;
+}
+
+button:hover,
+button:focus,
+button:active {
+  @apply shadow-xl transition-shadow duration-150;
+}
+button:disabled {
+  @apply cursor-not-allowed opacity-50;
+}
+
+.list {
+  h2 {
+    @apply mr-2 text-2xl;
+  }
+  span h3 {
+    @apply bg-gradient-to-r from-green-700 to-green-600 bg-clip-text font-semibold text-transparent;
+  }
+  img {
+    @apply size-8;
   }
 }
 
-.title-container,
-.title_last {
-  .line {
-    @apply bg-tertiary round hidden h-2 md:inline;
-  }
-}
-.full {
-  @apply w-full;
+.round {
+  @apply rounded-xl;
 }

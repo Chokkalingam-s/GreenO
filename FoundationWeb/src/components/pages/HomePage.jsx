@@ -3,15 +3,20 @@ import {focusAreas} from './data'
 import {useNavigate} from 'react-router-dom'
 import {missionVisionItems, greenOItems} from './data'
 import About from '../About'
+import AboutUs from './AboutUs'
+import HorizontalTimeline from '../Tree'
 
 export default function HomePage() {
   const navigate = useNavigate()
   return (
     <>
       <section className='flex h-screen'>
-        <span className='absolute top-1/2 z-20 -translate-y-1/2 space-y-4 md:left-20'>
-          <h1 className='mb-10 text-5xl font-bold'>CG Foundation</h1>
-        </span>
+        <aside className='flex flex-col justify-center'>
+          {/* <h1 className='mb-4 grad_txt text-5xl font-semibold '>
+            CG Foundation
+          </h1>*/}
+          <AboutUs />
+        </aside>
         <img
           src='/home1.svg'
           alt='foundation background'
@@ -20,8 +25,12 @@ export default function HomePage() {
       </section>
 
       <section>
-        <h2 className='mb-8 text-3xl font-bold'>Domains of Change</h2>
-        <p className='mb-12 text-lg'>We believe in targeted actions to maximize impact.</p>
+        <h2 className='grad_txt text-center text-3xl font-bold'>
+          Domains of Change
+        </h2>
+        <p className='mb-8 text-center text-lg'>
+          We believe in targeted actions to maximize impact.
+        </p>
         <div className='grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3'>
           {focusAreas.map((area, index) => (
             <Card
@@ -38,50 +47,24 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* <section className='timeline hidden md:grid'>
-        <div className='relative grid w-full grid-cols-3'>
-          <div className='hidden md:inline'></div>
-          <Item
-            classN='top'
-            content='To empower communities through innovative and sustainable solutions.'
-          />
-          <Item
-            classN='top'
-            content='To create a world where sustainable development drives inclusive growth.'
-          />
-          <span className='title-container'>
-            <h2 className='title'>
-              <div>Mission</div>
-              <div>&</div>
-              <div>Vision</div>
-            </h2>
-            <div className='line'></div>
-          </span>
-
-          <div className='hidden md:inline'></div>
-          <Item
-            classN='bottom1'
-            content='To promote equality, education, and environmental preservation for a better tomorrow.'
-          />
-          <Item
-            classN='bottom1'
-            content='To be a catalyst for positive change across environment, education, and empowerment.'
-          />
-        </div>
-        <img src='/mission&vision.svg' alt='icon for mission vision' />
-      </section> */}
-
-      <section className='px-6 py-10'>
-        <h2 className='mb-6 text-center text-2xl font-bold'>Our Mission & Vision</h2>
-        <div className='grid grid-cols-2 gap-4 md:grid-cols-4'>
+      <section className='py-10'>
+        <h2 className='grad_txt mb-6 text-center text-2xl font-bold'>
+          Our Mission & Vision
+        </h2>
+        <div className='grid grid-cols-1 gap-8 md:grid-cols-2'>
           {missionVisionItems.map((item, index) => (
-            <Card key={index} content={item.content} showBtn={false} fixed={false} />
+            <Card
+              key={index}
+              content={item.content}
+              showBtn={false}
+              fixed={false}
+            />
           ))}
         </div>
       </section>
 
       <section className='timeline last hidden md:grid'>
-        <div className='grid md:grid-cols-[20%_26%_28%_26%]'>
+        <div className='grid gap-x-2 md:grid-cols-[20%_26%_28%_26%]'>
           <div className='hidden md:inline'></div>
           <div className='hidden md:inline'></div>
           <Item
@@ -94,12 +77,18 @@ export default function HomePage() {
             title='Geo-Verified Growth'
             content='Upload geotagged sapling photos each semester with verified images and locations.'
           />
-          <h2 className='title_last'>
-            GreenO <br />
-            <span className='text-xl'>One Student One Tree</span>
+          <h2 className='title_last grad_txt'>
+            <span className='text-2xl font-bold'>
+              GreenO
+            </span>
+            <br />
+            <span className='text-xl font-medium'>
+              One Student One Tree
+            </span>
             <button
               className='absolute -bottom-20 left-0 text-xl font-semibold'
-              onClick={() => navigate('/OSOT')}>
+              onClick={() => navigate('/OSOT')}
+            >
               Join Us
             </button>
             <div className='line'></div>
@@ -121,15 +110,12 @@ export default function HomePage() {
             content='Every sapling planted is a step toward hope, positivity, and a greener tomorrow.'
           />
         </div>
-        <img src='/osot.svg' alt='GreenO - One Student One Tree logo' />
+        <img
+          src='/osot.svg'
+          alt='GreenO - One Student One Tree logo'
+        />
       </section>
 
-      <Timeline
-        items={missionVisionItems}
-        title='Mission and Vision'
-        imgSrc='/mission&vision.svg'
-        imgAlt='Icon for Mission and Vision'
-      />
       <About
         items={greenOItems}
         title='GreenO'

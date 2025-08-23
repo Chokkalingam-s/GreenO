@@ -1,6 +1,5 @@
-import { NavBar } from '../exp_comp'
 import HomePage from './pages/HomePage'
-
+import {NavBar} from './NavBar'
 export default function Layout() {
   return (
     <>

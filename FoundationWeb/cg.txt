@@ -1,0 +1,15 @@
+https://cgfoundation.in/
+
+get involved in navbar -> dropdown
+    - indi
+    - student
+    - clg
+    - corp csr
+
+    --> layout (laptop)
+      -- right img left content below form (contact us -ref | https://www.smilefoundationindia.org/individual-support/)
+      - mobile same
+navbar contact us
+  -https://www.smilefoundationindia.org/contact-us/
+  FAQ
+  - media center (disabled)

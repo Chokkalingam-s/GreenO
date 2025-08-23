@@ -1,6 +1,12 @@
-export default function About({items, title, title2, imgSrc, imgAlt}) {
+export default function About({
+  items,
+  title,
+  title2,
+  imgSrc,
+  imgAlt
+}) {
   return (
-    <section className='timeline md:hidden grid grd_cont'>
+    <section className='timeline grd_cont grid md:hidden'>
       <div className='flex items-center justify-between'>
         <span>
           <h2>{title}</h2>
@@ -9,12 +15,13 @@ export default function About({items, title, title2, imgSrc, imgAlt}) {
         <span>
           <button
             className='text-xl font-semibold'
-            onClick={() => navigate('/OneStudentOneTree')}>
+            onClick={() => navigate('/OneStudentOneTree')}
+          >
             Join Us
           </button>
         </span>
       </div>
-      <div className='relative w-full grid gap-6 mt-4 glassy out p-4 round'>
+      <div className='glassy out round relative mt-4 grid w-full gap-6 p-4'>
         {items.map(({title, content}) => (
           <span key={title}>
             <h3 className='text-tertiary'>{title}</h3>
@@ -26,7 +33,7 @@ export default function About({items, title, title2, imgSrc, imgAlt}) {
         <img
           src={imgSrc}
           alt={imgAlt}
-          className='mt-4 mx-auto w-full max-w-xs'
+          className='mx-auto mt-4 w-full max-w-xs'
         />
       )}
     </section>
