@@ -13,3 +13,9 @@ navbar contact us
   -https://www.smilefoundationindia.org/contact-us/
   FAQ
   - media center (disabled)
+
+  CHOKS 25/08/25 8:00 PM
+  Landing page - blank content remove
+  navbar - responsive 
+  footer - @ 2025 etc at center of the page
+  exisiting cgfoundation.in light green looks good than current update - check through it
