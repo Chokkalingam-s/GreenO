@@ -16,6 +16,9 @@ navbar contact us
 
   CHOKS 25/08/25 8:00 PM
   Landing page - blank content remove
-  navbar - responsive 
+  navbar - responsive
   footer - @ 2025 etc at center of the page
   exisiting cgfoundation.in light green looks good than current update - check through it
+
+
+  COMPLETED!
