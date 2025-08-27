@@ -6,7 +6,7 @@ export default function About({
   imgAlt
 }) {
   return (
-    <section className='timeline grd_cont grid md:hidden'>
+    <section className='timeline grd_cont grid w-11/12 md:hidden'>
       <div className='flex items-center justify-between'>
         <span>
           <h2>{title}</h2>

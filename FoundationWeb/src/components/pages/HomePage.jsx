@@ -12,7 +12,7 @@ export default function HomePage() {
   const navigate = useNavigate()
   return (
     <>
-      <section className='flex h-[80vh]'>
+      <section className='relative flex h-[80vh]'>
         <aside className='relative z-20 flex flex-col justify-center'>
           {/* <h1 className='mb-4 grad_txt text-5xl font-semibold '>
             CG Foundation
@@ -22,7 +22,7 @@ export default function HomePage() {
         <img
           src='/home1.svg'
           alt='foundation background'
-          className='absolute bottom-0 object-cover md:-right-60 md:bottom-24 md:h-4/5 md:w-9/12'
+          className='absolute bottom-0 object-cover md:-right-60 md:-bottom-10 md:h-4/5 md:w-9/12'
         />
       </section>
 
