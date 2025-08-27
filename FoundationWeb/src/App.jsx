@@ -3,9 +3,12 @@ import {
   Routes,
   Route
 } from 'react-router-dom'
-import {About, Contact, GreenO, Home} from './exp_comp'
 import Navbar from './components/NavBar'
 import Individual from './components/pages/Individual'
+import Home from './components/pages/HomePage'
+import GreenO from './components/pages/GreenO'
+import About from './components/About'
+import ContactUs from './components/pages/Contact'
 import Corp from './components/pages/Corp'
 import College from './components/pages/College'
 import Student from './components/pages/Student'
@@ -29,7 +32,7 @@ export default function App() {
         />
         <Route
           path='/contact'
-          element={<Contact />}
+          element={<ContactUs />}
         />
         <Route
           path='/getInvolved/individual'

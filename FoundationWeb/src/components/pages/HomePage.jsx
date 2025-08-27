@@ -1,17 +1,19 @@
-import {Item, Card, Footer, Timeline} from '../../exp_comp'
 import {focusAreas} from './data'
 import {useNavigate} from 'react-router-dom'
 import {missionVisionItems, greenOItems} from './data'
-import About from '../About'
-import AboutUs from './AboutUs'
-import HorizontalTimeline from '../Tree'
+import {lazy} from 'react'
+const About = lazy(() => import('../About'))
+const AboutUs = lazy(() => import('./AboutUs'))
+const Card = lazy(() => import('../Card'))
+const Item = lazy(() => import('../Item'))
+const Footer = lazy(() => import('../Footer'))
 
 export default function HomePage() {
   const navigate = useNavigate()
   return (
     <>
-      <section className='flex h-screen'>
-        <aside className='flex flex-col justify-center'>
+      <section className='flex h-[80vh]'>
+        <aside className='relative z-20 flex flex-col justify-center'>
           {/* <h1 className='mb-4 grad_txt text-5xl font-semibold '>
             CG Foundation
           </h1>*/}
@@ -20,7 +22,7 @@ export default function HomePage() {
         <img
           src='/home1.svg'
           alt='foundation background'
-          className='absolute bottom-0 object-cover md:-right-60 md:-bottom-6 md:h-4/5 md:w-9/12'
+          className='absolute bottom-0 object-cover md:-right-60 md:bottom-24 md:h-4/5 md:w-9/12'
         />
       </section>
 

@@ -1,4 +1,4 @@
-import {Branch} from '../exp_comp'
+import Branch from '../components/Branch'
 
 export default function Item({classN, title, content}) {
   return (

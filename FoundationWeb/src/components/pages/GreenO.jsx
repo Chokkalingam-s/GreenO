@@ -1,4 +1,4 @@
-import {Footer} from '../../exp_comp'
+import Footer from '../../components/Footer'
 
 export default function GreenOPage() {
   window.scrollTo(0, 0)
@@ -17,7 +17,7 @@ export default function GreenOPage() {
           alt='background image'
           className='absolute top-0 -z-10 h-full w-full object-cover'
         />
-        <div class='absolute inset-0 -z-10 bg-black opacity-50'></div>
+        <div className='absolute inset-0 -z-10 bg-black opacity-50'></div>
       </div>
 
       <section className='mt-6 grid grid-cols-1 items-center justify-center justify-items-center text-center md:grid-cols-2 md:text-start'>
@@ -26,7 +26,7 @@ export default function GreenOPage() {
             An Initiative...
           </h2>
           <br />
-          <p>
+          <div>
             The
             <strong className='grad_txt italic'>
               {' '}
@@ -50,7 +50,7 @@ export default function GreenOPage() {
             Overall, the One Student One Tree Project is a
             valuable initiative that has many benefits for
             the environment, students, and communities.
-          </p>
+          </div>
         </div>
         <img
           src='/osot.svg'

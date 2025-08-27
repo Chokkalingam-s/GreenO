@@ -27,7 +27,6 @@ export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false)
   const [openDropdown, setOpenDropdown] = useState(null)
 
-  // helper: check if current path matches parent or its dropdown children
   const isActive = (path, dropdown) => {
     if (path && pathname === path) return true
     if (dropdown) {
@@ -39,112 +38,137 @@ export default function Navbar() {
   }
 
   return (
-    <nav className='fixed top-0 z-50 flex w-full items-center justify-between bg-green-600/20 px-4 py-2 shadow-md backdrop-blur-sm md:px-10'>
-      <h2 className='grad_txt text-xl font-bold italic'>
-        <Link
-          to='/'
-          className='hover:text-secondary transition'
-        >
-          CG Foundation
-        </Link>
-      </h2>
-
-      {/* Desktop Nav */}
-      <div className='hidden space-x-6 md:flex'>
-        {navLinks.map(({path, label, dropdown}) => (
-          <div
-            key={label}
-            className='relative'
-            onMouseEnter={() =>
-              dropdown && setOpenDropdown(label)
-            }
-            onMouseLeave={() =>
-              dropdown && setOpenDropdown(null)
-            }
+    <nav className='fixed top-0 z-50 w-full bg-green-600/20 px-4 py-2 shadow-md backdrop-blur-sm md:px-10'>
+      <div className='flex items-center justify-between'>
+        <h2 className='grad_txt text-xl font-bold italic'>
+          <Link
+            to='/'
+            className='hover:text-secondary transition'
           >
-            <Link
-              to={path || '#'}
-              className={`hover:text-tertiary transition ${
-                isActive(path, dropdown)
-                  ? 'grad_txt font-bold'
-                  : ''
-              }`}
-            >
-              {label}
-            </Link>
+            CG Foundation
+          </Link>
+        </h2>
 
-            {dropdown && openDropdown === label && (
-              <div className='absolute top-full left-0 w-48 rounded-xl bg-green-200 p-2 shadow-lg'>
-                {dropdown.map(item => (
-                  <Link
-                    key={item.path}
-                    to={item.path}
-                    className={`block rounded px-4 py-2 text-sm hover:bg-green-100 ${
-                      pathname === item.path
-                        ? 'font-semibold text-green-600'
-                        : ''
-                    }`}
-                  >
-                    {item.label}
-                  </Link>
-                ))}
-              </div>
-            )}
-          </div>
-        ))}
-      </div>
+        {/* Hamburger (mobile only) */}
+        <button
+          className='nav text-2xl md:hidden'
+          onClick={() => setIsOpen(!isOpen)}
+        >
+          {isOpen ? '' : '☰'}
+        </button>
 
-      {/* Mobile Sidebar nav ... */}
-      <nav className='mt-10 flex space-y-4 md:hidden'>
-        {navLinks.map(({path, label, dropdown}) => (
-          <div key={label}>
-            <button
-              className={`flex w-full items-center justify-between text-lg ${
-                isActive(path, dropdown)
-                  ? 'grad_txt font-bold'
-                  : ''
-              }`}
-              onClick={() =>
-                dropdown
-                  ? setOpenDropdown(
-                      openDropdown === label ? null : label
-                    )
-                  : setIsOpen(false)
+        {/* Desktop Nav */}
+        <div className='hidden space-x-6 md:flex'>
+          {navLinks.map(({path, label, dropdown}) => (
+            <div
+              key={label}
+              className='relative'
+              onMouseEnter={() =>
+                dropdown && setOpenDropdown(label)
+              }
+              onMouseLeave={() =>
+                dropdown && setOpenDropdown(null)
               }
             >
-              {dropdown ? (
-                label
-              ) : (
-                <Link to={path}>{label}</Link>
-              )}
-              {dropdown && (
-                <span>
-                  {openDropdown === label ? '−' : '+'}
-                </span>
-              )}
-            </button>
+              <Link
+                to={path || '#'}
+                className={`hover:text-tertiary transition ${
+                  isActive(path, dropdown)
+                    ? 'grad_txt font-bold'
+                    : ''
+                }`}
+              >
+                {label}
+              </Link>
 
-            {dropdown && openDropdown === label && (
-              <div className='mt-2 ml-4 space-y-2'>
-                {dropdown.map(item => (
-                  <Link
-                    key={item.path}
-                    to={item.path}
-                    onClick={() => setIsOpen(false)}
-                    className={`block text-sm hover:text-green-600 ${
-                      pathname === item.path
-                        ? 'font-semibold text-green-600'
-                        : ''
-                    }`}
-                  >
-                    {item.label}
-                  </Link>
-                ))}
-              </div>
-            )}
-          </div>
-        ))}
-      </nav>
+              {dropdown && openDropdown === label && (
+                <div className='absolute top-full left-0 w-48 rounded-xl bg-green-200 p-2 shadow-lg'>
+                  {dropdown.map(item => (
+                    <Link
+                      key={item.path}
+                      to={item.path}
+                      className={`block rounded px-4 py-2 text-sm hover:bg-green-100 ${
+                        pathname === item.path
+                          ? 'font-semibold text-green-600'
+                          : ''
+                      }`}
+                    >
+                      {item.label}
+                    </Link>
+                  ))}
+                </div>
+              )}
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Mobile Sidebar */}
+      {isOpen && (
+        <div className='fixed top-0 right-0 z-50 h-screen w-64 space-y-2 overflow-y-auto rounded-l-xl bg-green-400 p-4 md:hidden'>
+          <button
+            className='nav mb-4 text-2xl'
+            onClick={() => setIsOpen(false)}
+          >
+            ✕
+          </button>
+
+          {navLinks.map(({path, label, dropdown}) => (
+            <div key={label}>
+              {dropdown ? (
+                <button
+                  className={`nav flex w-full items-center justify-between rounded-lg p-2 ${
+                    isActive(path, dropdown)
+                      ? 'grad_txt font-bold'
+                      : ''
+                  }`}
+                  onClick={() =>
+                    setOpenDropdown(
+                      openDropdown === label ? null : label
+                    )
+                  }
+                >
+                  {label}
+                  <span>
+                    {openDropdown === label ? '−' : '+'}
+                  </span>
+                </button>
+              ) : (
+                <Link
+                  to={path}
+                  onClick={() => setIsOpen(false)}
+                  className={`nav block w-full rounded-lg p-2 ${
+                    isActive(path)
+                      ? 'grad_txt font-bold'
+                      : ''
+                  }`}
+                >
+                  {label}
+                </Link>
+              )}
+
+              {dropdown && openDropdown === label && (
+                <div className='mt-2 ml-4 space-y-2'>
+                  {dropdown.map(item => (
+                    <Link
+                      key={item.path}
+                      to={item.path}
+                      onClick={() => setIsOpen(false)}
+                      className={`block text-sm hover:text-green-600 ${
+                        pathname === item.path
+                          ? 'font-semibold text-green-600'
+                          : ''
+                      }`}
+                    >
+                      {item.label}
+                    </Link>
+                  ))}
+                </div>
+              )}
+            </div>
+          ))}
+        </div>
+      )}
     </nav>
   )
 }
