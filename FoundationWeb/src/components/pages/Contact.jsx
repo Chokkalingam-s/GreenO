@@ -1,10 +1,32 @@
 import { useState } from 'react'
 
 const faqs = [
-  { q: 'What is CG Foundation?', a: 'We are a non-profit focused on sustainability and community growth.' },
-  { q: 'How can I get involved?', a: 'You can join as an individual, student, college, or corporate partner.' },
-  { q: 'Where do donations go?', a: 'All contributions directly fund green initiatives and community projects.' }
-]
+  { 
+    q: 'What is CG Foundation?', 
+    a: 'CG Foundation is a non-profit organization dedicated to creating sustainable impact in the areas of environment, education, healthcare, women empowerment, livelihood, and child welfare across India.' 
+  },
+  { 
+    q: 'What is GreenO – One Student One Tree?', 
+    a: 'GreenO is our flagship initiative where students plant and nurture saplings with geo-verified tracking and AI-driven validation, promoting environmental responsibility and transparency.' 
+  },
+  { 
+    q: 'Who can get involved?', 
+    a: 'Anyone can join! We welcome students, individuals, colleges, corporates, and NGOs to contribute through volunteering, sponsorship, mentorship, or partnerships.' 
+  },
+  { 
+    q: 'How does my contribution make a difference?', 
+    a: 'Every action, whether planting a tree, mentoring a child, or funding a project, directly impacts communities, the environment, and empowers individuals to lead better lives.' 
+  },
+  { 
+    q: 'Are donations and participation transparent?', 
+    a: 'Yes! All donations and project contributions are tracked carefully, with measurable results, reports, and recognition for participants to ensure accountability.' 
+  },
+  { 
+    q: 'How can I contact CG Foundation?', 
+    a: 'You can fill out the contact form on our website under the "Get Involved" section or reach us via email - info@cgfoundation.in for guidance on participation and collaboration.' 
+  }
+];
+
 
 function FAQ() {
   const [open, setOpen] = useState(null)
