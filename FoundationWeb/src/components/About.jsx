@@ -8,15 +8,14 @@ export default function About({
   return (
     <section className='timeline grd_cont grid w-11/12 md:hidden'>
       <div className='flex items-center justify-between'>
-        <span>
-          <h2>{title}</h2>
-          <h2 className='text-xl'>{title2}</h2>
+        <span className='font-medium'>
+          <h2 className='grad_txt'>{title}</h2>
+          <h2 className='text-xl grad_txt'>{title2}</h2>
         </span>
         <span>
           <button
             className='text-xl font-semibold'
-            onClick={() => navigate('/OneStudentOneTree')}
-          >
+            onClick={() => navigate('/OneStudentOneTree')}>
             Join Us
           </button>
         </span>

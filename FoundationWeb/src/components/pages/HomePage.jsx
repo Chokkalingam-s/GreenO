@@ -12,25 +12,38 @@ export default function HomePage() {
   const navigate = useNavigate()
   return (
     <>
-      <section className='relative flex h-[80vh]'>
-        <aside className='relative z-20 flex flex-col justify-center'>
-          {/* <h1 className='mb-4 grad_txt text-5xl font-semibold '>
-            CG Foundation
-          </h1>*/}
+      <section className='relative grid md:h-[85vh] grid-cols-1 md:grid-cols-[65%_1fr] items-center px-6 md:px-10'>
+        {/* Content */}
+        <aside className='relative z-20 flex flex-col justify-center py-8 md:py-0'>
           <AboutUs />
         </aside>
-        <img
-          src='/home1.svg'
-          alt='foundation background'
-          className='absolute bottom-0 object-cover md:-right-60 md:-bottom-10 md:h-4/5 md:w-9/12'
-        />
+
+        {/* Visual column */}
+        <div className='relative z-10 flex items-center justify-center md:justify-end py-8 md:py-0'>
+          <div className='relative'>
+            {/* Logo */}
+            <img
+              src='/logo.png'
+              alt='CG Foundation logo'
+              className='w-56 md:w-80 filter hue-rotate-260 saturate-200 drop-shadow-lg'
+            />
+
+            {/* Tagline chip */}
+            <div className='mt-4 inline-flex items-center gap-2 rounded-full bg-white/80 px-4 py-2 shadow-sm backdrop-blur'>
+              <span className='h-2 w-2 rounded-full bg-green-600 animate-pulse' />
+              <span className='text-sm font-medium text-gray-700'>
+                Together for Change
+              </span>
+            </div>
+          </div>
+        </div>
       </section>
 
       <section>
-        <h2 className='grad_txt text-center text-3xl font-bold'>
-          Domains of Change
+        <h2 className='grad_txt text-3xl font-bold'>
+          Our impact spans across
         </h2>
-        <p className='mb-8 text-center text-lg'>
+        <p className='mb-8 text-lg'>
           We believe in targeted actions to maximize impact.
         </p>
         <div className='grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3'>
@@ -50,7 +63,7 @@ export default function HomePage() {
       </section>
 
       <section className='py-10'>
-        <h2 className='grad_txt mb-6 text-center text-2xl font-bold'>
+        <h2 className='grad_txt mb-6 text-2xl font-bold'>
           Our Mission & Vision
         </h2>
         <div className='grid grid-cols-1 gap-8 md:grid-cols-2'>
@@ -60,6 +73,7 @@ export default function HomePage() {
               content={item.content}
               showBtn={false}
               fixed={false}
+              img={'/svgviewer-output.svg'}
             />
           ))}
         </div>
@@ -89,8 +103,7 @@ export default function HomePage() {
             </span>
             <button
               className='absolute -bottom-20 left-0 text-xl font-semibold'
-              onClick={() => navigate('/OSOT')}
-            >
+              onClick={() => navigate('/OSOT')}>
               Join Us
             </button>
             <div className='line'></div>

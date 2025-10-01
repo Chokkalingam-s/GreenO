@@ -1,32 +1,31 @@
-import { useState } from 'react'
+import {useState} from 'react'
 
 const faqs = [
-  { 
-    q: 'What is CG Foundation?', 
-    a: 'CG Foundation is a non-profit organization dedicated to creating sustainable impact in the areas of environment, education, healthcare, women empowerment, livelihood, and child welfare across India.' 
+  {
+    q: 'What is CG Foundation?',
+    a: 'CG Foundation is a non-profit organization dedicated to creating sustainable impact in the areas of environment, education, healthcare, women empowerment, livelihood, and child welfare across India.'
   },
-  { 
-    q: 'What is GreenO – One Student One Tree?', 
-    a: 'GreenO is our flagship initiative where students plant and nurture saplings with geo-verified tracking and AI-driven validation, promoting environmental responsibility and transparency.' 
+  {
+    q: 'What is GreenO – One Student One Tree?',
+    a: 'GreenO is our flagship initiative where students plant and nurture saplings with geo-verified tracking and AI-driven validation, promoting environmental responsibility and transparency.'
   },
-  { 
-    q: 'Who can get involved?', 
-    a: 'Anyone can join! We welcome students, individuals, colleges, corporates, and NGOs to contribute through volunteering, sponsorship, mentorship, or partnerships.' 
+  {
+    q: 'Who can get involved?',
+    a: 'Anyone can join! We welcome students, individuals, colleges, corporates, and NGOs to contribute through volunteering, sponsorship, mentorship, or partnerships.'
   },
-  { 
-    q: 'How does my contribution make a difference?', 
-    a: 'Every action, whether planting a tree, mentoring a child, or funding a project, directly impacts communities, the environment, and empowers individuals to lead better lives.' 
+  {
+    q: 'How does my contribution make a difference?',
+    a: 'Every action, whether planting a tree, mentoring a child, or funding a project, directly impacts communities, the environment, and empowers individuals to lead better lives.'
   },
-  { 
-    q: 'Are donations and participation transparent?', 
-    a: 'Yes! All donations and project contributions are tracked carefully, with measurable results, reports, and recognition for participants to ensure accountability.' 
+  {
+    q: 'Are donations and participation transparent?',
+    a: 'Yes! All donations and project contributions are tracked carefully, with measurable results, reports, and recognition for participants to ensure accountability.'
   },
-  { 
-    q: 'How can I contact CG Foundation?', 
-    a: 'You can fill out the contact form on our website under the "Get Involved" section or reach us via email - info@cgfoundation.in for guidance on participation and collaboration.' 
+  {
+    q: 'How can I contact CG Foundation?',
+    a: 'You can fill out the contact form on our website under the "Get Involved" section or reach us via email - info@cgfoundation.in for guidance on participation and collaboration.'
   }
-];
-
+]
 
 function FAQ() {
   const [open, setOpen] = useState(null)
@@ -35,9 +34,10 @@ function FAQ() {
       {faqs.map((item, idx) => (
         <div key={idx}>
           <button
-            onClick={() => setOpen(open === idx ? null : idx)}
-            className='flex h-14 w-full items-center justify-between text-left'
-          >
+            onClick={() =>
+              setOpen(open === idx ? null : idx)
+            }
+            className='flex h-14 w-full items-center justify-between text-left'>
             <span className='pr-4'>{item.q}</span>
             <span className='flex-shrink-0 text-xl font-bold'>
               {open === idx ? '−' : '+'}
@@ -55,7 +55,12 @@ function FAQ() {
 }
 
 export default function ContactUs() {
-  const [form, setForm] = useState({ name: '', mobile: '', email: '', message: '' })
+  const [form, setForm] = useState({
+    name: '',
+    mobile: '',
+    email: '',
+    message: ''
+  })
   const [loading, setLoading] = useState(false)
   const [status, setStatus] = useState('')
 
@@ -65,19 +70,22 @@ export default function ContactUs() {
     form.email.trim() &&
     form.message.trim()
 
-  const handleChange = (e) => {
-    setForm({ ...form, [e.target.name]: e.target.value })
+  const handleChange = e => {
+    setForm({...form, [e.target.name]: e.target.value})
   }
 
   const handleSubmit = async () => {
     if (!isValid) return
     setLoading(true)
     try {
-      const res = await fetch('http://localhost:5000/send-mail', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(form)
-      })
+      const res = await fetch(
+        'http://localhost:5000/send-mail',
+        {
+          method: 'POST',
+          headers: {'Content-Type': 'application/json'},
+          body: JSON.stringify(form)
+        }
+      )
       const data = await res.json()
       setStatus(data.message)
     } catch (err) {
@@ -100,7 +108,9 @@ export default function ContactUs() {
         <h2 className='grad_txt mb-6 text-2xl font-bold'>
           Contact Us
         </h2>
-        <form className='contact space-y-4' onSubmit={(e) => e.preventDefault()}>
+        <form
+          className='contact space-y-4'
+          onSubmit={e => e.preventDefault()}>
           <input
             type='text'
             name='name'
@@ -131,18 +141,18 @@ export default function ContactUs() {
             name='message'
             placeholder='Your Message'
             value={form.message}
-            onChange={handleChange}
-          ></textarea>
+            onChange={handleChange}></textarea>
 
           <button
             type='button'
             onClick={handleSubmit}
             disabled={!isValid || loading}
-            className={`px-4 py-2 rounded ${isValid ? 'bg-green-600 text-white' : 'bg-gray-400 text-gray-200'}`}
-          >
+            className={`px-4 py-2 rounded ${isValid ? 'bg-green-600 text-white' : 'bg-gray-400 text-gray-200'}`}>
             {loading ? 'Sending...' : 'Send Message'}
           </button>
-          {status && <p className="text-sm mt-2">{status}</p>}
+          {status && (
+            <p className='text-sm mt-2'>{status}</p>
+          )}
         </form>
       </aside>
     </main>

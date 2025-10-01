@@ -4,29 +4,30 @@
     <meta charset="UTF-8" />
     <meta
       name="viewport"
-      content="width=device-width, initial-scale=1.0"
-    />
+      content="width=device-width, initial-scale=1.0" />
     <link
       rel="preconnect"
-      href="https://fonts.googleapis.com"
-    />
+      href="https://fonts.googleapis.com" />
     <link
       rel="preconnect"
       href="https://fonts.gstatic.com"
-      crossorigin
-    />
+      crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
-      rel="stylesheet"
-    />
+      rel="stylesheet" />
     <title>CG Foundation</title>
   </head>
 
   <body>
+    <div
+      className="pointer-events-none fixed -top-24 -right-24 h-96 w-96 rounded-full bg-green-200/40 blur-2xl" />
+    <div
+      className="pointer-events-none fixed bottom-0 left-[-10%] h-64 w-[50%] bg-green-100/40 rounded-tr-[6rem] blur-xl" />
     <div id="root"></div>
+    <div
+      className="pointer-events-none fixed -z-10 left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 h-64 w-64 rounded-full bg-green-200/40 blur-2xl" />
     <script
       type="module"
-      src="/src/main.jsx"
-    ></script>
+      src="/src/main.jsx"></script>
   </body>
 </html>

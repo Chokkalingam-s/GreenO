@@ -8,13 +8,13 @@ const navLinks = [
     label: 'Get Involved',
     dropdown: [
       {
-        label: 'Individual',
+        label: 'Individuals',
         path: '/getInvolved/individual'
       },
-      {label: 'Student', path: '/getInvolved/student'},
-      {label: 'College', path: '/getInvolved/college'},
+      {label: 'Students', path: '/getInvolved/student'},
+      {label: 'Colleges', path: '/getInvolved/college'},
       {
-        label: 'Corporation CSR',
+        label: 'Corporate CSR & NGOs',
         path: '/getInvolved/corporation_csr'
       }
     ]
@@ -43,8 +43,7 @@ export default function Navbar() {
         <h2 className='grad_txt text-xl font-bold italic'>
           <Link
             to='/'
-            className='hover:text-secondary transition'
-          >
+            className='hover:text-secondary transition'>
             CG Foundation
           </Link>
         </h2>
@@ -52,8 +51,7 @@ export default function Navbar() {
         {/* Hamburger (mobile only) */}
         <button
           className='nav text-2xl md:hidden'
-          onClick={() => setIsOpen(!isOpen)}
-        >
+          onClick={() => setIsOpen(!isOpen)}>
           {isOpen ? '' : '☰'}
         </button>
 
@@ -68,21 +66,19 @@ export default function Navbar() {
               }
               onMouseLeave={() =>
                 dropdown && setOpenDropdown(null)
-              }
-            >
+              }>
               <Link
                 to={path || '#'}
                 className={`hover:text-tertiary transition ${
                   isActive(path, dropdown)
                     ? 'grad_txt font-bold'
                     : ''
-                }`}
-              >
+                }`}>
                 {label}
               </Link>
 
               {dropdown && openDropdown === label && (
-                <div className='absolute top-full left-0 w-48 rounded-xl bg-green-200 p-2 shadow-lg'>
+                <div className='absolute top-full left-0 w-48 rounded-xl p-2 z-10 bg-green-100/50'>
                   {dropdown.map(item => (
                     <Link
                       key={item.path}
@@ -91,8 +87,7 @@ export default function Navbar() {
                         pathname === item.path
                           ? 'font-semibold text-green-600'
                           : ''
-                      }`}
-                    >
+                      }`}>
                       {item.label}
                     </Link>
                   ))}
@@ -105,11 +100,10 @@ export default function Navbar() {
 
       {/* Mobile Sidebar */}
       {isOpen && (
-        <div className='fixed top-0 right-0 z-50 h-screen w-64 space-y-2 overflow-y-auto rounded-l-xl bg-green-400 p-4 md:hidden'>
+        <div className='fixed top-0 right-0 z-50 h-screen w-64 space-y-2 overflow-y-auto rounded-l-xl bg-green-200 p-4 md:hidden'>
           <button
             className='nav mb-4 text-2xl'
-            onClick={() => setIsOpen(false)}
-          >
+            onClick={() => setIsOpen(false)}>
             ✕
           </button>
 
@@ -126,8 +120,7 @@ export default function Navbar() {
                     setOpenDropdown(
                       openDropdown === label ? null : label
                     )
-                  }
-                >
+                  }>
                   {label}
                   <span>
                     {openDropdown === label ? '−' : '+'}
@@ -141,8 +134,7 @@ export default function Navbar() {
                     isActive(path)
                       ? 'grad_txt font-bold'
                       : ''
-                  }`}
-                >
+                  }`}>
                   {label}
                 </Link>
               )}
@@ -158,8 +150,7 @@ export default function Navbar() {
                         pathname === item.path
                           ? 'font-semibold text-green-600'
                           : ''
-                      }`}
-                    >
+                      }`}>
                       {item.label}
                     </Link>
                   ))}
