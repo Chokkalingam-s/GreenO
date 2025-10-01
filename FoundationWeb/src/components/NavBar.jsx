@@ -78,7 +78,7 @@ export default function Navbar() {
               </Link>
 
               {dropdown && openDropdown === label && (
-                <div className='absolute top-full left-0 w-48 rounded-xl p-2 z-10 bg-green-100/50'>
+                <div className='absolute top-full left-0 w-48 rounded-xl p-2 z-10 bg-gradient-to-br from-green-100 via-neutral-200 to-green-100'>
                   {dropdown.map(item => (
                     <Link
                       key={item.path}
@@ -100,7 +100,7 @@ export default function Navbar() {
 
       {/* Mobile Sidebar */}
       {isOpen && (
-        <div className='fixed top-0 right-0 z-50 h-screen w-64 space-y-2 overflow-y-auto rounded-l-xl bg-green-200 p-4 md:hidden'>
+        <div className='fixed top-0 right-0 z-50 h-screen w-64 space-y-2 overflow-y-auto rounded-l-xl bg-gradient-to-br from-green-100 via-neutral-200 to-green-100 p-4 md:hidden'>
           <button
             className='nav mb-4 text-2xl'
             onClick={() => setIsOpen(false)}>
