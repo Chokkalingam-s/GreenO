@@ -1,5 +1,5 @@
 import DropDownLayout from './DropDownLayout'
-import iB from './individualBanner.png'
+import iB from '/get_involved/individualBanner.png'
 
 export default function Individual() {
   return (

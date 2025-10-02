@@ -1,5 +1,5 @@
 import DropDownLayout from './DropDownLayout'
-import csrBanner from './csrBanner.png'
+import csrBanner from '/get_involved/csrBanner.png'
 
 export default function Corp() {
   return (

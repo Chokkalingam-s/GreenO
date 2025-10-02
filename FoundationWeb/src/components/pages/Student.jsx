@@ -1,5 +1,5 @@
 import DropDownLayout from './DropDownLayout'
-import StudentBanner from './studentBanner.png'
+import StudentBanner from '/get_involved/studentBanner.png'
 
 export default function Student() {
   return (
