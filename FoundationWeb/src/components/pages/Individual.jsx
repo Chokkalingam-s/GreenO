@@ -1,9 +1,10 @@
 import DropDownLayout from './DropDownLayout'
+import iB from './individualBanner.png'
 
 export default function Individual() {
   return (
     <DropDownLayout
-      img='https://images.unsplash.com/photo-1755354567507-10dae25beb9a?q=80&w=2487&auto=format&fit=crop&ixlib=rb-4.1.0'
+      img={iB}
       title='Individuals'
       subtitle='Be the Change You Wish to See'
       content={{
