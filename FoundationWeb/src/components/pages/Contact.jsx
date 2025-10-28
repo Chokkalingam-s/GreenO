@@ -79,7 +79,7 @@ export default function ContactUs() {
     setLoading(true)
     try {
       const res = await fetch(
-        'http://localhost:5000/send-mail',
+        `${import.meta.env.VITE_API_BASE_URL}/send-mail`,
         {
           method: 'POST',
           headers: {'Content-Type': 'application/json'},
